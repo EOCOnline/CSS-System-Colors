@@ -26,13 +26,21 @@ async function readSystemColors() {
         });
 }
 
-let html = "";
+// Generate flexgrid of system-colors
 function generateSystemColors(colors) {
-    html += ".color-" + color + " { background-color: " + colors[color] + "; }\n";
-    if (verbose > 1) console.log("CSS:\n" + html);
-    const container = document.getElementById("syscolors-container");
-    const textNode = document.createTextNode(html);
-    container.innerHTML = "";
-    container.appendChild(textNode);
+    i = 0;
+    for (const color in colors.currentColors) {
+
+        if (verbose > 1) console.log("color: " + colors.currentColors[color] + " " + color);
+        if (colors.currentColors.hasOwnProperty(color)) {
+            let newDiv = document.createElement('div');
+            newDiv.className = "syscolors-item-div";
+            newDiv.innerHTML = "<span class='syscolors-item-span'>" + color.color + "</span>";
+            newDiv.style.backgroundColor = colors.currentColors[color];
+            document.getElementById("syscolors-flexgrid").appendChild(newDiv);
+            i++;
+        }
+    }
+    if (verbose > 1) console.log("Processed {%1} colors.", i);
 }
 

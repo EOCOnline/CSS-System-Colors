@@ -79,20 +79,83 @@ body {
 }
 
 #syscolors-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1em;
+  margin: 5px;
+  padding: 5px;
 }
 
 #syscolors-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1em;
+  border: CanvasText 2px solid;
+  border-radius: 0.5em;
+  margin: 5px;
+  padding: 5px;
 }
+
 #syscolors-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1em;
+  border: CanvasText 2px solid;
+  border-radius: 0.5em;
+  margin: 5px;
+  padding: 10px;
+}
+
+#syscolors-flexgrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: CanvasText 2px solid;
+  border-radius: 0.5em;
+  padding: 10px;
+  margin: 10px;
+}
+
+#syscolors-flexgrid div {
+  flex: 0 25%;
+  height: 50px;
+
+  margin: 15px; /* (100-32*3)/2 */
+  padding: 4px;
+  /*border: CanvasText 5px solid;*/
+  background-color: Canvas;
+  border-radius: 0.5em;
+  place-self: center stretch;
+  /*box-shadow: 10px 10px 10px 10px CanvasText inset;*/
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  /* https://getcssscan.com/css-box-shadow-examples */
+}
+
+#syscolors-demo {
+  margin: 5px;
+  padding: 5px;
+  border: CanvasText 2px solid;
+  background-color: Canvas;
+  border-radius: 0.5em;
+}
+
+#syscolors-footer {
+  margin: 5px;
+  padding: 5px;
+  border: CanvasText 2px solid;
+  background-color: Canvas;
+  border-radius: 0.5em;
+}
+
+/* UNUSED ideas ... */
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: DodgerBlue;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
 }
 
 .grid-container {
@@ -100,8 +163,4 @@ body {
   grid-template-rows: 80px auto 80px;
   column-gap: 10px;
   row-gap: 15px;
-}
-
-.item-a {
-  place-self: center stretch;
 }
