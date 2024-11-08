@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "name": "Launch css-system-colors.html",
+            "file": "${workspaceFolder}/css-system-colors.html"
         }
     ]
 }
