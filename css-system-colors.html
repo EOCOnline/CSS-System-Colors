@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CSS System Colors</title>
+
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./css-system-colors.css" />
+    <script src="./css-system-colors.js"></script>
+  </head>
+
+  <body>
+    <div id="sys-colors-container">
+      <div id="sys-colors-header">
+        <a
+          href="https://github.com/eoconline/css-system-colors"
+          style="text-decoration: none"
+          target="_blank"
+        >
+          <h1
+            title="CSS System Colors - Visual demonstration of all CSS System Colors"
+          >
+            CSS System Colors
+          </h1>
+          <!--img
+          src="https://img.shields.io/github/stars/eoconline/system-colors?style=social"
+          alt="GitHub stars"/-->
+        </a>
+      </div>
+
+      <div id="sys-colors-options">
+        <div>
+          <strong
+            >CSS System-Colors Options:
+
+            <label for="lightdark">Light/Dark Mode:</label>
+            <select id="lightdark">
+              <option value="auto">OS Default</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            &nbsp;
+
+            <label for="contrast">Contrast Mode:</label>
+            <select id="contrast">
+              <option value="auto">Auto</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </strong>
+        </div>
+        <br />
+      </div>
+
+      <div id="sys-colors-intro">
+        <details>
+          <summary>Introduction</summary>
+
+          <p>
+            CSS System Colors are a set of 17 color keywords that are derived
+            from the user's operating system's color scheme. They are useful for
+            creating a consistent look and feel that matches the user's
+            preferences.
+          </p>
+          <p>
+            The colors are defined in the CSS Color Module Level 4 specification
+            and can be used in any property that accepts a color value. They are
+            prefixed with the <code>system-</code> keyword, such as
+            <code>system-highlight</code> or <code>system-buttonface</code>.
+          </p>
+          <p>
+            The colors are designed to adapt to different light/dark modes and
+            contrast settings, making them ideal for creating accessible and
+            user-friendly interfaces. They can be used in combination with other
+            color values to create a harmonious color palette. Note that the
+            colors may vary depending on the user's operating system and browser
+            settings. A nice feature of CSS System Colors is that they can be
+            used in combination with other color values to create a harmonious
+            color palette. You just specify 'one' color, but the actual
+            displayed color will depend on the user's operating system and
+            browser settings!
+          </p>
+          <p>
+            Some colors are deprecated as they enable mimicking system colors
+            too well, and could be used for fake, evil phishing sites!
+          </p>
+          <p>For more information on CSS System Colors, check out:</p>
+
+          <ul>
+            <li>
+              <a
+                href="https://blog.jim-nielsen.com/2021/css-system-colors/"
+                target="_blank"
+                >Jim Nielsen's blog post</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/system-color"
+                target="_blank"
+                >MDN Web Docs</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://drafts.csswg.org/css-color/#css-system-colors"
+                target="_blank"
+                >CSS Color Module Level 4 specification</a
+              >
+            </li>
+          </ul>
+          <p>
+            The following is a list of all the CSS System Colors along with
+            their corresponding hex values:
+          </p>
+          <p>
+            This page demonstrates the CSS System Colors in action. You can use
+            the dropdowns below to change the light/dark mode and contrast
+            settings to see how the colors adapt to different environments.
+          </p>
+        </details>
+      </div>
+
+      <div id="sys-colors-container"></div>
+
+      <div id="sys-colors-demo"></div>
+
+      <div id="sys-colors-footer">
+        <a
+          href="https://eoc.online"
+          target="_blank"
+          title="Open source tooling for Emergency Operation Centers"
+          >©2024 eoc.online</a
+        >
+        <span style="float: right"
+          ><a href="https://github.com/eoconline/sys-colors" target="_blank"
+            >Details & source code</a
+          ></span
+        >
+      </div>
+    </div>
+  </body>
+</html>

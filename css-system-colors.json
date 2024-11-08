@@ -1,0 +1,194 @@
+{
+    "currentColors": [
+        {
+            "color": "AccentColor",
+            "desc": "Background of accented user interface controls"
+        },
+        {
+            "color": "AccentColorText",
+            "desc": "Text of accented user interface controls"
+        },
+        {
+            "color": "ActiveText",
+            "desc": "Text of active links"
+        },
+        {
+            "color": "ButtonBorder",
+            "desc": "Base border color of controls"
+        },
+        {
+            "color": "ButtonFace",
+            "desc": "Background color of controls"
+        },
+        {
+            "color": "ButtonText",
+            "desc": "Text color of controls"
+        },
+        {
+            "color": "Canvas",
+            "desc": "Background of application content or documents"
+        },
+        {
+            "color": "CanvasText",
+            "desc": "Text color in application content or documents"
+        },
+        {
+            "color": "Field",
+            "desc": "Background of input fields"
+        },
+        {
+            "color": "FieldText",
+            "desc": "Text in input fields"
+        },
+        {
+            "color": "GrayText",
+            "desc": "Text color for disabled items (e.g. a disabled control)"
+        },
+        {
+            "color": "Highlight",
+            "desc": "Background of selected items"
+        },
+        {
+            "color": "HighlightText",
+            "desc": "Text color of selected items"
+        },
+        {
+            "color": "LinkText",
+            "desc": "Text of non-active, non-visited links"
+        },
+        {
+            "color": "Mark",
+            "desc": "Background of text that has been specially marked (such as by the HTML mark element)"
+        },
+        {
+            "color": "MarkText",
+            "desc": "Text that has been specially marked (such as by the HTML mark element)"
+        },
+        {
+            "color": "SelectedItem",
+            "desc": "Background of selected items, for example, a selected checkbox"
+        },
+        {
+            "color": "SelectedItemText",
+            "desc": "Text of selected items"
+        },
+        {
+            "color": "VisitedText",
+            "desc": "Text of visited links"
+        }
+    ],
+    "deprecatedColors": [
+        {
+            "color": "ActiveBorder",
+            "desc": "Active window border."
+        },
+        {
+            "color": "ActiveCaption",
+            "desc": "Active window title bar."
+        },
+        {
+            "color": "AppWorkspace",
+            "desc": "Background color of multiple document interface."
+        },
+        {
+            "color": "Background",
+            "desc": "Desktop background."
+        },
+        {
+            "color": "ButtonFace",
+            "desc": "Face color for three-dimensional display elements."
+        },
+        {
+            "color": "ButtonHighlight",
+            "desc": "Dark shadow for three-dimensional display elements."
+        },
+        {
+            "color": "ButtonShadow",
+            "desc": "Shadow color for three-dimensional display elements."
+        },
+        {
+            "color": "ButtonText",
+            "desc": "Text on push buttons."
+        },
+        {
+            "color": "CaptionText",
+            "desc": "Text in caption, size box, and scroll bar arrow box."
+        },
+        {
+            "color": "GrayText",
+            "desc": "Grayed (disabled) text. This color is set to #000 if the current display driver does not support a solid gray color."
+        },
+        {
+            "color": "Highlight",
+            "desc": "Item(s) selected in a control."
+        },
+        {
+            "color": "HighlightText",
+            "desc": "Text of item(s) selected in a control."
+        },
+        {
+            "color": "InactiveBorder",
+            "desc": "Inactive window border."
+        },
+        {
+            "color": "InactiveCaption",
+            "desc": "Inactive window title bar."
+        },
+        {
+            "color": "InactiveCaptionText",
+            "desc": "Color of text in an inactive caption."
+        },
+        {
+            "color": "InfoBackground",
+            "desc": "Background color for tooltip controls."
+        },
+        {
+            "color": "InfoText",
+            "desc": "Text color for tooltip controls."
+        },
+        {
+            "color": "Menu",
+            "desc": "Menu background."
+        },
+        {
+            "color": "MenuText",
+            "desc": "Text in menus."
+        },
+        {
+            "color": "Scrollbar",
+            "desc": "Scroll bar gray area."
+        },
+        {
+            "color": "ThreeDDarkShadow",
+            "desc": "Dark shadow for three-dimensional display elements."
+        },
+        {
+            "color": "ThreeDFace",
+            "desc": "Face color for three-dimensional display elements."
+        },
+        {
+            "color": "ThreeDHighlight",
+            "desc": "Highlight color for three-dimensional display elements (for edges facing the light source)."
+        },
+        {
+            "color": "ThreeDLightShadow",
+            "desc": "Light color for three-dimensional display elements (for edges facing the light source)."
+        },
+        {
+            "color": "ThreeDShadow",
+            "desc": "Shadow color for three-dimensional display elements (for edges facing away from the light source)."
+        },
+        {
+            "color": "Window",
+            "desc": "Window background."
+        },
+        {
+            "color": "WindowFrame",
+            "desc": "Window frame."
+        },
+        {
+            "color": "WindowText",
+            "desc": "Text in windows."
+        }
+    ]
+}

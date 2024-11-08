@@ -1,0 +1,107 @@
+:root {
+  /* allow unstyled HTML to follow user preference via prefers-color-scheme */
+  color-scheme: light dark;
+  --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
+}
+
+:root:has(#lightdark option[value="light"]:checked) {
+  color-scheme: light;
+}
+:root:has(#lightdark option[value="dark"]:checked) {
+  color-scheme: dark;
+}
+:root:has(#contrast option[value="low"]:checked) {
+  filter: contrast(65%);
+  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  color: CanvasText;
+  background-color: Canvas;
+}
+:root:has(#contrast option[value="medium"]:checked) {
+  filter: contrast(80%);
+  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  color: CanvasText;
+  background-color: Canvas;
+}
+:root:has(#contrast option[value="high"]:checked) {
+  & main {
+    background-color: Canvas;
+    border: 2px solid CanvasText;
+  }
+}
+
+@media (prefers-contrast: medium) {
+  :root {
+    filter: contrast(80%);
+    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    color: CanvasText;
+    background-color: Canvas;
+  }
+  :root:has(#contrast option[value="high"]:checked) {
+    filter: revert;
+  }
+}
+
+@media (prefers-contrast: less) {
+  :root {
+    filter: contrast(65%);
+    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    color: CanvasText;
+    background-color: Canvas;
+  }
+  :root:has(#contrast option[value="high"]:checked) {
+    filter: revert;
+  }
+}
+
+/* https://css-tricks.com/dark-mode-and-variable-fonts/ */
+body {
+  font-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    font-weight: 350;
+  }
+}
+
+/* stuff above you may want! */
+/* ========================================================= */
+
+/* ========================================================= */
+/* Stuff below is only for this demo page & can be ignored! */
+
+#sys-colors-container {
+  padding: 10px;
+  border: 2px solid CanvasText;
+  border-radius: 0.3em;
+  margin: 20px;
+  font-family: sans-serif;
+}
+
+#sys-colors-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+#sys-colors-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+#sys-colors-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.grid-container {
+  grid-template-columns: 100px 50px 100px;
+  grid-template-rows: 80px auto 80px;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.item-a {
+  place-self: center stretch;
+}
