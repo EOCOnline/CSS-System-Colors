@@ -4,10 +4,34 @@ const verbose = 2;
 document.addEventListener("DOMContentLoaded", function () {
     if (verbose > 1) console.clear();
     if (verbose > 1) console.log("DOM fully loaded and parsed");
-    generateSystemColors();
+    readSystemColors();
 });
 
-// This uses fileReader instead of fetch, because fetch does not work with local files due to CR (Cross-Origin Policy)
+// read system-color from css-system-colors.json
+async function readSystemColors() {
+    let file = new File([""], "css-system-colors.json", { type: "application/json" });
+    readJSONFile(file).then(
+        json => {
+            console.log("%c" + "Read system colors file: " + file.name + " with " + file.size + " char", "color:maroon;font-weight:bold;");
+            if (!validateJson(json)) {
+                console.error("Invalid JSON: " + json);
+                alert("Invalid JSON: " + json);
+                return;
+            }
+            try {
+                generateSystemColors(json);
+            } catch (e) {
+                console.error("Error building list of System Colors: " + e.message);
+            }
+
+        }
+    ).catch(error => {
+        console.error("Error reading JSON file: " + error.message);
+        alert("Error reading JSON file (" + file.name + "): \n" + error.message);
+    });
+}
+
+// Use fileReader instead of fetch, to avoid CORS errors with local files
 async function readJSONFile(file) {
     return new Promise((resolve, reject) => {
         let fileReader = new FileReader();
@@ -21,41 +45,15 @@ async function readJSONFile(file) {
                 reject(new Error("Invalid JSON format"));
             }
         };
-        fileReader.onerror = (error => reject(error));
+        fileReader.onerror = error => {
+            reject(new Error(`Error reading file ${file.name}: ${error.message}`));
+        };
         fileReader.readAsText(file);
     });
 }
 
-
-// read system-color from css-system-colors.json
-async function readSystemColors() {
-    let file = new File([""], "css-system-colors.json", { type: "application/json" });
-    readJSONFile(file).then(
-        json => {
-            console.log("%c" + "\n================\nRead new Json file: " + file.name + " with " + file.size + " char (" + (file.size / 1024).toFixed(1) + " KB)", "color:maroon;font-weight:bold;");
-            if (!validateJson(json)) {
-                console.error("Invalid JSON: " + json);
-                alert("Invalid JSON: " + json);
-                return;
-            }
-            try {
-                generateSystemColors();
-            } catch (e) {
-                console.error("Error building list of System Colors: " + e.message);
-            }
-
-        }
-    ).catch(error => {
-        console.error("Error reading JSON file: " + error.message);
-        alert("Error reading JSON file (" + file.name + "): \n" + error.message);
-    });
-}
-
-
 // Generate CSS flexbox grid of system colors
-async function generateSystemColors() {
-    let colors = await readSystemColors();
-    if (verbose > 1) console.log("Colors: ", colors);
+async function generateSystemColors(colors) {
     let html = "";
     let color;
     let i = 0;
@@ -65,6 +63,9 @@ async function generateSystemColors() {
         html += ".color-" + color + " { background-color: " + colors[color] + "; }\n";
     }
     if (verbose > 1) console.log("CSS:\n" + html);
-    document.getElementById("syscolors-container").innerHTML = html;
+    const container = document.getElementById("syscolors-container");
+    const textNode = document.createTextNode(html);
+    container.innerHTML = "";
+    container.appendChild(textNode);
 }
 
