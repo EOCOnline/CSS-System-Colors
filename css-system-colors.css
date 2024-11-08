@@ -70,7 +70,7 @@ body {
 /* ========================================================= */
 /* Stuff below is only for this demo page & can be ignored! */
 
-#sys-colors-container {
+#syscolors-container {
   padding: 10px;
   border: 2px solid CanvasText;
   border-radius: 0.3em;
@@ -78,18 +78,18 @@ body {
   font-family: sans-serif;
 }
 
-#sys-colors-header {
+#syscolors-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
 }
 
-#sys-colors-intro {
+#syscolors-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
 }
-#sys-colors-options {
+#syscolors-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;

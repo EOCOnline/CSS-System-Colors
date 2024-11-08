@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
             "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against static css-system-colors.HTML",
-            "url": "D:/Projects/EOC.online/CSS-System-Colors/css-system-colors.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
