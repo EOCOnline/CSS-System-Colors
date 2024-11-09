@@ -32,18 +32,39 @@ function generateSystemColors(systemColorSet, elementID) {
     let i = 0;
     for (const index in systemColorSet) {
 
-        if (verbose > 1) console.log("color: " + systemColorSet[index].color);
+        if (verbose > 2) console.log("color: " + systemColorSet[index].color);
         if (systemColorSet.hasOwnProperty(index)) {
             let nameDiv = document.createElement('div');
             nameDiv.className = "syscolors-name-div";
             nameDiv.innerHTML = systemColorSet[index].color;
             nameDiv.style.color = systemColorSet[index].color;
+            nameDiv.style.backgroundColor = "white";
 
             let descDiv = document.createElement('div');
             descDiv.className = "syscolors-desc-div";
             descDiv.innerHTML = systemColorSet[index].desc;
             descDiv.style.color = systemColorSet[index].color;
             nameDiv.appendChild(descDiv);
+
+            let newDiv = document.createElement('div');
+            newDiv.className = "syscolors-div";
+            nameDiv.innerHTML = systemColorSet[index].color;
+            nameDiv.appendChild(newDiv);
+            let descSpan = document.createElement('span');
+            descSpan.className = "syscolors-desc-div";
+            descSpan.innerHTML = systemColorSet[index].desc;
+            nameDiv.appendChild(descSpan);
+
+
+
+            /*
+            https://blog.jim-nielsen.com/2021/css-relative-colors/
+            https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
+            https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors
+            https://fullystacked.net/color-mix-and-relative-color/
+            https://developer.chrome.com/blog/css-relative-color-syntax/#invert_a_color
+            https://developer.chrome.com/blog/css-relative-color-syntax/
+            */
 
             // https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue#syntax
             // console.error("color was set to: " + nameDiv.style.getPropertyValue("color"));
@@ -56,7 +77,7 @@ function generateSystemColors(systemColorSet, elementID) {
             i++;
         }
     }
-    if (verbose > 1) console.log("Processed {%1} colors.", i);
+    if (verbose > 1) console.log("Processed " + i + " colors.");
 }
 
 // See: http://stackoverflow.com/a/1855903/186965
