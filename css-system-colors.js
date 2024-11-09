@@ -1,11 +1,70 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
 const logLevel = 2;
 
+// https://javascript.plainenglish.io/how-to-trigger-download-of-a-file-via-an-html-button-using-javascript-55f53a4111ce
+/*
+const submit = document.getElementById('submitButton');
+let contrastSlider = document.getElementById('syscolors-contrast');
+const contrastValue = contrastSlider.value;//document.getElementById('syscolors-contrast-value');
+
+contrastSlider.addEventListener('input', function () {
+  contrastValue.innerHTML = contrastSlider.value;
+  updateContrast({ value: contrastSlider.value });
+});
+
+submit.addEventListener('click', function () {
+  downloadJSON(data, 'CSS_System_Colors.json');
+});
+*/
+function downloadJSON(data, filename) {
+  // Convert the JSON data to a string
+  var json = JSON.stringify(data);
+
+  // Create a new Blob object with the JSON data and set its type
+  var blob = new Blob([json], { type: 'application/json' });
+
+  // Create a temporary URL for the file
+  var url = URL.createObjectURL(blob);
+
+  // Create a new link element with the download attribute set to the desired filename
+  var link = document.createElement('a');
+  link.setAttribute('download', filename);
+
+  // Set the link's href attribute to the temporary URL
+  link.href = url;
+
+  // Simulate a click on the link to trigger the download
+  document.body.appendChild(link);
+  link.click();
+
+  // Clean up the temporary URL and link element
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 1) console.log("DOM fully loaded and parsed");
+  // set contrast to auto value
+  updateContrast({ value: 95 });
   readSystemColors();
 });
+
+function updateContrast(el) {
+  let contrast = el.value;
+  // set root style to have filter: contrast(80%);
+  document.documentElement.style.setProperty('--contrast', contrast);
+  document.querySelector("#syscolors-container").style.contrast = contrast + 'em';
+  document.querySelector("#syscolors-contrast").value = contrast;
+  document.querySelector("#syscolors-contrast-value").innerHTML = contrast;
+}
 
 async function readSystemColors() {
   // avoid CORS errors when reading a local file!
@@ -49,8 +108,24 @@ function setupDownload(json, validity = "current") {
   dlAnchorElem.setAttribute("href", dataStr);
   dlAnchorElem.setAttribute("download", "CssSystemColors-" + validity + ".json");
   // dlAnchorElem.click(); // auto-download: user doesn't even have to click the button!
+  return;
+}
+/*
+public IActionResult Download()
+{
+  var download = Serialize(_context.Users, new JsonSerializerSettings());
+
+  return File(download, "application/json", "file.json");
 }
 
+
+private byte[] Serialize(object value, JsonSerializerSettings jsonSerializerSettings)
+{
+  var result = JsonConvert.SerializeObject(value, jsonSerializerSettings);
+
+  return Encoding.UTF8.GetBytes(result);
+}
+*/
 
 // Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
 function generateSystemColors(systemColorSet, elementID, newJson) {

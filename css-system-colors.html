@@ -15,12 +15,14 @@
   <body>
     <div id="syscolors-container">
       <div id="syscolors-header">
-        <img
-          src="./images/favicon.png"
-          alt="eoc.online logo"
-          title="eoc.online - Open Source Tooling for Emergency Operation Centers"
-          height="60px"
-        />
+        <a href="https://eoc.online" target="_blank">
+          <img
+            src="./images/favicon.png"
+            alt="eoc.online logo"
+            title="brought to you by eoc.online - Open Source Tooling for Emergency Operation Centers"
+            height="60px"
+          />
+        </a>
         <a
           href="https://github.com/eoconline/css-system-colors"
           target="_blank"
@@ -30,7 +32,7 @@
           >
             CSS System Colors
           </h1>
-          <h3>- Visual demonstration of all CSS System Colors</h3>
+          <h3>visually demonstrating all CSS System Colors</h3>
         </a>
       </div>
 
@@ -44,7 +46,7 @@
           <option value="dark">Dark</option>
         </select>
         &nbsp; &nbsp; &nbsp;
-
+        <!--
         <label for="contrast">Contrast Mode:</label>
         <select id="contrast">
           <option value="auto">Auto</option>
@@ -52,6 +54,31 @@
           <option value="medium">Medium (80%)</option>
           <option value="low">Low (65%)</option>
         </select>
+        &nbsp; &nbsp; &nbsp;
+      -->
+        <label title="Contrast in %" id="syscolors-contrast-label">
+          Contrast <span id="syscolors-contrast-value">(auto) 100</span>%:
+          <input
+            type="range"
+            step="5"
+            min="0"
+            value="100"
+            max="100"
+            id="syscolors-contrast"
+            oninput="updateContrast(this)"
+          />
+          <!--
+            list="step-list"
+
+            <datalist id="step-list">
+              <option>1.0</option>
+              <option>2.0</option>
+              <option>3.0</option>
+              <option>4.0</option>
+              <option>5</option>
+            </datalist>
+          -->
+        </label>
       </div>
 
       <div id="syscolors-intro" class="syscolors-inner-container">
@@ -132,6 +159,10 @@
               >Download JSON file with RGBA values.</a
             >
           </button>
+
+          <button class="btn" id="submitButton" style="cursor: pointer">
+            Submit
+          </button>
         </details>
       </div>
 
@@ -139,10 +170,9 @@
         <details>
           <summary>Deprecated System Colors</summary>
           <p>
-            The following system colors are deprecated and should not be used in
-            new projects. You may - or may not - see a color. The browser
-            decides what to do with these values. They are included here for
-            reference purposes only.
+            You may - or may not - see a color as these are deprecated and
+            should not be used. The browser decides what to do with these
+            values. They are included here for reference purposes only.
           </p>
           <div id="syscolors-deprecated-grid"></div>
           <a id="syscolors-download-deprecated" style="display: none"

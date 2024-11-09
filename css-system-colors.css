@@ -81,10 +81,17 @@ body {
 #syscolors-header {
   margin: 5px;
   padding: 5px;
-  display: inline-block;
   text-decoration: none;
-  line-height: 1.5;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+#syscolors-header h1,
+#syscolors-header h3 {
+  display: inline-block;
+  margin: 20px;
 }
 
 .syscolors-inner-container {
@@ -103,13 +110,45 @@ details > summary {
 }
 
 details > p {
-  font-size: 120%;
+  contrast: 120%;
   /*margin: 15px;
   /*  box-shadow: 1px 1px 2px #bbbbbb;*/
 }
 
 #syscolors-options {
   font-weight: bold;
+}
+
+#syscolors-options input:hover {
+  box-shadow: rgba(69, 103, 187, 0.35) 0 -25px 18px -14px inset,
+    rgba(69, 103, 187, 0.35) 0 1px 2px, rgba(69, 103, 187, 0.35) 0 2px 4px,
+    rgba(69, 103, 187, 0.35) 0 4px 8px, rgba(69, 103, 187, 0.35) 0 8px 16px,
+    rgba(69, 103, 187, 0.35) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #374151;
+}
+
+#syscolors-options input:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+#syscolors-contrast-label {
+  font-size: medium;
+  margin-top: 20px;
+}
+
+#syscolors-contrast {
+  width: 220px;
+  margin-top: 50px;
+}
+
+#syscolors-contrast-value {
+  display: inline-block;
+  /*background-color: #e5e5e5;
+  border: #aaa 1px solid;*/
+  padding: 2px;
 }
 
 #syscolors-intro {
