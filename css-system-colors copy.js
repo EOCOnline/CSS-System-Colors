@@ -21,9 +21,7 @@ async function readSystemColors() {
             console.table(json);
             if (verbose > 1) {
                 console.log("Self reported navigator.userAgent: " + navigator.userAgent);
-                if (!navigator.userAgentData) {
-                    console.log("navigator.userAgentData: undefined");
-                } else {
+                if (navigator.userAgentData) {
                     console.log("navigator.userAgentData: " + navigator.userAgentData);
                     console.log("navigator.userAgentData.brands: " + navigator.userAgentData.brands);
 
@@ -36,18 +34,26 @@ async function readSystemColors() {
                     console.log("navigator.userAgentData.uaList[0].uaPlatform: " + navigator.userAgentData.uaList[0].uaPlatform);
                     console.log("navigator.userAgentData.uaList[0].uaVersion: " + navigator.userAgentData.uaList[0].uaVersion);
                     console.log("navigator.userAgentData.uaList[0].uaFullVersion: " + navigator.userAgentData.uaList[0].uaFullVersion);
-                    //console.log("navigator.userAgentData.platform: " + (navigator.userAgentData.platform ? navigator.userAgentData.platform : "undefined"));
+
+                    console.log("navigator.userAgentData.platform: " + (navigator.userAgentData.platform ? navigator.userAgentData.platform : "undefined"));
+                } else {
+                    console.log("navigator.userAgentData: undefined");
                 }
             }
-
-            console.log("currentColors: " + json.currentColors.length);
-            generateSystemColors(json.currentColors, "syscolors-grid");
-            console.log("\n\ndeprecatedColors: " + json.deprecatedColors.length);
-            generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
-        })
-        .catch(error => {
-            console.error("Fetch error: " + error.message);
-        });
+            console.log("navigator.platform (deprecated): " + (navigator.userAgentData.platform ? navigator.userAgentData.platform : "undefined"));
+        }
+            if (verbose > 1) console.log("currentColors: " + json.currentColors.length);
+    generateSystemColors(json.currentColors, "syscolors-grid");
+    if (verbose > 1) console.log("\n\ndeprecatedColors: " + json.deprecatedColors.length);
+    generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
+})
+        .catch (error => {
+    console.error("Fetch error: " + error.message);
+});
+    }
+    .catch (error => {
+    console.error("Fetch error: " + error.message);
+});
 }
 
 // Generate flexgrid of system-colors
