@@ -7,7 +7,7 @@
 
     <title>CSS System Colors</title>
 
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
     <link rel="stylesheet" href="./css-system-colors.css" />
     <script src="./css-system-colors.js"></script>
   </head>
@@ -31,32 +31,29 @@
         </a>
       </div>
 
-      <div id="syscolors-options">
+      <div id="syscolors-options" class="syscolors-inner-container">
         <div>
-          <strong
-            >CSS System-Colors Options:
+          Options: &nbsp; &nbsp;
 
-            <label for="lightdark">Light/Dark Mode:</label>
-            <select id="lightdark">
-              <option value="auto">OS Default</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-            &nbsp;
+          <label for="lightdark">Light/Dark Mode:</label>
+          <select id="lightdark">
+            <option value="auto">OS Default</option>
+            <option value="light" checked="checked">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+          &nbsp; &nbsp; &nbsp;
 
-            <label for="contrast">Contrast Mode:</label>
-            <select id="contrast">
-              <option value="auto">Auto</option>
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
-            </select>
-          </strong>
+          <label for="contrast">Contrast Mode:</label>
+          <select id="contrast">
+            <option value="auto">Auto</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
         </div>
-        <br />
       </div>
 
-      <div id="syscolors-intro">
+      <div id="syscolors-intro" class="syscolors-inner-container">
         <details>
           <summary>Introduction</summary>
 
@@ -125,14 +122,28 @@
         </details>
       </div>
 
-      <div id="syscolors-flexgrid">
-        <div class="item">my color name is XXX</div>
-        <div class="item">my color name is XXX</div>
+      <div id="syscolors-flexgrid" class="syscolors-inner-container">
+        <details open>
+          <summary>System Colors</summary>
+          <div id="syscolors-grid"></div>
+        </details>
       </div>
 
-      <div id="syscolors-demo"></div>
+      <div id="syscolors-deprecated" class="syscolors-inner-container">
+        <details>
+          <summary>Deprecated System Colors</summary>
+          <div id="syscolors-deprecated-grid"></div>
+        </details>
+      </div>
 
-      <div id="syscolors-footer">
+      <div id="syscolors-demo-container" class="syscolors-inner-container">
+        <details open>
+          <summary>System Color Example</summary>
+          <div id="syscolors-demo"></div>
+        </details>
+      </div>
+
+      <div id="syscolors-footer" class="syscolors-inner-container">
         <a
           href="https://eoc.online"
           target="_blank"

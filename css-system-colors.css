@@ -25,7 +25,7 @@
 :root:has(#contrast option[value="high"]:checked) {
   & main {
     background-color: Canvas;
-    border: 2px solid CanvasText;
+    border: 1px solid CanvasText;
   }
 }
 
@@ -72,7 +72,7 @@ body {
 
 #syscolors-container {
   padding: 10px;
-  border: 2px solid CanvasText;
+  border: 1px solid CanvasText;
   border-radius: 0.3em;
   margin: 20px;
   font-family: sans-serif;
@@ -83,40 +83,67 @@ body {
   padding: 5px;
 }
 
-#syscolors-intro {
-  border: CanvasText 2px solid;
+.syscolors-inner-container {
+  border: CanvasText 1px solid;
   border-radius: 0.5em;
-  margin: 5px;
-  padding: 5px;
+  margin: 10px;
+  padding: 10px;
+  background-color: Canvas;
+  color: CanvasText;
+}
+
+details > summary {
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+}
+
+details > p {
+  font-size: 120%;
+  /*margin: 15px;
+  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
 }
 
 #syscolors-options {
-  border: CanvasText 2px solid;
-  border-radius: 0.5em;
-  margin: 5px;
-  padding: 10px;
+  font-weight: bold;
 }
 
-#syscolors-flexgrid {
+#syscolors-intro {
+  --noop: var(--noop);
+}
+
+#syscolors-flexgrid,
+#syscolors-deprecated-grid {
+  --noop: var(--noop);
+}
+
+#syscolors-grid,
+#syscolors-deprecated-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  border: CanvasText 2px solid;
-  border-radius: 0.5em;
-  padding: 10px;
-  margin: 10px;
+  justify-content: flex-start;
 }
 
-#syscolors-flexgrid div {
-  flex: 0 25%;
-  height: 50px;
+.syscolors-name-div {
+  flex: 0 1; /* flex: 0 24% */
+  height: 75px;
+  min-width: 225px;
+
+  font-weight: bolder;
 
   margin: 15px; /* (100-32*3)/2 */
-  padding: 4px;
+  padding: 10px;
   /*border: CanvasText 5px solid;*/
-  background-color: Canvas;
+  /* background-color: Canvas;*/
   border-radius: 0.5em;
   place-self: center stretch;
+
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
+  background-color: rgb(from currentcolor 0 0 255);
+  
+  */
+  background-color: rgb(from currentcolor r g b);
+
   /*box-shadow: 10px 10px 10px 10px CanvasText inset;*/
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
@@ -124,43 +151,29 @@ body {
     rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   /* https://getcssscan.com/css-box-shadow-examples */
+
+  /* https://codepen.io/WebSeed/pen/pvgqEq */
+
+  /* following works in dark mode, not light! not too good: https://stackoverflow.com/questions/23968961/css-how-can-i-make-a-font-readable-over-any-color 
+  text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
+    0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
+    0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
+}*/
+}
+
+.syscolors-desc-div {
+  font-weight: 400;
+}
+
+#syscolors-demo-container {
+  --noop: var(--noop);
 }
 
 #syscolors-demo {
   margin: 5px;
   padding: 5px;
-  border: CanvasText 2px solid;
-  background-color: Canvas;
-  border-radius: 0.5em;
 }
 
 #syscolors-footer {
-  margin: 5px;
-  padding: 5px;
-  border: CanvasText 2px solid;
-  background-color: Canvas;
-  border-radius: 0.5em;
-}
-
-/* UNUSED ideas ... */
-.flex-container {
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: DodgerBlue;
-}
-
-.flex-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-}
-
-.grid-container {
-  grid-template-columns: 100px 50px 100px;
-  grid-template-rows: 80px auto 80px;
-  column-gap: 10px;
-  row-gap: 15px;
+  font-weight: bold;
 }
