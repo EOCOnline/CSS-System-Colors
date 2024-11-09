@@ -35,25 +35,23 @@
       </div>
 
       <div id="syscolors-options" class="syscolors-inner-container">
-        <div>
-          Options: &nbsp; &nbsp;
+        Options: &nbsp; &nbsp;
 
-          <label for="lightdark">Light/Dark Mode:</label>
-          <select id="lightdark">
-            <option value="auto">OS Default</option>
-            <option value="light" checked="checked">Light</option>
-            <option value="dark">Dark</option>
-          </select>
-          &nbsp; &nbsp; &nbsp;
+        <label for="lightdark">Light/Dark Mode:</label>
+        <select id="lightdark">
+          <option value="auto">OS Default</option>
+          <option value="light" checked="checked">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+        &nbsp; &nbsp; &nbsp;
 
-          <label for="contrast">Contrast Mode:</label>
-          <select id="contrast">
-            <option value="auto">Auto</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
+        <label for="contrast">Contrast Mode:</label>
+        <select id="contrast">
+          <option value="auto">Auto</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
       </div>
 
       <div id="syscolors-intro" class="syscolors-inner-container">
@@ -129,6 +127,11 @@
         <details open>
           <summary>System Colors</summary>
           <div id="syscolors-grid"></div>
+          <button id="syscolors-copy" value="Copy to clipboard">
+            <a id="syscolors-download-current" style="display: none"
+              >Download JSON file with RGBA values.</a
+            >
+          </button>
         </details>
       </div>
 
@@ -142,6 +145,9 @@
             reference purposes only.
           </p>
           <div id="syscolors-deprecated-grid"></div>
+          <a id="syscolors-download-deprecated" style="display: none"
+            >Download JSON file with RGBA values.</a
+          >
         </details>
       </div>
 

@@ -137,20 +137,25 @@ details > p {
 
   margin: 15px; /* (100-32*3)/2 */
   padding: 10px;
-  /*border: CanvasText 5px solid;*/
-  /* background-color: Canvas;*/
+
   border-radius: 0.5em;
   place-self: center stretch;
-
+  background-color: rgb(from currentcolor r g b);
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
   background-color: rgb(from currentcolor 0 0 255);
   
   */
-  background-color: rgb(from currentcolor r g b);
+  /*border: CanvasText 5px solid;*/
+  /* background-color: Canvas;*/
+  border-style: solid 10px;
+  border-top-color: 000;
+  border-right-color: CanvasText;
+  border-bottom-color: none;
+  border-left-color: black;
 
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+  /*box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;*/
   /* https://getcssscan.com/css-box-shadow-examples */
 
   /* https://codepen.io/WebSeed/pen/pvgqEq */
