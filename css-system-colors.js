@@ -1,9 +1,9 @@
-// Verbose is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const verbose = 2;
+// logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
+const logLevel = 2;
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (verbose > 1) console.clear();
-  if (verbose > 1) console.log("DOM fully loaded and parsed");
+  if (logLevel > 1) console.clear();
+  if (logLevel > 1) console.log("DOM fully loaded and parsed");
   readSystemColors();
 });
 
@@ -25,7 +25,7 @@ async function readSystemColors() {
 }
 
 function processJson(json) {
-  if (verbose > 1) console.log("Processing JSON");
+  if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
 
   json.info.useragent = navigator.userAgent;
@@ -37,13 +37,13 @@ function processJson(json) {
   setupDownload(newJson);
 
   console.log("deprecatedColors: " + json.deprecatedColors.length);
-  newJson = Object.assign({}, json.info, generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid", jsonDeprecated));
+  newJson = Object.assign({}, json.info, generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid", json.deprecatedColors));
   setupDownload(newJson, 'deprecated');
 }
 
 // https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
 function setupDownload(json, validity = "current") {
-  let storageObj = JSON.parse(json);
+  let storageObj = json;
   let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(storageObj));
   let dlAnchorElem = document.getElementById('syscolors-download-' + validity);
   dlAnchorElem.setAttribute("href", dataStr);
@@ -58,11 +58,11 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
   console.log("Self reported navigator.userAgent: '" + navigator.userAgent + "'");
   let i = 0;
 
-  for (const index in Object.keys(systemColorSet)) {
+  for (const index of Object.keys(systemColorSet)) {
 
-    //if (verbose) console.log("color: " + systemColorSet[index].color);
+    //if (logLevel) console.log("color: " + systemColorSet[index].color);
     let RGBA = nameToRgba(systemColorSet[index].color);
-    if (verbose) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
+    if (logLevel) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
 
 
@@ -70,15 +70,15 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
     nameSpan.className = "syscolors-color-span";
     nameSpan.style.color = systemColorSet[index].color;
     // background needs a contrasting color
-    nameSpan.backgroundColor = colorIsLight(RGBA[0], RGBA[1], RGBA[2]) ? 'black' : 'white';
+    nameSpan.style.backgroundColor = colorIsLight(RGBA[0], RGBA[1], RGBA[2]) ? 'black' : 'white';
     //nameSpan.style.backgroundColor = "#" + RGBA[0].toString(16) + RGBA[1].toString(16) + RGBA[2].toString(16);
     nameSpan.innerHTML = systemColorSet[index].color;
 
-    descSpan = document.createElement('span');
+    let descSpan = document.createElement('span');
     descSpan.className = "syscolors-desc-span";
     descSpan.innerHTML = " (" + systemColorSet[index].desc + ") ";
 
-    rgbaSpan = document.createElement('span');
+    let rgbaSpan = document.createElement('span');
     rgbaSpan.className = "syscolors-rgba-span";
     rgbaSpan.innerHTML = RGBA;
 
@@ -117,8 +117,8 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
     i++;
     //}
   }
-  if (verbose > 1) console.log("Processed " + i + " colors.");
-  return newJson
+  if (logLevel > 1) console.log("Processed " + i + " colors.");
+  return newJson;
 }
 
 // See: http://stackoverflow.com/a/1855903/186965
@@ -128,7 +128,7 @@ function colorIsLight(r, g, b) {
   // Counting the perceptive luminance
   // human eye favors green color... 
   var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  console.log(a);
+  if (logLevel > 1) console.log(a);
   return (a < 0.5);
 }
 
@@ -147,13 +147,12 @@ function colorFromRgb(r, g, b) {
 function getContrastingColor(element) {
   let rgb1 = element.style.backgroundColor;
   let rgb = rgb1.match(/\d+/g);
-  if (verbose > 1) console.log("rgb: " + rgb);
+  if (logLevel > 1) console.log("rgb: " + rgb);
   if (rgb === null) {
     rgb = 'fff';
   }
   //var bgColor = colorFromRgb(bgRgb[0], bgRgb[1], bgRgb[2]);
-  let textColor = colorIsLight(rgb[0], rgb[1], rgb[2]) ? 'black' : 'white';
-
-  //el.setAttribute('style', 'background-color: ' + bgColour + '; color: ' + textColour);
-  //c.appendChild(el);
+  let textColor = colorIsLight(Number(rgb[0]), Number(rgb[1]), Number(rgb[2])) ? 'black' : 'white';
+  element.style.color = textColor;
+  return textColor;
 }
