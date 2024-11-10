@@ -151,28 +151,26 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
     let RGBA = nameToRgba(systemColorSet[index].color);
     if (logLevel) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
-
+    let contrastColor = colorIsLight(RGBA[0], RGBA[1], RGBA[2]) ? 'black' : 'white';
 
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-color-span";
-    nameSpan.style.color = systemColorSet[index].color;
-    // background needs a contrasting color
-    nameSpan.style.backgroundColor = colorIsLight(RGBA[0], RGBA[1], RGBA[2]) ? 'black' : 'white';
-    //nameSpan.style.backgroundColor = "#" + RGBA[0].toString(16) + RGBA[1].toString(16) + RGBA[2].toString(16);
+    //nameSpan.style.color = contrastColor;
     nameSpan.innerHTML = systemColorSet[index].color;
 
     let descSpan = document.createElement('span');
     descSpan.className = "syscolors-desc-span";
-    descSpan.innerHTML = " (" + systemColorSet[index].desc + ") ";
+    descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
 
     let rgbaSpan = document.createElement('span');
     rgbaSpan.className = "syscolors-rgba-span";
-    rgbaSpan.innerHTML = RGBA;
+    rgbaSpan.innerHTML = ": [" + RGBA + "]";
 
     let nameDiv = document.createElement('div');
     nameDiv.className = "syscolors-name-div";
-    nameDiv.style.color = systemColorSet[index].color;
-    nameDiv.style.backgroundColor = "#" + RGBA[0].toString(16) + RGBA[1].toString(16) + RGBA[2].toString(16);
+    nameDiv.style.color = contrastColor;
+    nameDiv.style.backgroundColor = systemColorSet[index].color;
+    //"#" + RGBA[0].toString(16) + RGBA[1].toString(16) + RGBA[2].toString(16);
     nameDiv.appendChild(nameSpan);
     nameDiv.appendChild(descSpan);
     nameDiv.appendChild(rgbaSpan);

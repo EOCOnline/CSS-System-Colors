@@ -110,7 +110,7 @@ details > summary {
 }
 
 details > p {
-  contrast: 120%;
+  font-size: 120%;
   /*margin: 15px;
   /*  box-shadow: 1px 1px 2px #bbbbbb;*/
 }
@@ -171,13 +171,12 @@ details > p {
   flex: 0 1; /* flex: 0 24% */
   height: 75px;
   min-width: 225px;
-
   font-weight: bolder;
 
   margin: 15px; /* (100-32*3)/2 */
   padding: 10px;
 
-  border-radius: 0.5em;
+  /*background-color: bisque; */
   place-self: center stretch;
   background-color: rgb(from currentcolor r g b);
   /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
@@ -186,15 +185,18 @@ details > p {
   */
   /*border: CanvasText 5px solid;*/
   /* background-color: Canvas;*/
-  border-style: solid 10px;
+  border-radius: 1em;
+
+  border: solid 8px;
+
   border-top-color: 000;
   border-right-color: CanvasText;
   border-bottom-color: none;
   border-left-color: black;
 
-  /*box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;*/
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   /* https://getcssscan.com/css-box-shadow-examples */
 
   /* https://codepen.io/WebSeed/pen/pvgqEq */
@@ -204,6 +206,15 @@ details > p {
     0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
     0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
 }*/
+}
+.syscolors-desc-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.syscolors-rgba-span {
+  font-size: 80%;
+  font-weight: 400;
 }
 
 /* https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
