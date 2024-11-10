@@ -32,7 +32,7 @@
           >
             CSS System Colors
           </h1>
-          <h3>visually demonstrating all CSS System Colors</h3>
+          <h3>visually demonstrates CSS System Colors</h3>
         </a>
       </div>
 
@@ -154,14 +154,14 @@
         <details open>
           <summary>System Colors</summary>
           <div id="syscolors-grid"></div>
-          <button id="syscolors-copy" value="Copy to clipboard">
-            <a id="syscolors-download-current" style="display: none"
-              >Download JSON file with RGBA values.</a
-            >
-          </button>
-
-          <button class="btn" id="submitButton" style="cursor: pointer">
-            Submit
+          <button
+            class="btn"
+            id="syscolors-download-current"
+            style="cursor: pointer"
+            title="Download JSON file with RGBA values"
+            onclick="downloadCurrentColors()"
+          >
+            Download JSON
           </button>
         </details>
       </div>
@@ -175,9 +175,15 @@
             values. They are included here for reference purposes only.
           </p>
           <div id="syscolors-deprecated-grid"></div>
-          <a id="syscolors-download-deprecated" style="display: none"
-            >Download JSON file with RGBA values.</a
+          <button
+            class="btn"
+            id="syscolors-download-deprecated"
+            style="cursor: pointer"
+            title="Download JSON file with RGBA values"
+            onclick="downloadDeprecatedColors()"
           >
+            Download JSON
+          </button>
         </details>
       </div>
 

@@ -83,6 +83,8 @@ async function readSystemColors() {
     });
 }
 
+let currentColorsJson = {};
+let deprecatedColorsJson = {};
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
@@ -93,11 +95,13 @@ function processJson(json) {
   console.log("currentColors: " + json.currentColors.length);
   json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid");
   let newJson = Object.assign({}, json.info, json.currentColors);
-  setupDownload(newJson);
+  currentColorsJson = newJson;
+  // setupDownload(newJson);
 
   console.log("deprecatedColors: " + json.deprecatedColors.length);
   newJson = Object.assign({}, json.info, generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid", json.deprecatedColors));
-  setupDownload(newJson, 'deprecated');
+  deprecatedColorsJson = newJson;
+  // setupDownload(newJson, 'deprecated');
 }
 
 // https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
@@ -110,22 +114,30 @@ function setupDownload(json, validity = "current") {
   // dlAnchorElem.click(); // auto-download: user doesn't even have to click the button!
   return;
 }
-/*
-public IActionResult Download()
-{
-  var download = Serialize(_context.Users, new JsonSerializerSettings());
 
-  return File(download, "application/json", "file.json");
+
+function downloadCurrentColors() {
+  //let curColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentColorsJson));
+  let curColor = JSON.stringify(currentColorsJson);
+  downloadJSON(curColor, 'CSS_System_Colors.json');
 }
+
+function downloadDeprecatedColors() {
+  //let depColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(deprecatedColorsJson));
+  let depColor = JSON.stringify(deprecatedColorsJson);
+  downloadJSON(depColor, 'CSS_Deprecated_Colors.json');
+}
+/*
+public IActionResult Download(){
+  var download = Serialize(_context.Users, new JsonSerializerSettings());
+  return File(download, "application/json", "file.json");}
 
 
 private byte[] Serialize(object value, JsonSerializerSettings jsonSerializerSettings)
-{
-  var result = JsonConvert.SerializeObject(value, jsonSerializerSettings);
-
-  return Encoding.UTF8.GetBytes(result);
-}
+{  var result = JsonConvert.SerializeObject(value, jsonSerializerSettings);
+  return Encoding.UTF8.GetBytes(result);}
 */
+
 
 // Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
 function generateSystemColors(systemColorSet, elementID, newJson) {
