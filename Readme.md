@@ -1,4 +1,4 @@
-# CSS System Colors Demo
+# CSS System Colors Visual Demonstration
 
 CSS System Colors are derived from the user's operating system's color scheme.
 They are useful for creating a consistent look and feel that matches the user's
@@ -12,11 +12,19 @@ this browser/operating System**!
 
 This page demonstrates the CSS System Colors in action. You can view the colors
 (and their change the light/dark mode and contrast settings to see how the
-colors adapt to different environments. We uniquely display the actual color's
-[RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
-environment.
+colors adapt to different environments.
 
-## Introduction
+We uniquely display the actual color's
+[RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
+environment. Note that the values are likely to change when switching from light
+to dark mode.
+
+Hovering over each card displays the same text as in the card,and allows copying
+it to your clipboard if desired. At the bottom to the two system color grids is
+a download button which will download a simple json files with the current RGBA
+values for the environment.
+
+## System Colors Introduction
 
 [CSS System Colors](https://drafts.csswg.org/css-color/#css-system-colors) are a
 set of 17 color keywords that are derived from the user's operating system's

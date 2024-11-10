@@ -15,6 +15,7 @@
 
 <body>
   <div id="syscolors-container">
+
     <div id="syscolors-header">
       <a href="https://eoc.online" target="_blank">
         <img src="./images/favicon.png" alt="eoc.online logo"
@@ -26,43 +27,28 @@
         </h1>
         <h3>Visually demonstrate CSS System Colors</h3>
       </a>
+      <span id="syscolors-github">
+        <a href="https://github.com/eoconline/css-system-colors" target="_blank" title="Download the source!"><img
+            src="./images/github-mark.svg" height="40px"></a>
+      </span>
     </div>
 
     <div id="syscolors-options" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
-      <label for="lightdark">Light/Dark Mode:</label>
-      <select id="lightdark" onchange="setColorMode(self)">
+      <label for="syscolors-lightdark">Light/Dark Mode:</label>
+      <select id="syscolors-lightdark" onchange="setColorMode(self)">
         <option value="auto">OS Default</option>
-        <option value="light" checked="checked">Light</option>
+        <option value="light" selected="selected">Light</option>
         <option value="dark">Dark</option>
       </select>
       &nbsp; &nbsp; &nbsp;
-      <!--
-        <label for="contrast">Contrast Mode:</label>
-        <select id="contrast">
-          <option value="auto">Auto</option>
-          <option value="high">High</option>
-          <option value="medium">Medium (80%)</option>
-          <option value="low">Low (65%)</option>
-        </select>
-        &nbsp; &nbsp; &nbsp;
-      -->
-      <label title="Contrast in %" id="syscolors-contrast-label">
+
+      <label title="Contrast in %" id="syscolors-contrast-label" for="syscolors-contrast">
         Contrast <span id="syscolors-contrast-value">(auto) 100</span>%:
         <input type="range" step="5" min="0" value="100" max="100" id="syscolors-contrast"
           oninput="updateContrast(this)" />
-        <!--
-            list="step-list"
 
-            <datalist id="step-list">
-              <option>1.0</option>
-              <option>2.0</option>
-              <option>3.0</option>
-              <option>4.0</option>
-              <option>5</option>
-            </datalist>
-          -->
       </label>
       <div title="As reported by navigator.userAgent" id="syscolors-user-agent-div">
         System parameters: <span id="syscolors-user-agent"></span>
@@ -88,7 +74,16 @@
 
         <p>We uniquely display the actual color's
           [RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
-          environment. Note that they likely values when switch from light to dark mode!!!</p>
+          environment. Note that the values are likely to change when switching from light to dark mode.</p>
+
+        <p>This page demonstrates the CSS System Colors in action. You can use
+          the dropdowns above to change the light/dark mode and contrast
+          settings to see how the colors adapt to different environments.</p>
+
+        <p>Hovering over each card displays the same text as in the card,and allows copying
+          it to your clipboard if desired. At the bottom to the two system color grids is
+          a download button which will download a simple json files with the current RGBA
+          values for the environment.</p>
 
         <h3>Introduction</h3>
 
@@ -97,7 +92,7 @@
           color scheme. They are useful for creating a consistent look and feel that
           matches the user's preferences.</p>
 
-        <p>CSS System Colors are a new ![W3C](W3C.png) standard (under development since
+        <p>CSS System Colors are a new ![W3C](./images/W3C.png) standard (under development since
           [2017](https://www.w3.org/standards/history/css-color-4/) as part of CSS Color
           Module Level 4), but still in proposal status as of 2024) -- but well adopted by
           modern browsers. The colors and descriptions are current as of November 2024.</p>
@@ -184,10 +179,8 @@
             </li>
           </ul>
         </details>
-        <p>
-          None of the above have useful examples or visual demonstrations.
-          Thus this!
-        </p>
+        <p>None of the above have useful examples or visual demonstrations.
+          Thus this!</p>
 
         <h3>License</h3>
 
@@ -199,12 +192,6 @@
         </p>
 
         <p>Source & details at <https: //github.com/eoconline/css-system-colors>
-        </p>
-
-        <p>
-          This page demonstrates the CSS System Colors in action. You can use
-          the dropdowns below to change the light/dark mode and contrast
-          settings to see how the colors adapt to different environments.
         </p>
       </details>
     </div>

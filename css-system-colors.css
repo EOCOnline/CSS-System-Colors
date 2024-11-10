@@ -1,25 +1,40 @@
+/*******************************************************
+*
+*  CSS System Colors
+*  Use CSS as much as possible to handle light vs dark mode and contrast
+*
+*/
+
+/*****************************
+** Handle light vs dark mode
+**/
 :root {
   /* allow unstyled HTML to follow user preference via prefers-color-scheme */
   color-scheme: light dark;
   --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
+  --contrast: 100;
 }
-:root:has(#lightdark option[value="light"]:checked) {
+:root:has(#syscolors-lightdark option[value="light"]:checked) {
   color-scheme: light;
 }
-:root:has(#lightdark option[value="dark"]:checked) {
+:root:has(#syscolors-lightdark option[value="dark"]:checked) {
   color-scheme: dark;
 }
 
-/* Contrast */
+/*****************************
+** Handle contrast
+ * NOTE: Apparently just using JS to set --contrast does everything?
+ * Don't we also need to apply the 'filter' as below does?!
+**
 :root:has(#contrast option[value="low"]:checked) {
   filter: contrast(65%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  /* only needed because of low contrast filter, which needs a declared color to work on: *
   color: CanvasText;
   background-color: Canvas;
 }
 :root:has(#contrast option[value="medium"]:checked) {
   filter: contrast(80%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  /* only needed because of low contrast filter, which needs a declared color to work on: *
   color: CanvasText;
   background-color: Canvas;
 }
@@ -33,7 +48,7 @@
 @media (prefers-contrast: medium) {
   :root {
     filter: contrast(80%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    /* only needed because of low contrast filter, which needs a declared color to work on: *
     color: CanvasText;
     background-color: Canvas;
   }
@@ -45,7 +60,7 @@
 @media (prefers-contrast: less) {
   :root {
     filter: contrast(65%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    /* only needed because of low contrast filter, which needs a declared color to work on: *
     color: CanvasText;
     background-color: Canvas;
   }
@@ -53,6 +68,7 @@
     filter: revert;
   }
 }
+*/
 
 /* https://css-tricks.com/dark-mode-and-variable-fonts/ */
 body {
@@ -65,12 +81,22 @@ body {
   }
 }
 
-/* stuff above you may want! */
-/* ========================================================= */
+/*
+Not used, but may be worth testing! 
+https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
+.well-contrasting-darker-color {
+  background: darkred;
+  color: oklch(from darkred calc(l + 0.6) c h);
+}
 
-/* ========================================================= */
-/* Stuff below is only for this demo page & can be ignored! */
+.well-contrasting-lighter-color {
+  background: lightpink;
+  color: oklch(from lightpink calc(l - 0.6) c h);
+}
 
+/***************************************************************
+ * Page Containers
+**/
 #syscolors-container {
   padding: 10px;
   border: 1px solid CanvasText;
@@ -93,6 +119,11 @@ body {
 #syscolors-header h3 {
   display: inline-block;
   margin-left: 50px;
+}
+
+#syscolors-github {
+  margin-left: auto;
+  margin-right: 15px;
 }
 
 .syscolors-inner-container {
@@ -143,13 +174,13 @@ details > p {
   margin-top: 15px;
 }
 
-#syscolors-contrast-label {
-  font-size: medium;
-}
-
 #syscolors-contrast {
   width: 220px;
   margin-top: 0px;
+}
+
+#syscolors-contrast-label {
+  font-size: medium;
 }
 
 #syscolors-contrast-value {
@@ -161,103 +192,6 @@ details > p {
 
 #syscolors-intro {
   --noop: var(--noop);
-}
-
-#syscolors-flexgrid,
-#syscolors-deprecated-grid {
-  --noop: var(--noop);
-}
-
-#syscolors-grid,
-#syscolors-deprecated-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.syscolors-name-div {
-  flex: 0 1; /* flex: 0 24% */
-  height: 75px;
-  min-width: 225px;
-  font-weight: bolder;
-
-  margin: 15px; /* (100-32*3)/2 */
-  padding: 10px;
-
-  /*background-color: bisque; */
-  place-self: center stretch;
-  background-color: rgb(from currentcolor r g b);
-  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
-  background-color: rgb(from currentcolor 0 0 255);
-  
-  */
-  /*border: CanvasText 5px solid;*/
-  /* background-color: Canvas;*/
-  border-radius: 1em;
-
-  border: solid 8px;
-
-  border-top-color: 000;
-  border-right-color: CanvasText;
-  border-bottom-color: none;
-  border-left-color: black;
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  /* https://getcssscan.com/css-box-shadow-examples */
-
-  /* https://codepen.io/WebSeed/pen/pvgqEq */
-
-  /* following works in dark mode, not light! not too good: https://stackoverflow.com/questions/23968961/css-how-can-i-make-a-font-readable-over-any-color 
-  text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
-    0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
-    0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
-}*/
-}
-
-/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
-.syscolors-name-div:hover .tooltip {
-  display: block;
-}
-
-.tooltip {
-  display: none;
-  color: rgb(11, 56, 37);
-  background-color: beige;
-  padding: 5px;
-  border: #374151 1px solid;
-  border-radius: 0.5em;
-
-  margin-left: 30px; /* moves the tooltip to the right */
-  margin-top: 15px; /* moves it down */
-  position: absolute;
-  z-index: 1000;
-}
-
-.syscolors-desc-span {
-  font-size: 90%;
-  font-weight: 500;
-}
-
-.syscolors-rgba-span {
-  font-size: 80%;
-  font-weight: 400;
-}
-
-/* https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
-.well-contrasting-darker-color {
-  background: darkred;
-  color: oklch(from darkred calc(l + 0.6) c h);
-}
-
-.well-contrasting-lighter-color {
-  background: lightpink;
-  color: oklch(from lightpink calc(l - 0.6) c h);
-}
-
-.syscolors-desc-div {
-  font-weight: 400;
 }
 
 #syscolors-demo-container {
@@ -282,4 +216,98 @@ details > p {
 
 #syscolors-footer {
   font-weight: bold;
+}
+
+/****************************************************
+ * System Color Grids
+**/
+#syscolors-flexgrid,
+#syscolors-deprecated-grid {
+  --noop: var(--noop);
+}
+
+#syscolors-grid,
+#syscolors-deprecated-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.syscolors-card {
+  flex: 0 1; /* flex: 0 24% */
+  height: 80px;
+  min-width: 250px;
+  font-weight: bolder;
+
+  margin: 15px; /* (100-32*3)/2 */
+  padding: 10px;
+
+  /*background-color: bisque; */
+  place-self: center stretch;
+  background-color: rgb(from currentcolor r g b);
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
+  background-color: rgb(from currentcolor 0 0 255);
+  
+  */
+  /*border: CanvasText 5px solid;*/
+  /* background-color: Canvas;*/
+  border-radius: 1em;
+
+  border: solid 5px white;
+
+  border-top-color: 000;
+  border-right-color: CanvasText;
+  border-bottom-color: none;
+  border-left-color: black;
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  /*
+
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    */
+  /* https://getcssscan.com/css-box-shadow-examples */
+
+  /* https://codepen.io/WebSeed/pen/pvgqEq */
+
+  /* following works in dark mode, not light! not too good: https://stackoverflow.com/questions/23968961/css-how-can-i-make-a-font-readable-over-any-color 
+  text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
+    0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
+    0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
+}*/
+}
+
+/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
+.syscolors-card:hover .syscolors-tooltip {
+  display: block;
+}
+
+.syscolors-tooltip {
+  display: none;
+  color: rgb(11, 56, 37);
+  background-color: beige;
+  padding: 5px;
+  border: #374151 1px solid;
+  border-radius: 0.5em;
+
+  margin-left: 30px; /* moves the tooltip to the right */
+  margin-top: 15px; /* moves it down */
+  position: absolute;
+  z-index: 1000;
+}
+
+.syscolors-desc-div {
+  font-weight: 400;
+}
+
+.syscolors-desc-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.syscolors-rgba-span {
+  font-size: 80%;
+  font-weight: 400;
 }
