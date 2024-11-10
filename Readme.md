@@ -13,18 +13,20 @@ this browser/operating System**!
 This page demonstrates the CSS System Colors in action. You can view the colors
 (and their change the light/dark mode and contrast settings to see how the
 colors adapt to different environments. We uniquely display the actual color's
-RGBA values.
+[RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
+environment.
 
 ## Introduction
 
-CSS System Colors are a set of 17 color keywords that are derived from the
-user's operating system's color scheme. They are useful for creating a
-consistent look and feel that matches the user's preferences.
+[CSS System Colors](https://drafts.csswg.org/css-color/#css-system-colors) are a
+set of 17 color keywords that are derived from the user's operating system's
+color scheme. They are useful for creating a consistent look and feel that
+matches the user's preferences.
 
 CSS System Colors are a new ![W3C](W3C.png) standard (under development since
 [2017](https://www.w3.org/standards/history/css-color-4/) as part of CSS Color
 Module Level 4), but still in proposal status as of 2024) -- but well adopted by
-modern browsers.
+modern browsers. The colors and descriptions are current as of November 2024.
 
 The colors are defined in the CSS Color Module Level 4 specification and can be
 used in any property that accepts a color value. They are prefixed with the
@@ -41,8 +43,10 @@ harmonious color palette.
 A nice feature of CSS System Colors is that they can be used in combination with
 other color values to create a harmonious color palette.
 
-Some colors are deprecated as they enable mimicking system colors too well, and
-could be used for fake, evil phishing sites. Don't go there!
+Some colors are
+[deprecated](https://drafts.csswg.org/css-color/#typedef-deprecated-color) as
+they enable mimicking system colors too well, and could be used for fake, evil
+phishing sites. Don't go there!
 
 For more information on CSS System Colors, check out:
 

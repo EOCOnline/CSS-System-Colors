@@ -3,13 +3,14 @@
   color-scheme: light dark;
   --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
 }
-
 :root:has(#lightdark option[value="light"]:checked) {
   color-scheme: light;
 }
 :root:has(#lightdark option[value="dark"]:checked) {
   color-scheme: dark;
 }
+
+/* Contrast */
 :root:has(#contrast option[value="low"]:checked) {
   filter: contrast(65%);
   /* only needed because of low contrast filter, which needs a declared color to work on: */
@@ -91,7 +92,7 @@ body {
 #syscolors-header h1,
 #syscolors-header h3 {
   display: inline-block;
-  margin: 20px;
+  margin-left: 50px;
 }
 
 .syscolors-inner-container {
@@ -117,6 +118,8 @@ details > p {
 
 #syscolors-options {
   font-weight: bold;
+  /* margin: 0px;
+  padding: 0px;*/
 }
 
 #syscolors-options input:hover {
@@ -134,14 +137,19 @@ details > p {
   outline-offset: 2px;
 }
 
+#syscolors-user-agent-div {
+  font-weight: normal;
+  font-size: 80%;
+  margin-top: 15px;
+}
+
 #syscolors-contrast-label {
   font-size: medium;
-  margin-top: 20px;
 }
 
 #syscolors-contrast {
   width: 220px;
-  margin-top: 50px;
+  margin-top: 0px;
 }
 
 #syscolors-contrast-value {
@@ -207,6 +215,26 @@ details > p {
     0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
 }*/
 }
+
+/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
+.syscolors-name-div:hover .tooltip {
+  display: block;
+}
+
+.tooltip {
+  display: none;
+  color: rgb(11, 56, 37);
+  background-color: beige;
+  padding: 5px;
+  border: #374151 1px solid;
+  border-radius: 0.5em;
+
+  margin-left: 30px; /* moves the tooltip to the right */
+  margin-top: 15px; /* moves it down */
+  position: absolute;
+  z-index: 1000;
+}
+
 .syscolors-desc-span {
   font-size: 90%;
   font-weight: 500;
@@ -239,6 +267,17 @@ details > p {
 #syscolors-demo {
   margin: 5px;
   padding: 5px;
+
+  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
+  :link {
+    color: LinkText;
+  }
+  :visited {
+    color: VisitedText;
+  }
+  :active {
+    color: ActiveText;
+  }
 }
 
 #syscolors-footer {

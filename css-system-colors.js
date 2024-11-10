@@ -60,10 +60,25 @@ document.addEventListener("DOMContentLoaded", function () {
 function updateContrast(el) {
   let contrast = el.value;
   // set root style to have filter: contrast(80%);
-  document.documentElement.style.setProperty('--contrast', contrast);
+  document.documentElement.style.setProperty('--contrast', contrast); // BUG: This is ignored currently!!!
   document.querySelector("#syscolors-container").style.contrast = contrast + 'em';
   document.querySelector("#syscolors-contrast").value = contrast;
   document.querySelector("#syscolors-contrast-value").innerHTML = contrast;
+}
+
+function setColorMode(el) {
+  let mode = el.value;
+  if (mode === "auto") {
+    document.documentElement.style.removeProperty('--color-mode');
+  } else {
+    //document.documentElement.style.setProperty('--color-mode', mode);
+    //document.querySelector("#syscolors-color-mode").value = mode;
+  }
+  if (logLevel) console.log("Color mode set to: " + mode);
+  // TODO: I believe we HAVE to rerun color table, as RGBA values likely change with change in color mode!
+  let currentColorsJson = {};
+  let deprecatedColorsJson = {};
+  readSystemColors();
 }
 
 async function readSystemColors() {
@@ -85,25 +100,31 @@ async function readSystemColors() {
 
 let currentColorsJson = {};
 let deprecatedColorsJson = {};
+
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
 
   json.info.useragent = navigator.userAgent;
+  document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
   json.info.timeStamp = new Date().toLocaleString();
 
   console.log("currentColors: " + json.currentColors.length);
+  document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
   json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid");
   let newJson = Object.assign({}, json.info, json.currentColors);
   currentColorsJson = newJson;
   // setupDownload(newJson);
 
   console.log("deprecatedColors: " + json.deprecatedColors.length);
+  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+
   newJson = Object.assign({}, json.info, generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid", json.deprecatedColors));
   deprecatedColorsJson = newJson;
   // setupDownload(newJson, 'deprecated');
 }
 
+// NOTE: UNUSED!
 // https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
 function setupDownload(json, validity = "current") {
   let storageObj = json;
@@ -114,7 +135,6 @@ function setupDownload(json, validity = "current") {
   // dlAnchorElem.click(); // auto-download: user doesn't even have to click the button!
   return;
 }
-
 
 function downloadCurrentColors() {
   //let curColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentColorsJson));
@@ -127,17 +147,6 @@ function downloadDeprecatedColors() {
   let depColor = JSON.stringify(deprecatedColorsJson);
   downloadJSON(depColor, 'CSS_Deprecated_Colors.json');
 }
-/*
-public IActionResult Download(){
-  var download = Serialize(_context.Users, new JsonSerializerSettings());
-  return File(download, "application/json", "file.json");}
-
-
-private byte[] Serialize(object value, JsonSerializerSettings jsonSerializerSettings)
-{  var result = JsonConvert.SerializeObject(value, jsonSerializerSettings);
-  return Encoding.UTF8.GetBytes(result);}
-*/
-
 
 // Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
 function generateSystemColors(systemColorSet, elementID, newJson) {
@@ -166,14 +175,22 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
     rgbaSpan.className = "syscolors-rgba-span";
     rgbaSpan.innerHTML = ": [" + RGBA + "]";
 
+    let tooltipSpan = document.createElement('span');
+    tooltipSpan.className = "tooltip";
+    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + "&nbsp; &nbsp; (Click to copy)";
+    tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + rgbaSpan.innerText); });
+
     let nameDiv = document.createElement('div');
     nameDiv.className = "syscolors-name-div";
     nameDiv.style.color = contrastColor;
     nameDiv.style.backgroundColor = systemColorSet[index].color;
+    //nameDiv.title = nameSpan + descSpan + rgbaSpan;
     //"#" + RGBA[0].toString(16) + RGBA[1].toString(16) + RGBA[2].toString(16);
     nameDiv.appendChild(nameSpan);
     nameDiv.appendChild(descSpan);
     nameDiv.appendChild(rgbaSpan);
+    nameDiv.appendChild(tooltipSpan);
+
 
 
     // How to come up with contrasting color for text?
@@ -240,4 +257,41 @@ function getContrastingColor(element) {
   let textColor = colorIsLight(Number(rgb[0]), Number(rgb[1]), Number(rgb[2])) ? 'black' : 'white';
   element.style.color = textColor;
   return textColor;
+}
+
+// From: https://github.com/DeanMarkTaylor/clipboard-test
+function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+
+function copyTextToClipboard(text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function () {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function (err) {
+    console.error('Async: Could not copy text: ', err);
+  });
 }

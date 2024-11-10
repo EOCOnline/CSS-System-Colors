@@ -3,193 +3,173 @@
     "currentColors": [
         {
             "color": "AccentColor",
-            "desc": "Background of accented user interface controls"
+            "desc": "Background of accented user interface controls."
         },
         {
             "color": "AccentColorText",
-            "desc": "Text of accented user interface controls"
+            "desc": "Text of accented user interface controls."
         },
         {
             "color": "ActiveText",
-            "desc": "Text of active links"
+            "desc": "Text in active links. For light backgrounds, traditionally red."
         },
         {
             "color": "ButtonBorder",
-            "desc": "Base border color of controls"
+            "desc": "The base border color for push buttons."
         },
         {
             "color": "ButtonFace",
-            "desc": "Background color of controls"
-        },
-        {
-            "color": "ButtonText",
-            "desc": "Text color of controls"
-        },
-        {
-            "color": "Canvas",
-            "desc": "Background of application content or documents"
-        },
-        {
-            "color": "CanvasText",
-            "desc": "Text color in application content or documents"
-        },
-        {
-            "color": "Field",
-            "desc": "Background of input fields"
-        },
-        {
-            "color": "FieldText",
-            "desc": "Text in input fields"
-        },
-        {
-            "color": "GrayText",
-            "desc": "Text color for disabled items (e.g. a disabled control)"
-        },
-        {
-            "color": "Highlight",
-            "desc": "Background of selected items"
-        },
-        {
-            "color": "HighlightText",
-            "desc": "Text color of selected items"
-        },
-        {
-            "color": "LinkText",
-            "desc": "Text of non-active, non-visited links"
-        },
-        {
-            "color": "Mark",
-            "desc": "Background of text that has been specially marked (such as by the HTML mark element)"
-        },
-        {
-            "color": "MarkText",
-            "desc": "Text that has been specially marked (such as by the HTML mark element)"
-        },
-        {
-            "color": "SelectedItem",
-            "desc": "Background of selected items, for example, a selected checkbox"
-        },
-        {
-            "color": "SelectedItemText",
-            "desc": "Text of selected items"
-        },
-        {
-            "color": "VisitedText",
-            "desc": "Text of visited links"
-        }
-    ],
-    "deprecatedColors": [
-        {
-            "color": "ActiveBorder",
-            "desc": "Active window border."
-        },
-        {
-            "color": "ActiveCaption",
-            "desc": "Active window title bar."
-        },
-        {
-            "color": "AppWorkspace",
-            "desc": "Background color of multiple document interface."
-        },
-        {
-            "color": "Background",
-            "desc": "Desktop background."
-        },
-        {
-            "color": "ButtonFace",
-            "desc": "Face color for three-dimensional display elements."
-        },
-        {
-            "color": "ButtonHighlight",
-            "desc": "Dark shadow for three-dimensional display elements."
-        },
-        {
-            "color": "ButtonShadow",
-            "desc": "Shadow color for three-dimensional display elements."
+            "desc": "The face background color for push buttons."
         },
         {
             "color": "ButtonText",
             "desc": "Text on push buttons."
         },
         {
-            "color": "CaptionText",
-            "desc": "Text in caption, size box, and scroll bar arrow box."
+            "color": "Canvas",
+            "desc": "Background of application content or documents."
+        },
+        {
+            "color": "CanvasText",
+            "desc": "Text in application content or documents."
+        },
+        {
+            "color": "Field",
+            "desc": "Background of input fields."
+        },
+        {
+            "color": "FieldText",
+            "desc": "Text in input fields."
         },
         {
             "color": "GrayText",
-            "desc": "Grayed (disabled) text. This color is set to #000 if the current display driver does not support a solid gray color."
+            "desc": "Disabled text. (Often, but not necessarily, gray.)"
         },
         {
             "color": "Highlight",
-            "desc": "Item(s) selected in a control."
+            "desc": "Background of selected text, for example from : :selection."
         },
         {
             "color": "HighlightText",
-            "desc": "Text of item(s) selected in a control."
+            "desc": "Text of selected text."
+        },
+        {
+            "color": "LinkText",
+            "desc": "Text in non-active, non-visited links. For light backgrounds, traditionally blue."
+        },
+        {
+            "color": "Mark",
+            "desc": "Background of text that has been specially marked (such as by the HTML mark element)."
+        },
+        {
+            "color": "MarkText",
+            "desc": "Text that has been specially marked (such as by the HTML mark element)."
+        },
+        {
+            "color": "SelectedItem",
+            "desc": "Background of selected items, for example a selected checkbox."
+        },
+        {
+            "color": "SelectedItemText",
+            "desc": "Text of selected items."
+        },
+        {
+            "color": "VisitedText",
+            "desc": "Text in visited links. For light backgrounds, traditionally purple."
+        }
+    ],
+    "deprecatedColors": [
+        {
+            "color": "ActiveBorder",
+            "desc": "Active window border. Same as ButtonBorder"
+        },
+        {
+            "color": "ActiveCaption",
+            "desc": "Active window caption. Same as Canvas"
+        },
+        {
+            "color": "AppWorkspace",
+            "desc": "Background color of multiple document interface. Same as Canvas"
+        },
+        {
+            "color": "Background",
+            "desc": "Desktop background. Same as Canvas."
+        },
+        {
+            "color": "ButtonHighlight",
+            "desc": "The color of the border facing the light source for 3-D elements that appear 3-D due to one layer of surrounding border. Same as ButtonFace."
+        },
+        {
+            "color": "ButtonShadow",
+            "desc": "The color of the border away from the light source for 3-D elements that appear 3-D due to one layer of surrounding border. Same as ButtonFace."
+        },
+        {
+            "color": "CaptionText",
+            "desc": "Text in caption, size box, and scrollbar arrow box. Same as CanvasText."
         },
         {
             "color": "InactiveBorder",
-            "desc": "Inactive window border."
+            "desc": "Inactive window border. Same as ButtonBorder."
         },
         {
             "color": "InactiveCaption",
-            "desc": "Inactive window title bar."
+            "desc": "Inactive window caption. Same as Canvas."
         },
         {
             "color": "InactiveCaptionText",
-            "desc": "Color of text in an inactive caption."
+            "desc": "Color of text in an inactive caption. Same as GrayText."
         },
         {
             "color": "InfoBackground",
-            "desc": "Background color for tooltip controls."
+            "desc": "Background color for tooltip controls. Same as Canvas."
         },
         {
             "color": "InfoText",
-            "desc": "Text color for tooltip controls."
+            "desc": "Text color for tooltip controls. Same as CanvasText."
         },
         {
             "color": "Menu",
-            "desc": "Menu background."
+            "desc": "Menu background. Same as Canvas."
         },
         {
             "color": "MenuText",
-            "desc": "Text in menus."
+            "desc": "Text in menus. Same as CanvasText."
         },
         {
             "color": "Scrollbar",
-            "desc": "Scroll bar gray area."
+            "desc": "Scroll bar gray area. Same as Canvas."
         },
         {
             "color": "ThreeDDarkShadow",
-            "desc": "Dark shadow for three-dimensional display elements."
+            "desc": "The color of the darker (generally outer) of the two borders away from the light source for 3-D elements that appear 3-D due to two concentric layers of surrounding border. Same as ButtonBorder."
         },
         {
             "color": "ThreeDFace",
-            "desc": "Face color for three-dimensional display elements."
+            "desc": "The face background color for 3-D elements that appear 3-D due to two concentric layers of surrounding border. Same as ButtonFace."
         },
         {
             "color": "ThreeDHighlight",
-            "desc": "Highlight color for three-dimensional display elements (for edges facing the light source)."
+            "desc": "The color of the lighter (generally outer) of the two borders facing the light source for 3-D elements that appear 3-D due to two concentric layers of surrounding border. Same as ButtonBorder."
         },
         {
             "color": "ThreeDLightShadow",
-            "desc": "Light color for three-dimensional display elements (for edges facing the light source)."
+            "desc": "The color of the darker (generally inner) of the two borders facing the light source for 3-D elements that appear 3-D due to two concentric layers of surrounding border. Same as ButtonBorder."
         },
         {
             "color": "ThreeDShadow",
-            "desc": "Shadow color for three-dimensional display elements (for edges facing away from the light source)."
+            "desc": "The color of the lighter (generally inner) of the two borders away from the light source for 3-D elements that appear 3-D due to two concentric layers of surrounding border. Same as ButtonBorder."
         },
         {
             "color": "Window",
-            "desc": "Window background."
+            "desc": "Window background. Same as Canvas."
         },
         {
             "color": "WindowFrame",
-            "desc": "Window frame."
+            "desc": "Window frame. Same as ButtonBorder."
         },
         {
             "color": "WindowText",
-            "desc": "Text in windows."
+            "desc": "Text in windows. Same as CanvasText."
         }
     ]
 }
