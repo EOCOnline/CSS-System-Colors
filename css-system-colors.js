@@ -77,46 +77,28 @@ async function readSystemColors() {
 }
 
 
-
-let currentColorsJson = {};
-let deprecatedColorsJson = {};
+let currentColorsJson = { "info": {}, "currentColors": [] };
+let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
 
   json.info.timeStamp = new Date().toLocaleString();
-  json.info.useragent = navigator.userAgent;
+  json.info.userAgent = navigator.userAgent;
   document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
   console.log("currentColors: " + json.currentColors.length);
   document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
-  debugger;
   json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid");
-
-
-
-  // OK to use shallow copy, as we're not copying objects, just strings & numbers - with current JSON structure
-  let Json1 = { ...json.info, currentColors: json.currentColors };
-  let Json2 = { ...json.info, currentColors: [...json.currentColors] };
-  // BUG: gets: TypeError: can't access property Symbol.iterator, json.currentColors is undefined
-  let currentColorsJson3 = { ...json.info, currentColors: [...json.currentColors] };
-  let currentColorsJson1 = { ...json.info, ...json.currentColors };
-
-  // This works though not as recommended!
-  currentColorsJson = Object.assign({}, json.info, json.currentColors);
+  currentColorsJson.info = structuredClone(json.info);
+  currentColorsJson.currentColors = structuredClone(json.currentColors);
 
   console.log("deprecatedColors: " + json.deprecatedColors.length);
   document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
-
-
   json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
-
-  // Broken, but recommended method!!!
-  // deprecatedColorsJson = { ...json.info, deprecatedColors: [...json.deprecatedColors] };
-
-  // Works
-  deprecatedColorsJson = Object.assign({}, json.info, generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid", json.deprecatedColors));
+  deprecatedColorsJson.info = structuredClone(json.info);
+  deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 
   // setupDownload(currentColorsJson);
   // setupDownload(deprecatedColorsJson, 'deprecated');
@@ -124,7 +106,7 @@ function processJson(json) {
 
 // Build the HTML grid for display AND get the current RGBA values
 // Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
-function generateSystemColors(systemColorSet, elementID, newJson) {
+function generateSystemColors(systemColorSet, elementID) {
   console.table(systemColorSet);
   console.log("Self reported navigator.userAgent: '" + navigator.userAgent + "'");
   let i = 0;
@@ -137,15 +119,13 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
     i++;
   }
   if (logLevel > 1) console.log("Processed " + i + " colors.");
-  return newJson;
+  return systemColorSet;
 }
 
 let clickText = "&nbsp; &nbsp; (Click to copy)";
 let clickedText = "&nbsp; &nbsp; (Copied!)";
 // Create an HTML card for each color
 function createColorCards(systemColorSet, index, elementID, RGBA) {
-
-
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -297,7 +277,6 @@ function createFileName(baseName) {
 function downloadCurrentColors() {
   //let curColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentColorsJson));
   let curColor = JSON.stringify(currentColorsJson);
-  debugger;
   downloadJSON(curColor, createFileName("CSS_System_Colors"));
 }
 

@@ -1,5 +1,7 @@
 {
-    "info": "Created by eoc.online CSS System Colors tool: https://github.com/eoconline/css-system-colors",
+    "info": {
+        "copyright": "Created by eoc.online CSS System Colors tool: https://github.com/eoconline/css-system-colors"
+    },
     "currentColors": [
         {
             "color": "AccentColor",
