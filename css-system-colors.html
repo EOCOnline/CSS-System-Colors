@@ -57,143 +57,158 @@
 
     <div id="syscolors-intro" class="syscolors-inner-container">
       <details>
-        <summary>Introduction</summary>
-        <h3>Welcome to CSS SystemColors</h3>
-        <p>CSS System Colors are derived from the user's operating system's color scheme.
-          They are useful for creating a consistent look and feel that matches the user's
-          preferences.</p>
-
-        <p>This page is a nice visual reference to the system-colors - but **specific to
-          this browser/operating System**!</p>
-        <blockquote>Avoid specifying different colors for light or dark mode: let the browser & OS
-          handle it for you!</blockquote>
-
-        <p>This page demonstrates the CSS System Colors in action. You can view the colors
-          (and their change the light/dark mode and contrast settings to see how the
-          colors adapt to different environments.</p>
-
-        <p>We uniquely display the actual color's
-          [RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
-          environment. Note that the values are likely to change when switching from light to dark mode.</p>
-
-        <p>This page demonstrates the CSS System Colors in action. You can use
-          the dropdowns above to change the light/dark mode and contrast
-          settings to see how the colors adapt to different environments.</p>
-
-        <p>Hovering over each card displays the same text as in the card,and allows copying
-          it to your clipboard if desired. At the bottom to the two system color grids is
-          a download button which will download a simple json files with the current RGBA
-          values for the environment.</p>
-
-        <h3>Introduction</h3>
-
-        <p>[CSS System Colors](https://drafts.csswg.org/css-color/#css-system-colors) are a
-          set of 17 color keywords that are derived from the user's operating system's
-          color scheme. They are useful for creating a consistent look and feel that
-          matches the user's preferences.</p>
-
-        <p>CSS System Colors are a new ![W3C](./images/W3C.png) standard (under development since
-          [2017](https://www.w3.org/standards/history/css-color-4/) as part of CSS Color
-          Module Level 4), but still in proposal status as of 2024) -- but well adopted by
-          modern browsers. The colors and descriptions are current as of November 2024.</p>
-
-        <p>The colors are defined in the CSS Color Module Level 4 specification and can be
-          used in any property that accepts a color value. <strong>[NOTE: They are SUPPOSED TO BE prefixed with the
-            system- keyword, such as system-highlight or system-buttonface.]</strong></p>
-
-        <p>The colors are designed to adapt to different light/dark modes and contrast
-          settings, making them ideal for creating accessible and user-friendly
-          interfaces. They can be used in combination with other color values to create a
-          harmonious color palette.</p>
-
-        <blockquote>
-          Note: System colors' actual RGBA values may vary depending on the user's
-          operating system and browser settings!</blockquote>
-
-        <p>A nice feature of CSS System Colors is that they can be used in combination with
-          other color values to create a harmonious color palette.</p>
-
-        <p>Some colors are
-          [deprecated](https://drafts.csswg.org/css-color/#typedef-deprecated-color) as
-          they enable mimicking system colors too well, and could be used for fake, evil
-          phishing sites. Don't go there!</p>
-
-        <p>For more information on CSS System Colors, check out:
-        <ul>
-          <li> Jim Nielsen's blog post
-            <https: //blog.jim-nielsen.com/2021/css-system-colors />
-          </li>
-          <li>MDN Web Docs <https: //developer.mozilla.org/en-US/docs/Web/CSS/system-color>
-          </li>
-          <li>CSS Color Module Level 4 specification
-            ([~2024](https://www.w3.org/standards/history/css-color-4/))
-            <https: //www.w3.org/TR/css-color-4/#css-system-colors>
-          </li>
-        </ul>
-        </p>
-        <br />
+        <!--  #region Intro -->
         <details>
-          <summary>Tests</summary>
+          <summary>Introduction</summary>
+          <summary>Introduction</summary>
+          <h3>Welcome to CSS SystemColors</h3>
+          <p>CSS System Colors are derived from the user's operating system's color scheme.
+            They are useful for creating a consistent look and feel that matches the user's
+            preferences.</p>
 
+          <p>This page is a nice visual reference to the system-colors - but **specific to
+            this browser/operating System**!</p>
+          <blockquote>Avoid specifying different colors for light or dark mode: let the browser & OS
+            handle it for you!</blockquote>
+
+          <p>This page demonstrates the CSS System Colors in action. You can view the colors
+            (and their change the light/dark mode and contrast settings to see how the
+            colors adapt to different environments.</p>
+
+          <p>We uniquely display the actual color's
+            <a href="https://drafts.csswg.org/css-color/#rgb-functions" target="_blank">RGBA</a> values for the current
+            environment. Note that the values are likely to change when switching from light to dark mode.
+          </p>
+
+          <p>This page demonstrates the CSS System Colors in action. You can use
+            the dropdowns above to change the light/dark mode and contrast
+            settings to see how the colors adapt to different environments.</p>
+
+          <p>Hovering over each card displays the same text as in the card,and allows copying
+            it to your clipboard if desired. At the bottom to the two system color grids is
+            a download button which will download a simple json files with the current RGBA
+            values for the environment.</p>
+
+          <h3>Introduction</h3>
+
+          <p><a href="https: //www.w3.org/TR/css-color-4/#css-system-colors" target="_blank">https:
+              //www.w3.org/TR/css-color-4/#css-system-colorsCSS System Colors</a> are a
+            set of 17 color keywords that are derived from the user's operating system's
+            color scheme. They are useful for creating a consistent look and feel that
+            matches the user's preferences.</p>
+
+          <p>CSS System Colors are a new ![W3C](./images/W3C.png) standard (under development since
+            <a href="https://www.w3.org/standards/history/css-color-4/" target="_blank">2017</a> as part of CSS Color
+            Module Level 4), but still in proposal status as of 2024) -- but well adopted by
+            modern browsers. The colors and descriptions are current as of November 2024.
+          </p>
+
+          <p>The colors are defined in the CSS Color Module Level 4 specification and can be
+            used in any property that accepts a color value. <strong>[NOTE: They are SUPPOSED TO BE prefixed with the
+              system- keyword, such as system-highlight or system-buttonface.]</strong></p>
+
+          <p>The colors are designed to adapt to different light/dark modes and contrast
+            settings, making them ideal for creating accessible and user-friendly
+            interfaces. They can be used in combination with other color values to create a
+            harmonious color palette.</p>
+
+          <blockquote>
+            Note: System colors' actual RGBA values may vary depending on the user's
+            operating system and browser settings!</blockquote>
+
+          <p>A nice feature of CSS System Colors is that they can be used in combination with
+            other color values to create a harmonious color palette.</p>
+
+          <p>Some colors are
+            <a href="https://drafts.csswg.org/css-color/#typedef-deprecated-color" target="_blank">deprecated></a> as
+            they enable mimicking system colors too well, and could be used for fake, evil
+            phishing sites. Don't go there!
+          </p>
+
+          <p>For more information on CSS System Colors, check out:
           <ul>
-            <li><a href="https://wpt.fyi/results/css/css-color/system-color-consistency.html"
-                title="css/css-color/system-color-consistency.html">system-color-consistency.html<small> (56
-                  tests)</small></a><span><span title="chrome 56/56"
-                  style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
-                  title="firefox 56/56"
-                  style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
-                  title="safari 26/56"
-                  style="background: conic-gradient(forestgreen 167.14285714285714deg, darkred 0deg);"></span><span
-                  title="edge 55/56"
-                  style="background: conic-gradient(forestgreen 353.57142857142856deg, darkred 0deg);"></span></span> <a
-                class="wpt-live" href="http://wpt.live/css/css-color/system-color-consistency.html"><small>(live
-                  test)</small></a> <a
-                href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-consistency.html"><small>(source)</small></a>
+            <li> Jim Nielsen's blog post
+              <a href="https: //blog.jim-nielsen.com/2021/css-system-colors" target="_blank">https:
+                //blog.jim-nielsen.com/2021/css-system-colors</a>
             </li>
-            <li><a href="https://wpt.fyi/results/css/css-color/system-color-support.html"
-                title="css/css-color/system-color-support.html">system-color-support.html<small> (21
-                  tests)</small></a><span><span title="chrome 18/21"
-                  style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span
-                  title="firefox 20/21"
-                  style="background: conic-gradient(forestgreen 342.85714285714283deg, darkred 0deg);"></span><span
-                  title="safari 18/21"
-                  style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span
-                  title="edge 19/21"
-                  style="background: conic-gradient(forestgreen 325.7142857142857deg, darkred 0deg);"></span></span> <a
-                class="wpt-live" href="http://wpt.live/css/css-color/system-color-support.html"><small>(live
-                  test)</small></a> <a
-                href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-support.html"><small>(source)</small></a>
+            <li>MDN Web Docs
+              <a href="https: //developer.mozilla.org/en-US/docs/Web/CSS/system-color" target="_blank">https:
+                //developer.mozilla.org/en-US/docs/Web/CSS/system-color</a>
             </li>
-            <li><a href="https://wpt.fyi/results/css/css-color/parsing/color-valid-system-color.html"
-                title="css/css-color/parsing/color-valid-system-color.html">color-valid-system-color.html<small> (19
-                  tests)</small></a><span><span title="chrome 17/19"
-                  style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span><span
-                  title="firefox 19/19"
-                  style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
-                  title="safari 19/19"
-                  style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span title="edge 17/19"
-                  style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span></span> <a
-                class="wpt-live" href="http://wpt.live/css/css-color/parsing/color-valid-system-color.html"><small>(live
-                  test)</small></a> <a
-                href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/parsing/color-valid-system-color.html"><small>(source)</small></a>
+            <li>CSS Color Module Level 4 specification
+              <a href="https: //www.w3.org/TR/css-color-4/#css-system-colors" target="_blank">https:
+                //www.w3.org/TR/css-color-4/#css-system-colors</a>
             </li>
           </ul>
+          </p>
+          <br />
+          <details>
+            <summary>Tests</summary>
+
+            <ul>
+              <li><a href="https://wpt.fyi/results/css/css-color/system-color-consistency.html"
+                  title="css/css-color/system-color-consistency.html">system-color-consistency.html<small> (56
+                    tests)</small></a><span><span title="chrome 56/56"
+                    style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
+                    title="firefox 56/56"
+                    style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
+                    title="safari 26/56"
+                    style="background: conic-gradient(forestgreen 167.14285714285714deg, darkred 0deg);"></span><span
+                    title="edge 55/56"
+                    style="background: conic-gradient(forestgreen 353.57142857142856deg, darkred 0deg);"></span></span>
+                <a class="wpt-live" href="http://wpt.live/css/css-color/system-color-consistency.html"><small>(live
+                    test)</small></a> <a
+                  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-consistency.html"><small>(source)</small></a>
+              </li>
+              <li><a href="https://wpt.fyi/results/css/css-color/system-color-support.html"
+                  title="css/css-color/system-color-support.html">system-color-support.html<small> (21
+                    tests)</small></a><span><span title="chrome 18/21"
+                    style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span
+                    title="firefox 20/21"
+                    style="background: conic-gradient(forestgreen 342.85714285714283deg, darkred 0deg);"></span><span
+                    title="safari 18/21"
+                    style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span
+                    title="edge 19/21"
+                    style="background: conic-gradient(forestgreen 325.7142857142857deg, darkred 0deg);"></span></span>
+                <a class="wpt-live" href="http://wpt.live/css/css-color/system-color-support.html"><small>(live
+                    test)</small></a> <a
+                  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-support.html"><small>(source)</small></a>
+              </li>
+              <li><a href="https://wpt.fyi/results/css/css-color/parsing/color-valid-system-color.html"
+                  title="css/css-color/parsing/color-valid-system-color.html">color-valid-system-color.html<small> (19
+                    tests)</small></a><span><span title="chrome 17/19"
+                    style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span><span
+                    title="firefox 19/19"
+                    style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
+                    title="safari 19/19"
+                    style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span
+                    title="edge 17/19"
+                    style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span></span>
+                <a class="wpt-live"
+                  href="http://wpt.live/css/css-color/parsing/color-valid-system-color.html"><small>(live
+                    test)</small></a> <a
+                  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/parsing/color-valid-system-color.html"><small>(source)</small></a>
+              </li>
+            </ul>
+          </details>
+          <p>None of the above have useful examples or visual demonstrations.
+            Thus this!</p>
+
+          <h3>License</h3>
+
+          <p>©2024 eoc.online under the permissive MIT License. Please note our contributions
+            though!</p>
+
+          <p>
+            <a href="https://eoc.online" target="_blank">https://eoc.online</a>: Open source tooling for Emergency
+            Operation Centers
+          </p>
+
+          <p>Source & details at <a href="https://github.com/eoconline/css-system-colors"
+              target="_blank">https://github.com/eoconline/css-system-colors</a>
+          </p>
+          <!--  #endregion -->
         </details>
-        <p>None of the above have useful examples or visual demonstrations.
-          Thus this!</p>
-
-        <h3>License</h3>
-
-        <p>©2024 eoc.online under the permissive MIT License. Please note our contributions
-          though!</p>
-
-        <p>
-          <https: //eoc.online>: Open source tooling for Emergency Operation Centers
-        </p>
-
-        <p>Source & details at <https: //github.com/eoconline/css-system-colors>
-        </p>
-      </details>
     </div>
 
     <div id="syscolors-flexgrid" class="syscolors-inner-container">

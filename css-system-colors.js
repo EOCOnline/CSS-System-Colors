@@ -1,6 +1,6 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
 const logLevel = 1;
-const sourceJson = "system-colors.json";
+const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
@@ -61,7 +61,7 @@ async function readSystemColorsBroken() {
 
 async function readSystemColors() {
   // avoid CORS errors when reading a local file!
-  fetch("css-system-colors.json")
+  fetch(sourceJson)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
@@ -72,9 +72,11 @@ async function readSystemColors() {
       processJson(json);
     })
     .catch(error => {
-      console.error("Fetch error: " + error.message);
+      console.error("Fetch error: " + error.message); //BUG: Fetch error: can't convert undefined to object
     });
 }
+
+
 
 let currentColorsJson = {};
 let deprecatedColorsJson = {};
@@ -89,16 +91,25 @@ function processJson(json) {
 
   console.log("currentColors: " + json.currentColors.length);
   document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
+  debugger;
   json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid");
 
+
+
+  // OK to use shallow copy, as we're not copying objects, just strings & numbers - with current JSON structure
+  let Json1 = { ...json.info, currentColors: json.currentColors };
+  let Json2 = { ...json.info, currentColors: [...json.currentColors] };
   // BUG: gets: TypeError: can't access property Symbol.iterator, json.currentColors is undefined
-  // currentColorsJson = { ...json.info, currentColors: [...json.currentColors] };
+  let currentColorsJson3 = { ...json.info, currentColors: [...json.currentColors] };
+  let currentColorsJson1 = { ...json.info, ...json.currentColors };
 
   // This works though not as recommended!
   currentColorsJson = Object.assign({}, json.info, json.currentColors);
 
   console.log("deprecatedColors: " + json.deprecatedColors.length);
   document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+
+
   json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
 
   // Broken, but recommended method!!!
@@ -117,7 +128,7 @@ function generateSystemColors(systemColorSet, elementID, newJson) {
   console.table(systemColorSet);
   console.log("Self reported navigator.userAgent: '" + navigator.userAgent + "'");
   let i = 0;
-  for (const index of Object.keys(systemColorSet)) {
+  for (const index of Object.keys(systemColorSet)) { // BUG: gets TypeError: can't convert undefined to object
     let RGBA = nameToRgba(systemColorSet[index].color);
     if (logLevel > 1) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
@@ -134,7 +145,7 @@ let clickedText = "&nbsp; &nbsp; (Copied!)";
 // Create an HTML card for each color
 function createColorCards(systemColorSet, index, elementID, RGBA) {
 
-  let contrastColor = colorIsLight(RGBA[0], RGBA[1], RGBA[2]) ? 'black' : 'white';
+
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -146,7 +157,7 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
 
   let rgbaSpan = document.createElement('span');
   rgbaSpan.className = "syscolors-rgba-span";
-  rgbaSpan.innerHTML = ": [" + RGBA + "]";
+  rgbaSpan.innerHTML = " [" + RGBA + "]";
 
   let tooltipSpan = document.createElement('span');
   tooltipSpan.className = "syscolors-tooltip";
@@ -157,8 +168,7 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-card";
   cardDiv.style.backgroundColor = systemColorSet[index].color;
-
-  cardDiv.style.color = contrastColor;
+  cardDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
 
   cardDiv.appendChild(nameSpan);
   cardDiv.appendChild(descSpan);
@@ -172,50 +182,24 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
 
 
 
-
-
-
 /******************************************* 
  * 
- * Color contrast functions
+ * Color functions
  */
 
-// How to come up with contrasting color for text?
-/*********************   
-    https://css-tricks.com/methods-contrasting-text-backgrounds/
-    https://codepen.io/thebabydino/pen/JNWqLL
-    https://stackoverflow.com/questions/1855884/determine-font-color-based-on-background-color
+// TODO: get contrasting colors (not just black/white) with all-css strategy: https://css-tricks.com/methods-contrasting-text-backgrounds/ & https://codepen.io/thebabydino/pen/JNWqLL
 
-    https://blog.jim-nielsen.com/2021/css-relative-colors/
-    https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb
-    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors
-    https://fullystacked.net/color-mix-and-relative-color/
-    https://developer.chrome.com/blog/css-relative-color-syntax/#invert_a_color
-    https://developer.chrome.com/blog/css-relative-color-syntax/
-    
-    https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue#syntax
-    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors
-    
-    console.error("color was set to: " + nameDiv.style.getPropertyValue("color"));
-    //getPropertyValue("color", systemColors[index].color);
-    //getPropertyValue("color", systemColors[index].color);   
-    //newDiv.style.Color = rgb(from systemColors[index].color 200 g b);;
-    //newDiv.style.Color = getContrastingColor(newDiv);
-
-    */
-
-// See: http://stackoverflow.com/a/1855903/186965
-// https://css-tricks.com/methods-contrasting-text-backgrounds/ & https://codepen.io/thebabydino/pen/JNWqLL
-// calc contrasting color
-function colorIsLight(r, g, b) {
+// from: http://stackoverflow.com/a/1855903/186965  ONLY returns black or white!
+function getContrastingColor(r, g, b) {
   // Counting the perceptive luminance
   // The formula for calculating luminance is based on the human eye's sensitivity to different colors.
   // The human eye favors green color, so the coefficients for red, green, and blue are 0.299, 0.587, and 0.114 respectively.
   var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  if (logLevel > 2) console.log("perceptive luminance:" + a);
-  return (a < 0.5);
+  if (logLevel > 2) console.log("Perceptive luminance:" + a);
+  return ((a < 0.5) ? 'black' : 'white');
 }
 
+// Write a named color to a canvas and read back the RGBA value
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 
@@ -225,28 +209,6 @@ function nameToRgba(name) {
   context.fillRect(0, 0, 1, 1);
   return context.getImageData(0, 0, 1, 1).data;
 }
-
-function colorFromRgb(r, g, b) {
-  return 'rgb(' + r + ',' + g + ',' + b + ')';
-};
-
-// NOTE: UNUSED!
-function getContrastingColor(element) {
-  let rgb1 = element.style.backgroundColor;
-  let rgb = rgb1.match(/\d+/g);
-  if (logLevel > 2) console.log("rgb of element is: " + rgb);
-  if (rgb === null) {
-    rgb = 'fff';
-  }
-  //var bgColor = colorFromRgb(bgRgb[0], bgRgb[1], bgRgb[2]);
-  let textColor = colorIsLight(Number(rgb[0]), Number(rgb[1]), Number(rgb[2])) ? 'black' : 'white';
-  element.style.color = textColor;
-  return textColor;
-}
-
-
-
-
 
 
 /*****************************
@@ -272,7 +234,7 @@ function fallbackCopyTextToClipboard(text) {
   try {
     var successful = document.execCommand('copy');
     /**
-     * TODO: Experiment with this alternative to hte depricated ExecCommand:
+     * TODO: Experiment with this alternative to the deprecated ExecCommand:
      * navigator.clipboard
         .readText()
         .then(
@@ -291,6 +253,7 @@ function fallbackCopyTextToClipboard(text) {
 
 function copyTextToClipboard(text, id) {
   if (!navigator.clipboard) {
+    console.warn('Browser does not support clipboard, using old techniques!');
     fallbackCopyTextToClipboard(text);
     return;
   }
@@ -334,6 +297,7 @@ function createFileName(baseName) {
 function downloadCurrentColors() {
   //let curColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentColorsJson));
   let curColor = JSON.stringify(currentColorsJson);
+  debugger;
   downloadJSON(curColor, createFileName("CSS_System_Colors"));
 }
 
