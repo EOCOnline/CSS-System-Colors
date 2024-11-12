@@ -51,9 +51,35 @@ https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
   color: oklch(from lightpink calc(l - 0.6) c h);
 }
 
+/**********************************************
+ * General page styles
+ */
+details > summary {
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+}
+
+details > p {
+  font-size: 120%;
+  /*margin: 15px;
+  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
+}
+
+/* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
+blockquote {
+  font-style: italic;
+  font-size: 135%;
+  width: fit-content;
+  background-color: #e0e0e0;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 0.5em;
+}
+
 /***************************************************************
- * Page Containers
-**/
+ * Page Containers/Panels
+ */
 #syscolors-container {
   padding: 10px;
   border: 1px solid CanvasText;
@@ -62,15 +88,38 @@ https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
   font-family: sans-serif;
 }
 
+/**********************************************
+ * Styles used by multiple panels
+ */
 .syscolors-inner-container {
   border: CanvasText 1px solid;
   border-radius: 0.5em;
   margin: 10px;
   padding: 10px;
-  background-color: Canvas;
-  color: CanvasText;
+  /*background-color: Canvas;
+  color: CanvasText;*/
 }
 
+.syscolors-light {
+  /*background-color: white;
+  color: black;*/
+  color-scheme: light;
+  width: 48%;
+  margin: 0px;
+  margin-right: 6px;
+}
+
+.syscolors-dark {
+  /*background-color: white;
+  color: black;*/
+  color-scheme: dark;
+  width: 48%;
+  margin: 0px;
+}
+
+/***********************************
+ * Head Panel
+ */
 #syscolors-header {
   margin: 5px;
   padding: 5px;
@@ -92,18 +141,9 @@ https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
   margin-right: 15px;
 }
 
-details > summary {
-  font-weight: bold;
-  font-style: italic;
-  cursor: pointer;
-}
-
-details > p {
-  font-size: 120%;
-  /*margin: 15px;
-  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
-}
-
+/***********************************
+ * Options Panel
+ */
 #syscolors-options {
   font-weight: bold;
   /* margin: 0px;
@@ -147,10 +187,17 @@ details > p {
   padding: 2px;
 }
 
+/***********************************
+ * Intro Panel
+ */
 #syscolors-intro {
   --noop: var(--noop);
 }
 
+/**********************************************
+ * Color Grid Panels
+ * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
+ */
 #syscolors-grid,
 #syscolors-grid-light,
 #syscolors-grid-dark,
@@ -162,20 +209,10 @@ details > p {
   justify-content: flex-start;
 }
 
-#syscolors-grid-light,
-#syscolors-deprecated-light {
-  color-scheme: light;
-  width: 45%;
-  margin: 0px;
-  margin-right: 6px;
-}
-#syscolors-grid-dark,
-#syscolors-deprecated-dark {
-  color-scheme: dark;
-  width: 45%;
-  margin: 0px;
-}
-
+/**********************************************
+ * Demonstration Panels
+ * NOTE: Also see syscolors-demo.css & system-colors.css!
+ */
 #syscolors-demo-container {
   display: flex;
   flex-wrap: wrap;
@@ -185,35 +222,19 @@ details > p {
   display: flex;
   flex-wrap: wrap;
 }
-
+/*
 #syscolors-demo-light {
-  /*background-color: white;
-  color: black;*/
-  color-scheme: light;
-  width: 48%;
-  margin: 0px;
   margin-right: 6px;
 }
 
 #syscolors-demo-dark {
-  /*background-color: black;
-  color: white;*/
-  color-scheme: dark;
-  width: 48%;
   margin: 0px;
 }
+*/
 
+/**********************************************
+ * Footer Panel
+ */
 #syscolors-footer {
   font-weight: bold;
-}
-
-/* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
-blockquote {
-  font-style: italic;
-  font-size: 135%;
-  width: fit-content;
-  background-color: #e0e0e0;
-  padding: 15px;
-  margin: 15px;
-  border-radius: 0.5em;
 }

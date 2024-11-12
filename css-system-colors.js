@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // duplicate the light theme to dark theme
   let duplicateElement = document.getElementById("syscolors-demo-light").cloneNode(true);
   duplicateElement.id = "syscolors-demo-dark";
+  duplicateElement.class = "syscolors-dark";
   document.getElementById("syscolors-demo").appendChild(duplicateElement);
   document.querySelector("#syscolors-demo-light H2 .syscolors-demo-mode").innerText = "Light";
   document.querySelector("#syscolors-demo-dark H2 .syscolors-demo-mode").innerText = "Dark";
@@ -34,15 +35,22 @@ function updateContrast(el) {
 
 function setColor(el) {
   // Mostly handled by CSS
-  clearWebPage();
+  resetWebPage();
   readSystemColors();
 }
 
-function clearWebPage() {
+function resetWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
+
   document.getElementById("syscolors-grid-light").innerHTML = "";
+  if (document.getElementById("syscolors-grid-dark")) document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"))
+
   document.getElementById("syscolors-deprecated-light").innerHTML = "";
+  if (document.getElementById("syscolors-deprecated-dark")) document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
+
+  document.getElementById("syscolors-demo-light").innerHTML = "";
+  if (document.getElementById("syscolors-demo-dark")) document.getElementById("syscolors-demo-grid").removeChild(document.getElementById("syscolors-demo-dark"))
 }
 
 
@@ -90,6 +98,7 @@ function processJson(json) {
   // duplicate light theme to dark theme
   let duplicateElement = document.getElementById("syscolors-grid-light").cloneNode(true);
   duplicateElement.id = "syscolors-grid-dark";
+  duplicateElement.class = "syscolors-dark";
   document.getElementById("syscolors-grid").appendChild(duplicateElement);
   document.querySelector("#syscolors-grid-light H2 .syscolors-grid-mode").innerText = "Light";
   document.querySelector("#syscolors-grid-dark H2 .syscolors-grid-mode").innerText = "Dark";
@@ -107,6 +116,7 @@ function processJson(json) {
   // duplicate light theme to dark theme
   duplicateElement = document.getElementById("syscolors-deprecated-light").cloneNode(true);
   duplicateElement.id = "syscolors-deprecated-dark";
+  duplicateElement.class = "syscolors-dark";
   document.getElementById("syscolors-deprecated-grid").appendChild(duplicateElement);
   document.querySelector("#syscolors-deprecated-light H2 .syscolors-grid-mode").innerText = "Light";
   document.querySelector("#syscolors-deprecated-dark H2 .syscolors-grid-mode").innerText = "Dark";
