@@ -208,6 +208,9 @@ blockquote {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+#syscolors-grid {
+  padding: 10px;
+}
 
 /**********************************************
  * Demonstration Panels
