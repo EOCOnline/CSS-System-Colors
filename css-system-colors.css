@@ -26,15 +26,19 @@
  * NOTE: Apparently just using JS to set --contrast does everything?
  * Don't we also need to apply the 'filter' as below does?!
 **/
+/*
+
+FOLLOWING IS NOT NEEDED!!!
+
 :root:has(#contrast option[value="low"]:checked) {
   filter: contrast(65%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  /* only needed because of low contrast filter, which needs a declared color to work on: *
   color: CanvasText;
   background-color: Canvas;
 }
 :root:has(#contrast option[value="medium"]:checked) {
   filter: contrast(80%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: */
+  /* only needed because of low contrast filter, which needs a declared color to work on: *
   color: CanvasText;
   background-color: Canvas;
 }
@@ -48,7 +52,7 @@
 @media (prefers-contrast: medium) {
   :root {
     filter: contrast(80%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    /* only needed because of low contrast filter, which needs a declared color to work on: *
     color: CanvasText;
     background-color: Canvas;
   }
@@ -60,7 +64,7 @@
 @media (prefers-contrast: less) {
   :root {
     filter: contrast(65%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: */
+    /* only needed because of low contrast filter, which needs a declared color to work on: *
     color: CanvasText;
     background-color: Canvas;
   }
@@ -194,38 +198,6 @@ details > p {
   --noop: var(--noop);
 }
 
-#syscolors-demo-container {
-  --noop: var(--noop);
-}
-
-#syscolors-demo {
-  margin: 5px;
-  padding: 5px;
-
-  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
-  :link {
-    color: LinkText;
-  }
-  :visited {
-    color: VisitedText;
-  }
-  :active {
-    color: ActiveText;
-  }
-}
-
-#syscolors-footer {
-  font-weight: bold;
-}
-
-/****************************************************
- * System Color Grids
-**/
-#syscolors-flexgrid,
-#syscolors-deprecated-grid {
-  --noop: var(--noop);
-}
-
 #syscolors-grid,
 #syscolors-deprecated-grid {
   display: flex;
@@ -233,83 +205,23 @@ details > p {
   justify-content: flex-start;
 }
 
-.syscolors-card {
-  flex: 0 1; /* flex: 0 24% */
-  height: 80px;
-  min-width: 250px;
-  font-weight: bolder;
-
-  margin: 15px; /* (100-32*3)/2 */
-  padding: 10px;
-
-  /*background-color: bisque; */
-  place-self: center stretch;
-  background-color: rgb(from currentcolor r g b);
-  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
-  background-color: rgb(from currentcolor 0 0 255);
-  
-  */
-  /*border: CanvasText 5px solid;*/
-  /* background-color: Canvas;*/
-  border-radius: 1em;
-
-  border: solid 3px white;
-
-  border-top-color: white;
-  border-right-color: white;
-  border-bottom-color: black;
-  border-left-color: system-canvastext;
-
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-  /*
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    */
-  /* https://getcssscan.com/css-box-shadow-examples */
-
-  /* https://codepen.io/WebSeed/pen/pvgqEq */
-
-  /* following works in dark mode, not light! not too good: https://stackoverflow.com/questions/23968961/css-how-can-i-make-a-font-readable-over-any-color 
-  text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
-    0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
-    0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
-  */
+#syscolors-demo-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
-.syscolors-card:hover .syscolors-tooltip {
-  display: block;
+#syscolors-demo-light {
+  background-color: white;
+  color: black;
 }
 
-.syscolors-tooltip {
-  display: none;
-  color: rgb(11, 56, 37);
-  background-color: beige;
-  padding: 5px;
-  border: #374151 1px solid;
-  border-radius: 0.5em;
-
-  margin-left: 30px; /* moves the tooltip to the right */
-  margin-top: 15px; /* moves it down */
-  position: absolute;
-  z-index: 1000;
+#syscolors-demo-dark {
+  background-color: black;
+  color: white;
 }
 
-.syscolors-desc-div {
-  font-weight: 400;
-}
-
-.syscolors-desc-span {
-  font-size: 90%;
-  font-weight: 500;
-}
-
-.syscolors-rgba-span {
-  font-size: 80%;
-  font-weight: 400;
+#syscolors-footer {
+  font-weight: bold;
 }
 
 /* https://cssdeck.com/blog/six-ways-style-blockquotes/ */

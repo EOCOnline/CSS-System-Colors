@@ -78,16 +78,6 @@
   color: GrayText;
 }
 
-.Highlight {
-  /* Background of selected text, for example from : :selection */
-  background-color: Highlight;
-}
-
-.HighlightText {
-  /* Text of selected text */
-  color: HighlightText;
-}
-
 .Mark {
   /* Background of text that has been specially marked (such as by the HTML mark element) */
   background-color: Mark;
@@ -96,6 +86,13 @@
 .MarkText {
   /* Text that has been specially marked (such as by the HTML mark element) */
   color: MarkText;
+}
+
+::selection {
+  /* Text of selected text */
+  color: HighlightText;
+  /* Background of selected text, for example from : :selection */
+  background-color: Highlight;
 }
 
 .SelectedItem {

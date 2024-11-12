@@ -1,0 +1,146 @@
+/*******************************************************
+*
+*  CSS used for CSS System Colors Demonstration Pages
+*  Use CSS as much as possible to handle light vs dark mode and contrast
+*
+*/
+
+/*https://www.digitalocean.com/community/tutorials/css-minimal-css-reset*/
+/* NO Need for reset, just ensure syscolors-container styles don't leak thru - or anything to root */
+
+#UNUSED-syscolors-demo {
+  html {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ol,
+  ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+#syscolors-demo {
+  margin: 5px;
+  padding: 5px;
+
+  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
+  :link {
+    color: LinkText;
+  }
+  :visited {
+    color: VisitedText;
+  }
+  :active {
+    color: ActiveText;
+  }
+}
+
+/* POST-RESET?! */
+#syscolors-demo a:link {
+  color: LinkText;
+}
+#syscolors-demo a:visited {
+  color: VisitedText;
+}
+#syscolors-demo a:active {
+  color: ActiveText;
+}
+#syscolors-demo a:hover {
+  color: HighlightText;
+}
+
+#syscolors-demo button {
+  color: ButtonText;
+  background-color: ButtonFace;
+  border: 5px solid ButtonBorder;
+}
+
+#syscolors-demo mark {
+  background-color: Mark;
+  color: MarkText;
+}
+
+#syscolors-demo input {
+  color: system-ButtonText;
+  background-color: system-ButtonFace;
+  border: 5px solid system-ButtonBorder;
+}
+
+#syscolors-demo input[type="text"] {
+  color: InputText;
+  background-color: Input;
+  border: 5px solid ButtonBorder;
+}
+
+#syscolors-demo input[type="submit"] {
+  color: system-ButtonText;
+  background-color: system-ButtonFace;
+  border: 5px solid ButtonBorder;
+}
+#syscolors-demo input[type="submit"]:hover {
+  color: HighlightText;
+  background-color: Highlight;
+}
+#syscolors-demo input[type="submit"]:active {
+  color: ActiveText;
+  background-color: ActiveText;
+}
+#syscolors-demo input[type="submit"]:focus {
+  color: HighlightText;
+  background-color: Highlight;
+}
+#syscolors-demo input[type="submit"]:disabled {
+  color: GrayText;
+  background-color: ButtonFace;
+}
+#syscolors-demo input[type="submit"]:disabled:hover {
+  color: GrayText;
+  background-color: ButtonFace;
+}
+#syscolors-demo input[type="submit"]:disabled:active {
+  color: GrayText;
+  background-color: ButtonFace;
+}
+#syscolors-demo input[type="submit"]:disabled:focus {
+  color: GrayText;
+  background-color: ButtonFace;
+}
+
+/*****************************
+** Handle contrast
+ * NOTE: Apparently just using JS to set --contrast does everything?
+ * Don't we also need to apply the 'filter' as below does?!
+**/
+/*
+*/
+
+/***************************************************************
+ * 
+**/
