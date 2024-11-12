@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./css-system-colors.css" />
   <link rel="stylesheet" href="./system-colors.css" />
   <link rel="stylesheet" href="./css-system-demo.css" />
+  <link rel="stylesheet" href="./css-system-flexgrid.css" />
   <script src="./css-system-colors.js"></script>
 </head>
 
@@ -38,9 +39,11 @@
     <div id="syscolors-options" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
-      <label for="syscolors-lightdark">Light/Dark Mode:</label>
-      <select id="syscolors-lightdark" onchange="setColorMode(this)">
-        <option value="auto">OS Default</option>
+      <label for="syscolors-lightdark"
+        title="This is NOT the color mode! That is hardwired per panel as identified below.">Page background
+        color:</label>
+      <select id="syscolors-lightdark" onchange="setColor(this)">
+        <!--option value="auto">OS Default</option-->
         <option value="light" selected="selected">Light</option>
         <option value="dark">Dark</option>
       </select>
@@ -212,7 +215,13 @@
     <div id="syscolors-flexgrid" class="syscolors-inner-container">
       <details open>
         <summary id="syscolors-current-summary">System Colors</summary>
-        <div id="syscolors-grid"></div>
+
+        <div id="syscolors-grid">
+          <div id="syscolors-grid-light">
+            <h2>System Colors: <span class="syscolors-grid-mode"></span> Color Mode</h2>
+          </div>
+        </div>
+
         <button class="btn" id="syscolors-download-current" style="cursor: pointer"
           title="Download JSON file with RGBA values" onclick="downloadCurrentColors()">
           Download JSON
@@ -225,12 +234,18 @@
         <summary id="syscolors-deprecated-summary">
           Deprecated System Colors
         </summary>
+
         <p>
           You may - or may not - see a color as these are deprecated and
           should not be used. The browser decides what to do with these
           values. They are included here for reference purposes only.
         </p>
-        <div id="syscolors-deprecated-grid"></div>
+        <div id="syscolors-deprecated-grid">
+          <div id="syscolors-deprecated-light">
+            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Color Mode</h2>
+          </div>
+        </div>
+
         <button class="btn" id="syscolors-download-deprecated" style="cursor: pointer"
           title="Download JSON file with RGBA values" onclick="downloadDeprecatedColors()">
           Download JSON

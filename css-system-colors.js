@@ -32,7 +32,7 @@ function updateContrast(el) {
   contrastValue.innerText = contrast;
 }
 
-function setColorMode(el) {
+function setColor(el) {
   // Mostly handled by CSS
   clearWebPage();
   readSystemColors();
@@ -41,8 +41,8 @@ function setColorMode(el) {
 function clearWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
-  document.getElementById("syscolors-grid").innerHTML = "";
-  document.getElementById("syscolors-deprecated-grid").innerHTML = "";
+  document.getElementById("syscolors-grid-light").innerHTML = "";
+  document.getElementById("syscolors-deprecated-light").innerHTML = "";
 }
 
 
@@ -85,13 +85,33 @@ function processJson(json) {
 
   console.log("currentColors: " + json.currentColors.length);
   document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
-  json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid");
+  json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
+
+  // duplicate light theme to dark theme
+  let duplicateElement = document.getElementById("syscolors-grid-light").cloneNode(true);
+  duplicateElement.id = "syscolors-grid-dark";
+  document.getElementById("syscolors-grid").appendChild(duplicateElement);
+  document.querySelector("#syscolors-grid-light H2 .syscolors-grid-mode").innerText = "Light";
+  document.querySelector("#syscolors-grid-dark H2 .syscolors-grid-mode").innerText = "Dark";
+
+  // save the JSON data for download
   currentColorsJson.info = structuredClone(json.info);
   currentColorsJson.currentColors = structuredClone(json.currentColors);
 
+
+  // & again for the Deprecated Color Grid...
   console.log("deprecatedColors: " + json.deprecatedColors.length);
   document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
-  json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
+  json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
+
+  // duplicate light theme to dark theme
+  duplicateElement = document.getElementById("syscolors-deprecated-light").cloneNode(true);
+  duplicateElement.id = "syscolors-deprecated-dark";
+  document.getElementById("syscolors-deprecated-grid").appendChild(duplicateElement);
+  document.querySelector("#syscolors-deprecated-light H2 .syscolors-grid-mode").innerText = "Light";
+  document.querySelector("#syscolors-deprecated-dark H2 .syscolors-grid-mode").innerText = "Dark";
+
+  // save the JSON data for download
   deprecatedColorsJson.info = structuredClone(json.info);
   deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 }
@@ -149,6 +169,8 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-card";
   cardDiv.style.backgroundColor = systemColorSet[index].color;
+
+  // BUG: Use system colors here?! Or rerun for dark grids...
   cardDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
 
   cardDiv.appendChild(nameSpan);
