@@ -7,8 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 2) console.log("DOM fully loaded and parsed");
 
   contrastValue = document.getElementById('syscolors-contrast-value');
-  syscolorsContrast = document.querySelector("#syscolors-contrast");
-  syscolorsContainer = document.querySelector("#syscolors-container");
+  syscolorsContrast = document.getElementById("syscolors-contrast");
+  syscolorsContainer = document.getElementById("syscolors-container");
+
+  // duplicate the light theme to dark theme
+  let duplicateElement = document.getElementById("syscolors-demo-light").cloneNode(true);
+  duplicateElement.id = "syscolors-demo-dark";
+  document.getElementById("syscolors-demo").appendChild(duplicateElement);
+  document.querySelector("#syscolors-demo-light H2 .syscolors-demo-mode").innerText = "Light";
+  document.querySelector("#syscolors-demo-dark H2 .syscolors-demo-mode").innerText = "Dark";
+
   updateContrast({ value: 95 });
   readSystemColors();   // This is where it all starts!
 });

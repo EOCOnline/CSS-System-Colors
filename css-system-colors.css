@@ -2,7 +2,7 @@
 *
 *  CSS System Colors
 *  Use CSS as much as possible to handle light vs dark mode and contrast
-*
+*  General CSS for page containers and miscellaneous styling
 */
 
 /*****************************
@@ -26,53 +26,6 @@
  * NOTE: Apparently just using JS to set --contrast does everything?
  * Don't we also need to apply the 'filter' as below does?!
 **/
-/*
-
-FOLLOWING IS NOT NEEDED!!!
-
-:root:has(#contrast option[value="low"]:checked) {
-  filter: contrast(65%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: *
-  color: CanvasText;
-  background-color: Canvas;
-}
-:root:has(#contrast option[value="medium"]:checked) {
-  filter: contrast(80%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: *
-  color: CanvasText;
-  background-color: Canvas;
-}
-:root:has(#contrast option[value="high"]:checked) {
-  & main {
-    background-color: Canvas;
-    border: 1px solid CanvasText;
-  }
-}
-
-@media (prefers-contrast: medium) {
-  :root {
-    filter: contrast(80%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: *
-    color: CanvasText;
-    background-color: Canvas;
-  }
-  :root:has(#contrast option[value="high"]:checked) {
-    filter: revert;
-  }
-}
-
-@media (prefers-contrast: less) {
-  :root {
-    filter: contrast(65%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: *
-    color: CanvasText;
-    background-color: Canvas;
-  }
-  :root:has(#contrast option[value="high"]:checked) {
-    filter: revert;
-  }
-}
-*/
 
 /* https://css-tricks.com/dark-mode-and-variable-fonts/ */
 body {
@@ -109,6 +62,15 @@ https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
   font-family: sans-serif;
 }
 
+.syscolors-inner-container {
+  border: CanvasText 1px solid;
+  border-radius: 0.5em;
+  margin: 10px;
+  padding: 10px;
+  background-color: Canvas;
+  color: CanvasText;
+}
+
 #syscolors-header {
   margin: 5px;
   padding: 5px;
@@ -128,15 +90,6 @@ https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
 #syscolors-github {
   margin-left: auto;
   margin-right: 15px;
-}
-
-.syscolors-inner-container {
-  border: CanvasText 1px solid;
-  border-radius: 0.5em;
-  margin: 10px;
-  padding: 10px;
-  background-color: Canvas;
-  color: CanvasText;
 }
 
 details > summary {
@@ -204,8 +157,13 @@ details > p {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-
+/*
 #syscolors-demo-container {
+  display: flex;
+  flex-wrap: wrap;
+}*/
+
+#syscolors-demo {
   display: flex;
   flex-wrap: wrap;
 }
@@ -213,11 +171,16 @@ details > p {
 #syscolors-demo-light {
   background-color: white;
   color: black;
+  width: 48%;
+  margin: 0px;
+  margin-right: 6px;
 }
 
 #syscolors-demo-dark {
   background-color: black;
   color: white;
+  width: 48%;
+  margin: 0px;
 }
 
 #syscolors-footer {

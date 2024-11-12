@@ -46,6 +46,14 @@
   }
 }
 
+#syscolors-demo-light {
+  color-scheme: light;
+}
+
+#syscolors-demo-dark {
+  color-scheme: dark;
+}
+
 #syscolors-demo {
   margin: 5px;
   padding: 5px;
@@ -76,32 +84,33 @@
   color: HighlightText;
 }
 
-#syscolors-demo button {
+.syscolors-demo-button {
   color: ButtonText;
   background-color: ButtonFace;
   border: 5px solid ButtonBorder;
 }
 
+.syscolors-demo-canvas {
 #syscolors-demo mark {
   background-color: Mark;
   color: MarkText;
 }
 
 #syscolors-demo input {
-  color: system-ButtonText;
-  background-color: system-ButtonFace;
-  border: 5px solid system-ButtonBorder;
+  color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped.*/
+  background-color: system-ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
+  border: 5px solid system-ButtonBorder; /*Error in parsing value for ‘border’.  Declaration dropped. */
 }
 
 #syscolors-demo input[type="text"] {
-  color: InputText;
-  background-color: Input;
+  color: InputText; /* Expected color but found ‘InputText’.  Error in parsing value for ‘color’.  Declaration dropped. */
+  background-color: Input; /*Expected color but found ‘Input’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
   border: 5px solid ButtonBorder;
 }
 
 #syscolors-demo input[type="submit"] {
-  color: system-ButtonText;
-  background-color: system-ButtonFace;
+  color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped. */
+  background-color: system-ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
   border: 5px solid ButtonBorder;
 }
 #syscolors-demo input[type="submit"]:hover {

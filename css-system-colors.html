@@ -239,13 +239,13 @@
     </div>
 
     <div id="syscolors-demo-container" class="syscolors-inner-container">
-      <div id="syscolors-demo-light">
 
-        <details open>
-          <summary>System Color Example</summary>
-          <div id="syscolors-demo">
-
-            <button class="btn" id="syscolors-demo-button" style="cursor: pointer"
+      <details open>
+        <summary>System Color Example</summary>
+        <div id="syscolors-demo">
+          <div id="syscolors-demo-light" class="syscolors-inner-container">
+            <h2>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h2>
+            <button class="btn" class="syscolors-demo-button" style="cursor: pointer"
               title="This is a non-functional button">
               Fake Button
             </button> - This uses the ButtonText, ButtonFace & ButtonBorder colors. Hover to see ___ color, then Click
@@ -254,7 +254,7 @@
 
             <br />
 
-            <div id="syscolors-demo-canvas" class="CanvasText Canvas">
+            <div class="syscolors-demo-canvas" class="CanvasText Canvas">
               This is a paragraph of text. It is here to demonstrate how the system colors
               can be used in a real-world scenario. The text color is set to
               <code>system-canvasText</code> and the background color is set to
@@ -308,21 +308,22 @@
               <p>This is a paragraph.</p>
               <div>This is some text in a div element.</div>
             </div>
-        </details>
-      </div>
-      <div id="syscolors-demo-dark"></div>
+          </div>
+      </details>
     </div>
 
-    <div id="syscolors-footer" class="syscolors-inner-container">
-      <a href="https://eoc.online" target="_blank" title="Open source tooling for Emergency Operation Centers">©2024
-        eoc.online</a>
-      <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank">Details &
-          source code</a>
-        <!--img
+  </div>
+
+  <div id="syscolors-footer" class="syscolors-inner-container">
+    <a href="https://eoc.online" target="_blank" title="Open source tooling for Emergency Operation Centers">©2024
+      eoc.online</a>
+    <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank">Details &
+        source code</a>
+      <!--img
           src="https://img.shields.io/github/stars/eoconline/system-colors?style=social"
           alt="GitHub stars"/-->
-      </span>
-    </div>
+    </span>
+  </div>
   </div>
 </body>
 
