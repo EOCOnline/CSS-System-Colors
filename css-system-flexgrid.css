@@ -81,6 +81,11 @@
   font-weight: 500;
 }
 
+.syscolors-category-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
 .syscolors-rgba-span {
   font-size: 80%;
   font-weight: 400;

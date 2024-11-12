@@ -39,6 +39,14 @@ function setColor(el) {
   readSystemColors();
 }
 
+let sortByCategory = false;
+function setSortOrder(val) {
+  sortByCategory = val.checked;
+  if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
+  resetWebPage();
+  readSystemColors();
+}
+
 function resetWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
@@ -127,29 +135,33 @@ function processJson(json) {
 }
 
 
-// Process a list of system-colors: get RGBA values for each named color, then create its HTML card to display
+// Process a list of system-colors: get RGBA values for each named color, store in jSON object, then create its HTML card to display
 function generateSystemColors(systemColorSet, elementID) {
   console.table(systemColorSet);
   let i = 0;
   if (!systemColorSet) {
     console.error("No systemColorSet object!");
     return;
-  } else {
-    for (const index of Object.keys(systemColorSet)) {
-      // NOTE: As I read the spec, prefixing with system- should work, but doesn't
-      // let color = "system-" + systemColorSet[index].color 
-      let color = systemColorSet[index].color;
-      let RGBA = nameToRgba(color);
-      if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
-      systemColorSet[index].rgba = RGBA;
-
-      createColorCards(systemColorSet, index, elementID, RGBA);
-      i++;
-    }
-    if (logLevel > 1) console.log("Processed " + i + " colors.");
-    return systemColorSet;
   }
+
+  // Sort colors by category?
+  if (sortByCategory) systemColorSet.sort((a, b) => (a.category > b.category) ? 1 : -1);
+
+  for (const index of Object.keys(systemColorSet)) {
+    // NOTE: As I read the spec, prefixing with system- should work, but doesn't
+    // let color = "system-" + systemColorSet[index].color 
+    let color = systemColorSet[index].color;
+    let RGBA = nameToRgba(color);
+    if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
+    systemColorSet[index].rgba = RGBA;
+
+    createColorCards(systemColorSet, index, elementID, RGBA);
+    i++;
+  }
+  if (logLevel > 1) console.log("Processed " + i + " colors.");
+  return systemColorSet;
 }
+
 
 
 const clickText = "&nbsp; &nbsp; (Click to copy)";
@@ -166,6 +178,10 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   descSpan.className = "syscolors-desc-span";
   descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
 
+  let categorySpan = document.createElement('span');
+  categorySpan.className = "`syscolors-category-span`";
+  categorySpan.innerHTML = " {" + systemColorSet[index].category + "} ";
+
   let rgbaSpan = document.createElement('span');
   rgbaSpan.className = "syscolors-rgba-span";
   rgbaSpan.innerHTML = " [" + RGBA + "]";
@@ -173,8 +189,8 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   let tooltipSpan = document.createElement('span');
   tooltipSpan.className = "syscolors-tooltip";
   tooltipSpan.id = "syscolors-tooltip-" + index;
-  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
-  tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + rgbaSpan.innerText, tooltipSpan.id); });
+  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
+  tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText + rgbaSpan.innerText, tooltipSpan.id); });
 
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-card";
@@ -185,6 +201,7 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
 
   cardDiv.appendChild(nameSpan);
   cardDiv.appendChild(descSpan);
+  cardDiv.appendChild(categorySpan);
   cardDiv.appendChild(rgbaSpan);
   cardDiv.appendChild(tooltipSpan);
 

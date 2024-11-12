@@ -49,6 +49,10 @@
       </select>
       &nbsp; &nbsp; &nbsp;
 
+      <label for="syscolors-sorted" title="Sort colors by category (vs. name)">Sort by category:</label>
+      <input type="checkbox" checked="" onclick="setSortOrder(this)" id="syscolors-sorted" />
+      &nbsp; &nbsp; &nbsp;
+
       <label id="syscolors-contrast-label" for="syscolors-contrast">
         Contrast <span id="syscolors-contrast-value">(auto) 100</span>%:
         <input type="range" step="5" min="0" value="100" max="100" id="syscolors-contrast"
