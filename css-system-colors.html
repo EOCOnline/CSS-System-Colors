@@ -10,6 +10,7 @@
 
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
   <link rel="stylesheet" href="./css-system-colors.css" />
+  <link rel="stylesheet" href="./system-colors.css" />
   <script src="./css-system-colors.js"></script>
 </head>
 
@@ -102,7 +103,8 @@
 
         <p>The colors are defined in the CSS Color Module Level 4 specification and can be
           used in any property that accepts a color value. <strong>[NOTE: They are SUPPOSED TO BE prefixed with the
-            system- keyword, such as system-highlight or system-buttonface.]</strong></p>
+            system- keyword, such as system-highlight or system-buttonface, but adding them in
+            css-system-colors.js:generateSystemColors() file failed. Hmmm.]</strong></p>
 
         <p>The colors are designed to adapt to different light/dark modes and contrast
           settings, making them ideal for creating accessible and user-friendly
@@ -238,7 +240,70 @@
     <div id="syscolors-demo-container" class="syscolors-inner-container">
       <details open>
         <summary>System Color Example</summary>
-        <div id="syscolors-demo"></div>
+        <div id="syscolors-demo">
+
+          <button class="btn" id="syscolors-demo-button" style="cursor: pointer"
+            title="This is a non-functional button">
+            Fake Button
+          </button> - This uses the ButtonText, ButtonFace & ButtonBorder colors. Hover to see ___ color, then Click for
+          the ActiveText color!
+
+          <br />
+
+          <div id="syscolors-demo-canvas" class="CanvasText Canvas">
+            This is a paragraph of text. It is here to demonstrate how the system colors
+            can be used in a real-world scenario. The text color is set to
+            <code>system-canvasText</code> and the background color is set to
+            <code>system-canvas</code>.
+            <br />
+            <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the author
+              having to specify any adjustments! Easy Peasy.</p>
+            <p>Weird it is that clicking the paragraph changes its color to ActiveText. This is a bug in the code that
+              I can't seem to find. It is not supposed to do that. But it does. So there.</p>
+            </p>
+          </div>
+          <div>This is a regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear with out
+            author intervention if you change the color mode.</div>
+
+          <div>
+            Here is a link to a site: <a href="https://eoc.online" target="_blank">eoc.online</a> - the link color is
+            set to <code>system-link</code> and the visited link color is set to <code>system-visited</code>.
+          </div>
+          <div>
+            Here is a 2nd link to the same <a href="https://eoc.online" target="_blank">eoc.online</a>, and another that
+            you can select some other time: <a href="https://github.com/eoc.online"
+              target="_blank">github.com/eoconline</a> - the link color is set to <code>system-link</code> and the
+            visited link color is set to <code>system-visited</code>.
+          </div>
+
+          <div>
+            This is a blockquote. The text color is set to <code>system-quotetext</code> and the background color is set
+            to <code>system-quote</code>.
+            <blockquote>
+              This is a blockquote. The text color is set to <code>system-quotetext</code> and the background color is
+              set to <code>system-quote</code>.
+            </blockquote>
+          </div>
+
+          <div>
+            This is a code block. The text color is set to <code>system-canvasText</code> and the background color is
+            set
+            to <code>system-canvas</code>.
+            <pre>
+              <code>
+                This is a code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
+              </code>
+            </pre>
+
+          </div>
+          <div>
+            This is a text input field. The text color is set to InputText and the background color is set to Input.
+            <input type="text" value="text input field" class="Input-Text Input" />
+
+            <div class="input" role="textbox" contenteditable>
+              This is a text input field. The text color is set to InputText and the background color is set to Input."
+            </div>
+
       </details>
     </div>
 

@@ -1,0 +1,109 @@
+.Canvas {
+  /* Background of application content or documents */
+  background-color: Canvas;
+}
+
+.CanvasText {
+  /* Text in application content or documents */
+  color: CanvasText;
+}
+
+/*********************************
+ * Input elements
+ */
+
+.AccentColor {
+  /* Background of accented user interface controls */
+  background-color: AccentColor;
+}
+
+.AccentColorText {
+  /* Text of accented user interface controls */
+  color: AccentColorText;
+}
+
+.Field {
+  /* Background of input fields */
+  background-color: Field;
+}
+
+.FieldText {
+  /* Text in input fields */
+  color: FieldText;
+}
+
+/*********************************
+ * Button elements
+ */
+.ButtonBorder {
+  /* The base border color for push buttons */
+  color: ButtonBorder;
+}
+
+.ButtonFace {
+  /* The face background color for push buttons */
+  background-color: ButtonFace;
+}
+
+.ButtonText {
+  /* Text on push buttons */
+  color: ButtonText;
+}
+
+/*********************************
+ * Links
+ */
+
+.LinkText {
+  /* Text in non-active, non-visited links. For light backgrounds, traditionally blue */
+  color: LinkText;
+}
+
+.ActiveText {
+  /* Text in active links. For light backgrounds, traditionally red */
+  color: ActiveText;
+}
+
+.VisitedText {
+  /* Text in visited links. For light backgrounds, traditionally purple */
+  color: VisitedText;
+}
+
+/*********************************
+ * Other miscellaneous
+ */
+
+.GrayText {
+  /* Disabled text (Often, but not necessarily, gray) */
+  color: GrayText;
+}
+
+.Highlight {
+  /* Background of selected text, for example from : :selection */
+  background-color: Highlight;
+}
+
+.HighlightText {
+  /* Text of selected text */
+  color: HighlightText;
+}
+
+.Mark {
+  /* Background of text that has been specially marked (such as by the HTML mark element) */
+  background-color: Mark;
+}
+
+.MarkText {
+  /* Text that has been specially marked (such as by the HTML mark element) */
+  color: MarkText;
+}
+
+.SelectedItem {
+  /* Background of selected items, for example a selected checkbox */
+  background-color: SelectedItem;
+}
+
+.SelectedItemText {
+  /* Text of selected items */
+  color: SelectedItemText;
+}

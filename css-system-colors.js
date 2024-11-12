@@ -4,12 +4,11 @@ const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
-  if (logLevel > 1) console.log("DOM fully loaded and parsed");
+  if (logLevel > 2) console.log("DOM fully loaded and parsed");
 
   contrastValue = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.querySelector("#syscolors-contrast");
   syscolorsContainer = document.querySelector("#syscolors-container");
-  // set contrast to auto value
   updateContrast({ value: 95 });
   readSystemColors();   // This is where it all starts!
 });
@@ -20,24 +19,13 @@ let syscolorsContainer;
 
 function updateContrast(el) {
   const contrast = el.value;
-  // set root style to have filter: contrast(80%);
-  document.documentElement.style.setProperty('--contrast', contrast);
-
   syscolorsContainer.style.filter = 'contrast(' + contrast + '%)';
   syscolorsContrast.value = contrast;
   contrastValue.innerText = contrast;
 }
 
 function setColorMode(el) {
-  let mode = el.value;
-  if (mode === "auto") {
-    document.documentElement.style.removeProperty('--color-mode');
-  } else {
-    //document.documentElement.style.setProperty('--color-mode', mode);
-    //document.querySelector("#syscolors-color-mode").value = mode;
-  }
-  if (logLevel) console.log("Color mode set to: " + mode);
-  // TODO: We HAVE to rerun color table, as RGBA values likely change with change in color mode - right?!
+  // Mostly handled by CSS
   clearWebPage();
   readSystemColors();
 }
@@ -110,8 +98,11 @@ function generateSystemColors(systemColorSet, elementID) {
     return;
   } else {
     for (const index of Object.keys(systemColorSet)) {
-      let RGBA = nameToRgba(systemColorSet[index].color);
-      if (logLevel > 1) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
+      // NOTE: As I read the spec, prefixing with system- should work, but doesn't
+      // let color = "system-" + systemColorSet[index].color 
+      let color = systemColorSet[index].color;
+      let RGBA = nameToRgba(color);
+      if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
       systemColorSet[index].rgba = RGBA;
 
       createColorCards(systemColorSet, index, elementID, RGBA);
