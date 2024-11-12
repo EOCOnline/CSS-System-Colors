@@ -5,14 +5,18 @@ const sourceJson = "css-system-colors.json";
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 1) console.log("DOM fully loaded and parsed");
+
+  contrastValue = document.getElementById('syscolors-contrast-value');
+  syscolorsContrast = document.querySelector("#syscolors-contrast");
+  syscolorsContainer = document.querySelector("#syscolors-container");
   // set contrast to auto value
   updateContrast({ value: 95 });
   readSystemColors();
 });
 
-const contrastValue = document.getElementById('syscolors-contrast-value');
-const syscolorsContrast = document.querySelector("#syscolors-contrast");
-const syscolorsContainer = document.querySelector("#syscolors-container");
+let contrastValue;
+let syscolorsContrast;
+let syscolorsContainer;
 
 function updateContrast(el) {
   const contrast = el.value;
@@ -162,9 +166,6 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
 }
 
 
-
-
-
 /******************************************* 
  * 
  * Color functions
@@ -204,7 +205,6 @@ function nameToRgba(name) {
  * 
  *  Copy text to clipboard
  */
-
 
 // From: https://github.com/DeanMarkTaylor/clipboard-test
 function fallbackCopyTextToClipboard(text) {
@@ -274,29 +274,24 @@ function createFileName(baseName) {
 }
 
 function downloadCurrentColors() {
-  //let curColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentColorsJson));
-  let curColor = JSON.stringify(currentColorsJson);
-  downloadJSON(curColor, createFileName("CSS_System_Colors"));
+  downloadJSON(currentColorsJson, createFileName("CSS_System_Colors"));
+
 }
 
 function downloadDeprecatedColors() {
-  //let depColor = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(deprecatedColorsJson));
-  let depColor = JSON.stringify(deprecatedColorsJson);
-  downloadJSON(depColor, createFileName("CSS_Deprecated_Colors"));
+  downloadJSON(deprecatedColorsJson, createFileName("CSS_Deprecated_Colors"));
 }
 
 function downloadJSON(data, filename) {
   const json = JSON.stringify(data);
-  // Create a new Blob object with the JSON data and set its type
-  let blob = new Blob([json], { type: 'application/json' });
+  const blob = new Blob([json], { type: 'application/json' });
 
   // Create a temporary URL for the file
-  var url = URL.createObjectURL(blob);
+  let url = URL.createObjectURL(blob);
 
-  // Create a new link element with the download attribute set to the desired filename
+  // Create a new link element
   const link = document.createElement('a');
-  // TODO: link.setAttribute('download', filename);
-  // Set the link's href attribute to the temporary URL
+  link.setAttribute('download', filename);
   link.href = url;
 
   // Simulate a click on the link to trigger the download

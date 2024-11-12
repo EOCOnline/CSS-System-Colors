@@ -253,12 +253,12 @@ details > p {
   /* background-color: Canvas;*/
   border-radius: 1em;
 
-  border: solid 5px white;
+  border: solid 3px white;
 
   border-top-color: white;
-  border-right-color: CanvasText;
+  border-right-color: white;
   border-bottom-color: black;
-  border-left-color: black;
+  border-left-color: system-canvastext;
 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
