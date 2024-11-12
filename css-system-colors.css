@@ -11,7 +11,7 @@
 :root {
   /* allow unstyled HTML to follow user preference via prefers-color-scheme */
   color-scheme: light dark;
-  --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
+  /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
   --contrast: 100;
 }
 :root:has(#syscolors-lightdark option[value="light"]:checked) {
@@ -25,16 +25,16 @@
 ** Handle contrast
  * NOTE: Apparently just using JS to set --contrast does everything?
  * Don't we also need to apply the 'filter' as below does?!
-**
+**/
 :root:has(#contrast option[value="low"]:checked) {
   filter: contrast(65%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: *
+  /* only needed because of low contrast filter, which needs a declared color to work on: */
   color: CanvasText;
   background-color: Canvas;
 }
 :root:has(#contrast option[value="medium"]:checked) {
   filter: contrast(80%);
-  /* only needed because of low contrast filter, which needs a declared color to work on: *
+  /* only needed because of low contrast filter, which needs a declared color to work on: */
   color: CanvasText;
   background-color: Canvas;
 }
@@ -48,7 +48,7 @@
 @media (prefers-contrast: medium) {
   :root {
     filter: contrast(80%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: *
+    /* only needed because of low contrast filter, which needs a declared color to work on: */
     color: CanvasText;
     background-color: Canvas;
   }
@@ -60,7 +60,7 @@
 @media (prefers-contrast: less) {
   :root {
     filter: contrast(65%);
-    /* only needed because of low contrast filter, which needs a declared color to work on: *
+    /* only needed because of low contrast filter, which needs a declared color to work on: */
     color: CanvasText;
     background-color: Canvas;
   }
@@ -255,9 +255,9 @@ details > p {
 
   border: solid 5px white;
 
-  border-top-color: 000;
+  border-top-color: white;
   border-right-color: CanvasText;
-  border-bottom-color: none;
+  border-bottom-color: black;
   border-left-color: black;
 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -276,7 +276,7 @@ details > p {
   text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
     0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
     0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
-}*/
+  */
 }
 
 /* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */

@@ -10,14 +10,18 @@ document.addEventListener("DOMContentLoaded", function () {
   readSystemColors();
 });
 
-let contrastValue = document.getElementById('syscolors-contrast-value');
+const contrastValue = document.getElementById('syscolors-contrast-value');
+const syscolorsContrast = document.querySelector("#syscolors-contrast");
+const syscolorsContainer = document.querySelector("#syscolors-container");
+
 function updateContrast(el) {
-  let contrast = el.value;
+  const contrast = el.value;
   // set root style to have filter: contrast(80%);
   document.documentElement.style.setProperty('--contrast', contrast);
-  document.querySelector("#syscolors-container").style.filter = 'contrast(' + contrast + '%)';
-  document.querySelector("#syscolors-contrast").value = contrast;
-  document.querySelector("#syscolors-contrast-value").innerText = contrast;
+
+  syscolorsContainer.style.filter = 'contrast(' + contrast + '%)';
+  syscolorsContrast.value = contrast;
+  contrastValue.innerText = contrast;
 }
 
 function setColorMode(el) {
@@ -34,17 +38,15 @@ function setColorMode(el) {
 }
 
 function clearWebPage() {
-  let currentColorsJson = {};
-  let deprecatedColorsJson = {};
+  currentColorsJson = { "info": {}, "currentColors": [] };
+  deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
   document.getElementById("syscolors-grid").innerHTML = "";
   document.getElementById("syscolors-deprecated-grid").innerHTML = "";
 
   readSystemColors();
 }
 
-// Broken, but recommended method!!!
-// get 
-async function readSystemColorsBroken() {
+async function readSystemColors_BROKEN_UNUSED() {
   try {
     // avoid CORS errors when reading a local file!
     const response = await fetch(sourceJson);//, { mode: 'no-cors' }
@@ -58,22 +60,18 @@ async function readSystemColorsBroken() {
     console.error("Fetch error: " + error.message);
   }
 }
-
 async function readSystemColors() {
-  // avoid CORS errors when reading a local file!
-  fetch(sourceJson)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then(json => {
-      processJson(json);
-    })
-    .catch(error => {
-      console.error("Fetch error: " + error.message); //BUG: Fetch error: can't convert undefined to object
-    });
+  try {
+    // avoid CORS errors when reading a local file!
+    const response = await fetch(sourceJson);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const json = await response.json();
+    processJson(json);
+  } catch (error) {
+    console.error("Fetch error: " + error.message);
+  }
 }
 
 
@@ -84,8 +82,12 @@ function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
 
-  json.info.timeStamp = new Date().toLocaleString();
-  json.info.userAgent = navigator.userAgent;
+  if (json.info) {
+    json.info.timeStamp = new Date().toLocaleString();
+    json.info.userAgent = navigator.userAgent;
+  } else {
+    console.error("No info object in JSON file!");
+  }
   document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
   console.log("currentColors: " + json.currentColors.length);
@@ -99,27 +101,28 @@ function processJson(json) {
   json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-grid");
   deprecatedColorsJson.info = structuredClone(json.info);
   deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
-
-  // setupDownload(currentColorsJson);
-  // setupDownload(deprecatedColorsJson, 'deprecated');
 }
 
 // Build the HTML grid for display AND get the current RGBA values
 // Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
 function generateSystemColors(systemColorSet, elementID) {
   console.table(systemColorSet);
-  console.log("Self reported navigator.userAgent: '" + navigator.userAgent + "'");
   let i = 0;
-  for (const index of Object.keys(systemColorSet)) { // BUG: gets TypeError: can't convert undefined to object
-    let RGBA = nameToRgba(systemColorSet[index].color);
-    if (logLevel > 1) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
-    systemColorSet[index].rgba = RGBA;
+  if (!systemColorSet) {
+    console.error("No systemColorSet object!");
+    return;
+  } else {
+    for (const index of Object.keys(systemColorSet)) {
+      let RGBA = nameToRgba(systemColorSet[index].color);
+      if (logLevel > 1) console.log("RGBA of " + systemColorSet[index].color + " is " + RGBA);
+      systemColorSet[index].rgba = RGBA;
 
-    createColorCards(systemColorSet, index, elementID, RGBA);
-    i++;
+      createColorCards(systemColorSet, index, elementID, RGBA);
+      i++;
+    }
+    if (logLevel > 1) console.log("Processed " + i + " colors.");
+    return systemColorSet;
   }
-  if (logLevel > 1) console.log("Processed " + i + " colors.");
-  return systemColorSet;
 }
 
 let clickText = "&nbsp; &nbsp; (Click to copy)";
@@ -178,15 +181,21 @@ function getContrastingColor(r, g, b) {
   if (logLevel > 2) console.log("Perceptive luminance:" + a);
   return ((a < 0.5) ? 'black' : 'white');
 }
-
-// Write a named color to a canvas and read back the RGBA value
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 
+// Write a named color to a canvas and read back the RGBA value
 function nameToRgba(name) {
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = name;
   context.fillRect(0, 0, 1, 1);
+  const imageData = context.getImageData(0, 0, 1, 1).data;
+  if (imageData.length === 4) {
+    return imageData;
+  } else {
+    console.error('Invalid image data');
+    return [0, 0, 0, 0]; // Return a default value
+  }
   return context.getImageData(0, 0, 1, 1).data;
 }
 
@@ -240,9 +249,11 @@ function copyTextToClipboard(text, id) {
   navigator.clipboard.writeText(text).then(function () {
     console.log('Async: Copying to clipboard was successful!');
     let tooltip = document.getElementById(id);
-    tooltip.innerHTML = tooltip.innerHTML.replace(clickText, clickedText);
+    if (tooltip) {
+      tooltip.innerHTML = tooltip.innerHTML.replace(clickText, clickedText);
+    }
   }, function (err) {
-    console.error('Async: Could not copy text: ', err);
+    console.error('Could not copy text: ', err);
   });
 }
 
@@ -252,22 +263,10 @@ function copyTextToClipboard(text, id) {
  * Download JSON file
  */
 
-// NOTE: UNUSED!
-// https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
-function setupDownload(json, validity = "current") {
-  let storageObj = json;
-  let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(storageObj));
-  let dlAnchorElem = document.getElementById('syscolors-download-' + validity);
-
-  dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", createFileName("CSS_System_Colors2"));
-  // dlAnchorElem.click(); // auto-download: user doesn't even have to click the button!
-  return;
-}
-
 function createFileName(baseName) {
   let date = new Date().toISOString().slice(0, 10);
-  let colorMode = document.querySelector("#syscolors-lightdark").value;
+  let colorModeElement = document.querySelector("#syscolors-lightdark");
+  let colorMode = colorModeElement ? colorModeElement.value : "default";
   let userAgentSummary = navigator.userAgent.replace(/[^a-zA-Z0-9]/g, '');  // TODO: shorten this!
   let fileName = baseName + "_" + date + "_" + colorMode + "_" + userAgentSummary + ".json";
   console.log("Download fileName: " + fileName);
@@ -286,27 +285,17 @@ function downloadDeprecatedColors() {
   downloadJSON(depColor, createFileName("CSS_Deprecated_Colors"));
 }
 
-// https://javascript.plainenglish.io/how-to-trigger-download-of-a-file-via-an-html-button-using-javascript-55f53a4111ce
-/*
-const submit = document.getElementById('submitButton');
-submit.addEventListener('click', function () {
-  downloadJSON(data, 'CSS_System_Colors.json');
-});
-*/
 function downloadJSON(data, filename) {
-  // Convert the JSON data to a string
-  var json = JSON.stringify(data);
-
+  const json = JSON.stringify(data);
   // Create a new Blob object with the JSON data and set its type
-  var blob = new Blob([json], { type: 'application/json' });
+  let blob = new Blob([json], { type: 'application/json' });
 
   // Create a temporary URL for the file
   var url = URL.createObjectURL(blob);
 
   // Create a new link element with the download attribute set to the desired filename
-  var link = document.createElement('a');
-  link.setAttribute('download', filename);
-
+  const link = document.createElement('a');
+  // TODO: link.setAttribute('download', filename);
   // Set the link's href attribute to the temporary URL
   link.href = url;
 
@@ -317,6 +306,4 @@ function downloadJSON(data, filename) {
   // Clean up the temporary URL and link element
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
-
 };
-
