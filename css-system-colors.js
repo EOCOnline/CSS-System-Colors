@@ -50,7 +50,7 @@ function resetWebPage() {
   if (document.getElementById("syscolors-deprecated-dark")) document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
 
   document.getElementById("syscolors-demo-light").innerHTML = "";
-  if (document.getElementById("syscolors-demo-dark")) document.getElementById("syscolors-demo-grid").removeChild(document.getElementById("syscolors-demo-dark"))
+  if (document.getElementById("syscolors-demo-dark")) document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
 }
 
 
