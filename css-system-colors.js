@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContainer = document.querySelector("#syscolors-container");
   // set contrast to auto value
   updateContrast({ value: 95 });
-  readSystemColors();
+  readSystemColors();   // This is where it all starts!
 });
 
 let contrastValue;
@@ -37,8 +37,9 @@ function setColorMode(el) {
     //document.querySelector("#syscolors-color-mode").value = mode;
   }
   if (logLevel) console.log("Color mode set to: " + mode);
-  // TODO: I believe we HAVE to rerun color table, as RGBA values likely change with change in color mode!
+  // TODO: We HAVE to rerun color table, as RGBA values likely change with change in color mode - right?!
   clearWebPage();
+  readSystemColors();
 }
 
 function clearWebPage() {
@@ -46,24 +47,15 @@ function clearWebPage() {
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
   document.getElementById("syscolors-grid").innerHTML = "";
   document.getElementById("syscolors-deprecated-grid").innerHTML = "";
-
-  readSystemColors();
 }
 
-async function readSystemColors_BROKEN_UNUSED() {
-  try {
-    // avoid CORS errors when reading a local file!
-    const response = await fetch(sourceJson);//, { mode: 'no-cors' }
-    if (!response.ok) {
-      throw new Error("Network response was not ok " + response.statusText);
-    }
-    const json = await response.json();
-    // BUG: Following gets: "Fetch error: NetworkError when attempting to fetch resource."
-    processJson(json);
-  } catch (error) {
-    console.error("Fetch error: " + error.message);
-  }
-}
+
+/******************************************* 
+ * 
+ * Main Action Flow™ are these routines!
+ */
+
+// Read JSON File with system colors
 async function readSystemColors() {
   try {
     // avoid CORS errors when reading a local file!
@@ -82,6 +74,7 @@ async function readSystemColors() {
 let currentColorsJson = { "info": {}, "currentColors": [] };
 let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
+// Process the JSON file with system colors
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
@@ -107,8 +100,8 @@ function processJson(json) {
   deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 }
 
-// Build the HTML grid for display AND get the current RGBA values
-// Process a list of system-colors: displaying it & building up JSON object with RGBA values for this userAgent
+
+// Process a list of system-colors: get RGBA values for each named color, then create its HTML card to display
 function generateSystemColors(systemColorSet, elementID) {
   console.table(systemColorSet);
   let i = 0;
@@ -129,9 +122,11 @@ function generateSystemColors(systemColorSet, elementID) {
   }
 }
 
-let clickText = "&nbsp; &nbsp; (Click to copy)";
-let clickedText = "&nbsp; &nbsp; (Copied!)";
-// Create an HTML card for each color
+
+const clickText = "&nbsp; &nbsp; (Click to copy)";
+const clickedText = "&nbsp; &nbsp; (Copied!)";
+
+// Build up an HTML card for each color & attach to the DOM
 function createColorCards(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
