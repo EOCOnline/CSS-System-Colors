@@ -1,5 +1,5 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const logLevel = 1;
+const logLevel = 3;
 const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,17 +10,37 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-container");
 
-  // duplicate the light theme to dark theme
-  let duplicateElement = document.getElementById("syscolors-demo-light").cloneNode(true);
-  duplicateElement.id = "syscolors-demo-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-demo").appendChild(duplicateElement);
-  document.querySelector("#syscolors-demo-light H2 .syscolors-demo-mode").innerText = "Light";
-  document.querySelector("#syscolors-demo-dark H2 .syscolors-demo-mode").innerText = "Dark";
-
+  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H2 .syscolors-demo-mode");
   updateContrast({ value: 95 });
   readSystemColors();   // This is where it all starts!
 });
+
+
+function cloneLightPanel(elementId, cloneId, spanSelector) {
+  let light = document.getElementById(elementId);
+  if (!light) {
+    console.error("No element with ID: " + elementId);
+    return;
+  }
+  let dark = light.cloneNode(true);
+  dark.id = cloneId;
+  dark.className = "syscolors-inner-container syscolors-dark";
+
+  light.classList.add("syscolors-inner-container");
+  light.classList.add("syscolors-light");
+
+  let parent = light.parentNode;
+  if (!parent) {
+    console.error("No parent element found for element with ID: " + elementId);
+    return;
+  }
+  if (logLevel > 1) console.log("Found Parent with ID: " + parent.id);
+  parent.appendChild(dark);
+
+  light.querySelector(spanSelector).innerText = "Light";
+  dark.querySelector(spanSelector).innerText = "Dark";
+  return dark;
+}
 
 let contrastValue;
 let syscolorsContrast;
@@ -101,16 +121,9 @@ function processJson(json) {
 
   console.log("currentColors: " + json.currentColors.length);
   document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
+
   json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
-
-  // duplicate light theme to dark theme
-  let duplicateElement = document.getElementById("syscolors-grid-light").cloneNode(true);
-  duplicateElement.id = "syscolors-grid-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-grid").appendChild(duplicateElement);
-  document.querySelector("#syscolors-grid-light H2 .syscolors-grid-mode").innerText = "Light";
-  document.querySelector("#syscolors-grid-dark H2 .syscolors-grid-mode").innerText = "Dark";
-
+  cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
   // save the JSON data for download
   currentColorsJson.info = structuredClone(json.info);
   currentColorsJson.currentColors = structuredClone(json.currentColors);
@@ -119,16 +132,9 @@ function processJson(json) {
   // & again for the Deprecated Color Grid...
   console.log("deprecatedColors: " + json.deprecatedColors.length);
   document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+
   json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
-
-  // duplicate light theme to dark theme
-  duplicateElement = document.getElementById("syscolors-deprecated-light").cloneNode(true);
-  duplicateElement.id = "syscolors-deprecated-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-deprecated-grid").appendChild(duplicateElement);
-  document.querySelector("#syscolors-deprecated-light H2 .syscolors-grid-mode").innerText = "Light";
-  document.querySelector("#syscolors-deprecated-dark H2 .syscolors-grid-mode").innerText = "Dark";
-
+  cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
   // save the JSON data for download
   deprecatedColorsJson.info = structuredClone(json.info);
   deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
