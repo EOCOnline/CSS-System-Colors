@@ -78,30 +78,32 @@
           handle it for you!</blockquote>
 
         <p>This page demonstrates the CSS System Colors in action. You can view the colors
-          (and their change the light/dark mode and contrast settings to see how the
+          side by side in light AND dark modes and change the contrast settings to see how the
           colors adapt to different environments.</p>
 
         <p>We uniquely display the actual color's
           <a href="https://drafts.csswg.org/css-color/#rgb-functions" target="_blank">RGBA</a> values for the current
-          environment. Note that the values are likely to change when switching from light to dark mode.
+          environment. Note that the values generally change between light & dark mode.
         </p>
 
-        <p>This page demonstrates the CSS System Colors in action. You can use
-          the dropdowns above to change the light/dark mode and contrast
-          settings to see how the colors adapt to different environments.</p>
-
         <p>Hovering over each card displays the same text as in the card,and allows copying
-          it to your clipboard if desired. At the bottom to the two system color grids is
+          it to your clipboard if desired. The bottom of the two system panels has
           a download button which will download a simple json files with the current RGBA
           values for the environment.</p>
 
-        <h3>Introduction</h3>
+        <h3>More Details</h3>
 
         <p><a href="https://www.w3.org/TR/css-color-4/#css-system-colors" target="_blank">https:
             //www.w3.org/TR/css-color-4/#css-system-colorsCSS System Colors</a> are a
           set of 17 color keywords that are derived from the user's operating system's
-          color scheme. They are useful for creating a consistent look and feel that
-          matches the user's preferences.</p>
+          color scheme. They are useful to:</p>
+        <ul>
+          <li>Create a consistent look and feel matching user's preferences</li>
+          <li>Create accessible and user-friendly interfaces</li>
+          <li>Create a harmonious color palette when used in combination with other color values</li>
+          <li>Automatically respond to light/dark modes and contrast settings</li>
+          <li>Ease development by reducing code to otherwise handle these issues</li>
+        </ul>
 
         <p>CSS System Colors are a new <img src="./images/W3C.png" alt="W3C"> standard (under development since
           <a href="https://www.w3.org/standards/history/css-color-4/" target="_blank">2017</a> as part of CSS Color
@@ -114,22 +116,13 @@
             system- keyword, such as system-highlight or system-buttonface, but adding them in
             css-system-colors.js:generateSystemColors() file failed. Hmmm.]</strong></p>
 
-        <p>The colors are designed to adapt to different light/dark modes and contrast
-          settings, making them ideal for creating accessible and user-friendly
-          interfaces. They can be used in combination with other color values to create a
-          harmonious color palette.</p>
-
         <blockquote>
           Note: System colors' actual RGBA values may vary depending on the user's
           operating system and browser settings!</blockquote>
 
-        <p>A nice feature of CSS System Colors is that they can be used in combination with
-          other color values to create a harmonious color palette.</p>
-
-        <p>Some colors are
+        <p>Deprecated colors are often not displayed by the browser, and were
           <a href="https://drafts.csswg.org/css-color/#typedef-deprecated-color" target="_blank">deprecated</a> as
-          they enable mimicking system colors too well, and could be used for fake, evil
-          phishing sites. Don't go there!
+          they enable mimicking system colors too well, and were used for fake, evil phishing sites. Don't go there!
         </p>
 
         <p>For more information on CSS System Colors, check out:
