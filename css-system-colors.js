@@ -71,6 +71,8 @@ function resetWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
+  document.getElementById("syscolors-table").innerHTML = "";
+
   document.getElementById("syscolors-grid-light").innerHTML = "";
   if (document.getElementById("syscolors-grid-dark")) document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"))
 
@@ -91,6 +93,7 @@ function resetWebPage() {
 async function readSystemColors() {
   try {
     // avoid CORS errors when reading a local file!
+    if (logLevel > 1) console.log("Fetching JSON file:" + sourceJson);
     const response = await fetch(sourceJson);
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
@@ -110,34 +113,37 @@ let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
+  try {
+    if (json.info) {
+      json.info.timeStamp = new Date().toLocaleString();
+      json.info.userAgent = navigator.userAgent;
+    } else {
+      console.error("No info object in JSON file!");
+    }
+    document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
-  if (json.info) {
-    json.info.timeStamp = new Date().toLocaleString();
-    json.info.userAgent = navigator.userAgent;
-  } else {
-    console.error("No info object in JSON file!");
+    console.log("currentColors: " + json.currentColors.length);
+    document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
+
+    json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
+    cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
+    // save the JSON data for download
+    currentColorsJson.info = structuredClone(json.info);
+    currentColorsJson.currentColors = structuredClone(json.currentColors);
+
+
+    // & again for the Deprecated Color Grid...
+    console.log("deprecatedColors: " + json.deprecatedColors.length);
+    document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+
+    json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
+    cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
+    // save the JSON data for download
+    deprecatedColorsJson.info = structuredClone(json.info);
+    deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
+  } catch (error) {
+    console.error("Error processing JSON: " + error.message);
   }
-  document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
-
-  console.log("currentColors: " + json.currentColors.length);
-  document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
-
-  json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
-  cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
-  // save the JSON data for download
-  currentColorsJson.info = structuredClone(json.info);
-  currentColorsJson.currentColors = structuredClone(json.currentColors);
-
-
-  // & again for the Deprecated Color Grid...
-  console.log("deprecatedColors: " + json.deprecatedColors.length);
-  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
-
-  json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
-  cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
-  // save the JSON data for download
-  deprecatedColorsJson.info = structuredClone(json.info);
-  deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 }
 
 
@@ -161,7 +167,10 @@ function generateSystemColors(systemColorSet, elementID) {
     if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
 
-    createColorCards(systemColorSet, index, elementID, RGBA);
+    createColorCards1(systemColorSet, index, elementID, RGBA);
+    if (elementID == "syscolors-grid-light") {
+      createColorCards2(systemColorSet, index, "syscolors-table", RGBA);
+    }
     i++;
   }
   if (logLevel > 1) console.log("Processed " + i + " colors.");
@@ -174,7 +183,7 @@ const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
 // Build up an HTML card for each color & attach to the DOM
-function createColorCards(systemColorSet, index, elementID, RGBA) {
+function createColorCards1(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -210,6 +219,66 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   cardDiv.appendChild(categorySpan);
   cardDiv.appendChild(rgbaSpan);
   cardDiv.appendChild(tooltipSpan);
+
+  document.getElementById(elementID).appendChild(cardDiv);
+}
+
+// These cards will look more like rows of a table...
+function createColorCards2(systemColorSet, index, elementID, RGBA) {
+
+  let nameSpan = document.createElement('span');
+  nameSpan.className = "syscolors-color-span";
+  nameSpan.innerHTML = systemColorSet[index].color;
+  let n2 = nameSpan.cloneNode(true);
+  let n3 = nameSpan.cloneNode(true);
+
+  let descSpan = document.createElement('span');
+  descSpan.className = "syscolors-desc-span";
+  descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
+
+  let categorySpan = document.createElement('span');
+  categorySpan.className = "`syscolors-category-span`";
+  categorySpan.innerHTML = " {" + systemColorSet[index].category + "} ";
+
+  let rgbaSpan = document.createElement('span');
+  rgbaSpan.className = "syscolors-rgba-span";
+  rgbaSpan.innerHTML = " [" + RGBA + "]";
+
+  let tooltipSpan = document.createElement('span');
+  tooltipSpan.className = "syscolors-tooltip";
+  tooltipSpan.id = "syscolors-table-tooltip-" + index;
+  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
+  tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText + rgbaSpan.innerText, tooltipSpan.id); });
+
+  let cardDiv = document.createElement('div');
+  cardDiv.className = "syscolors-row-card";
+  // cardDiv.style.backgroundColor = systemColorSet[index].color;
+  cardDiv.appendChild(tooltipSpan);
+
+
+  let textSpan = document.createElement('span');
+  textSpan.className = "syscolors-row-text";
+  // textDiv.style.backgroundColor = systemColorSet[index].color;
+  // BUG: Use system colors here?! Or rerun for dark grids...
+  //textDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
+  textSpan.appendChild(nameSpan);
+  textSpan.appendChild(descSpan);
+  textSpan.appendChild(categorySpan);
+  textSpan.appendChild(rgbaSpan);
+
+  let lightSpan = document.createElement('span');
+  lightSpan.className = "syscolors-row-light";
+  lightSpan.style.backgroundColor = systemColorSet[index].color;
+  lightSpan.appendChild(n2);
+
+  let darkSpan = document.createElement('span');
+  darkSpan.className = "syscolors-row-dark";
+  darkSpan.style.backgroundColor = systemColorSet[index].color;
+  darkSpan.appendChild(n3);
+
+  cardDiv.appendChild(textSpan);
+  cardDiv.appendChild(lightSpan);
+  cardDiv.appendChild(darkSpan);
 
   document.getElementById(elementID).appendChild(cardDiv);
 }

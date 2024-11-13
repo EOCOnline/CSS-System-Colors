@@ -189,6 +189,65 @@ blockquote {
 }
 
 /**********************************************
+ * Color Table Panel
+ * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
+ */
+.syscolors-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 5px;
+  background-color: rgb(198, 183, 163);
+}
+
+.syscolors-row-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  flex-grow: 0;
+  display: inline-block;
+  background-color: rgb(251, 251, 240);
+  padding: 5px;
+
+  border: 2px solid #585858;
+  border-radius: 0.5em;
+  width: 500px;
+  height: 100px;
+}
+
+.syscolors-row-text {
+  color-scheme: dark;
+  /*border: 2px solid #a5e36b;*/
+  display: inline-block;
+  padding: 5px;
+  border-radius: 0.5em;
+  width: 180px;
+  height: 80px;
+}
+
+.syscolors-row-light {
+  color-scheme: light;
+  border: 2px solid white;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 0.5em;
+  height: 80px;
+  width: 110px;
+}
+
+.syscolors-row-dark {
+  color-scheme: dark;
+  border: 2px solid white;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 0.5em;
+  height: 80px;
+  width: 110px;
+}
+
+/**********************************************
  * Color Grid Panels
  * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
  */
