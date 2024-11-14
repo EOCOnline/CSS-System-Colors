@@ -167,9 +167,9 @@ function generateSystemColors(systemColorSet, elementID) {
     if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
 
-    createColorCards1(systemColorSet, index, elementID, RGBA);
+    createColorCard(systemColorSet, index, elementID, RGBA);
     if (elementID == "syscolors-grid-light") {
-      createColorCards2(systemColorSet, index, "syscolors-table", RGBA);
+      createColorRow(systemColorSet, index, "syscolors-table", RGBA);
     }
     i++;
   }
@@ -178,12 +178,11 @@ function generateSystemColors(systemColorSet, elementID) {
 }
 
 
-
 const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
 // Build up an HTML card for each color & attach to the DOM
-function createColorCards1(systemColorSet, index, elementID, RGBA) {
+function createColorCard(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -224,7 +223,7 @@ function createColorCards1(systemColorSet, index, elementID, RGBA) {
 }
 
 // These cards will look more like rows of a table...
-function createColorCards2(systemColorSet, index, elementID, RGBA) {
+function createColorRow(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -256,29 +255,29 @@ function createColorCards2(systemColorSet, index, elementID, RGBA) {
   cardDiv.appendChild(tooltipSpan);
 
 
-  let textSpan = document.createElement('span');
-  textSpan.className = "syscolors-row-text";
+  let textDiv = document.createElement('div');
+  textDiv.className = "syscolors-row-text";
   // textDiv.style.backgroundColor = systemColorSet[index].color;
   // BUG: Use system colors here?! Or rerun for dark grids...
   //textDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
-  textSpan.appendChild(nameSpan);
-  textSpan.appendChild(descSpan);
-  textSpan.appendChild(categorySpan);
-  textSpan.appendChild(rgbaSpan);
+  textDiv.appendChild(nameSpan);
+  textDiv.appendChild(descSpan);
+  textDiv.appendChild(categorySpan);
+  textDiv.appendChild(rgbaSpan);
 
-  let lightSpan = document.createElement('span');
-  lightSpan.className = "syscolors-row-light";
-  lightSpan.style.backgroundColor = systemColorSet[index].color;
-  lightSpan.appendChild(n2);
+  let lightDiv = document.createElement('div');
+  lightDiv.className = "syscolors-row-light";
+  lightDiv.style.backgroundColor = systemColorSet[index].color;
+  lightDiv.appendChild(n2);
 
-  let darkSpan = document.createElement('span');
-  darkSpan.className = "syscolors-row-dark";
-  darkSpan.style.backgroundColor = systemColorSet[index].color;
-  darkSpan.appendChild(n3);
+  let darkDiv = document.createElement('div');
+  darkDiv.className = "syscolors-row-dark";
+  darkDiv.style.backgroundColor = systemColorSet[index].color;
+  darkDiv.appendChild(n3);
 
-  cardDiv.appendChild(textSpan);
-  cardDiv.appendChild(lightSpan);
-  cardDiv.appendChild(darkSpan);
+  cardDiv.appendChild(textDiv);
+  cardDiv.appendChild(lightDiv);
+  cardDiv.appendChild(darkDiv);
 
   document.getElementById(elementID).appendChild(cardDiv);
 }
