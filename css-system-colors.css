@@ -206,8 +206,7 @@ blockquote {
   justify-content: space-between;
   align-items: flex-start;
   gap: 10px;
-  flex-grow: 0;
-  display: inline-block;
+  flex-grow: 1;
   background-color: rgb(251, 251, 240);
   padding: 5px;
 
@@ -215,6 +214,11 @@ blockquote {
   border-radius: 0.5em;
   width: 500px;
   height: 100px;
+}
+
+.syscolors-row-card + .syscolors-row-card {
+  /* affects all but the 1st */
+  margin-left: 2%;
 }
 
 .syscolors-row-text {
