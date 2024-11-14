@@ -1,0 +1,108 @@
+/**********************************************
+ * Color Table Panel
+ * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
+ */
+.syscolors-table {
+  display: flex;
+  flex-wrap: wrap;
+  /*  background-color: rgb(198, 183, 163);
+  justify-content: flex-start;*/
+  padding: 5px;
+}
+
+/* BUG: This applies to entire page, not just the table section */
+/*.syscolors-table * {
+*/
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*
+}
+*/
+
+.syscolors-row-card {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin: 0.5em;
+  border: 2px solid #585858;
+  border-radius: 0.5em;
+  width: 525px;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="category"]) {
+  --borderColor: #ac2929;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="selection"]) {
+  --borderColor: #00ff00;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="general"]) {
+  --borderColor: #ca648a;
+}
+.syscolors-row-text:has(.syscolors-category-span[category="interface"]) {
+  --borderColor: #ff00ff;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="links"]) {
+  --borderColor: #ffff00;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="input-buttons"]) {
+  --borderColor: #00ffff;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="input"]) {
+  --borderColor: #80c8c8;
+}
+
+.syscolors-row-text {
+  border: 2px solid var(--borderColor);
+  border-left: 30px solid var(--borderColor);
+  position: relative;
+  font-size: small;
+  display: inline-block;
+  padding: 3px;
+  border-radius: 0.5em;
+  width: 200px;
+  height: 70px;
+}
+
+.syscolors-category-span {
+  font-size: 0.85rem;
+  /*color: white;
+  border: 2px solid;*/
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  padding: 0.25em 0.5em;
+  margin-left: -30px;
+  bottom: -21px;
+  font-size: x-small;
+  font-weight: bold;
+  transform: rotate(270deg);
+  transform-origin: 0 0;
+}
+
+.syscolors-row-light {
+  color-scheme: light;
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 0.5em;
+  height: 70px;
+  width: 150px;
+}
+
+.syscolors-row-dark {
+  color-scheme: dark;
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 0.5em;
+  height: 70px;
+  width: 150px;
+}

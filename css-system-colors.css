@@ -92,17 +92,13 @@ blockquote {
  * Styles used by multiple panels
  */
 .syscolors-inner-container {
-  border: CanvasText 1px solid;
+  border: black 1px solid;
   border-radius: 0.5em;
   margin: 10px;
   padding: 10px;
-  /*background-color: Canvas;
-  color: CanvasText;*/
 }
 
 .syscolors-light {
-  /*background-color: white;
-  color: black;*/
   color-scheme: light;
   width: 48%;
   margin: 0px;
@@ -110,8 +106,6 @@ blockquote {
 }
 
 .syscolors-dark {
-  /*background-color: white;
-  color: black;*/
   color-scheme: dark;
   width: 48%;
   margin: 0px;
@@ -167,13 +161,13 @@ blockquote {
 
 #syscolors-user-agent-div {
   font-weight: normal;
-  font-size: 80%;
+  font-size: 90%;
   margin-top: 15px;
 }
 
 #syscolors-contrast {
-  width: 220px;
-  margin-top: 0px;
+  width: 125px;
+  margin-bottom: -5px;
 }
 
 #syscolors-contrast-label {

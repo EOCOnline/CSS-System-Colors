@@ -10,17 +10,37 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-container");
 
-  // duplicate the light theme to dark theme
-  let duplicateElement = document.getElementById("syscolors-demo-light").cloneNode(true);
-  duplicateElement.id = "syscolors-demo-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-demo").appendChild(duplicateElement);
-  document.querySelector("#syscolors-demo-light H2 .syscolors-demo-mode").innerText = "Light";
-  document.querySelector("#syscolors-demo-dark H2 .syscolors-demo-mode").innerText = "Dark";
-
+  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H2 .syscolors-demo-mode");
   updateContrast({ value: 95 });
   readSystemColors();   // This is where it all starts!
 });
+
+
+function cloneLightPanel(elementId, cloneId, spanSelector) {
+  let light = document.getElementById(elementId);
+  if (!light) {
+    console.error("No element with ID: " + elementId);
+    return;
+  }
+  let dark = light.cloneNode(true);
+  dark.id = cloneId;
+  dark.className = "syscolors-inner-container syscolors-dark";
+
+  light.classList.add("syscolors-inner-container");
+  light.classList.add("syscolors-light");
+
+  let parent = light.parentNode;
+  if (!parent) {
+    console.error("No parent element found for element with ID: " + elementId);
+    return;
+  }
+  if (logLevel > 1) console.log("Found Parent with ID: " + parent.id);
+  parent.appendChild(dark);
+
+  light.querySelector(spanSelector).innerText = "Light";
+  dark.querySelector(spanSelector).innerText = "Dark";
+  return dark;
+}
 
 let contrastValue;
 let syscolorsContrast;
@@ -51,6 +71,10 @@ function resetWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
+  saveMe = document.getElementsByClassName("syscolors-save-me")[0].cloneNode(true);
+  //debugger;
+  document.getElementById("syscolors-table").innerHTML = saveMe.outerHTML;
+
   document.getElementById("syscolors-grid-light").innerHTML = "";
   if (document.getElementById("syscolors-grid-dark")) document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"))
 
@@ -71,6 +95,7 @@ function resetWebPage() {
 async function readSystemColors() {
   try {
     // avoid CORS errors when reading a local file!
+    if (logLevel > 1) console.log("Fetching JSON file:" + sourceJson);
     const response = await fetch(sourceJson);
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
@@ -90,48 +115,37 @@ let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
+  try {
+    if (json.info) {
+      json.info.timeStamp = new Date().toLocaleString();
+      json.info.userAgent = navigator.userAgent;
+    } else {
+      console.error("No info object in JSON file!");
+    }
+    document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
-  if (json.info) {
-    json.info.timeStamp = new Date().toLocaleString();
-    json.info.userAgent = navigator.userAgent;
-  } else {
-    console.error("No info object in JSON file!");
+    console.log("currentColors: " + json.currentColors.length);
+    document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
+
+    json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
+    cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
+    // save the JSON data for download
+    currentColorsJson.info = structuredClone(json.info);
+    currentColorsJson.currentColors = structuredClone(json.currentColors);
+
+
+    // & again for the Deprecated Color Grid...
+    console.log("deprecatedColors: " + json.deprecatedColors.length);
+    document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+
+    json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
+    cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
+    // save the JSON data for download
+    deprecatedColorsJson.info = structuredClone(json.info);
+    deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
+  } catch (error) {
+    console.error("Error processing JSON: " + error.message);
   }
-  document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
-
-  console.log("currentColors: " + json.currentColors.length);
-  document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
-  json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
-
-  // duplicate light theme to dark theme
-  let duplicateElement = document.getElementById("syscolors-grid-light").cloneNode(true);
-  duplicateElement.id = "syscolors-grid-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-grid").appendChild(duplicateElement);
-  document.querySelector("#syscolors-grid-light H2 .syscolors-grid-mode").innerText = "Light";
-  document.querySelector("#syscolors-grid-dark H2 .syscolors-grid-mode").innerText = "Dark";
-
-  // save the JSON data for download
-  currentColorsJson.info = structuredClone(json.info);
-  currentColorsJson.currentColors = structuredClone(json.currentColors);
-
-
-  // & again for the Deprecated Color Grid...
-  console.log("deprecatedColors: " + json.deprecatedColors.length);
-  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
-  json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
-
-  // duplicate light theme to dark theme
-  duplicateElement = document.getElementById("syscolors-deprecated-light").cloneNode(true);
-  duplicateElement.id = "syscolors-deprecated-dark";
-  duplicateElement.class = "syscolors-dark";
-  document.getElementById("syscolors-deprecated-grid").appendChild(duplicateElement);
-  document.querySelector("#syscolors-deprecated-light H2 .syscolors-grid-mode").innerText = "Light";
-  document.querySelector("#syscolors-deprecated-dark H2 .syscolors-grid-mode").innerText = "Dark";
-
-  // save the JSON data for download
-  deprecatedColorsJson.info = structuredClone(json.info);
-  deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 }
 
 
@@ -155,7 +169,10 @@ function generateSystemColors(systemColorSet, elementID) {
     if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
 
-    createColorCards(systemColorSet, index, elementID, RGBA);
+    createColorCard(systemColorSet, index, elementID, RGBA);
+    if (elementID == "syscolors-grid-light") {
+      createColorRow(systemColorSet, index, "syscolors-table");
+    }
     i++;
   }
   if (logLevel > 1) console.log("Processed " + i + " colors.");
@@ -163,12 +180,11 @@ function generateSystemColors(systemColorSet, elementID) {
 }
 
 
-
 const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
 // Build up an HTML card for each color & attach to the DOM
-function createColorCards(systemColorSet, index, elementID, RGBA) {
+function createColorCard(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -206,6 +222,88 @@ function createColorCards(systemColorSet, index, elementID, RGBA) {
   cardDiv.appendChild(tooltipSpan);
 
   document.getElementById(elementID).appendChild(cardDiv);
+}
+
+// These cards  look more like rows of a table...
+function createColorRow(systemColorSet, index, elementID) {
+
+  let nameSpan = document.createElement('span');
+  nameSpan.className = "syscolors-color-span";
+  nameSpan.innerHTML = systemColorSet[index].color;
+  let lightText = nameSpan.cloneNode(true);
+  let darkText = nameSpan.cloneNode(true);
+
+  let descSpan = document.createElement('span');
+  descSpan.className = "syscolors-desc-span";
+  descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
+
+  let categorySpan = document.createElement('span');
+  categorySpan.className = "syscolors-category-span";
+  // add attribute to span
+
+
+  categorySpan.setAttribute("category", systemColorSet[index].category);
+  categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
+
+  let tooltipSpan = document.createElement('span');
+  tooltipSpan.className = "syscolors-tooltip";
+  tooltipSpan.id = "syscolors-table-tooltip-" + index;
+  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + //"<br/>" + rgbaSpan.outerHTML 
+    + clickText;
+  tooltipSpan.addEventListener('click', function () {
+    copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText //+ rgbaSpan.innerText
+      , tooltipSpan.id);
+  });
+
+  let cardDiv = document.createElement('div');
+  cardDiv.className = "syscolors-row-card";
+  cardDiv.appendChild(tooltipSpan);
+
+  let textDiv = document.createElement('div');
+  textDiv.className = "syscolors-row-text";
+  textDiv.appendChild(categorySpan);
+  textDiv.appendChild(nameSpan);
+  textDiv.appendChild(descSpan);
+
+  let lightDiv = document.createElement('div');
+  lightDiv.className = "syscolors-row-light";
+  lightDiv.style.backgroundColor = systemColorSet[index].color;
+  lightDiv.appendChild(lightText);
+
+  let darkDiv = document.createElement('div');
+  darkDiv.className = "syscolors-row-dark";
+  darkDiv.style.backgroundColor = systemColorSet[index].color;
+  darkDiv.appendChild(darkText);
+
+  cardDiv.appendChild(textDiv);
+  cardDiv.appendChild(lightDiv);
+  cardDiv.appendChild(darkDiv);
+
+  document.getElementById(elementID).appendChild(cardDiv);
+
+  // Update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
+  nameSpan.innerHTML = systemColorSet[index].color;
+
+  let colorLight = getComputedStyle(lightDiv).backgroundColor;
+  let r = colorLight.match(/\d+/g)[0];
+  let g = colorLight.match(/\d+/g)[1];
+  let b = colorLight.match(/\d+/g)[2];
+  lightDiv.style.color = getContrastingColor(r, g, b);
+  r = parseInt(r).toString(16).padStart(2, '0');
+  g = parseInt(g).toString(16).padStart(2, '0');
+  b = parseInt(b).toString(16).padStart(2, '0');
+
+  lightText.innerHTML = systemColorSet[index].color + "<br/>" + colorLight + "<br/>" + "#" + r + g + b;
+
+  let colorDark = getComputedStyle(darkDiv).backgroundColor;
+  r = colorDark.match(/\d+/g)[0];
+  g = colorDark.match(/\d+/g)[1];
+  b = colorDark.match(/\d+/g)[2];
+  darkDiv.style.color = getContrastingColor(r, g, b);
+  r = parseInt(r).toString(16).padStart(2, '0');
+  g = parseInt(g).toString(16).padStart(2, '0');
+  b = parseInt(b).toString(16).padStart(2, '0');
+  darkText.innerHTML = systemColorSet[index].color + "<br/>" + colorDark + "<br/>" + "#" + r + g + b;
 }
 
 
