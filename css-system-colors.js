@@ -1,5 +1,5 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const logLevel = 3;
+const logLevel = 1;
 const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -222,64 +222,92 @@ function createColorCard(systemColorSet, index, elementID, RGBA) {
   document.getElementById(elementID).appendChild(cardDiv);
 }
 
-// These cards will look more like rows of a table...
+// These cards  look more like rows of a table...
 function createColorRow(systemColorSet, index, elementID, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
   nameSpan.innerHTML = systemColorSet[index].color;
-  let n2 = nameSpan.cloneNode(true);
-  let n3 = nameSpan.cloneNode(true);
+  let lightText = nameSpan.cloneNode(true);
+  let darkText = nameSpan.cloneNode(true);
 
   let descSpan = document.createElement('span');
   descSpan.className = "syscolors-desc-span";
   descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
 
   let categorySpan = document.createElement('span');
-  categorySpan.className = "`syscolors-category-span`";
-  categorySpan.innerHTML = " {" + systemColorSet[index].category + "} ";
+  categorySpan.className = "syscolors-category-span";
+  categorySpan.innerHTML = systemColorSet[index].category;
 
+  /*
   let rgbaSpan = document.createElement('span');
   rgbaSpan.className = "syscolors-rgba-span";
   rgbaSpan.innerHTML = " [" + RGBA + "]";
-
+*/
   let tooltipSpan = document.createElement('span');
   tooltipSpan.className = "syscolors-tooltip";
   tooltipSpan.id = "syscolors-table-tooltip-" + index;
-  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
-  tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText + rgbaSpan.innerText, tooltipSpan.id); });
+  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + //"<br/>" + rgbaSpan.outerHTML 
+    + clickText;
+  tooltipSpan.addEventListener('click', function () {
+    copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText //+ rgbaSpan.innerText
+      , tooltipSpan.id);
+  });
 
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-row-card";
   // cardDiv.style.backgroundColor = systemColorSet[index].color;
   cardDiv.appendChild(tooltipSpan);
 
-
   let textDiv = document.createElement('div');
   textDiv.className = "syscolors-row-text";
   // textDiv.style.backgroundColor = systemColorSet[index].color;
   // BUG: Use system colors here?! Or rerun for dark grids...
   //textDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
+  textDiv.appendChild(categorySpan);
   textDiv.appendChild(nameSpan);
   textDiv.appendChild(descSpan);
-  textDiv.appendChild(categorySpan);
-  textDiv.appendChild(rgbaSpan);
+  //textDiv.appendChild(rgbaSpan);
 
   let lightDiv = document.createElement('div');
   lightDiv.className = "syscolors-row-light";
   lightDiv.style.backgroundColor = systemColorSet[index].color;
-  lightDiv.appendChild(n2);
+  lightDiv.appendChild(lightText);
 
   let darkDiv = document.createElement('div');
   darkDiv.className = "syscolors-row-dark";
   darkDiv.style.backgroundColor = systemColorSet[index].color;
-  darkDiv.appendChild(n3);
+  darkDiv.appendChild(darkText);
 
   cardDiv.appendChild(textDiv);
   cardDiv.appendChild(lightDiv);
   cardDiv.appendChild(darkDiv);
 
   document.getElementById(elementID).appendChild(cardDiv);
+
+  // Update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
+  nameSpan.innerHTML = systemColorSet[index].color;
+
+  let colorLight = getComputedStyle(lightDiv).backgroundColor;
+  let r = colorLight.match(/\d+/g)[0];
+  let g = colorLight.match(/\d+/g)[1];
+  let b = colorLight.match(/\d+/g)[2];
+  lightDiv.style.color = getContrastingColor(r, g, b);
+  r = parseInt(r).toString(16).padStart(2, '0');
+  g = parseInt(g).toString(16).padStart(2, '0');
+  b = parseInt(b).toString(16).padStart(2, '0');
+
+  lightText.innerHTML = systemColorSet[index].color + "<br/>" + colorLight + "<br/>" + "#" + r + g + b;
+
+  let colorDark = getComputedStyle(darkDiv).backgroundColor;
+  r = colorDark.match(/\d+/g)[0];
+  g = colorDark.match(/\d+/g)[1];
+  b = colorDark.match(/\d+/g)[2];
+  darkDiv.style.color = getContrastingColor(r, g, b);
+  r = parseInt(r).toString(16).padStart(2, '0');
+  g = parseInt(g).toString(16).padStart(2, '0');
+  b = parseInt(b).toString(16).padStart(2, '0');
+  darkText.innerHTML = systemColorSet[index].color + "<br/>" + colorDark + "<br/>" + "#" + r + g + b;
 }
 
 
@@ -317,6 +345,39 @@ function nameToRgba(name) {
   return context.getImageData(0, 0, 1, 1).data;
 }
 
+function RGBToRGBA(r, g, b) {
+  return "rgba(" + r + "," + g + "," + b + ",1)";
+}
+
+// thx to https://css-tricks.com/converting-color-spaces-in-javascript/
+function RGBToHex(r, g, b) {
+  /*
+  r = r.toString(16);
+  g = g.toString(16);
+  b = b.toString(16);
+  */
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
+  return "#" + r + g + b;
+}
+
+function hexAToRGBA(h) {
+  let r = 0, g = 0, b = 0, a = 1;
+  if (h.length == 5) {
+    r = "0x" + h[1] + h[1];
+    g = "0x" + h[2] + h[2];
+    b = "0x" + h[3] + h[3];
+    a = "0x" + h[4] + h[4];
+  } else if (h.length == 9) {
+    r = "0x" + h[1] + h[2];
+    g = "0x" + h[3] + h[4];
+    b = "0x" + h[5] + h[6];
+    a = "0x" + h[7] + h[8];
+  }
+  a = +(a / 255).toFixed(3);
+  return "rgba(" + +r + "," + +g + "," + +b + "," + a + ")";
+}
 
 /*****************************
  * 

@@ -17,6 +17,25 @@
 </head>
 
 <body>
+
+
+  <!--section>
+    <div class="wrapper">
+      <h3>Header One</h3>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <h3>Header Two</h3>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+    </div>
+  </section-->
+
+
   <div id="syscolors-container">
 
     <div id="syscolors-header">
@@ -50,12 +69,12 @@
       &nbsp; &nbsp; &nbsp;
 
       <label for="syscolors-sorted" title="Sort colors by category (vs. name)">Sort by category:</label>
-      <input type="checkbox" checked="" onclick="setSortOrder(this)" id="syscolors-sorted" />
+      <input type="checkbox" onclick="setSortOrder(this)" id="syscolors-sorted" />
       &nbsp; &nbsp; &nbsp;
 
       <label id="syscolors-contrast-label" for="syscolors-contrast">
         Contrast <span id="syscolors-contrast-value">(auto) 100</span>%:
-        <input type="range" step="5" min="0" value="100" max="100" id="syscolors-contrast"
+        <input type="range" step="2.5" min="0" value="100" max="100" id="syscolors-contrast"
           oninput="updateContrast(this)" />
 
       </label>
@@ -208,20 +227,31 @@
       </details>
     </div>
 
+
+
     <div id="syscolors-table-container" class="syscolors-inner-container">
       <details open>
         <summary id="syscolors-table-summary">System Color Table</summary>
 
+
         <div id="syscolors-table">
-          <!--div id="syscolors-table-light"-->
-          <!--h2>Current System Colors: <span class="syscolors-table-mode"></span> Color Mode</h2-->
-          <!--/div-->
+
+
+          <div class="syscolors-row-card">
+            <div class="syscolors-row-text">
+              <span class="syscolors-category-span">Category</span>
+              <span class="syscolors-color-span"><strong>System Color</strong></span>
+              <span class="syscolors-desc-span"> &mdash; Description </span>
+            </div>
+            <div class="syscolors-row-light">
+              <strong>This column displays colors in light mode</strong>
+            </div>
+            <div class="syscolors-row-dark">
+              <strong>This column displays colors in dark mode</strong>
+            </div>
+          </div>
         </div>
 
-        <!--button class="btn" id="syscolors-download-current" style="cursor: pointer"
-          title="Download JSON file with RGBA values" onclick="downloadCurrentColors()">
-          Download JSON
-        </button-->
       </details>
     </div>
 
@@ -275,6 +305,15 @@
           <div id="syscolors-demo-light">
             <h2>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h2>
 
+            This is a page demonstrating the use of CSS System Colors in a real-world scenario. The text color is set to
+            <code>system-canvasText</code> and the background color is set to
+            <code>system-canvas</code>.
+            <br />
+            <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the author
+              having to specify any adjustments! Easy Peasy.</p>
+
+            generate a sample html page showing all the css system colors in action
+
             TODO: Organize this page by categories.
 
             <button class="btn" class="syscolors-demo-button" style="cursor: pointer"
@@ -309,7 +348,8 @@
               Here is a 2nd link to the same <a href="https://eoc.online" target="_blank">eoc.online</a>, and another
               that
               you can select some other time: <a href="https://github.com/eoc.online"
-                target="_blank">github.com/eoconline</a> - the link color is set to <code>system-link</code> and the
+                target="_blank">github.com/eoconline</a> -
+              the link color is set to <code>system-link</code> and the
               visited link color is set to <code>system-visited</code>.
             </div>
 
@@ -340,6 +380,7 @@
               <p>This is a paragraph.</p>
               <div>This is some text in a div element.</div>
             </div>
+
           </div>
       </details>
     </div>

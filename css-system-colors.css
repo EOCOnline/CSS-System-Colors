@@ -5,6 +5,14 @@
 *  General CSS for page containers and miscellaneous styling
 */
 
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 /*****************************
 ** Handle light vs dark mode
 **/
@@ -161,13 +169,13 @@ blockquote {
 
 #syscolors-user-agent-div {
   font-weight: normal;
-  font-size: 80%;
+  font-size: 90%;
   margin-top: 15px;
 }
 
 #syscolors-contrast {
-  width: 220px;
-  margin-top: 0px;
+  width: 125px;
+  margin-bottom: -5px;
 }
 
 #syscolors-contrast-label {
@@ -205,50 +213,70 @@ blockquote {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 10px;
+  /* gap: 10px;
   flex-grow: 1;
-  background-color: rgb(251, 251, 240);
-  padding: 5px;
+  background-color: rgb(251, 251, 240);*/
+  padding: 8px;
 
+  margin: 0.5em;
   border: 2px solid #585858;
   border-radius: 0.5em;
-  width: 500px;
-  height: 100px;
+  width: 575px;
+  height: 95px;
 }
-
+/*
 .syscolors-row-card + .syscolors-row-card {
-  /* affects all but the 1st */
+  /* affects all but the 1st *
   margin-left: 2%;
 }
+*/
 
 .syscolors-row-text {
-  color-scheme: dark;
-  /*border: 2px solid #a5e36b;*/
+  /*min-height: 80px;*/
+  position: relative;
+  border: 2px solid orange;
+  border-left: 40px solid orange;
+  /*color: rgb(0, 0, 0);*/
+  font-size: small;
   display: inline-block;
+  /*  color-scheme: dark;
+  border: 2px solid #a5e36b;*/
   padding: 5px;
   border-radius: 0.5em;
-  width: 180px;
+  width: 200px;
   height: 80px;
+}
+.syscolors-category-span {
+  font-size: 0.85rem;
+  color: white;
+  /*text-transform: uppercase;
+    letter-spacing: 3px;*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -25px;
+
+  transform: rotate(270deg);
+  transform-origin: 0 0;
 }
 
 .syscolors-row-light {
   color-scheme: light;
-  border: 2px solid white;
+  border: 2px solid black;
   padding: 5px;
-  display: inline-block;
+
   border-radius: 0.5em;
-  height: 80px;
-  width: 110px;
+  height: 70px;
+  width: 150px;
 }
 
 .syscolors-row-dark {
   color-scheme: dark;
-  border: 2px solid white;
+  border: 2px solid black;
   padding: 5px;
-  display: inline-block;
   border-radius: 0.5em;
-  height: 80px;
-  width: 110px;
+  height: 70px;
+  width: 150px;
 }
 
 /**********************************************
