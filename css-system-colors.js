@@ -71,7 +71,9 @@ function resetWebPage() {
   currentColorsJson = { "info": {}, "currentColors": [] };
   deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
-  document.getElementById("syscolors-table").innerHTML = "";
+  saveMe = document.getElementsByClassName("syscolors-save-me")[0].cloneNode(true);
+  //debugger;
+  document.getElementById("syscolors-table").innerHTML = saveMe.outerHTML;
 
   document.getElementById("syscolors-grid-light").innerHTML = "";
   if (document.getElementById("syscolors-grid-dark")) document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"))
