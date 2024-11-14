@@ -169,7 +169,7 @@ function generateSystemColors(systemColorSet, elementID) {
 
     createColorCard(systemColorSet, index, elementID, RGBA);
     if (elementID == "syscolors-grid-light") {
-      createColorRow(systemColorSet, index, "syscolors-table", RGBA);
+      createColorRow(systemColorSet, index, "syscolors-table");
     }
     i++;
   }
@@ -223,7 +223,7 @@ function createColorCard(systemColorSet, index, elementID, RGBA) {
 }
 
 // These cards  look more like rows of a table...
-function createColorRow(systemColorSet, index, elementID, RGBA) {
+function createColorRow(systemColorSet, index, elementID) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -237,13 +237,12 @@ function createColorRow(systemColorSet, index, elementID, RGBA) {
 
   let categorySpan = document.createElement('span');
   categorySpan.className = "syscolors-category-span";
-  categorySpan.innerHTML = systemColorSet[index].category;
+  // add attribute to span
 
-  /*
-  let rgbaSpan = document.createElement('span');
-  rgbaSpan.className = "syscolors-rgba-span";
-  rgbaSpan.innerHTML = " [" + RGBA + "]";
-*/
+
+  categorySpan.setAttribute("category", systemColorSet[index].category);
+  categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
+
   let tooltipSpan = document.createElement('span');
   tooltipSpan.className = "syscolors-tooltip";
   tooltipSpan.id = "syscolors-table-tooltip-" + index;
@@ -256,18 +255,13 @@ function createColorRow(systemColorSet, index, elementID, RGBA) {
 
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-row-card";
-  // cardDiv.style.backgroundColor = systemColorSet[index].color;
   cardDiv.appendChild(tooltipSpan);
 
   let textDiv = document.createElement('div');
   textDiv.className = "syscolors-row-text";
-  // textDiv.style.backgroundColor = systemColorSet[index].color;
-  // BUG: Use system colors here?! Or rerun for dark grids...
-  //textDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
   textDiv.appendChild(categorySpan);
   textDiv.appendChild(nameSpan);
   textDiv.appendChild(descSpan);
-  //textDiv.appendChild(rgbaSpan);
 
   let lightDiv = document.createElement('div');
   lightDiv.className = "syscolors-row-light";
@@ -345,39 +339,6 @@ function nameToRgba(name) {
   return context.getImageData(0, 0, 1, 1).data;
 }
 
-function RGBToRGBA(r, g, b) {
-  return "rgba(" + r + "," + g + "," + b + ",1)";
-}
-
-// thx to https://css-tricks.com/converting-color-spaces-in-javascript/
-function RGBToHex(r, g, b) {
-  /*
-  r = r.toString(16);
-  g = g.toString(16);
-  b = b.toString(16);
-  */
-  if (r.length == 1) r = "0" + r;
-  if (g.length == 1) g = "0" + g;
-  if (b.length == 1) b = "0" + b;
-  return "#" + r + g + b;
-}
-
-function hexAToRGBA(h) {
-  let r = 0, g = 0, b = 0, a = 1;
-  if (h.length == 5) {
-    r = "0x" + h[1] + h[1];
-    g = "0x" + h[2] + h[2];
-    b = "0x" + h[3] + h[3];
-    a = "0x" + h[4] + h[4];
-  } else if (h.length == 9) {
-    r = "0x" + h[1] + h[2];
-    g = "0x" + h[3] + h[4];
-    b = "0x" + h[5] + h[6];
-    a = "0x" + h[7] + h[8];
-  }
-  a = +(a / 255).toFixed(3);
-  return "rgba(" + +r + "," + +g + "," + +b + "," + a + ")";
-}
 
 /*****************************
  * 
