@@ -82,6 +82,9 @@ function resetWebPage() {
 
 // from: http://stackoverflow.com/a/1855903/186965  ONLY returns black or white!
 function getContrastingColor(r, g, b) {
+    //    console.error("Contrasting color of white (#000) is: " + getContrastingColor(0, 0, 0));
+    //if (r == 0 && g == 0 && b == 0) return "white";
+
     // Counting the perceptive luminance
     // The formula for calculating luminance is based on the human eye's sensitivity to different colors.
     // The human eye favors green color, so the coefficients for red, green, and blue are 0.299, 0.587, and 0.114 respectively.

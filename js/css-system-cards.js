@@ -5,7 +5,7 @@ const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
 function createColorCard(systemColorSet, index, elementID) {
 
-
+    let mode = (elementID.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
@@ -49,17 +49,19 @@ function createColorCard(systemColorSet, index, elementID) {
     let g = color.match(/\d+/g)[1];
     let b = color.match(/\d+/g)[2];
     cardDiv.style.color = getContrastingColor(r, g, b);
-    if (systemColorSet[index].color === "HighlightText") {
-        console.warn("HighLightText contrasting color was set to " + getContrastingColor(r, g, b));
-        cardDiv.style.color = "#000";
-        console.warn("HighLightText style reset to " + cardDiv.style.color);
+
+    if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
+        console.warn("HighLightText contrasting color (for dark grid " + color + ") was set to " + getContrastingColor(r, g, b));
+        cardDiv.style.backgroundColor = color;// BUG: Without this, background was same as text color!!!
+        //cardDiv.style.color = "white";
+        //console.warn("HighLightText style reset to " + cardDiv.style.color);
     }
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
     rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
 
-    let mode = (elementID.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
+
     tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>"
         //+ categorySpan.outerHTML + "<br/>" 
         + mode + " mode color: " + rgbaSpan.outerHTML + clickText;
@@ -93,7 +95,6 @@ function createColorRow(systemColorSet, index, elementID) {
     categorySpan.setAttribute("category", systemColorSet[index].category);
     categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
 
-    // BUG: This ain't happening!
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
     tooltipSpan.id = "syscolors-row-tooltip-" + index;
@@ -146,9 +147,10 @@ function createColorRow(systemColorSet, index, elementID) {
     b = colorDark.match(/\d+/g)[2];
     darkDiv.style.color = getContrastingColor(r, g, b);
     if (systemColorSet[index].color === "HighlightText") {
-        console.warn("HighLightText contrasting color in dark mode was set to " + getContrastingColor(r, g, b));
-        cardDiv.style.color = "#000";
-        console.warn("HighLightText style reset to " + cardDiv.style.color);
+        console.warn("HighLightText contrasting color (in dark mode for rows of " + colorDark + ") was set to " + getContrastingColor(r, g, b));
+        darkDiv.style.background = colorDark; // BUG: Without this, background was same as text color!!!
+        //darkDiv.style.color = "red";
+        console.warn("HighLightText style reset to " + darkDiv.style.color);
     }
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
