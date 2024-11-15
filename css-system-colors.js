@@ -11,10 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContainer = document.getElementById("syscolors-container");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H2 .syscolors-demo-mode");
-  updateContrast({ value: 95 });
-  readSystemColors();   // This is where it all starts!
+  updateContrast({ value: 97.5 });
+  fetchSystemColors();   // This is where it all starts!
 });
-
 
 function cloneLightPanel(elementId, cloneId, spanSelector) {
   let light = document.getElementById(elementId);
@@ -56,7 +55,7 @@ function updateContrast(el) {
 function setColor(el) {
   // Mostly handled by CSS
   resetWebPage();
-  readSystemColors();
+  fetchSystemColors();
 }
 
 let sortByCategory = false;
@@ -64,7 +63,7 @@ function setSortOrder(val) {
   sortByCategory = val.checked;
   if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
   resetWebPage();
-  readSystemColors();
+  fetchSystemColors();
 }
 
 function resetWebPage() {
@@ -88,10 +87,10 @@ function resetWebPage() {
 
 /******************************************* 
  * 
- * Main Action Flow™ are these routines!
+ * Main Action Flow™: these routines!
  */
 
-// Read JSON File with system colors
+// fetch JSON File with system colors (i.e., if page is being 'served')
 async function fetchSystemColors() {
   try {
     // avoid CORS errors when reading a local file!
@@ -114,8 +113,10 @@ async function fetchSystemColors() {
   }
 }
 
+// read JSON File with system colors (i.e., if page is just being opened directly by a browser)
+// BUG: Broken, probably with the new File statement
 async function readSystemColors() {
-  let file = new File([""], sourceJson, { type: "application/json" });
+  let file = new File([""], sourceJson, { type: "application/json" });// NOTE: suspect!
   readJSONFile(file).then(
     json => {
       console.log("%c" + "Read system colors file: " + file.name + " with " + file.size + " char", "color:maroon;font-weight:bold;");
@@ -136,7 +137,6 @@ async function readSystemColors() {
   });
 }
 
-// Use fileReader instead of fetch, to avoid CORS errors with local files
 async function readJSONFile(file) {
   return new Promise((resolve, reject) => {
     let fileReader = new FileReader();
@@ -174,11 +174,21 @@ function processJson(json) {
     }
     document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
-    console.log("currentColors: " + json.currentColors.length);
-    document.getElementById("syscolors-current-summary").innerText = "System Colors (" + json.currentColors.length + ")";
+    // Generate the System Colors 'Tables'
+    generateSystemColors(json.currentColors, "syscolors-table");
+    generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
 
-    json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-light");
-    cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
+
+    // Generate the System Colors 'Grids'
+    console.log("currentColors: " + json.currentColors.length);
+    document.getElementById("syscolors-current-summary").innerText = "System Color (" + json.currentColors.length + ") Grid";
+    //json.currentColors = 
+    generateSystemColors(json.currentColors, "syscolors-grid-light");
+    json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-dark");
+    //document.getElementById("syscolors-grid-light").querySelector("H2 .syscolors-grid-mode").innerText = "Light";
+    //document.getElementById("syscolors-grid-dark").querySelector("H2 .syscolors-grid-mode").innerText = "Dark";
+
+    // cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
     // save the JSON data for download
     currentColorsJson.info = structuredClone(json.info);
     currentColorsJson.currentColors = structuredClone(json.currentColors);
@@ -186,10 +196,14 @@ function processJson(json) {
 
     // & again for the Deprecated Color Grid...
     console.log("deprecatedColors: " + json.deprecatedColors.length);
-    document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Colors (" + json.deprecatedColors.length + ")";
+    document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + json.deprecatedColors.length + ") Grid";
+    // json.deprecatedColors = 
+    generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
+    json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-dark");
+    //document.getElementById("syscolors-deprecated-light").querySelector("H2 .syscolors-grid-mode").innerText = "Light";
+    //document.getElementById("syscolors-deprecated-dark").querySelector("H2 .syscolors-grid-mode").innerText = "Dark";
+    //cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
 
-    json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
-    cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
     // save the JSON data for download
     deprecatedColorsJson.info = structuredClone(json.info);
     deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
@@ -208,21 +222,26 @@ function generateSystemColors(systemColorSet, elementID) {
     return;
   }
 
-  // Sort colors by category?
+  // Sort colors by category (or leave as in the file: alphabetically)
   if (sortByCategory) systemColorSet.sort((a, b) => (a.category > b.category) ? 1 : -1);
 
   for (const index of Object.keys(systemColorSet)) {
     // NOTE: As I read the spec, prefixing with system- should work, but doesn't
     // let color = "system-" + systemColorSet[index].color 
     let color = systemColorSet[index].color;
+    /*
+    old plan was to draw into canvas element & read back color, but new way is to use getComputedStyle() which takes into account all CSS & styles in place...    
     let RGBA = nameToRgba(color);
     if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
     systemColorSet[index].rgba = RGBA;
+*/
 
-    createColorCard(systemColorSet, index, elementID, RGBA);
-    if (elementID == "syscolors-grid-light") {
+    if (elementID === "syscolors-table") {
       createColorRow(systemColorSet, index, "syscolors-table");
+    } else {
+      createColorCard(systemColorSet, index, elementID); //, RGBA);
     }
+
     i++;
   }
   if (logLevel > 1) console.log("Processed " + i + " colors.");
@@ -234,7 +253,7 @@ const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
 // Build up an HTML card for each color & attach to the DOM
-function createColorCard(systemColorSet, index, elementID, RGBA) {
+function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
 
   let nameSpan = document.createElement('span');
   nameSpan.className = "syscolors-color-span";
@@ -248,27 +267,32 @@ function createColorCard(systemColorSet, index, elementID, RGBA) {
   categorySpan.className = "`syscolors-category-span`";
   categorySpan.innerHTML = " {" + systemColorSet[index].category + "} ";
 
+  /*
   let rgbaSpan = document.createElement('span');
   rgbaSpan.className = "syscolors-rgba-span";
   rgbaSpan.innerHTML = " [" + RGBA + "]";
-
+*/
   let tooltipSpan = document.createElement('span');
   tooltipSpan.className = "syscolors-tooltip";
   tooltipSpan.id = "syscolors-tooltip-" + index;
-  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
-  tooltipSpan.addEventListener('click', function () { copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText + rgbaSpan.innerText, tooltipSpan.id); });
+  tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML //+ "<br/>" + rgbaSpan.outerHTML 
+    + clickText;
+  tooltipSpan.addEventListener('click', function () {
+    copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText //+ rgbaSpan.innerText
+      , tooltipSpan.id);
+  });
 
   let cardDiv = document.createElement('div');
   cardDiv.className = "syscolors-card";
   cardDiv.style.backgroundColor = systemColorSet[index].color;
 
   // BUG: Use system colors here?! Or rerun for dark grids...
-  cardDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
+  //cardDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
 
   cardDiv.appendChild(nameSpan);
   cardDiv.appendChild(descSpan);
   cardDiv.appendChild(categorySpan);
-  cardDiv.appendChild(rgbaSpan);
+  //cardDiv.appendChild(rgbaSpan);
   cardDiv.appendChild(tooltipSpan);
 
   document.getElementById(elementID).appendChild(cardDiv);
@@ -456,7 +480,7 @@ function copyTextToClipboard(text, id) {
 
 function createFileName(baseName) {
   let date = new Date().toISOString().slice(0, 10);
-  let colorModeElement = document.querySelector("#syscolors-lightdark");
+  let colorModeElement = document.querySelector("#syscolors-background");
   let colorMode = colorModeElement ? colorModeElement.value : "default";
   let userAgentSummary = navigator.userAgent.replace(/[^a-zA-Z0-9]/g, '');  // TODO: shorten this!
   let fileName = baseName + "_" + date + "_" + colorMode + "_" + userAgentSummary + ".json";

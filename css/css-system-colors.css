@@ -14,10 +14,12 @@
   /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
   --contrast: 100;
 }
-:root:has(#syscolors-lightdark option[value="light"]:checked) {
+
+/* BUG: THis indicates JUST background color is changing, but it's actually changing the OUTER (default/non-specified) color scheme! */
+:root:has(#syscolors-background option[value="light"]:checked) {
   color-scheme: light;
 }
-:root:has(#syscolors-lightdark option[value="dark"]:checked) {
+:root:has(#syscolors-background option[value="dark"]:checked) {
   color-scheme: dark;
 }
 
@@ -140,8 +142,6 @@ blockquote {
  */
 #syscolors-options {
   font-weight: bold;
-  /* margin: 0px;
-  padding: 0px;*/
 }
 
 #syscolors-options input:hover {
@@ -188,9 +188,14 @@ blockquote {
   --noop: var(--noop);
 }
 
+/***********************************
+ * Table Panels
+ * NOTE: see syscolors-table.css
+ */
+
 /**********************************************
  * Color Grid Panels
- * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
+ * NOTE: Also see syscolors-grid.css & system-colors.css
  */
 #syscolors-grid,
 #syscolors-grid-light,

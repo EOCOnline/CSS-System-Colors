@@ -1,6 +1,6 @@
 /**********************************************
  * Color Table Panel
- * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
+ * NOTE: Also see syscolors-current-grid.css & system-colors.css!
  */
 .syscolors-table {
   display: flex;
@@ -35,7 +35,7 @@
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="category"]) {
-  --borderColor: #ac2929;
+  --borderColor: #888888;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="selection"]) {
