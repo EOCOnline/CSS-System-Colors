@@ -172,7 +172,7 @@ function copyTextToClipboard(text, id) {
 
 function createFileName(baseName) {
     let date = new Date().toISOString().slice(0, 10);
-    let colorModeElement = document.querySelector("#syscolors-background");
+    let colorModeElement = document.querySelector("#syscolors-page-mode");
     let colorMode = colorModeElement ? colorModeElement.value : "default";
     let userAgentSummary = navigator.userAgent.replace(/[^a-zA-Z0-9]/g, '');  // TODO: shorten this!
     let fileName = baseName + "_" + date + "_" + colorMode + "_" + userAgentSummary + ".json";

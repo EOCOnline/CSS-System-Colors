@@ -1,11 +1,12 @@
 const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
+
 // Build up an HTML card for each color & attach to the DOM
 function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
 
     let nameSpan = document.createElement('span');
-    nameSpan.className = "syscolors-color-span";
+    nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
 
     let descSpan = document.createElement('span');
@@ -13,45 +14,57 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
     descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
 
     let categorySpan = document.createElement('span');
-    categorySpan.className = "`syscolors-category-span`";
-    categorySpan.innerHTML = " {" + systemColorSet[index].category + "} ";
+    categorySpan.className = "syscolors-category-span";
+    // add attribute to span
+    categorySpan.setAttribute("category", systemColorSet[index].category);
+    categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
 
-    /*
     let rgbaSpan = document.createElement('span');
     rgbaSpan.className = "syscolors-rgba-span";
-    rgbaSpan.innerHTML = " [" + RGBA + "]";
-  */
+
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
     tooltipSpan.id = "syscolors-tooltip-" + index;
-    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML //+ "<br/>" + rgbaSpan.outerHTML 
-        + clickText;
+    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
     tooltipSpan.addEventListener('click', function () {
-        copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText //+ rgbaSpan.innerText
-            , tooltipSpan.id);
+        copyTextToClipboard(nameSpan.innerText + descSpan.innerText //+ categorySpan.innerText 
+            + rgbaSpan.innerText, tooltipSpan.id);
     });
 
     let cardDiv = document.createElement('div');
     cardDiv.className = "syscolors-card";
     cardDiv.style.backgroundColor = systemColorSet[index].color;
 
-    // BUG: Use system colors here?! Or rerun for dark grids...
-    //cardDiv.style.color = getContrastingColor(RGBA[0], RGBA[1], RGBA[2]);
-
+    cardDiv.appendChild(categorySpan);
     cardDiv.appendChild(nameSpan);
     cardDiv.appendChild(descSpan);
-    cardDiv.appendChild(categorySpan);
-    //cardDiv.appendChild(rgbaSpan);
+    cardDiv.appendChild(rgbaSpan);
     cardDiv.appendChild(tooltipSpan);
 
     document.getElementById(elementID).appendChild(cardDiv);
+
+
+    // Card is built & complete. 
+    // Now update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
+    let color = getComputedStyle(cardDiv).backgroundColor;
+    let r = color.match(/\d+/g)[0];
+    let g = color.match(/\d+/g)[1];
+    let b = color.match(/\d+/g)[2];
+    cardDiv.style.color = getContrastingColor(r, g, b);
+    r = parseInt(r).toString(16).padStart(2, '0');
+    g = parseInt(g).toString(16).padStart(2, '0');
+    b = parseInt(b).toString(16).padStart(2, '0');
+    rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
+    //  TODO: Add computed color to the JSON file that folks can download
 }
+
+
 
 // These cards  look more like rows of a table...
 function createColorRow(systemColorSet, index, elementID) {
 
     let nameSpan = document.createElement('span');
-    nameSpan.className = "syscolors-color-span";
+    nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
     let lightText = nameSpan.cloneNode(true);
     let darkText = nameSpan.cloneNode(true);
@@ -63,19 +76,18 @@ function createColorRow(systemColorSet, index, elementID) {
     let categorySpan = document.createElement('span');
     categorySpan.className = "syscolors-category-span";
     // add attribute to span
-
-
     categorySpan.setAttribute("category", systemColorSet[index].category);
     categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
 
+    // BUG: This ain't happening!
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
     tooltipSpan.id = "syscolors-table-tooltip-" + index;
     tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + //"<br/>" + rgbaSpan.outerHTML 
         + clickText;
     tooltipSpan.addEventListener('click', function () {
-        copyTextToClipboard(nameSpan.innerText + descSpan.innerText + categorySpan.innerText //+ rgbaSpan.innerText
-            , tooltipSpan.id);
+        copyTextToClipboard(nameSpan.innerText + descSpan.innerText //+ categorySpan.innerText 
+            + rgbaSpan.innerText, tooltipSpan.id);
     });
 
     let cardDiv = document.createElement('div');
@@ -104,7 +116,9 @@ function createColorRow(systemColorSet, index, elementID) {
 
     document.getElementById(elementID).appendChild(cardDiv);
 
-    // Update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
+
+    // This card is built & complete. 
+    // Now update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
     nameSpan.innerHTML = systemColorSet[index].color;
 
     let colorLight = getComputedStyle(lightDiv).backgroundColor;
@@ -127,4 +141,5 @@ function createColorRow(systemColorSet, index, elementID) {
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
     darkText.innerHTML = systemColorSet[index].color + "<br/>" + colorDark + "<br/>" + "#" + r + g + b;
+    //  TODO: Add computed colors to the JSON file that folks can download
 }

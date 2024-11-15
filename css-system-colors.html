@@ -43,9 +43,10 @@
     <div id="syscolors-options" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
-      <label for="syscolors-background"
-        title="This is NOT the color mode! That is hardwired per panel as identified below.">Page background:</label>
-      <select id="syscolors-background" onchange="setColor(this)">
+      <label for="syscolors-page-mode"
+        title="This sets the general page color mode. All panels modes are independently hardwired as identified below.">Page
+        background:</label>
+      <select id="syscolors-page-mode" onchange="setColor(this)">
         <!--option value="auto">OS Default</option-->
         <option value="light" selected="selected">Light</option>
         <option value="dark">Dark</option>
@@ -216,7 +217,7 @@
     </div>
 
     <div id="syscolors-table-container" class="syscolors-inner-container">
-      <details open>
+      <details>
         <summary id="syscolors-table-summary">System Color Table</summary>
         <div id="syscolors-table">
 
@@ -239,7 +240,7 @@
     </div>
 
     <div id="syscolors-current-grid" class="syscolors-inner-container">
-      <details>
+      <details open>
         <summary id="syscolors-current-summary">System Colors Grid</summary>
 
         <div id="syscolors-grid">

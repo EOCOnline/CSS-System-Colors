@@ -1,41 +1,23 @@
 /**********************************************
  * Color Table Panel
  * NOTE: Also see syscolors-current-grid.css & system-colors.css!
- */
-#syscolors-table,
-#syscolors-deprecated-table {
-  display: flex;
-  flex-wrap: wrap;
-  /*  background-color: rgb(198, 183, 163);
-  justify-content: flex-start;*/
-  padding: 5px;
-}
-
-/* BUG: This applies to entire page, not just the table section */
-/*.syscolors-table * {
-*/
-*,
-*:before,
-*:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-/*
-}
-*/
+ **/
 
 .syscolors-row-card {
   display: inline-flex;
   justify-content: space-between;
+  /* place-self: center stretch; */
+
+  width: 525px;
+
   padding: 5px;
   margin: 0.5em;
+
   border: 2px solid #585858;
   border-radius: 0.5em;
-  width: 525px;
-}
-:root {
-  --borderColor: #bbbbbb;
+
+  /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="category"]) {
@@ -79,8 +61,7 @@
 
 .syscolors-category-span {
   font-size: 0.85rem;
-  /*color: white;
-  border: 2px solid;*/
+
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: absolute;

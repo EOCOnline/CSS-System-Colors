@@ -13,13 +13,14 @@
   color-scheme: light dark;
   /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
   --contrast: 100;
+  --borderColor: #bbbbbb;
 }
 
 /* BUG: THis indicates JUST background color is changing, but it's actually changing the OUTER (default/non-specified) color scheme! */
-:root:has(#syscolors-background option[value="light"]:checked) {
+:root:has(#syscolors-page-mode option[value="light"]:checked) {
   color-scheme: light;
 }
-:root:has(#syscolors-background option[value="dark"]:checked) {
+:root:has(#syscolors-page-mode option[value="dark"]:checked) {
   color-scheme: dark;
 }
 
@@ -93,6 +94,24 @@ blockquote {
 /**********************************************
  * Styles used by multiple panels
  */
+
+/* BUG: This applies to entire page, not just the table & grids sections that use it *
+#syscolors-table,
+#syscolors-deprecated-table,
+#syscolors-grid,
+#syscolors-deprecated-grid {
+*/
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*  }  */
+
 .syscolors-inner-container {
   border: black 1px solid;
   border-radius: 0.5em;
@@ -212,6 +231,15 @@ blockquote {
  * NOTE: see syscolors-table.css
  */
 
+#syscolors-table,
+#syscolors-deprecated-table {
+  display: flex;
+  flex-wrap: wrap;
+  /*  background-color: rgb(198, 183, 163);
+  justify-content: flex-start;*/
+  padding: 5px;
+}
+
 /**********************************************
  * Color Grid Panels
  * NOTE: Also see syscolors-grid.css & system-colors.css
@@ -224,7 +252,7 @@ blockquote {
 #syscolors-deprecated-dark {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  /*justify-content: flex-start;*/
 }
 #syscolors-grid {
   padding: 10px;

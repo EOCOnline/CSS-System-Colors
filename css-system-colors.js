@@ -20,7 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchSystemColors();   // This is where it all starts!
 });
 
-// fetch JSON File with system colors (i.e., if page is being 'served')
+
+/**************************************
+ * Get the JSON data with system colors from the local file
+ */
+
+// FETCH JSON file -- if this HTML is being 'served'
 async function fetchSystemColors() {
   try {
     // avoid CORS errors when reading a local file!
@@ -43,7 +48,7 @@ async function fetchSystemColors() {
   }
 }
 
-// read JSON File with system colors (i.e., if page is just being opened directly by a browser)
+// READ JSON File -- if this HTML is being opened directly by a browser
 // BUG: Broken, probably with the new File statement
 async function readSystemColors() {
   let file = new File([""], sourceJson, { type: "application/json" });// NOTE: suspect!
@@ -88,10 +93,13 @@ async function readJSONFile(file) {
 }
 
 
+/**************************************
+ * Create the System Colors panels
+ */
 let currentColorsJson = { "info": {}, "currentColors": [] };
 let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
-// Process the JSON file with system colors
+// Create the various panels for display, with some pre-processing of the JSON
 function processJson(json) {
   if (logLevel > 1) console.log("Processing JSON");
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
@@ -108,21 +116,15 @@ function processJson(json) {
     generateSystemColors(json.currentColors, "syscolors-table");
     generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
 
-
     // Generate the System Colors 'Grids'
     console.log("currentColors: " + json.currentColors.length);
     document.getElementById("syscolors-current-summary").innerText = "System Color (" + json.currentColors.length + ") Grid";
     //json.currentColors = 
     generateSystemColors(json.currentColors, "syscolors-grid-light");
     json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-dark");
-    //document.getElementById("syscolors-grid-light").querySelector("H2 .syscolors-grid-mode").innerText = "Light";
-    //document.getElementById("syscolors-grid-dark").querySelector("H2 .syscolors-grid-mode").innerText = "Dark";
-
-    // cloneLightPanel("syscolors-grid-light", "syscolors-grid-dark", "H2 .syscolors-grid-mode");
     // save the JSON data for download
     currentColorsJson.info = structuredClone(json.info);
     currentColorsJson.currentColors = structuredClone(json.currentColors);
-
 
     // & again for the Deprecated Color Grid...
     console.log("deprecatedColors: " + json.deprecatedColors.length);
@@ -130,20 +132,16 @@ function processJson(json) {
     // json.deprecatedColors = 
     generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
     json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-dark");
-    //document.getElementById("syscolors-deprecated-light").querySelector("H2 .syscolors-grid-mode").innerText = "Light";
-    //document.getElementById("syscolors-deprecated-dark").querySelector("H2 .syscolors-grid-mode").innerText = "Dark";
-    //cloneLightPanel("syscolors-deprecated-light", "syscolors-deprecated-dark", "H2 .syscolors-grid-mode");
-
     // save the JSON data for download
     deprecatedColorsJson.info = structuredClone(json.info);
     deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
   } catch (error) {
-    console.error("Error processing JSON: " + error.message);
+    console.error("Error building the color panels: " + error.message);
   }
 }
 
 
-// Process a list of system-colors: get RGBA values for each named color, store in jSON object, then create its HTML card to display
+// Process a list of system-colors, creating HTML cards for display
 function generateSystemColors(systemColorSet, elementID) {
   console.table(systemColorSet);
   let i = 0;
@@ -153,6 +151,7 @@ function generateSystemColors(systemColorSet, elementID) {
   }
 
   // Sort colors by category (or leave as in the file: alphabetically)
+  // TODO: This is happening more than once, do it in parent routine instead...
   if (sortByCategory) systemColorSet.sort((a, b) => (a.category > b.category) ? 1 : -1);
 
   for (const index of Object.keys(systemColorSet)) {
@@ -168,6 +167,8 @@ function generateSystemColors(systemColorSet, elementID) {
 
     if (elementID === "syscolors-table") {
       createColorRow(systemColorSet, index, "syscolors-table");
+    } else if (elementID === "syscolors-deprecated-table") {
+      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
     } else {
       createColorCard(systemColorSet, index, elementID); //, RGBA);
     }

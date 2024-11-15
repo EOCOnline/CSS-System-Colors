@@ -3,49 +3,92 @@
 **/
 
 .syscolors-card {
+  display: inline-flex;
+  justify-content: space-between;
+  place-self: center stretch;
+
   flex: 0 1; /* flex: 0 24% */
-  height: 80px;
-  min-width: 250px;
+
+  width: 200px;
+  height: 120px;
+
   font-weight: bolder;
 
   margin: 15px; /* (100-32*3)/2 */
   padding: 10px;
 
-  /*background-color: bisque; */
-  place-self: center stretch;
-  background-color: rgb(from currentcolor r g b);
-  /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_colors/Relative_colors 
-  background-color: rgb(from currentcolor 0 0 255);
-  
-  */
-  /*border: CanvasText 5px solid;*/
-  /* background-color: Canvas;*/
+  /*background-color: rgb(from currentcolor r g b);*/
+
+  border: solid 2px var(--borderColor);
+  border-left: 30px solid var(--borderColor);
   border-radius: 1em;
 
-  border: solid 3px white;
+  font-size: small;
 
+  /*
   border-top-color: white;
   border-right-color: white;
   border-bottom-color: black;
   border-left-color: canvasText;
+*/
 
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-  /*
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    */
   /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 
-  /* https://codepen.io/WebSeed/pen/pvgqEq */
+.syscolors-card:has(.syscolors-category-span[category="category"]) {
+  --borderColor: #888888;
+}
 
-  /* following works in dark mode, not light! not too good: https://stackoverflow.com/questions/23968961/css-how-can-i-make-a-font-readable-over-any-color 
-  text-shadow: 0.05em 0 #c2c2c2, 0 0.05em #c2c2c2, -0.05em 0 #c2c2c2,
-    0 -0.05em #c2c2c2, -0.05em -0.05em #c2c2c2, -0.05em 0.05em #c2c2c2,
-    0.05em -0.05em #c2c2c2, 0.05em 0.05em #c2c2c2;
+.syscolors-card:has(.syscolors-category-span[category="selection"]) {
+  --borderColor: #00ff00;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="general"]) {
+  --borderColor: #ca648a;
+}
+.syscolors-card:has(.syscolors-category-span[category="interface"]) {
+  --borderColor: #ff00ff;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="links"]) {
+  --borderColor: #ffff00;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="input-buttons"]) {
+  --borderColor: #00ffff;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="input"]) {
+  --borderColor: #80c8c8;
+}
+
+.syscolors-category-span {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  padding: 0.25em 0.5em;
+  /*
+  margin-left: -30px;
+  bottom: -21px;
   */
+  font-size: x-small;
+  font-weight: bold;
+  transform: rotate(270deg);
+  transform-origin: 0 0;
+}
+
+.ssssyscolors-name-span {
+  border: 2px solid var(--borderColor);
+  border-left: 30px solid var(--borderColor);
+  position: relative;
+  font-size: small;
+  display: inline-block;
+  padding: 3px;
+  border-radius: 0.5em;
+  width: 200px;
+  height: 70px;
 }
 
 .syscolors-desc-div {
@@ -53,11 +96,6 @@
 }
 
 .syscolors-desc-span {
-  font-size: 90%;
-  font-weight: 500;
-}
-
-.syscolors-category-span {
   font-size: 90%;
   font-weight: 500;
 }
