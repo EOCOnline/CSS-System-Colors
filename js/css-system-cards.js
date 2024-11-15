@@ -5,6 +5,7 @@ const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
 function createColorCard(systemColorSet, index, elementID) {
 
+
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
@@ -58,18 +59,19 @@ function createColorCard(systemColorSet, index, elementID) {
     b = parseInt(b).toString(16).padStart(2, '0');
     rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
 
+    let mode = (elementID.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
     tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>"
         //+ categorySpan.outerHTML + "<br/>" 
-        + rgbaSpan.outerHTML + clickText;
+        + mode + " mode color: " + rgbaSpan.outerHTML + clickText;
+
     tooltipSpan.addEventListener('click', function () {
         copyTextToClipboard(nameSpan.innerText + descSpan.innerText
-            //+ categorySpan.innerText 
-            + rgbaSpan.innerText, tooltipSpan.id);
+            + "\ncategory: " + categorySpan.innerText
+            + "\n" + mode + " color " + rgbaSpan.innerText, tooltipSpan.id);
     });
 
     // TODO: Add computed color to the JSON file that folks can download
 }
-
 
 
 // These cards look more like rows - & are used by TABLES
@@ -160,8 +162,8 @@ function createColorRow(systemColorSet, index, elementID) {
         + clickText;
     tooltipSpan.addEventListener('click', function () {
         copyTextToClipboard(nameSpan.innerText + descSpan.innerText
-            //+ categorySpan.innerText 
-            + "; light mode: " + light + "<br/>dark mode: " + dark, tooltipSpan.id);
+            + "\ncategory: " + categorySpan.innerText
+            + "\nlight mode: " + light + "\ndark mode: " + dark, tooltipSpan.id);
     });
 
     // TODO: Add computed colors to the JSON file that folks can download
