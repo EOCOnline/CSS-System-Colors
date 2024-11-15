@@ -77,9 +77,8 @@
   height: 70px;
 }
 
-.syscolors-category-span {
+.syscolors-row-text .syscolors-category-span {
   font-size: 0.85rem;
-
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: absolute;

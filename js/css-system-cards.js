@@ -31,15 +31,19 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
             + rgbaSpan.innerText, tooltipSpan.id);
     });
 
+    let cardInnerDiv = document.createElement('div');
+    cardInnerDiv.className = "syscolors-card-inner";
+    cardInnerDiv.appendChild(categorySpan);
+    cardInnerDiv.appendChild(nameSpan);
+    cardInnerDiv.appendChild(descSpan);
+    cardInnerDiv.appendChild(rgbaSpan);
+    cardInnerDiv.appendChild(tooltipSpan);
+
     let cardDiv = document.createElement('div');
     cardDiv.className = "syscolors-card";
     cardDiv.style.backgroundColor = systemColorSet[index].color;
 
-    cardDiv.appendChild(categorySpan);
-    cardDiv.appendChild(nameSpan);
-    cardDiv.appendChild(descSpan);
-    cardDiv.appendChild(rgbaSpan);
-    cardDiv.appendChild(tooltipSpan);
+    cardDiv.appendChild(cardInnerDiv);
 
     document.getElementById(elementID).appendChild(cardDiv);
 

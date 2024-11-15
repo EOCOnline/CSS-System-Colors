@@ -9,9 +9,6 @@
 
   flex: 0 1; /* flex: 0 24% */
 
-  width: 200px;
-  height: 120px;
-
   font-weight: bolder;
 
   margin: 15px; /* (100-32*3)/2 */
@@ -37,79 +34,79 @@
 }
 
 .syscolors-card:has(.syscolors-category-span[category="category"]) {
-  --borderColor: #88888866;
+  --borderColor: #88888844;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="selection"]) {
-  --borderColor: #00ff0066;
+  --borderColor: #00ff0044;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="general"]) {
-  --borderColor: #ca648a66;
+  --borderColor: #ca648a44;
 }
 .syscolors-card:has(.syscolors-category-span[category="interface"]) {
-  --borderColor: #ff00ff66;
+  --borderColor: #ff00ff44;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="links"]) {
-  --borderColor: #ffff0066;
+  --borderColor: #ffff0044;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="input-button"]) {
-  --borderColor: #00ffff66;
+  --borderColor: #00ffff44;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="input"]) {
-  --borderColor: #80c8c866;
+  --borderColor: #80c8c844;
 }
 
 /* additional deprecated categories...*/
 .syscolors-card:has(.syscolors-category-span[category="window"]) {
-  --borderColor: #ec57ec66;
+  --borderColor: #ec57ec44;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="MDI"]) {
-  --borderColor: #73f29366;
+  --borderColor: #73f29344;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="tooltip"]) {
-  --borderColor: #458fd466;
+  --borderColor: #458fd444;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="3D"]) {
-  --borderColor: #cdf27666;
+  --borderColor: #cdf27644;
 }
 
-.syscolors-category-span {
+.syscolors-card-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 250px;
+  height: 90px;
+}
+
+.syscolors-card-inner .syscolors-category-span {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  position: absolute;
+  /*display: inline-block;*/
   padding: 0.25em 0.5em;
-  /*
-  margin-left: -30px;
-  bottom: -21px;
-  */
+
+  margin-left: -35px; /* bigger # sends it leftward */
+  margin-top: 80px; /* bigger # sends it downward */
+
   font-size: x-small;
   font-weight: bold;
+
   transform: rotate(270deg);
   transform-origin: 0 0;
+  z-index: 99;
 }
 
-.ssssyscolors-name-span {
-  border: 2px solid var(--borderColor);
-  border-left: 30px solid var(--borderColor);
-  position: relative;
+.sssyscolors-name-span {
   font-size: small;
-  display: inline-block;
   padding: 3px;
-  border-radius: 0.5em;
-  width: 200px;
-  height: 70px;
-}
-
-.syscolors-desc-div {
-  font-weight: 400;
 }
 
 .syscolors-desc-span {
@@ -118,6 +115,6 @@
 }
 
 .syscolors-rgba-span {
-  font-size: 80%;
-  font-weight: 400;
+  font-size: 90%;
+  font-weight: 500;
 }
