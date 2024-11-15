@@ -1,9 +1,9 @@
-const clickText = "&nbsp; &nbsp; (Click to copy)";
-const clickedText = "&nbsp; &nbsp; (Copied!)";
+const clickText = "&nbsp; &nbsp; <strong>(Click to copy)</strong>";
+const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 
 
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
-function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
+function createColorCard(systemColorSet, index, elementID) {
 
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
@@ -25,11 +25,6 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
     tooltipSpan.id = "syscolors-tooltip-" + index;
-    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + "<br/>" + rgbaSpan.outerHTML + clickText;
-    tooltipSpan.addEventListener('click', function () {
-        copyTextToClipboard(nameSpan.innerText + descSpan.innerText //+ categorySpan.innerText 
-            + rgbaSpan.innerText, tooltipSpan.id);
-    });
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
@@ -37,16 +32,14 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
     cardInnerDiv.appendChild(nameSpan);
     cardInnerDiv.appendChild(descSpan);
     cardInnerDiv.appendChild(rgbaSpan);
-    cardInnerDiv.appendChild(tooltipSpan);
 
     let cardDiv = document.createElement('div');
     cardDiv.className = "syscolors-card";
     cardDiv.style.backgroundColor = systemColorSet[index].color;
-
+    cardDiv.appendChild(tooltipSpan);
     cardDiv.appendChild(cardInnerDiv);
 
     document.getElementById(elementID).appendChild(cardDiv);
-
 
     // Card is built & complete. 
     // Now update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
@@ -55,11 +48,26 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
     let g = color.match(/\d+/g)[1];
     let b = color.match(/\d+/g)[2];
     cardDiv.style.color = getContrastingColor(r, g, b);
+    if (systemColorSet[index].color === "HighlightText") {
+        console.warn("HighLightText contrasting color was set to " + getContrastingColor(r, g, b));
+        cardDiv.style.color = "#000";
+        console.warn("HighLightText style reset to " + cardDiv.style.color);
+    }
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
     rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
-    //  TODO: Add computed color to the JSON file that folks can download
+
+    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>"
+        //+ categorySpan.outerHTML + "<br/>" 
+        + rgbaSpan.outerHTML + clickText;
+    tooltipSpan.addEventListener('click', function () {
+        copyTextToClipboard(nameSpan.innerText + descSpan.innerText
+            //+ categorySpan.innerText 
+            + rgbaSpan.innerText, tooltipSpan.id);
+    });
+
+    // TODO: Add computed color to the JSON file that folks can download
 }
 
 
@@ -86,13 +94,7 @@ function createColorRow(systemColorSet, index, elementID) {
     // BUG: This ain't happening!
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = "syscolors-table-tooltip-" + index;
-    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>" + categorySpan.outerHTML + //"<br/>" + rgbaSpan.outerHTML 
-        + clickText;
-    tooltipSpan.addEventListener('click', function () {
-        copyTextToClipboard(nameSpan.innerText + descSpan.innerText //+ categorySpan.innerText 
-            + rgbaSpan.innerText, tooltipSpan.id);
-    });
+    tooltipSpan.id = "syscolors-row-tooltip-" + index;
 
     let cardDiv = document.createElement('div');
     cardDiv.className = "syscolors-row-card";
@@ -133,17 +135,34 @@ function createColorRow(systemColorSet, index, elementID) {
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
-
-    lightText.outerHTML += "<span class='syscolors-color-span'><br/>" + colorLight + "<br/>" + "#" + r + g + b + "</span>";
+    let light = colorLight + " #" + r + g + b;
+    lightText.outerHTML += "<span class='syscolors-color-span'><br/>" + light + "</span>";
 
     let colorDark = getComputedStyle(darkDiv).backgroundColor;
     r = colorDark.match(/\d+/g)[0];
     g = colorDark.match(/\d+/g)[1];
     b = colorDark.match(/\d+/g)[2];
     darkDiv.style.color = getContrastingColor(r, g, b);
+    if (systemColorSet[index].color === "HighlightText") {
+        console.warn("HighLightText contrasting color in dark mode was set to " + getContrastingColor(r, g, b));
+        cardDiv.style.color = "#000";
+        console.warn("HighLightText style reset to " + cardDiv.style.color);
+    }
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
-    darkText.outerHTML += "<span class='syscolors-color-span'><br/>" + colorDark + "<br/>" + "#" + r + g + b + "</span>";
-    //  TODO: Add computed colors to the JSON file that folks can download
+    let dark = colorDark + " #" + r + g + b;
+    darkText.outerHTML += "<span class='syscolors-color-span'><br/>" + dark + "</span>";
+
+    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>"
+        //+ categorySpan.outerHTML + //"<br/>" 
+        + "light mode: " + light + "<br/>dark mode: " + dark
+        + clickText;
+    tooltipSpan.addEventListener('click', function () {
+        copyTextToClipboard(nameSpan.innerText + descSpan.innerText
+            //+ categorySpan.innerText 
+            + "; light mode: " + light + "<br/>dark mode: " + dark, tooltipSpan.id);
+    });
+
+    // TODO: Add computed colors to the JSON file that folks can download
 }

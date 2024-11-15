@@ -78,22 +78,26 @@
 }
 
 .syscolors-card-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /*justify-content: space-between;
+  align-items: center;*/
 
-  width: 200px;
-  height: 80px;
+  position: relative;
+  font-size: small;
+  display: inline-block;
+
+  width: 150px;
+  height: 65px;
 }
 
 .syscolors-card-inner .syscolors-category-span {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  position: absolute;
   /*  padding: 0.25em 0.5em;*/
 
   margin-left: -35px; /* bigger # sends it leftward */
-  margin-top: 80px; /* bigger # sends it downward */
+  margin-top: 60px; /* bigger # sends it downward */
 
   font-size: x-small;
   font-weight: bold;
@@ -103,7 +107,7 @@
   z-index: 99;
 }
 
-.sssyscolors-name-span {
+.syscolors-card-inner .syscolors-name-span {
   font-size: small;
   padding: 3px;
 }

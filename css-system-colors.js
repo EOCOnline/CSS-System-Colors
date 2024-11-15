@@ -158,12 +158,6 @@ function generateSystemColors(systemColorSet, elementID) {
     // NOTE: As I read the spec, prefixing with system- should work, but doesn't
     // let color = "system-" + systemColorSet[index].color 
     let color = systemColorSet[index].color;
-    /*
-    old plan was to draw into canvas element & read back color, but new way is to use getComputedStyle() which takes into account all CSS & styles in place...    
-    let RGBA = nameToRgba(color);
-    if (logLevel > 1) console.log("RGBA of " + color + " is " + RGBA);
-    systemColorSet[index].rgba = RGBA;
-*/
 
     if (elementID === "syscolors-table") {
       createColorRow(systemColorSet, index, "syscolors-table");
