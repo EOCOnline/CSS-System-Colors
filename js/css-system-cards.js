@@ -2,7 +2,7 @@ const clickText = "&nbsp; &nbsp; (Click to copy)";
 const clickedText = "&nbsp; &nbsp; (Copied!)";
 
 
-// Build up an HTML card for each color & attach to the DOM
+// Build up an HTML card for each color & attach to the DOM - used by GRIDS
 function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
 
     let nameSpan = document.createElement('span');
@@ -64,7 +64,7 @@ function createColorCard(systemColorSet, index, elementID) {//}, RGBA) {
 
 
 
-// These cards  look more like rows of a table...
+// These cards look more like rows - & are used by TABLES
 function createColorRow(systemColorSet, index, elementID) {
 
     let nameSpan = document.createElement('span');
@@ -134,7 +134,7 @@ function createColorRow(systemColorSet, index, elementID) {
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
 
-    lightText.innerHTML = systemColorSet[index].color + "<br/>" + colorLight + "<br/>" + "#" + r + g + b;
+    lightText.outerHTML += "<span class='syscolors-color-span'><br/>" + colorLight + "<br/>" + "#" + r + g + b + "</span>";
 
     let colorDark = getComputedStyle(darkDiv).backgroundColor;
     r = colorDark.match(/\d+/g)[0];
@@ -144,6 +144,6 @@ function createColorRow(systemColorSet, index, elementID) {
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
     b = parseInt(b).toString(16).padStart(2, '0');
-    darkText.innerHTML = systemColorSet[index].color + "<br/>" + colorDark + "<br/>" + "#" + r + g + b;
+    darkText.outerHTML += "<span class='syscolors-color-span'><br/>" + colorDark + "<br/>" + "#" + r + g + b + "</span>";
     //  TODO: Add computed colors to the JSON file that folks can download
 }

@@ -108,3 +108,18 @@
   height: 70px;
   width: 150px;
 }
+
+.syscolors-row-card .syscolors-name-span {
+  font-weight: bold;
+  font-size: small;
+}
+
+.syscolors-desc-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.syscolors-color-span {
+  font-size: 90%;
+  font-weight: 500;
+}
