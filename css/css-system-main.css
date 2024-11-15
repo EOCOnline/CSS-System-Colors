@@ -113,6 +113,25 @@ blockquote {
   margin: 0px;
 }
 
+/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
+.syscolors-card:hover .syscolors-tooltip {
+  display: block;
+}
+
+.syscolors-tooltip {
+  display: none;
+  color: rgb(11, 56, 37);
+  background-color: beige;
+  padding: 5px;
+  border: #374151 1px solid;
+  border-radius: 0.5em;
+
+  margin-left: 30px; /* moves the tooltip to the right */
+  margin-top: 15px; /* moves it down */
+  position: absolute;
+  z-index: 1000;
+}
+
 /***********************************
  * Head Panel
  */
