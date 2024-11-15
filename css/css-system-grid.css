@@ -37,30 +37,47 @@
 }
 
 .syscolors-card:has(.syscolors-category-span[category="category"]) {
-  --borderColor: #888888;
+  --borderColor: #88888866;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="selection"]) {
-  --borderColor: #00ff00;
+  --borderColor: #00ff0066;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="general"]) {
-  --borderColor: #ca648a;
+  --borderColor: #ca648a66;
 }
 .syscolors-card:has(.syscolors-category-span[category="interface"]) {
-  --borderColor: #ff00ff;
+  --borderColor: #ff00ff66;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="links"]) {
-  --borderColor: #ffff00;
+  --borderColor: #ffff0066;
 }
 
-.syscolors-card:has(.syscolors-category-span[category="input-buttons"]) {
-  --borderColor: #00ffff;
+.syscolors-card:has(.syscolors-category-span[category="input-button"]) {
+  --borderColor: #00ffff66;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="input"]) {
-  --borderColor: #80c8c8;
+  --borderColor: #80c8c866;
+}
+
+/* additional deprecated categories...*/
+.syscolors-card:has(.syscolors-category-span[category="window"]) {
+  --borderColor: #ec57ec66;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="MDI"]) {
+  --borderColor: #73f29366;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="tooltip"]) {
+  --borderColor: #458fd466;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="3D"]) {
+  --borderColor: #cdf27666;
 }
 
 .syscolors-category-span {
