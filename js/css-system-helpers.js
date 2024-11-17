@@ -83,6 +83,8 @@ function resetWebPage() {
 
 // TODO: get contrasting colors (not just black/white) with all-css strategy: https://css-tricks.com/methods-contrasting-text-backgrounds/ & https://codepen.io/thebabydino/pen/JNWqLL
 
+
+// TODO: Try https://www.w3.org/TR/css-color-5/#contrast-color
 // from: http://stackoverflow.com/a/1855903/186965  ONLY returns black or white!
 function getContrastingColor(r, g, b) {
     //    console.error("Contrasting color of white (#000) is: " + getContrastingColor(0, 0, 0));

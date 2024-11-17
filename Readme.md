@@ -26,7 +26,9 @@ This page demonstrates the CSS System Colors in action.
 - **Sort by Category:** By default the system colors are displayed
   alphabetically. When clicked they are sorted by a category that I arbitrarily
   assigned based on their description.
-- **Contrast:** You can change the contrast for the page using the slider.
+- **Contrast:** You can change the
+  [contrast](https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels)
+  for the page using the slider.
 - **User Agent:** The browser's reported configuration (from
   navigator.userAgent) is displayed here, for the record.
 - Both the "System Color Grid" and "Deprecated System Color Grid" panels have a
@@ -88,39 +90,69 @@ set of 17 color keywords that are derived from the user's operating system's
 color scheme. They are useful for creating a consistent look and feel that
 matches the user's preferences.
 
-CSS System Colors are a new ![W3C](W3C.png) standard (under development since
-[2017](https://www.w3.org/standards/history/css-color-4/) as part of CSS Color
-Module Level 4), but still in proposal status as of 2024) -- but well adopted by
-modern browsers. The colors and descriptions are current as of November 2024.
-
-The colors are defined in the CSS Color Module Level 4 specification and can be
-used in any property that accepts a color value. They are prefixed with the
-system- keyword, such as system-highlight or system-buttonface.
-
-The colors are designed to adapt to different light/dark modes and contrast
-settings, making them ideal for creating accessible and user-friendly
-interfaces. They can be used in combination with other color values to create a
-harmonious color palette.
-
 > Note: System colors' actual RGBA values may vary depending on the user's
 > operating system and browser settings!
 
-A nice feature of CSS System Colors is that they can be used in combination with
-other color values to create a harmonious color palette.
+There are also a few other new "system" things out now:
+[System Fonts, font weights, icons](https://css-trricks.com/system-things) which
+provides a neat new way to re-envision who does what. A complete
+[system.css](https://projects.dutchcelt.com/system.css/) can provide a quick
+start!
 
-Some colors are
-[deprecated](https://drafts.csswg.org/css-color/#typedef-deprecated-color) as
-they enable mimicking system colors too well, and could be used for fake, evil
-phishing sites. Don't go there!
+### History
+
+- CSS System Colors are not new but were originally part of
+  [CSS2](https://www.w3.org/TR/CSS2/ui.html#system-colors).
+- With ![W3C's](W3C.png) CSS
+  [Color Module Level 3](https://www.w3.org/TR/css-color-3/#css-system) they
+  were all listed as depreciated. (Apparently they enabled mimicking system
+  colors too well, and could be used for fake, evil
+  [phishing sites](https://www.w3.org/TR/css-color-4/#security). Just don't go
+  there!)
+- The [color-scheme](https://www.w3.org/TR/css-color-adjust-1/#color-scheme)
+  keyword was adopted around 2022.
+- [Color Module Level 4](https://www.w3.org/TR/css-color-4/#css-system-colors),
+  revived the following colors: ButtonFace, ButtonText, GrayText, Highlight &
+  HighlightText. It also added a number of other as seen in the link above.
+  [Deprecated](https://drafts.csswg.org/css-color/#typedef-deprecated-color)
+  colors were put into an appendix.
+- [Color Module 5](https://www.w3.org/TR/css-color-5/#light-dark) adds
+  @color-profiles, color-mix(), light-dark() &
+  [contrast-color()](https://css-tricks.com/exploring-color-contrast-for-the-first-time/)
+  functions & teases of future enhancements. System-colors remain as defined by
+  Color Module 4.
+
+Current system colors are defined in the CSS Color Module Level 4 specification
+and can be used in any property that accepts a color value. (Somewhere I've read
+they were supposed to be prefixed with the system- keyword, such as
+system-highlight or system-buttonface, but this only leads to errors for me.)
+
+The colors are designed to adapt to different light/dark modes and contrast
+settings, making them ideal for creating (accessible)[https://whimsica11y.net/]
+and user-friendly (interfaces)[https://projects.dutchcelt.com/system.css/]. They
+can be used in combination with other color values to create a harmonious (color
+palette)[https://codepen.io/sarajw/pen/eYwLaYp].
 
 For more information on CSS System Colors, check out:
 
-- Jim Nielsen's blog post <https://blog.jim-nielsen.com/2021/css-system-colors/>
-- MDN Web Docs <https://developer.mozilla.org/en-US/docs/Web/CSS/system-color>
 - CSS Tricks article: <https://css-tricks.com/come-to-the-light-dark-side/>
-- CSS Color Module Level 4 specification
-  ([~2024](https://www.w3.org/standards/history/css-color-4/))
-  <https://www.w3.org/TR/css-color-4/#css-system-colors>
+- (Sara Joy)[https://sarajoy.dev/blog/color-scheme/]
+- (System.css)[https://projects.dutchcelt.com/system.css/]
+- (Thomas Steiner)[https://web.dev/articles/color-scheme]
+- (Jim Nielsen's blog
+  post)[https://blog.jim-nielsen.com/2021/css-system-colors/]
+- (MDN Web Docs)[https://developer.mozilla.org/en-US/docs/Web/CSS/system-color]
+
+### Caveats
+
+- "System Colors can theoretically can expose details of the user’s OS settings,
+  which is a fingerprinting risk."
+  [1](https://www.w3.org/TR/css-color-4/#privacy)
+- "The system colors, if they actually correspond to the user’s system colors,
+  pose a security risk, as they make it easier for a malware site to create user
+  interfaces that appear to be from the system. However, as several system
+  colors are now defined to be "generic", this risk is believed to be
+  mitigated." [2](https://www.w3.org/TR/css-color-4/#security)
 
 ## License
 
