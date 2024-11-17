@@ -76,9 +76,7 @@ environment. Note that the values are likely to change when switching from light
 to dark mode.
 
 Hovering over each card displays the same text as in the card,and allows copying
-it to your clipboard if desired. At the bottom to the two system color grids is
-a download button which will download a simple json files with the current RGBA
-values for the environment.
+it to your clipboard if desired.
 
 ## System Colors Introduction
 
