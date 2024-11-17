@@ -54,11 +54,13 @@ The web page delivers a handful of panels:
   The actual color used for the backgrounds is then displayed in RGA and hex
   notation. (On a few colors the colors have some level of opacity so are
   reported in the RGBA format.)
+  ![System Color Table](images/Screenshot-SystemColorTable.png)
 
 - **System Color Grid:** This is fairly similar to the table but groups the
   colors into light and dark mode panels. The colors and values in these 'grids'
   should match those in the 'tables', it just is a different presentation. Note
   that there is a "Download JSON" button as described above under Options.
+  ![alt text](images/Screenshot-SystemColorsGrid.png)
 - **Deprecated System Color Table:** as above, but displays the deprecated
   colors for anyone's interest.
 - **Deprecated System Color Grid:** as above, but displays the deprecated colors
@@ -76,9 +78,7 @@ environment. Note that the values are likely to change when switching from light
 to dark mode.
 
 Hovering over each card displays the same text as in the card,and allows copying
-it to your clipboard if desired. At the bottom to the two system color grids is
-a download button which will download a simple json files with the current RGBA
-values for the environment.
+it to your clipboard if desired.
 
 ## System Colors Introduction
 
