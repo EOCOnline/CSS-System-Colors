@@ -1,82 +1,90 @@
 /**********************************************
  * Color Table Panel
- * NOTE: Also see syscolors-flexgrid.css & system-colors.css!
- */
-.syscolors-table {
-  display: flex;
-  flex-wrap: wrap;
-  /*  background-color: rgb(198, 183, 163);
-  justify-content: flex-start;*/
-  padding: 5px;
-}
-
-/* BUG: This applies to entire page, not just the table section */
-/*.syscolors-table * {
-*/
-*,
-*:before,
-*:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-/*
-}
-*/
+ * NOTE: Also see syscolors-current-grid.css & system-colors.css!
+ **/
 
 .syscolors-row-card {
   display: inline-flex;
   justify-content: space-between;
+  place-self: center stretch;
+
+  width: 525px;
+
   padding: 5px;
   margin: 0.5em;
+
   border: 2px solid #585858;
   border-radius: 0.5em;
-  width: 525px;
+
+  /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="category"]) {
-  --borderColor: #ac2929;
+  --borderColor: #88888866;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="selection"]) {
-  --borderColor: #00ff00;
+  --borderColor: #00ff0066;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="general"]) {
-  --borderColor: #ca648a;
+  --borderColor: #ca648a66;
 }
 .syscolors-row-text:has(.syscolors-category-span[category="interface"]) {
-  --borderColor: #ff00ff;
+  --borderColor: #ff00ff66;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="links"]) {
-  --borderColor: #ffff00;
+  --borderColor: #ffff0066;
 }
 
-.syscolors-row-text:has(.syscolors-category-span[category="input-buttons"]) {
-  --borderColor: #00ffff;
+.syscolors-row-text:has(.syscolors-category-span[category="input-button"]) {
+  --borderColor: #00ffff66;
 }
 
 .syscolors-row-text:has(.syscolors-category-span[category="input"]) {
-  --borderColor: #80c8c8;
+  --borderColor: #80c8c866;
+}
+
+/* additional deprecated categories...*/
+.syscolors-row-text:has(.syscolors-category-span[category="window"]) {
+  --borderColor: #ec57ec66;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="MDI"]) {
+  --borderColor: #73f29366;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="tooltip"]) {
+  --borderColor: #458fd466;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="3D"]) {
+  --borderColor: #cdf27666;
+}
+
+.syscolors-tall-row {
+  --rowHeight: 150px;
 }
 
 .syscolors-row-text {
   border: 2px solid var(--borderColor);
   border-left: 30px solid var(--borderColor);
+  border-radius: 0.5em;
+
   position: relative;
   font-size: small;
   display: inline-block;
+
   padding: 3px;
-  border-radius: 0.5em;
+
   width: 200px;
-  height: 70px;
+  height: val(--rowHeight);
 }
 
-.syscolors-category-span {
+.syscolors-row-text .syscolors-category-span {
   font-size: 0.85rem;
-  /*color: white;
-  border: 2px solid;*/
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: absolute;
@@ -94,7 +102,7 @@
   border: 2px solid black;
   padding: 5px;
   border-radius: 0.5em;
-  height: 70px;
+  height: val(--rowHeight);
   width: 150px;
 }
 
@@ -103,6 +111,21 @@
   border: 2px solid black;
   padding: 5px;
   border-radius: 0.5em;
-  height: 70px;
+  height: val(--rowHeight);
   width: 150px;
+}
+
+.syscolors-row-card .syscolors-name-span {
+  font-weight: bold;
+  font-size: small;
+}
+
+.syscolors-desc-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.syscolors-color-span {
+  font-size: 90%;
+  font-weight: 500;
 }

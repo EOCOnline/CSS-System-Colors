@@ -21,17 +21,17 @@
         {
             "color": "ButtonBorder",
             "desc": "The base border color for push buttons.",
-            "category": "input-buttons"
+            "category": "input-button"
         },
         {
             "color": "ButtonFace",
             "desc": "The face background color for push buttons.",
-            "category": "input-buttons"
+            "category": "input-button"
         },
         {
             "color": "ButtonText",
             "desc": "Text on push buttons.",
-            "category": "input-buttons"
+            "category": "input-button"
         },
         {
             "color": "Canvas",

@@ -1,0 +1,119 @@
+/****************************************************
+ * System Color Grids
+**/
+
+.syscolors-card {
+  display: inline-flex;
+  justify-content: space-between;
+  place-self: center stretch;
+  flex: 0 1; /* flex: 0 24% */
+
+  font-weight: bolder;
+
+  margin: 0.5em; /* (100-32*3)/2 */
+
+  border: solid 2px var(--borderColor);
+  border-left: 30px solid var(--borderColor);
+  border-radius: 0.5em;
+
+  /*background-color: rgb(from currentcolor r g b);*/
+
+  /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="category"]) {
+  --borderColor: #88888844;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="selection"]) {
+  --borderColor: #00ff0044;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="general"]) {
+  --borderColor: #ca648a44;
+}
+.syscolors-card:has(.syscolors-category-span[category="interface"]) {
+  --borderColor: #ff00ff44;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="links"]) {
+  --borderColor: #ffff0044;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="input-button"]) {
+  --borderColor: #00ffff44;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="input"]) {
+  --borderColor: #80c8c844;
+}
+
+/* additional deprecated categories...*/
+.syscolors-card:has(.syscolors-category-span[category="window"]) {
+  --borderColor: #ec57ec44;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="MDI"]) {
+  --borderColor: #73f29344;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="tooltip"]) {
+  --borderColor: #458fd444;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="3D"]) {
+  --borderColor: #cdf27644;
+}
+
+.syscolors-card .syscolors-category-span {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: absolute;
+  color: black;
+
+  /*  padding: 0.25em 0.5em;*/
+
+  margin-left: -26px; /* bigger # sends it leftward */
+  margin-top: 66px; /* bigger # sends it downward */
+
+  font-size: x-small;
+  font-weight: bold;
+
+  transform: rotate(270deg);
+  transform-origin: 0 0;
+}
+
+.syscolors-card-inner {
+  /*justify-content: space-between;
+  align-items: center;*/
+
+  border-radius: 0.5em;
+
+  position: relative;
+  font-size: small;
+  display: inline-block;
+
+  font-size: small;
+  padding: 5px;
+  /* margin-left: 30px;*/
+
+  width: 200px;
+  height: 80px;
+}
+
+.syscolors-card-inner .syscolors-name-span {
+  font-size: small;
+  padding: 3px;
+}
+
+.syscolors-desc-span {
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.syscolors-rgba-span {
+  font-size: 90%;
+  font-weight: 500;
+}

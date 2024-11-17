@@ -9,13 +9,15 @@
   <title>CSS System Colors</title>
 
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+  <link rel="stylesheet" href="./css/css-system-main.css" />
+  <link rel="stylesheet" href="./css/css-system-demo.css" />
+  <link rel="stylesheet" href="./css/css-system-grid.css" />
+  <link rel="stylesheet" href="./css/css-system-table.css" />
   <link rel="stylesheet" href="./css-system-colors.css" />
-  <link rel="stylesheet" href="./system-colors.css" />
-  <link rel="stylesheet" href="./css-system-demo.css" />
-  <link rel="stylesheet" href="./css-system-flexgrid.css" />
-  <link rel="stylesheet" href="./css-system-table.css" />
-
   <script src="./css-system-colors.js"></script>
+  <script src="./js/css-system-helpers.js"></script>
+  <script src="./js/css-system-cards.js"></script>
+
 </head>
 
 <body>
@@ -41,10 +43,10 @@
     <div id="syscolors-options" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
-      <label for="syscolors-lightdark"
-        title="This is NOT the color mode! That is hardwired per panel as identified below.">Page background
-        color:</label>
-      <select id="syscolors-lightdark" onchange="setColor(this)">
+      <label for="syscolors-page-mode"
+        title="This sets the general page color mode. All panels modes are independently hardwired as identified below.">Page
+        background:</label>
+      <select id="syscolors-page-mode" onchange="setColor(this)">
         <!--option value="auto">OS Default</option-->
         <option value="light" selected="selected">Light</option>
         <option value="dark">Dark</option>
@@ -214,8 +216,6 @@
       </details>
     </div>
 
-
-
     <div id="syscolors-table-container" class="syscolors-inner-container">
       <details open>
         <summary id="syscolors-table-summary">System Color Table</summary>
@@ -239,13 +239,18 @@
       </details>
     </div>
 
-    <div id="syscolors-flexgrid" class="syscolors-inner-container">
-      <details open>
-        <summary id="syscolors-current-summary">System Colors</summary>
+    <div id="syscolors-current-grid" class="syscolors-inner-container">
+      <details>
+        <summary id="syscolors-current-summary">System Colors Grid</summary>
 
         <div id="syscolors-grid">
-          <div id="syscolors-grid-light">
-            <h2>Current System Colors: <span class="syscolors-grid-mode"></span> Color Mode</h2>
+          <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
+            <h2>Current System Colors: <span class="syscolors-grid-mode"></span> Light Color Mode</h2>
+            <div class="syscolors-break"></div>
+          </div>
+          <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
+            <h2>Current System Colors: <span class="syscolors-grid-mode"></span> Dark Color Mode</h2>
+            <div class="syscolors-break"></div>
           </div>
         </div>
 
@@ -256,10 +261,32 @@
       </details>
     </div>
 
+    <div id="syscolors-deprecated-table-container" class="syscolors-inner-container">
+      <details>
+        <summary id="syscolors-deprecated-table-summary">Deprecated System Color Table</summary>
+        <div id="syscolors-deprecated-table">
+
+          <div class="syscolors-row-card syscolors-save-me">
+            <div class="syscolors-row-text">
+              <span class="syscolors-category-span" category="category">Category</span>
+              <span class="syscolors-color-span"><strong>Deprecated System Color</strong></span>
+              <span class="syscolors-desc-span"> &mdash; Description </span>
+            </div>
+            <div class="syscolors-row-light">
+              <strong>This column displays deprecated-colors in light mode</strong>
+            </div>
+            <div class="syscolors-row-dark">
+              <strong>This column displays deprecated-colors in dark mode</strong>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+
     <div id="syscolors-deprecated" class="syscolors-inner-container">
       <details>
         <summary id="syscolors-deprecated-summary">
-          Deprecated System Colors
+          Deprecated System Color Grid
         </summary>
 
         <p>
@@ -268,8 +295,13 @@
           values. They are included here for reference purposes only.
         </p>
         <div id="syscolors-deprecated-grid">
-          <div id="syscolors-deprecated-light">
-            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Color Mode</h2>
+          <div id="syscolors-deprecated-light" class="syscolors-inner-container syscolors-light">
+            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Light Color Mode</h2>
+            <div class="syscolors-break"></div>
+          </div>
+          <div id="syscolors-deprecated-dark" class="syscolors-inner-container syscolors-dark">
+            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Dark Color Mode</h2>
+            <div class="syscolors-break"></div>
           </div>
         </div>
 
@@ -288,8 +320,10 @@
           <div id="syscolors-demo-light">
             <h2>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h2>
 
-            This is a page demonstrating the use of CSS System Colors in a real-world scenario. The text color is set to
-            <code>system-canvasText</code> and the background color is set to
+            <p>>NOTE: This page is more a vision than anything useful. I do plan to show a useful page that demonstrates
+              how to use these in a real situation. Suggestions welcome!</p This is a page demonstrating the use of CSS
+              System Colors in a real-world scenario. The text color is set to <code>system-canvasText</code> and the
+            background color is set to
             <code>system-canvas</code>.
             <br />
             <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the author

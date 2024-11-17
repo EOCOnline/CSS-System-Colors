@@ -1,0 +1,302 @@
+/*******************************************************
+*
+*  CSS System Colors
+*  Use CSS as much as possible to handle light vs dark mode and contrast
+*  General CSS for page containers and miscellaneous styling
+*/
+
+/*****************************
+** Handle light vs dark mode
+**/
+:root {
+  /* allow unstyled HTML to follow user preference via prefers-color-scheme */
+  color-scheme: light dark;
+  /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
+  --contrast: 100;
+  --borderColor: #bbbbbb;
+  --rowHeight: 70px;
+}
+
+/* BUG: THis indicates JUST background color is changing, but it's actually changing the OUTER (default/non-specified) color scheme! */
+:root:has(#syscolors-page-mode option[value="light"]:checked) {
+  color-scheme: light;
+}
+:root:has(#syscolors-page-mode option[value="dark"]:checked) {
+  color-scheme: dark;
+}
+
+/*****************************
+** Handle contrast
+ * NOTE: Apparently just using JS to set --contrast does everything?
+ * Don't we also need to apply the 'filter' as below does?!
+**/
+
+/* https://css-tricks.com/dark-mode-and-variable-fonts/ */
+body {
+  font-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    font-weight: 350;
+  }
+}
+
+/*
+Not used, but may be worth testing! 
+https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
+.well-contrasting-darker-color {
+  background: darkred;
+  color: oklch(from darkred calc(l + 0.6) c h);
+}
+
+.well-contrasting-lighter-color {
+  background: lightpink;
+  color: oklch(from lightpink calc(l - 0.6) c h);
+}
+
+/**********************************************
+ * General page styles
+ */
+details > summary {
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+}
+
+details > p {
+  font-size: 120%;
+  /*margin: 15px;
+  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
+}
+
+/* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
+blockquote {
+  font-style: italic;
+  font-size: 135%;
+  width: fit-content;
+  background-color: #e0e0e0;
+  padding: 15px;
+  margin: 15px;
+  border-radius: 0.5em;
+}
+
+/***************************************************************
+ * Page Containers/Panels
+ */
+#syscolors-container {
+  padding: 10px;
+  border: 1px solid CanvasText;
+  border-radius: 0.3em;
+  margin: 20px;
+  font-family: sans-serif;
+}
+
+/**********************************************
+ * Styles used by multiple panels
+ */
+
+#syscolors-table,
+#syscolors-deprecated-table,
+#syscolors-grid,
+#syscolors-deprecated-grid {
+  *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+.syscolors-inner-container {
+  border: black 1px solid;
+  border-radius: 0.5em;
+  margin: 10px;
+  padding: 10px;
+}
+
+.syscolors-light {
+  color-scheme: light;
+  width: 48%;
+  margin: 0px;
+  margin-right: 6px;
+}
+
+.syscolors-dark {
+  color-scheme: dark;
+  width: 48%;
+  margin: 0px;
+}
+
+/* Inserting this collapsed row between two flex items will make 
+ * the flex item that comes after it break to a new row */
+.syscolors-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+#syscolors-grid .syscolors-inner-container H2,
+#syscolors-deprecated-grid .syscolors-inner-container H2 {
+  margin: 0px 0px 0px 10px;
+}
+
+/* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
+.syscolors-card:hover .syscolors-tooltip,
+.syscolors-row-card:hover .syscolors-tooltip {
+  display: block;
+}
+
+.syscolors-tooltip {
+  display: none;
+  color: rgb(11, 56, 37);
+  background-color: beige;
+  padding: 5px;
+  width: 300px;
+  border: #374151 1px solid;
+  border-radius: 0.5em;
+  font-size: smaller;
+
+  margin-left: 150px; /* moves the tooltip to the right */
+  margin-top: 75px; /* moves it down */
+
+  position: absolute;
+  z-index: 9;
+}
+
+/***********************************
+ * Head Panel
+ */
+#syscolors-header {
+  margin: 5px;
+  padding: 5px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+#syscolors-header h1,
+#syscolors-header h3 {
+  display: inline-block;
+  margin-left: 50px;
+}
+
+#syscolors-github {
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+/***********************************
+ * Options Panel
+ */
+#syscolors-options {
+  font-weight: bold;
+}
+
+#syscolors-options input:hover {
+  box-shadow: rgba(69, 103, 187, 0.35) 0 -25px 18px -14px inset,
+    rgba(69, 103, 187, 0.35) 0 1px 2px, rgba(69, 103, 187, 0.35) 0 2px 4px,
+    rgba(69, 103, 187, 0.35) 0 4px 8px, rgba(69, 103, 187, 0.35) 0 8px 16px,
+    rgba(69, 103, 187, 0.35) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #374151;
+}
+
+#syscolors-options input:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+#syscolors-user-agent-div {
+  font-weight: normal;
+  font-size: 90%;
+  margin-top: 15px;
+}
+
+#syscolors-contrast {
+  width: 125px;
+  margin-bottom: -5px;
+}
+
+#syscolors-contrast-label {
+  font-size: medium;
+}
+
+#syscolors-contrast-value {
+  display: inline-block;
+  /*background-color: #e5e5e5;
+  border: #aaa 1px solid;*/
+  padding: 2px;
+}
+
+/***********************************
+ * Intro Panel
+ */
+#syscolors-intro {
+  --noop: var(--noop);
+}
+
+/***********************************
+ * Table Panels
+ * NOTE: see syscolors-table.css
+ */
+
+#syscolors-table,
+#syscolors-deprecated-table {
+  display: flex;
+  flex-wrap: wrap;
+  /*  background-color: rgb(198, 183, 163);
+  justify-content: flex-start;*/
+  padding: 5px;
+}
+
+/**********************************************
+ * Color Grid Panels
+ * NOTE: Also see syscolors-grid.css & system-colors.css
+ */
+#syscolors-grid,
+#syscolors-grid-light,
+#syscolors-grid-dark,
+#syscolors-deprecated-grid,
+#syscolors-deprecated-light,
+#syscolors-deprecated-dark {
+  display: flex;
+  flex-wrap: wrap;
+  /*justify-content: flex-start;*/
+}
+#syscolors-grid {
+  padding: 10px;
+}
+
+/**********************************************
+ * Demonstration Panels
+ * NOTE: Also see syscolors-demo.css & system-colors.css!
+ */
+#syscolors-demo-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#syscolors-demo {
+  display: flex;
+  flex-wrap: wrap;
+}
+/*
+#syscolors-demo-light {
+  margin-right: 6px;
+}
+
+#syscolors-demo-dark {
+  margin: 0px;
+}
+*/
+
+/**********************************************
+ * Footer Panel
+ */
+#syscolors-footer {
+  font-weight: bold;
+}
