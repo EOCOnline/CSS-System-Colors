@@ -38,6 +38,35 @@ This page demonstrates the CSS System Colors in action.
 
 ## Functionality
 
+The web page delivers a handful of panels:
+
+- **Introduction:** This ideally is synchronized to contain the same information
+  you are reading now.
+- **System Color Table:** This displays one 'card' for each of the 16 System
+  Colors, plus an initial one that serves as a legend. Each card displays the
+  category I assigned each color, followed by the color name and description.
+
+  Then there are two sections that show that color as displayed by the browser
+  in the background. The first blob of color is with the color-scheme explicitly
+  set to 'light'. The second is the same, but with the color-scheme set to
+  'dark'.
+
+  The actual color used for the backgrounds is then displayed in RGA and hex
+  notation. (On a few colors the colors have some level of opacity so are
+  reported in the RGBA format.)
+
+- **System Color Grid:** This is fairly similar to the table but groups the
+  colors into light and dark mode panels. The colors and values in these 'grids'
+  should match those in the 'tables', it just is a different presentation. Note
+  that there is a "Download JSON" button as described above under Options.
+- **Deprecated System Color Table:** as above, but displays the deprecated
+  colors for anyone's interest.
+- **Deprecated System Color Grid:** as above, but displays the deprecated colors
+  for anyone's interest.
+- **Demo Page:** - UNFINISHED, but the goal is to have a simple HTML page that
+  shows all the System Colors in use as intended - shown in light & dark mode of
+  course.
+
 You can view the colors and change the light/dark mode and contrast settings to
 see how the colors adapt to different environments.
 
@@ -87,17 +116,10 @@ For more information on CSS System Colors, check out:
 
 - Jim Nielsen's blog post <https://blog.jim-nielsen.com/2021/css-system-colors/>
 - MDN Web Docs <https://developer.mozilla.org/en-US/docs/Web/CSS/system-color>
+- CSS Tricks article: <https://css-tricks.com/come-to-the-light-dark-side/>
 - CSS Color Module Level 4 specification
   ([~2024](https://www.w3.org/standards/history/css-color-4/))
   <https://www.w3.org/TR/css-color-4/#css-system-colors>
-
- <summary>Tests</summary>
-    <ul >
-     <li ><a  href="https://wpt.fyi/results/css/css-color/system-color-consistency.html" title="css/css-color/system-color-consistency.html">system-color-consistency.html<small> (56 tests)</small></a><span ><span title="chrome 56/56" style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span title="firefox 56/56" style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span title="safari 26/56" style="background: conic-gradient(forestgreen 167.14285714285714deg, darkred 0deg);"></span><span title="edge 55/56" style="background: conic-gradient(forestgreen 353.57142857142856deg, darkred 0deg);"></span></span> <a class="wpt-live" href="http://wpt.live/css/css-color/system-color-consistency.html"><small>(live test)</small></a> <a  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-consistency.html"><small>(source)</small></a>
-     </li><li ><a  href="https://wpt.fyi/results/css/css-color/system-color-support.html" title="css/css-color/system-color-support.html">system-color-support.html<small> (21 tests)</small></a><span ><span title="chrome 18/21" style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span title="firefox 20/21" style="background: conic-gradient(forestgreen 342.85714285714283deg, darkred 0deg);"></span><span title="safari 18/21" style="background: conic-gradient(forestgreen 308.57142857142856deg, darkred 0deg);"></span><span title="edge 19/21" style="background: conic-gradient(forestgreen 325.7142857142857deg, darkred 0deg);"></span></span> <a class="wpt-live" href="http://wpt.live/css/css-color/system-color-support.html"><small>(live test)</small></a> <a  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/system-color-support.html"><small>(source)</small></a>
-     </li><li ><a  href="https://wpt.fyi/results/css/css-color/parsing/color-valid-system-color.html" title="css/css-color/parsing/color-valid-system-color.html">color-valid-system-color.html<small> (19 tests)</small></a><span ><span title="chrome 17/19" style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span><span title="firefox 19/19" style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span title="safari 19/19" style="background: conic-gradient(forestgreen 360deg, darkred 0deg);"></span><span title="edge 17/19" style="background: conic-gradient(forestgreen 322.10526315789474deg, darkred 0deg);"></span></span> <a class="wpt-live" href="http://wpt.live/css/css-color/parsing/color-valid-system-color.html"><small>(live test)</small></a> <a  href="https://github.com/web-platform-tests/wpt/blob/master/css/css-color/parsing/color-valid-system-color.html"><small>(source)</small></a>
-    </li></ul>
-   </details>
 
 ## License
 
