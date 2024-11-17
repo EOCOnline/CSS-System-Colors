@@ -55,8 +55,8 @@
 
 #syscolors-demo input {
   color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped.*/
-  background-color: system-ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid system-ButtonBorder; /*Error in parsing value for ‘border’.  Declaration dropped. */
+  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
+  border: 5px solid ButtonBorder; /*Error in parsing value for ‘border’.  Declaration dropped. */
 }
 
 #syscolors-demo input[type="text"] {
@@ -67,7 +67,7 @@
 
 #syscolors-demo input[type="submit"] {
   color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped. */
-  background-color: system-ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
+  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
   border: 5px solid ButtonBorder;
 }
 #syscolors-demo input[type="submit"]:hover {
