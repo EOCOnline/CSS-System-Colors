@@ -4,15 +4,42 @@ CSS System Colors are derived from the user's operating system's color scheme.
 They are useful for creating a consistent look and feel that matches the user's
 preferences.
 
-This page is a nice visual reference to the system-colors - but **specific to
-this browser/operating System**!
+This page provides a nice visual reference to the system-colors - but the
+displayed colors are **specific to this browser/operating System**!
 
-> Avoid specifying different colors for light or dark mode: let the browser & OS
-> handle it for you!
+![alt text](images/Screenshot-Options&SystemColorTable.png)
 
-This page demonstrates the CSS System Colors in action. You can view the colors
-(and their change the light/dark mode and contrast settings to see how the
-colors adapt to different environments.
+> Avoid specifying different colors for (light or dark
+> mode)[https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark]:
+> let the browser & OS handle it for you!
+
+This page demonstrates the CSS System Colors in action.
+
+## Options
+
+![alt text](images/Screenshot-Options.png)
+
+- **Color Scheme:** The first option is a dropdown that sets the page's color
+  scheme from OS System default (auto), to explicitly light, or explicitly to
+  dark color mode. Note that form demonstration purposes many of the panels
+  explicitly set color mode to make the effect obvious.
+- **Sort by Category:** By default the system colors are displayed
+  alphabetically. When clicked they are sorted by a category that I arbitrarily
+  assigned based on their description.
+- **Contrast:** You can change the contrast for the page using the slider.
+- **User Agent:** The browser's reported configuration (from
+  navigator.userAgent) is displayed here, for the record.
+- Both the "System Color Grid" and "Deprecated System Color Grid" panels have a
+  **"Download JSON"** button at the bottom. This will download a JSON file with
+  the system colors and their description. Uniquely, we add the UserAgent as
+  reported by the browser/Operating system. We also then note the colors (as
+  RGB/RGBA & Hex) that were actually displayed -- both in light and dark color
+  modes!
+
+## Functionality
+
+You can view the colors and change the light/dark mode and contrast settings to
+see how the colors adapt to different environments.
 
 We uniquely display the actual color's
 [RGBA](https://drafts.csswg.org/css-color/#rgb-functions) values for the current
