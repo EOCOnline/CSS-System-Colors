@@ -25,7 +25,7 @@ function createColorCard(systemColorSet, index, elementId) {
 
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = "syscolors-tooltip-" + index;
+    tooltipSpan.id = "syscolors-tooltip-" + ((elementId.includes("deprecated")) ? "deprecated" : "") + mode + index;
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
@@ -115,7 +115,7 @@ function createColorRow(systemColorSet, index, elementId) {
 
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = "syscolors-row-tooltip-" + index;
+    tooltipSpan.id = "syscolors-row-tooltip-" + (elementId.includes("deprecated") ? "deprecated" : "") + index;
 
     let cardDiv = document.createElement('div');
     if (elementId == "syscolors-deprecated-table") {

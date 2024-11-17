@@ -162,7 +162,7 @@ blockquote {
   font-size: smaller;
 
   margin-left: 150px; /* moves the tooltip to the right */
-  margin-top: 75px; /* moves it down */
+  margin-top: 45px; /* moves it down */
 
   position: absolute;
   z-index: 9;
