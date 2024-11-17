@@ -3,9 +3,9 @@ const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 
 
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
-function createColorCard(systemColorSet, index, elementID) {
+function createColorCard(systemColorSet, index, elementId) {
 
-    let mode = (elementID.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
+    let mode = (elementId.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
@@ -29,30 +29,34 @@ function createColorCard(systemColorSet, index, elementID) {
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
-    cardInnerDiv.appendChild(categorySpan);
+    // Apply background color to inner div, so as to not affect cardDiv's big left border color!
+    cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
     cardInnerDiv.appendChild(nameSpan);
     cardInnerDiv.appendChild(descSpan);
     cardInnerDiv.appendChild(rgbaSpan);
 
     let cardDiv = document.createElement('div');
     cardDiv.className = "syscolors-card";
-    cardDiv.style.backgroundColor = systemColorSet[index].color;
+    cardDiv.appendChild(categorySpan);
     cardDiv.appendChild(tooltipSpan);
     cardDiv.appendChild(cardInnerDiv);
-
-    document.getElementById(elementID).appendChild(cardDiv);
+    if (
+        document.getElementById(elementId) === null) {
+        console.error("Element " + elementId + " not found!");
+    } else
+        document.getElementById(elementId).appendChild(cardDiv);
 
     // Card is built & complete. 
     // Now update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
-    let color = getComputedStyle(cardDiv).backgroundColor;
+    let color = getComputedStyle(cardInnerDiv).backgroundColor;
     let r = color.match(/\d+/g)[0];
     let g = color.match(/\d+/g)[1];
     let b = color.match(/\d+/g)[2];
-    cardDiv.style.color = getContrastingColor(r, g, b);
+    cardInnerDiv.style.color = getContrastingColor(r, g, b);
 
     if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
         console.warn("HighLightText contrasting color (for dark grid " + color + ") was set to " + getContrastingColor(r, g, b));
-        cardDiv.style.backgroundColor = color;// BUG: Without this, background was same as text color!!!
+        cardInnerDiv.style.backgroundColor = color;// BUG: Without this, background was same as text color!!!
         //cardDiv.style.color = "white";
         //console.warn("HighLightText style reset to " + cardDiv.style.color);
     }
@@ -72,12 +76,17 @@ function createColorCard(systemColorSet, index, elementID) {
             + "\n" + mode + " color " + rgbaSpan.innerText, tooltipSpan.id);
     });
 
-    // TODO: Add computed color to the JSON file that folks can download
+    // Create an RGBA key in the json file for download
+    if (elementId == "syscolors-grid-light" || elementId == "syscolors-deprecated-light") {
+        systemColorSet[index].lightModeRGBA = color + "= #" + r + g + b;
+    } else if (elementId == "syscolors-grid-dark" || elementId == "syscolors-deprecated-dark") {
+        systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
+    }
 }
 
 
 // These cards look more like rows - & are used by TABLES
-function createColorRow(systemColorSet, index, elementID) {
+function createColorRow(systemColorSet, index, elementId) {
 
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
@@ -100,7 +109,11 @@ function createColorRow(systemColorSet, index, elementID) {
     tooltipSpan.id = "syscolors-row-tooltip-" + index;
 
     let cardDiv = document.createElement('div');
-    cardDiv.className = "syscolors-row-card";
+    if (elementId == "syscolors-deprecated-table") {
+        cardDiv.className = "syscolors-row-card syscolors-tall-row";
+    } else {
+        cardDiv.className = "syscolors-row-card";
+    }
     cardDiv.appendChild(tooltipSpan);
 
     let textDiv = document.createElement('div');
@@ -123,8 +136,12 @@ function createColorRow(systemColorSet, index, elementID) {
     cardDiv.appendChild(lightDiv);
     cardDiv.appendChild(darkDiv);
 
-    document.getElementById(elementID).appendChild(cardDiv);
-
+    if (
+        document.getElementById(elementId) === null) {
+        console.error("Element " + elementId + " not found!");
+    } else {
+        document.getElementById(elementId).appendChild(cardDiv);
+    }
 
     // This card is built & complete. 
     // Now update colors based on what the browser actually used. getComputedStyle() is an expensive operation BTW.
@@ -150,7 +167,7 @@ function createColorRow(systemColorSet, index, elementID) {
         console.warn("HighLightText contrasting color (in dark mode for rows of " + colorDark + ") was set to " + getContrastingColor(r, g, b));
         darkDiv.style.background = colorDark; // BUG: Without this, background was same as text color!!!
         //darkDiv.style.color = "red";
-        console.warn("HighLightText style reset to " + darkDiv.style.color);
+        //console.warn("HighLightText style reset to " + darkDiv.style.color);
     }
     r = parseInt(r).toString(16).padStart(2, '0');
     g = parseInt(g).toString(16).padStart(2, '0');
@@ -167,6 +184,4 @@ function createColorRow(systemColorSet, index, elementID) {
             + "\ncategory: " + categorySpan.innerText
             + "\nlight mode: " + light + "\ndark mode: " + dark, tooltipSpan.id);
     });
-
-    // TODO: Add computed colors to the JSON file that folks can download
 }

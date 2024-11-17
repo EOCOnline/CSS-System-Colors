@@ -64,16 +64,23 @@
   --borderColor: #cdf27666;
 }
 
+.syscolors-tall-row {
+  --rowHeight: 150px;
+}
+
 .syscolors-row-text {
   border: 2px solid var(--borderColor);
   border-left: 30px solid var(--borderColor);
+  border-radius: 0.5em;
+
   position: relative;
   font-size: small;
   display: inline-block;
+
   padding: 3px;
-  border-radius: 0.5em;
+
   width: 200px;
-  height: 70px;
+  height: val(--rowHeight);
 }
 
 .syscolors-row-text .syscolors-category-span {
@@ -95,7 +102,7 @@
   border: 2px solid black;
   padding: 5px;
   border-radius: 0.5em;
-  height: 70px;
+  height: val(--rowHeight);
   width: 150px;
 }
 
@@ -104,7 +111,7 @@
   border: 2px solid black;
   padding: 5px;
   border-radius: 0.5em;
-  height: 70px;
+  height: val(--rowHeight);
   width: 150px;
 }
 

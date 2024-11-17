@@ -14,6 +14,7 @@
   /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
   --contrast: 100;
   --borderColor: #bbbbbb;
+  --rowHeight: 70px;
 }
 
 /* BUG: THis indicates JUST background color is changing, but it's actually changing the OUTER (default/non-specified) color scheme! */
@@ -95,22 +96,18 @@ blockquote {
  * Styles used by multiple panels
  */
 
-/* BUG: This applies to entire page, not just the table & grids sections that use it *
 #syscolors-table,
 #syscolors-deprecated-table,
 #syscolors-grid,
 #syscolors-deprecated-grid {
-*/
-
-*,
-*:before,
-*:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  *,
+  *:before,
+  *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 }
-
-/*  }  */
 
 .syscolors-inner-container {
   border: black 1px solid;
@@ -132,6 +129,18 @@ blockquote {
   margin: 0px;
 }
 
+/* Inserting this collapsed row between two flex items will make 
+ * the flex item that comes after it break to a new row */
+.syscolors-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+#syscolors-grid .syscolors-inner-container H2,
+#syscolors-deprecated-grid .syscolors-inner-container H2 {
+  margin: 0px 0px 0px 10px;
+}
+
 /* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
 .syscolors-card:hover .syscolors-tooltip,
 .syscolors-row-card:hover .syscolors-tooltip {
@@ -148,10 +157,11 @@ blockquote {
   border-radius: 0.5em;
   font-size: smaller;
 
-  margin-left: 30px; /* moves the tooltip to the right */
-  margin-top: 15px; /* moves it down */
+  margin-left: 150px; /* moves the tooltip to the right */
+  margin-top: 75px; /* moves it down */
+
   position: absolute;
-  z-index: 1000;
+  z-index: 9;
 }
 
 /***********************************

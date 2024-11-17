@@ -40,7 +40,7 @@ function updateContrast(el) {
 function setColor(el) {
     // Mostly handled by CSS
     resetWebPage();
-    fetchSystemColors();
+    processJson(systemColorsJson);
 }
 
 let sortByCategory = false;
@@ -48,7 +48,8 @@ function setSortOrder(val) {
     sortByCategory = val.checked;
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
-    fetchSystemColors();
+    //fetchSystemColors();
+    processJson(systemColorsJson);
 }
 
 function resetWebPage() {
@@ -67,6 +68,8 @@ function resetWebPage() {
 
     document.getElementById("syscolors-demo-light").innerHTML = "";
     if (document.getElementById("syscolors-demo-dark")) document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
+
+    // uncheck "sort by category" checkbox?
 }
 
 
