@@ -9,15 +9,19 @@
 ** Handle light vs dark mode
 **/
 :root {
-  /* allow unstyled HTML to follow user preference via prefers-color-scheme */
+  /* allow unstyled HTML to follow user preference via prefers-color-scheme 
+  To enable support for the light-dark() color function, the color-scheme must have a value of light dark */
   color-scheme: light dark;
-  /* --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116)); */
+  --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
   --contrast: 100;
   --borderColor: #bbbbbb;
   --rowHeight: 70px;
 }
 
-/* BUG: THis indicates JUST background color is changing, but it's actually changing the OUTER (default/non-specified) color scheme! */
+/* This changes the pages default color scheme. The panels tend to have their color modes hardwired. */
+:root:has(#syscolors-page-mode option[value="auto"]:checked) {
+  color-scheme: light dark;
+}
 :root:has(#syscolors-page-mode option[value="light"]:checked) {
   color-scheme: light;
 }

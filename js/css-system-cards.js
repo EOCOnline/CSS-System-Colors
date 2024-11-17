@@ -29,6 +29,11 @@ function createColorCard(systemColorSet, index, elementId) {
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
+    /*if (elementId == "syscolors-deprecated-table") {
+        cardDiv.className = "syscolors-row-card syscolors-tall-row";
+    } else {
+        cardDiv.className = "syscolors-row-card";
+    }*/
     // Apply background color to inner div, so as to not affect cardDiv's big left border color!
     cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
     cardInnerDiv.appendChild(nameSpan);
@@ -36,7 +41,11 @@ function createColorCard(systemColorSet, index, elementId) {
     cardInnerDiv.appendChild(rgbaSpan);
 
     let cardDiv = document.createElement('div');
-    cardDiv.className = "syscolors-card";
+    if ((elementId == "syscolors-deprecated-light") || (elementId == "syscolors-deprecated-dark")) {
+        cardDiv.className = "syscolors-card syscolors-tall-row";
+    } else {
+        cardDiv.className = "syscolors-card";
+    }
     cardDiv.appendChild(categorySpan);
     cardDiv.appendChild(tooltipSpan);
     cardDiv.appendChild(cardInnerDiv);

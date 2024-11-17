@@ -44,11 +44,11 @@
       Options: &nbsp; &nbsp;
 
       <label for="syscolors-page-mode"
-        title="This sets the general page color mode. All panels modes are independently hardwired as identified below.">Page
-        background:</label>
+        title="This sets the general page color mode. All panels have hardwired color modes, so this basically just changes the page background.">Page
+        color mode:</label>
       <select id="syscolors-page-mode" onchange="setColor(this)">
-        <!--option value="auto">OS Default</option-->
-        <option value="light" selected="selected">Light</option>
+        <option value="auto" selected="selected">OS Default</option>
+        <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
       &nbsp; &nbsp; &nbsp;
@@ -321,10 +321,15 @@
             <h2>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h2>
 
             <p>>NOTE: This page is more a vision than anything useful. I do plan to show a useful page that demonstrates
-              how to use these in a real situation. Suggestions welcome!</p This is a page demonstrating the use of CSS
+              how to use these in a real situation. Suggestions welcome!</p>
+            <p> see https://codepen.io/sarajw/pen/xxzyOMZ & https://css-tricks.com/come-to-the-light-dark-side/ for a
+              starting point...</p>
+            <p>This is a page demonstrating the use of
+              CSS
               System Colors in a real-world scenario. The text color is set to <code>system-canvasText</code> and the
-            background color is set to
-            <code>system-canvas</code>.
+              background color is set to
+              <code>system-canvas</code>.
+            </p>
             <br />
             <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the author
               having to specify any adjustments! Easy Peasy.</p>
