@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContainer = document.getElementById("syscolors-container");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H2 .syscolors-demo-mode");
+
+  document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
+  document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
+
   updateContrast({ value: 97.5 });
   processJson(systemColorsJson);
 

@@ -1,9 +1,92 @@
+/***************************************************************************************************************
+ * This has two sets of classes: system-<name> and <name>. 
+  * There is one system-<name> class for every system-color.
+  * The <name> classes use one name to reference a 'combo' of related settings. They are less verbose.
+  * The system-<name> classes are more verbose, but they allow you to specify the color and background-color 
+  * separately.
+ **/
+
+/* name(s), the class combos */
+
 .Canvas {
+  /* application content or documents */
+  color: CanvasText;
+  background-color: Canvas;
+}
+
+.Accent {
+  /* accented user interface controls */
+  color: AccentColorText;
+  background-color: AccentColor;
+}
+
+.Field {
+  /* input fields */
+  color: FieldText;
+  background-color: Field;
+}
+
+.Mark {
+  /* specially marked with <mark> tag*/
+  color: MarkText;
+  background-color: Mark;
+}
+
+.Button {
+  /* push buttons */
+  color: ButtonText;
+  background-color: ButtonFace;
+  border-color: ButtonBorder;
+}
+
+.SelectedItem {
+  /* selected items */
+  color: SelectedItemText;
+  background-color: SelectedItem;
+}
+
+::selection {
+  /* Text of selected text */
+  color: HighlightText;
+  /* Background of selected text, for example from : :selection */
+  background-color: Highlight;
+}
+
+a:link {
+  /* non-active, non-visited links */
+  color: LinkText;
+}
+a.visited {
+  /* visited links */
+  color: VisitedText;
+}
+a:hover {
+  /* hovered links */
+  color: ActiveText; /* BUG: no special color?*/
+}
+a:focus {
+  /* focused links */
+  color: ActiveText; /* BUG: no special color?*/
+}
+a:active {
+  /* active links */
+  color: ActiveText;
+}
+
+.GrayText {
+  /* disabled text */
+  color: GrayText;
+}
+
+/***************************************************************************************************************
+ * Specific class names for each system color
+ */
+**/ .system-Canvas {
   /* Background of application content or documents */
   background-color: Canvas;
 }
 
-.CanvasText {
+.system-CanvasText {
   /* Text in application content or documents */
   color: CanvasText;
 }
@@ -12,22 +95,22 @@
  * Input elements
  */
 
-.AccentColor {
+.system-AccentColor {
   /* Background of accented user interface controls */
   background-color: AccentColor;
 }
 
-.AccentColorText {
+.system-AccentColorText {
   /* Text of accented user interface controls */
   color: AccentColorText;
 }
 
-.Field {
+.system-Field {
   /* Background of input fields */
   background-color: Field;
 }
 
-.FieldText {
+.system-FieldText {
   /* Text in input fields */
   color: FieldText;
 }
@@ -35,17 +118,17 @@
 /*********************************
  * Button elements
  */
-.ButtonBorder {
+.system-ButtonBorder {
   /* The base border color for push buttons */
   color: ButtonBorder;
 }
 
-.ButtonFace {
+.system-ButtonFace {
   /* The face background color for push buttons */
   background-color: ButtonFace;
 }
 
-.ButtonText {
+.system-ButtonText {
   /* Text on push buttons */
   color: ButtonText;
 }
@@ -54,17 +137,17 @@
  * Links
  */
 
-.LinkText {
+.system-LinkText {
   /* Text in non-active, non-visited links. For light backgrounds, traditionally blue */
   color: LinkText;
 }
 
-.ActiveText {
+.system-ActiveText {
   /* Text in active links. For light backgrounds, traditionally red */
   color: ActiveText;
 }
 
-.VisitedText {
+.system-VisitedText {
   /* Text in visited links. For light backgrounds, traditionally purple */
   color: VisitedText;
 }
@@ -73,17 +156,17 @@
  * Other miscellaneous
  */
 
-.GrayText {
+.system-GrayText {
   /* Disabled text (Often, but not necessarily, gray) */
   color: GrayText;
 }
 
-.Mark {
+.system-Mark {
   /* Background of text that has been specially marked (such as by the HTML mark element) */
   background-color: Mark;
 }
 
-.MarkText {
+.system-MarkText {
   /* Text that has been specially marked (such as by the HTML mark element) */
   color: MarkText;
 }
@@ -95,12 +178,12 @@
   background-color: Highlight;
 }
 
-.SelectedItem {
+.system-SelectedItem {
   /* Background of selected items, for example a selected checkbox */
   background-color: SelectedItem;
 }
 
-.SelectedItemText {
+.system-SelectedItemText {
   /* Text of selected items */
   color: SelectedItemText;
 }

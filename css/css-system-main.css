@@ -124,7 +124,7 @@ blockquote {
   color-scheme: light;
   width: 48%;
   margin: 0px;
-  margin-right: 6px;
+  margin-right: 1%;
 }
 
 .syscolors-dark {
@@ -193,7 +193,7 @@ blockquote {
 }
 
 /***********************************
- * Options Panel
+ * #Region: Options Panel
  */
 #syscolors-options {
   font-weight: bold;
@@ -235,6 +235,7 @@ blockquote {
   border: #aaa 1px solid;*/
   padding: 2px;
 }
+/* # EndRegion Options Panel */
 
 /***********************************
  * Intro Panel
@@ -288,15 +289,20 @@ blockquote {
   display: flex;
   flex-wrap: wrap;
 }
-/*
+
+/* done by syscolors-light/dark classes above
 #syscolors-demo-light {
-  margin-right: 6px;
+  color-scheme: light;
+  margin-right: 1%;
+  width: 47%;
 }
 
 #syscolors-demo-dark {
+  color-scheme: dark;
   margin: 0px;
+  width: 47%;
 }
-*/
+  */
 
 /**********************************************
  * Footer Panel

@@ -5,6 +5,53 @@
 *
 */
 
+/* https://codepen.io/sarajw/pen/eYwLaYp*/
+/*
+#syscolors-demo-container {
+  color: CanvasText;
+  background-color: Canvas;
+  padding: 1rem;
+
+  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
+  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
+}
+
+#syscolors-demo-container > div {
+  margin-block: 1rem 0;
+}
+
+#syscolors-demo-container {
+  div > div {
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+    border: 1px solid;
+  }
+
+  div.oklch {
+    background-color: var(--theme-oklch);
+  }
+
+  div.hsl {
+    background-color: var(--theme-hsl);
+  }
+
+  p {
+    padding: 1rem;
+  }
+
+  p.oklch {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
+  }
+
+  p.hsl {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
+  }
+}
+  */
+
 /*https://www.digitalocean.com/community/tutorials/css-minimal-css-reset*/
 /* NO Need for reset, just ensure syscolors-container styles don't leak thru - or anything to root */
 #syscolors-demo {
@@ -36,65 +83,177 @@
   color: HighlightText;
 }
 
-.syscolors-demo-button {
-  color: ButtonText;
-  background-color: ButtonFace;
-  border: 5px solid ButtonBorder;
+#SaraJoyRocks {
+  form,
+  .single {
+    width: fit-content;
+    margin: 3rem auto;
+  }
+
+  form {
+    font-family: sans-serif;
+    padding: 1rem 2rem 2rem;
+    border: 1px solid silver;
+    border-radius: 1.5rem;
+    /*box-shadow: 0 0 2rem -1.25rem CanvasText;*/
+
+    box-shadow: Canvas 0px 50px 100px -20px, CanvasText 0px 30px 60px -30px,
+      CanvasText 0px -2px 6px 0px inset;
+  }
 }
 
-.syscolors-demo-canvas,
-.syscolors-demo-canvas2 {
+#myWebSite {
+  padding: 1rem 2rem 2rem;
+  width: fit-content;
+  margin: 3rem auto;
+
+  border: 1px solid aqua;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 2rem -1.25rem CanvasText;
+
+  display: flex;
+  flex-wrap: wrap;
+  /*justify-content: flex-start;*/
+}
+
+#myWebSite nav {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #ddd;
+  }
+
+  li a.active {
+    color: white;
+    background-color: #04aa6d;
+  }
+}
+
+#myWebSite section {
+  /*padding-right: 15px;
+  margin-right: 15px;
+  */
+  display: flex;
+  justify-content: space-between;
+  align-content: stretch;
+  /*flex-wrap: wrap;
+  justify-content: flex-start;*/
+
+  width: 75%;
+  padding: 1rem;
+  margin-right: 1rem;
+
   background-color: Canvas;
-  border: 5px solid CanvasText;
+  color: CanvasText;
+
+  border: 1px solid CanvasText;
+  border-radius: 0.5em;
 }
 
-#syscolors-demo mark {
-  background-color: Mark;
-  color: MarkText;
+#myWebSite .card {
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: canvasText 0px 10px 20px, canvasText 0px 6px 6px;
+*/
+  transition: 0.3s;
+  width: 20rem;
+  height: 10rem;
+  margin: 0.5rem;
+  border: 1px solid green;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 CanvasText;
+
+  :hover {
+    box-shadow: 0 8px 16px 0 canvasText;
+  }
+
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+
+  .container {
+    padding: 2px 16px;
+  }
 }
 
-#syscolors-demo input {
-  color: ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped.*/
-  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder; /*Error in parsing value for ‘border’.  Declaration dropped. */
+#myWebSite aside {
+  width: 30%;
+  height: 10rem;
+  padding-left: 15px;
+  margin-left: 15px;
+  float: right;
+
+  background-color: Selection;
+  color: SelectionText;
+
+  border: 1px solid CanvasText;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px 0 CanvasText;
 }
 
-#syscolors-demo input[type="text"] {
-  color: InputText; /* Expected color but found ‘InputText’.  Error in parsing value for ‘color’.  Declaration dropped. */
-  background-color: Input; /*Expected color but found ‘Input’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder;
+#myWebSite blockquote {
+  float: right;
+  height: 5rem;
+  margin: 0.5em 0.5em;
+  font-size: 85%;
+  border-left: 2px solid CanvasText;
+  padding-left: 1em;
+}
+/*
+#myWebSite main {
+  display: flex;
+  align-items: center;
+
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-#syscolors-demo input[type="submit"] {
-  color: ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped. */
-  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder;
+#mmyWebSite footer {
+  background-color: Canvas;
+  color: CanvasText;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
-#syscolors-demo input[type="submit"]:hover {
-  color: HighlightText;
-  background-color: Highlight;
+*/
+
+.sssyscolors-break {
+  flex-basis: 100%;
+  height: 0;
 }
-#syscolors-demo input[type="submit"]:active {
-  color: ActiveText;
-  background-color: ActiveText;
-}
-#syscolors-demo input[type="submit"]:focus {
-  color: HighlightText;
-  background-color: Highlight;
-}
-#syscolors-demo input[type="submit"]:disabled {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:hover {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:active {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:focus {
-  color: GrayText;
-  background-color: ButtonFace;
+
+#myForm {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1ex;
+
+  padding: 1rem 2rem 2rem;
+  width: fit-content;
+  margin: 3rem auto;
+
+  border: 1px solid silver;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 2rem -1.25rem CanvasText;
 }
