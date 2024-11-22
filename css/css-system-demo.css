@@ -12,17 +12,77 @@
   /* from https://www.color-meanings.com/light-color-palettes/ 
   Pale Robin Egg, blue, Azure (web), Mimi pink, Beige, Straw
   or #F8AC8C, #FBE4C4, #F9F4F0, #D2E4E8, #DEACD1 */
-  --light-primary: #96dfce;
-  --light-secondary: #ddecef;
-  --light-tertiary: #f8d5db;
-  --light-contrast: #eff1d9;
-  --light-bright: #f1eb86;
+  --light-primary: rgb(248, 172, 140);
+  --light-primary-rgb: 248, 172, 140;
+  --light-secondary: rgb(251, 228, 196);
+  --light-secondary-rgb: 251, 228, 196;
+  --light-tertiary: rgb(249, 244, 240);
+  --light-tertiary-rgb: 249, 244, 240;
+  --light-contrast: rgb(210, 228, 232);
+  --light-contrast-rgb: 210, 228, 232;
+  --light-bright: rgb(222, 172, 209);
+  --light-bright-rgb: 222, 172, 209;
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
-  --dark-primary: #4b0082;
-  --dark-secondary: #6a0f8a;
-  --dark-tertiary: #8a2be2;
-  --dark-contrast: #da70d6;
-  --dark-bright: #f5f5f5;
+  --dark-primary: rgb(75, 0, 130);
+  --dark-primary-rgb: 75, 0, 130;
+  --dark-secondary: rgb(106, 15, 138);
+  --dark-secondary-rgb: 106, 15, 138;
+  --dark-tertiary: rgb(138, 43, 226);
+  --dark-tertiary-rgb: 138, 43, 226;
+  --dark-contrast: rgb(218, 112, 214);
+  --dark-contrast-rgb: 218, 112, 214;
+  --dark-bright: rgb(245, 245, 245);
+  --dark-bright-rgb: 245, 245, 245;
+
+  --primary: light-dark(var(--light-primary), var(--dark-primary));
+  --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
+  --tertiary: light-dark(var(--light-tertiary), var(--dark-tertiary));
+  --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
+  --bright: light-dark(var(--light-bright), var(--dark-bright));
+
+  .pri {
+    color: light-dark(var(--light-primary), var(--dark-primary));
+  }
+  .sec {
+    color: light-dark(var(--light-secondary), var(--dark-secondary));
+  }
+  .ter {
+    color: light-dark(var(--light-tertiary), var(--dark-tertiary));
+  }
+  .con {
+    color: light-dark(var(--light-contrast), var(--dark-contrast));
+  }
+  .bri {
+    color: light-dark(var(--light-bright), var(--dark-bright));
+  }
+
+  .colorPalette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    div {
+      width: fit-content;
+      /* height: 6rem;*/
+      padding: 0.25rem;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px 0 CanvasText;
+      text-shadow: 1px 1px CanvasText;
+    }
+
+    :hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      background-color: light-dark(var(--light-tertiary), var(--dark-tertiary));
+    }
+  }
+
+  .pri::before {
+    /* content: "rgb(248, 172, 140):";  /* Works */
+    content: var(--light-primary-rgb); /* FSails */
+    /* +
+      light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));*/
+  }
 
   /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
   :link {
@@ -32,23 +92,25 @@
     color: VisitedText;
   }
 
-  /* NOT included in above CSS spec: :hover & :focus */
+  /* NOT included in above CSS spec: :hover & :focus 
   :hover {
     color: light-dark(var(--light-primary), var(--dark-primary));
   }
   :focus {
     color: light-dark(var(--light-secondary), var(--dark-secondary));
   }
+*/
 
+  /* BUG: This next rule affects the entire page, not just the actual link text! */
   :active {
     color: ActiveText;
   }
 }
 
-#myWebSite {
+.myWebSite {
   padding: 1rem;
   /* width: fit-content;*/
-  width: 90%;
+  max-width: 90%;
   margin: 1rem auto;
 
   border: 1px solid CanvasText;
@@ -60,19 +122,27 @@
   /*justify-content: flex-start;*/
 }
 
-#myWebSite nav {
+.myWebSite nav {
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border: 1px solid light-dark(var(--light-primary), var(--dark-primary));
+
     background-color: light-dark(var(--light-bright), var(--dark-bright));
   }
 
   li {
     float: left;
+    border: 1px solid CanvasText;
   }
+
+  /*
+  li:before {
+    content: "// ";
+      position: relative;
+    left: -1px;
+  }*/
 
   li a {
     display: block;
@@ -93,7 +163,25 @@
   }
 }
 
-#myWebSite section {
+.RGB-color::before {
+  /*content: light-dark(var(--light-bright-rgb), var(--dark-bright-rgb));
+  content: var(--light-bright-rgb);
+  content: "pre-";
+  https://www.w3schools.com/cssref/css_entities.php
+  */
+  content: "\2713";
+}
+
+.RGB-color::after {
+  content: attr(myval);
+  /*
+  a::before {
+  content: attr(href);
+}*/
+  color: green;
+}
+
+.myWebSite section {
   display: flex;
   justify-content: space-between;
   align-content: stretch;
@@ -105,36 +193,39 @@
   color: CanvasText;
 
   border: 1px solid CanvasText;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
 }
 
-#myWebSite .card {
+.myWebSite .card {
   /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   box-shadow: canvasText 0px 10px 20px, canvasText 0px 6px 6px;
 */
   transition: 0.3s;
-  width: 20rem;
-  height: 10rem;
-  margin: 0.5rem;
+  /*width: 20rem;
+  height: 10rem;*/
+  width: 10rem;
+  height: 6rem;
+  margin-right: 0.5rem;
   border: 1px solid green;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   box-shadow: 0 2px 4px 0 CanvasText;
 
-  :hover {
-    box-shadow: 0 8px 16px 0 canvasText;
-  }
-
   img {
-    border-radius: 5px 5px 0 0;
+    border-radius: 0.5rem 0 0 0;
   }
 
   .container {
-    padding: 2px 16px;
+    padding-left: 6px;
+    h4,
+    p {
+      padding: 0;
+      margin: 0;
+    }
   }
 }
 
-#myWebSite aside {
-  display: inline-block;
+.myWebSite aside {
+  display: block;
   width: 30%;
   height: 5rem;
   padding-left: 15px;
@@ -149,16 +240,16 @@
   box-shadow: 0 2px 3px 0 CanvasText;
 }
 
-#myWebSite blockquote {
+.myWebSite blockquote {
   float: right;
   height: 5rem;
-  margin: 0.5em 0.5em;
+  margin: 0.5rem 0.5rem;
   font-size: 85%;
   border-left: 2px solid CanvasText;
   padding-left: 1em;
 }
 
-#myWebSite main {
+.mmmmyWebSite main {
   width: 100%;
   /*
   display: flex;

@@ -69,7 +69,7 @@
     <div id="syscolors-demo-container" class="syscolors-inner-container">
 
       <details open>
-        <summary>System Color Example (Refresh the page if no content is displayed!)</summary>
+        <summary>System Color Example</summary>
         <div id="syscolors-demo">
           <div id="syscolors-demo-light">
             <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
@@ -89,7 +89,7 @@
                 a:active - active links
                 GrayText - disabled text
               -->
-            <div id="myWebSite">
+            <div class="myWebSite">
 
               <header>
                 <h1>A Swell Website</h1>
@@ -103,7 +103,6 @@
               </header>
 
               <main>
-                <!--div class="syscolors-break"></div-->
                 <h3>Our Blog (h3)</h3>
                 <a id="blog"></a>
                 The following sections use Canvas as the background & CanvasText as the text color.
@@ -111,20 +110,30 @@
                   <div>
                     <article>
                       <h4>CSS System Color News (h4)</h4>
-                      <p>Paragraph showing various HTML tags in action:
+                      <p>This paragraph shows various HTML tags in action:
                         Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
                         <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
                         <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
                         <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
                           text.</span>
                       </p>
-                      <div>This is a div. Selecting some text will show the ::selected pseudo class in action: text
+                      <div>This div describes text selection. If you select some text, the ::selected pseudo class sets
+                        a text
                         color of 'HighlightText' & background color of 'Highlight'. <span class="SelectedItem1">This
-                          span has 'Selection' specified as the
-                          background color and 'SelectedItemText' as the text color.</span></div>
-                      <div>There are only a limited set of system-defined colors, so without
-                        extending them with your own color scheme, there are only so many things you can do with them.
-                        But here is a simple example of how you might use them in a real-world scenario.</div>
+                          span has 'Selection' hardcoded as the background color and 'SelectedItemText' as the text
+                          color.</span>
+                      </div>
+                      <br />
+                      <div>
+                        <strong>Links</strong>
+                        <ul>
+                          <li><a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
+                              never visited link (...until you click on it!)</a></li>
+                          <li><a href="https://eoc.online">visited link</a></li>
+                          <li>Mouse hover for effects</li>
+                        </ul>
+                      </div>
+
                     </article>
                   </div>
                   <div>
@@ -138,15 +147,48 @@
                     </aside-->
                 </section>
 
-                <!--div class="syscolors-break"></div-->
+                <h3>Our Color Palette</h3>
+                <section>
+                  <div>The CSS System Colors provides a very limited palette. It is easy to extend them with your own
+                    scheme that changes based on light ot dark color-scheme chosen.
+                    <p>Our arbitrary palette for this micro-site:</p>
+                    <div class="colorPalette">
+                      <div class="pri">
+                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--primary)" />
+                        </svg> Primary
+                      </div>
+                      <div class="sec">
+                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--secondary)" />
+                        </svg>Secondary
+                      </div>
 
+                      <div class="ter">
+                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--tertiary)" />
+                        </svg>Tertiary
+                      </div>
+                      <div class="con">
+                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--contrast)" />
+                        </svg>Contrast
+                      </div>
+                      <div class="bri">
+                        <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--bright)" />
+                        </svg>Bright
+                      </div>
+                    </div>
+                  </div>
+                </section>
                 <h3>About Us</h3>
                 <div class="syscolors-break"></div>
                 <section class="aboutUs">
                   <a id="aboutUs"></a>
 
                   <div class="card">
-                    <img src="./images/avatar2.png" alt="Avatar" style="width:20%">
+                    <img src="./images/avatar2.png" alt="Avatar" style="width:30%">
                     <div class="container">
                       <h4>Wanda Doe</h4>
                       <p>Architect</p>
@@ -154,7 +196,7 @@
                   </div>
 
                   <div class="card">
-                    <img src="./images/avatar1.png" alt="Avatar" style="width:20%">
+                    <img src="./images/avatar1.png" alt="Avatar" style="width:30%">
                     <div class="container">
                       <h4>Eddie Doe</h4>
                       <p>Engineer</p>
