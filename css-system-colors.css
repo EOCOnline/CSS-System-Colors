@@ -73,16 +73,16 @@ a:active {
   /* active links */
   color: ActiveText;
 }
-)
+
 .GrayText {
   /* disabled text */
   color: GrayText;
 }
 
-/***************************************************************************************************************
+/***************************************************************************************
  * Specific class names for each system color
- */
-**/ .system-Canvas {
+ **/
+.system-Canvas {
   /* Background of application content or documents */
   background-color: Canvas;
 }

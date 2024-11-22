@@ -51,7 +51,7 @@
       </select>
       &nbsp; &nbsp; &nbsp;
 
-      <label for="syscolors-sorted" title="Sort colors by category (vs. name)">Sort by category:</label>
+      <label for="syscolors-sorted" title="Sort grid & table colors by category (vs. name)">Sort by category:</label>
       <input type="checkbox" onclick="setSortOrder(this)" id="syscolors-sorted" />
       &nbsp; &nbsp; &nbsp;
 
@@ -74,9 +74,7 @@
           <div id="syscolors-demo-light">
             <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
 
-            <details open>
-              <summary>System Color Demonstration </summary>
-              <!-- Try to show a useful page using:
+            <!-- Try to show a useful page using ALL the system colors, i.e.:
                 Canvas - application content or documents
                 Accent - accented user interface controls
                 Field - input fields
@@ -91,161 +89,139 @@
                 a:active - active links
                 GrayText - disabled text
               -->
-              <div id="myWebSite">
+            <div id="myWebSite">
 
-                <header>
-                  <h1>A Swell Website</h1>
-                  <nav>
-                    <ul>
-                      <li><a href="/" class="active">Home</a></li>
-                      <li><a href="#blog">Blog</a></li>
-                      <li><a href="#aboutUs">About Us</a></li>
-                    </ul>
-                  </nav>
-                </header>
+              <header>
+                <h1>A Swell Website</h1>
+                <nav>
+                  <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#aboutUs">About Us</a></li>
+                  </ul>
+                </nav>
+              </header>
 
-                <main>
-                  <!--div class="syscolors-break"></div-->
-                  <h3>Our Blog (h3)</h3>
-                  <a id="blog"></a>
-                  The following sections use Canvas as the background & CanvasText as the text color.
-                  <section>
-                    <div>
-                      <article>
-                        <h4>CSS System Color News (h4)</h4>
-                        <p>Paragraph showing various HTML tags in action:
-                          Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
-                          <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
-                          <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
-                          <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
-                            text!</span>
-                        </p>
-
-                        <div>This is a div. Selecting some text will show the ::selected pseudo class in action: text
-                          color of 'HighlightText' & background color of 'Highlight'. <span class="SelectedItem1">This
-                            span has 'Selection' specified as the
-                            background color and 'SelectedItemText' as the text color.</div>
-                      </article>
-                    </div>
-                    <div>
-                      <h4>Comments</h4>
-                      <article>Great post!</article>
-                      <article>Very informative!</article>
-                    </div>
-                    <!--aside>
+              <main>
+                <!--div class="syscolors-break"></div-->
+                <h3>Our Blog (h3)</h3>
+                <a id="blog"></a>
+                The following sections use Canvas as the background & CanvasText as the text color.
+                <section>
+                  <div>
+                    <article>
+                      <h4>CSS System Color News (h4)</h4>
+                      <p>Paragraph showing various HTML tags in action:
+                        Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
+                        <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
+                        <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
+                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
+                          text.</span>
+                      </p>
+                      <div>This is a div. Selecting some text will show the ::selected pseudo class in action: text
+                        color of 'HighlightText' & background color of 'Highlight'. <span class="SelectedItem1">This
+                          span has 'Selection' specified as the
+                          background color and 'SelectedItemText' as the text color.</span></div>
+                      <div>There are only a limited set of system-defined colors, so without
+                        extending them with your own color scheme, there are only so many things you can do with them.
+                        But here is a simple example of how you might use them in a real-world scenario.</div>
+                    </article>
+                  </div>
+                  <div>
+                    <h4>Comments</h4>
+                    <article>Great post!</article>
+                    <article>Very informative!</article>
+                  </div>
+                  <!--aside>
                       <h4>Aside</h4>
                       <p>Interesting extra info</p>
                     </aside-->
-                  </section>
+                </section>
 
+                <!--div class="syscolors-break"></div-->
 
+                <h3>About Us</h3>
+                <div class="syscolors-break"></div>
+                <section class="aboutUs">
+                  <a id="aboutUs"></a>
 
-                  <!--div class="syscolors-break"></div-->
-
-                  <h3>About Us</h3>
-                  <div class="syscolors-break"></div>
-                  <section class="aboutUs">
-                    <a id="aboutUs"></a>
-
-                    <div class="card">
-                      <img src="./images/avatar2.png" alt="Avatar" style="width:20%">
-                      <div class="container">
-                        <h4>Wanda Doe</h4>
-                        <p>Architect</p>
-                      </div>
+                  <div class="card">
+                    <img src="./images/avatar2.png" alt="Avatar" style="width:20%">
+                    <div class="container">
+                      <h4>Wanda Doe</h4>
+                      <p>Architect</p>
                     </div>
-
-                    <div class="card">
-                      <img src="./images/avatar1.png" alt="Avatar" style="width:20%">
-                      <div class="container">
-                        <h4>Eddie Doe</h4>
-                        <p>Engineer</p>
-                      </div>
-                    </div>
-                    <blockquote>We aim to please!</blockquote>
-                  </section>
-                </main>
-
-
-                <footer>
-                  <p>©Copyright Me, 2024 &nbsp;&nbsp;
-
-                    Link Up!
-                    <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">never visited link
-                      (...until you click on it!)</a>, <a href="https://eoc.online">visited link</a>. Mouse hover for
-                    effects.
-                  </p>
-                </footer>
-              </div>
-
-
-
-              <div>This is a <code>div</code>. There ere are only a limited set of system-defined colors, so without
-                extending them with your own color
-                scheme, there are only so many things you can do with them. But here is a simple example of how you
-                might use them in a real-world scenario.</div>
-
-              <p>This is a <code>p</code>aragraph. The container/panel has the color-scheme set to light or dark, as
-                noted in the panel's title.</p>
-
-              <div class=".Canvas">This container has color: CanvasText;
-                background-color: Canvas;
-
-
-
-                <form id="myForm">
-                  <h3>A Fine Form</h3>
-                  <label>Text input: <input type="text" placeholder="Hellooo"></label>
-
-                  <label>Check box: <input type="checkbox"> </label>
-
-                  <div>Radio button:
-                    <input type="radio" name="rName" value="1" id="idOn">
-                    <label for="idOn">on</label>
-                    <input type="radio" id="idOff" name="rName" value="2">
-                    <label for="idOff">off</label>
                   </div>
 
-                  <label>Select: <select name="cars" id="bikes">
-                      <option>Cervelo</option>
-                      <optgroup label="Domestic">
-                        <option>Schwinn</option>
-                        <option>Specialized</option>
-                        <option>Trek</option>
-                        <option>Cannondale</option>
-                      </optgroup>
-                      <option>Giant</option>
-                    </select>
-                  </label>
+                  <div class="card">
+                    <img src="./images/avatar1.png" alt="Avatar" style="width:20%">
+                    <div class="container">
+                      <h4>Eddie Doe</h4>
+                      <p>Engineer</p>
+                    </div>
+                  </div>
+                  <blockquote>We aim to please!</blockquote>
+                </section>
+              </main>
 
 
-                  <div>File: <input type="file" /></div>
-                  <div>Range: <input type="range" /> </div>
-                  <div>Number: <input type="number" value="1" /> </div>
-                  <div>Date: <input type="date" /> </div>
-                  <div>Progress: <progress max="100" value="30"></progress> </div>
-                  <div>Text area: <textarea id="textarea"></textarea></div>
+              <footer>
+                <p>©Copyright Me, 2024 &nbsp;&nbsp;
 
-                  <p>Unstyled Buttons:<br />
-                    <button disabled="disabled">Disabled</button>
-                    <button type="button">Cancel</button>
-                    <button type="submit">Submit</button>
-                  </p>
-                  <p>Buttons using the Button class:<br />
-                    <button class="Button" disabled="disabled">Disabled</button>
-                    <button class="Button" style="border:5px solid ButtonBorder;" type="button">Cancel (with fat
-                      ButtonBorder)</button>
-                    <button class="Button" type="submit">Submit</button>
-                  </p>
-                </form>
+                  Link Up!
+                  <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">never visited link
+                    (...until you click on it!)</a>, <a href="https://eoc.online">visited link</a>. Mouse hover for
+                  effects.
+                </p>
+              </footer>
+            </div>
 
+            <form id="myForm">
+              <h3>A Fine Form</h3>
+              <label>Text input: <input type="text" placeholder="Hellooo"></label>
 
-                <br />
-                <hr>
-                <br />
+              <label>Check box: <input type="checkbox"> </label>
 
+              <div>Radio button:
+                <input type="radio" name="rName" value="1" id="idOn">
+                <label for="idOn">on</label>
+                <input type="radio" id="idOff" name="rName" value="2">
+                <label for="idOff">off</label>
               </div>
-              <!--
+
+              <label>Select: <select name="cars" id="bikes">
+                  <option>Cervelo</option>
+                  <optgroup label="Domestic">
+                    <option>Schwinn</option>
+                    <option>Specialized</option>
+                    <option>Trek</option>
+                    <option>Cannondale</option>
+                  </optgroup>
+                  <option>Giant</option>
+                </select>
+              </label>
+
+              <div>File: <input type="file" /></div>
+              <div>Range: <input type="range" /> </div>
+              <div>Number: <input type="number" value="1" /> </div>
+              <div>Date: <input type="date" /> </div>
+              <div>Progress: <progress max="100" value="30"></progress> </div>
+              <div>Text area: <textarea id="textarea"></textarea></div>
+
+              <p>Unstyled Buttons:<br />
+                <button disabled="disabled">Disabled</button>
+                <button type="button">Cancel</button>
+                <button type="submit">Submit</button>
+              </p>
+              <p>Buttons using the Button class:<br />
+                <button class="Button" disabled="disabled">Disabled</button>
+                <button class="Button" style="border:5px solid ButtonBorder;" type="button">Cancel (with fat
+                  ButtonBorder)</button>
+                <button class="Button" type="submit">Submit</button>
+              </p>
+            </form>
+          </div>
+          <!--
               <input type="button">
               <input type="checkbox">
               <input type="color">
@@ -270,68 +246,64 @@
               <input type="week">
             -->
 
+      </details>
+      <br />
+      <div>
+        <details>
+          <summary>Details &amp; Summary</summary>
 
-              <br />
-              <hr>
-              <br />
-              <details>
-                <summary>Details &amp; Summary</summary>
+          <div class="Canvas">Canvas - application content or documents
 
-                <div class="Canvas">Canvas - application content or documents
+            <div class="Accent">Accented - accented user interface controls</div>
+            <div class="Field">Field - input fields</div>
+            <div class="Mark">Marked - specially marked with 'mark' tag</div>
+            <div class="ButtonFace">ButtonFace - push buttons</div>
+            <div class="SelectedItem">SelectedItem - selected items</div>
+            <div class="Selection">Selection - Text of selected text Background of selected text,
+              for example from : :selection</div>
 
-                  <div class="Accent">Accented - accented user interface controls</div>
-                  <div class="Field">Field - input fields</div>
-                  <div class="Mark">Marked - specially marked with 'mark' tag</div>
-                  <div class="ButtonFace">ButtonFace - push buttons</div>
-                  <div class="SelectedItem">SelectedItem - selected items</div>
-                  <div class="Selection">Selection - Text of selected text Background of selected text,
-                    for example from : :selection</div>
+            <a href="#" class="a:link">a:link - non-active, non-visited links</a><br />
+            <a href="#" class="a.visited">a.visited - visited links</a><br />
+            <a href="#" class="a:hover">a:hover - hovered links</a><br />
+            <a href="#" class="a:focus">a:focus - focused links</a><br />
+            <a href="#" class="a:active">a:active - active links</a><br />
 
-                  <a href="#" class="a:link">a:link - non-active, non-visited links</a><br />
-                  <a href="#" class="a.visited">a.visited - visited links</a><br />
-                  <a href="#" class="a:hover">a:hover - hovered links</a><br />
-                  <a href="#" class="a:focus">a:focus - focused links</a><br />
-                  <a href="#" class="a:active">a:active - active links</a><br />
+            <div class="a:link">a:link - non-active, non-visited links</div>
+            <div class="a.visited">a.visited - visited links</div>
+            <div class="a:hover">a:hover - hovered links</div>
+            <div class="a:focus">a:focus - focused links</div>
+            <div class="a:active">a:active - active links</div>
+            <div class="GrayText">GrayText - disabled text</div>
+          </div>
+        </details>
+      </div>
+      <br />
+      <div class="syscolors-break"></div>
+      <br />
+      <div>
+        <details>
+          <summary>References for the Eager</summary>
+          <p> see https://codepen.io/sarajw/pen/xxzyOMZ & https://css-tricks.com/come-to-the-light-dark-side/ for a
+            starting point...
+            https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels<br />
+            https://projects.dutchcelt.com/system.css/example.html &
+            https://github.com/kevquirk/simple.css/blob/main/index.html<br />
+            https://simplecss.org/demo/ <br />
 
-                  <div class="a:link">a:link - non-active, non-visited links</div>
-                  <div class="a.visited">a.visited - visited links</div>
-                  <div class="a:hover">a:hover - hovered links</div>
-                  <div class="a:focus">a:focus - focused links</div>
-                  <div class="a:active">a:active - active links</div>
-                  <div class="GrayText">GrayText - disabled text</div>
-                </div>
-              </details>
-
-            </details>
-
-
-
-
-            <details>
-              <summary>References for the Eager</summary>
-              <p> see https://codepen.io/sarajw/pen/xxzyOMZ & https://css-tricks.com/come-to-the-light-dark-side/ for a
-                starting point...
-                https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels<br />
-                https://projects.dutchcelt.com/system.css/example.html &
-                https://github.com/kevquirk/simple.css/blob/main/index.html<br />
-                https://simplecss.org/demo/ <br />
-
-                color-scheme:
-                https://web.dev/articles/prefers-color-scheme
-                https://codepen.io/sarajw/pen/eYwLaYp hue slider <br />
-                https://sarajoy.dev/blog/color-scheme/ <br />
-                https://color-scheme-light-dark.netlify.app/ <br />
-                https://4mrnhq.csb.app/ & https://x4qtf8.csb.app/ & - (picocss.com) <br />
-                https://web.dev/articles/color-scheme#demo <br />
-                https://color-scheme-light-dark.netlify.app/ <br />
-              </p>
-            </details>
-
-            <hr>
-
-            <!-- Thanks to https://projects.dutchcelt.com/system.css/example.html -->
-            <!-- or consider: https://simplecss.org/demo  -->
-            <!--h4>This section is thanks to https://projects.dutchcelt.com/system.css/example.html</h4>
+            color-scheme:
+            https://web.dev/articles/prefers-color-scheme
+            https://codepen.io/sarajw/pen/eYwLaYp hue slider <br />
+            https://sarajoy.dev/blog/color-scheme/ <br />
+            https://color-scheme-light-dark.netlify.app/ <br />
+            https://4mrnhq.csb.app/ & https://x4qtf8.csb.app/ & - (picocss.com) <br />
+            https://web.dev/articles/color-scheme#demo <br />
+            https://color-scheme-light-dark.netlify.app/ <br />
+          </p>
+        </details>
+      </div>
+      <!-- Thanks to https://projects.dutchcelt.com/system.css/example.html -->
+      <!-- or consider: https://simplecss.org/demo  -->
+      <!--h4>This section is thanks to https://projects.dutchcelt.com/system.css/example.html</h4>
             <main>
               <h1>Heading level 1</h1>
               <h2>Heading level 2</h2>
@@ -579,7 +551,7 @@
               </figure>
             </main-->
 
-            <!--details>
+      <!--details>
               <summary>Details &amp; Summary</summary>
 
               <div class="Canvas">Canvas - application content or documents
@@ -620,8 +592,8 @@
 -->
 
 
-            <!-- color-scheme(Pertinent?!) & color-mix https://codepen.io/sarajw/pen/eYwLaYp -->
-            <!--div style="padding: 1rem;
+      <!-- color-scheme(Pertinent?!) & color-mix https://codepen.io/sarajw/pen/eYwLaYp -->
+      <!--div style="padding: 1rem;
   --theme-oklch: oklch(50% 0.25 var(--hue, 222));
   --theme-hsl: hsl(var(--hue, 222) 75% 50%);
           ">????????????
@@ -645,7 +617,7 @@
 
               </div-->
 
-            <!--div>
+      <!--div>
 
                 <p>page demonstrating the use of CSS System Colors in a real-world scenario. The text color is set to
                   <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.

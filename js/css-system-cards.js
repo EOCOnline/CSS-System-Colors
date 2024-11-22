@@ -64,7 +64,7 @@ function createColorCard(systemColorSet, index, elementId) {
     cardInnerDiv.style.color = getContrastingColor(r, g, b);
 
     if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
-        console.warn("HighLightText contrasting color (for dark grid " + color + ") was set to " + getContrastingColor(r, g, b));
+        console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") was forcibly set to " + getContrastingColor(r, g, b));
         cardInnerDiv.style.backgroundColor = color;// BUG: Without this, background was same as text color!!!
         //cardDiv.style.color = "white";
         //console.warn("HighLightText style reset to " + cardDiv.style.color);

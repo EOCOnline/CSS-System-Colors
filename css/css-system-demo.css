@@ -4,56 +4,7 @@
 *  Use CSS as much as possible to handle light vs dark mode and contrast
 *
 */
-/* https://codepen.io/sarajw/pen/eYwLaYp */
-/* https://codepen.io/sarajw/pen/eYwLaYp*/
-/*
-#syscolors-demo-container {
-  color: CanvasText;
-  background-color: Canvas;
-  padding: 1rem;
 
-  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
-  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
-}
-
-#syscolors-demo-container > div {
-  margin-block: 1rem 0;
-}
-
-#syscolors-demo-container {
-  div.oklch {
-    background-color: var(--theme-oklch);
-  }
-
-  div.hsl {
-    background-color: var(--theme-hsl);
-  }
-
-  p {
-    padding: 1rem;
-  }
-
-  p.oklch {
-    color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
-    background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
-  }
-
-  p.hsl {
-    color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
-    background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
-  }
-}
-
-div > div {
-  display: inline-block;
-  width: 2rem;
-  height: 1rem;
-  border: 1px solid;
-}
-  */
-
-/*https://www.digitalocean.com/community/tutorials/css-minimal-css-reset*/
-/* NO Need for reset, just ensure syscolors-container styles don't leak thru - or anything to root */
 #syscolors-demo {
   color: CanvasText;
   background-color: Canvas;
@@ -80,12 +31,13 @@ div > div {
   :visited {
     color: VisitedText;
   }
-  /* NOT included in CSS spec: :hover & :focus */
+
+  /* NOT included in above CSS spec: :hover & :focus */
   :hover {
-    color: light dark(var(--light-primary), var(--dark-primary));
+    color: light-dark(var(--light-primary), var(--dark-primary));
   }
   :focus {
-    color: light dark(var(--light-secondary), var(--dark-secondary));
+    color: light-dark(var(--light-secondary), var(--dark-secondary));
   }
 
   :active {
@@ -114,8 +66,8 @@ div > div {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border: 1px solid light dark(var(--light-primary), var(--dark-primary));
-    background-color: light dark(var(--light-bright), var(--dark-bright));
+    border: 1px solid light-dark(var(--light-primary), var(--dark-primary));
+    background-color: light-dark(var(--light-bright), var(--dark-bright));
   }
 
   li {
@@ -131,13 +83,13 @@ div > div {
   }
 
   li a:hover:not(.active) {
-    background-color: light dark(var(--light-contrast), var(--dark-contrast));
-    color: light dark(var(--light-tertiary), var(--dark-tertiary));
+    background-color: light-dark(var(--light-contrast), var(--dark-contrast));
+    color: light-dark(var(--light-tertiary), var(--dark-tertiary));
   }
 
   li a.active {
-    background-color: light dark(var(--light-secondary), var(--dark-secondary));
-    color: light dark(var(--light-bright), var(--dark-bright));
+    background-color: light-dark(var(--light-secondary), var(--dark-secondary));
+    color: light-dark(var(--light-bright), var(--dark-bright));
   }
 }
 
@@ -189,8 +141,8 @@ div > div {
   margin-right: 10px;
   float: right;
 
-  background-color: light dark(var(--light-primary), var(--dark-primary));
-  color: light dark(var(--light-bright), var(--dark-bright));
+  background-color: light-dark(var(--light-primary), var(--dark-primary));
+  color: light-dark(var(--light-bright), var(--dark-bright));
 
   border: 1px dashed CanvasText;
   border-radius: 5px;
@@ -227,7 +179,7 @@ div > div {
   width: 100%;
 }
 
-.UNUSED-syscolors-break {
+.syscolors-break {
   flex-basis: 100%;
   height: 0;
 }
@@ -262,3 +214,51 @@ a:focus - focused links
 a:active - active links
 GrayText - disabled text
 */
+
+/* https://codepen.io/sarajw/pen/eYwLaYp */
+/* https://codepen.io/sarajw/pen/eYwLaYp*/
+/*
+#syscolors-demo-container {
+  color: CanvasText;
+  background-color: Canvas;
+  padding: 1rem;
+
+  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
+  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
+}
+
+#syscolors-demo-container > div {
+  margin-block: 1rem 0;
+}
+
+#syscolors-demo-container {
+  div.oklch {
+    background-color: var(--theme-oklch);
+  }
+
+  div.hsl {
+    background-color: var(--theme-hsl);
+  }
+
+  p {
+    padding: 1rem;
+  }
+
+  p.oklch {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
+  }
+
+  p.hsl {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
+  }
+}
+
+div > div {
+  display: inline-block;
+  width: 2rem;
+  height: 1rem;
+  border: 1px solid;
+}
+  */

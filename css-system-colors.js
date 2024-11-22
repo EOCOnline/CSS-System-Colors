@@ -4,7 +4,7 @@
  */
 
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const logLevel = 3;
+const logLevel = 1;
 const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
 
   updateContrast({ value: 97.5 });
-  if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 3 seconds while debugging
+  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 3 seconds while debugging
 
   processJson(systemColorsJson);
 

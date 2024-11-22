@@ -10,17 +10,17 @@
 **/
 :root {
   /* allow unstyled HTML to follow user preference via prefers-color-scheme 
-  To enable support for the light-dark() color function, the color-scheme must have a value of light dark */
-  color-scheme: light dark;
+  To enable support for the light-dark() color function, the color-scheme must have a value of light-dark */
+  color-scheme: light-dark;
   --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
   --contrast: 100;
   --borderColor: #bbbbbb;
-  --rowHeight: 70px;
+  --rowHeight: 70px; /* BUG: Broken somehow. Move to specific style sheets.*/
 }
 
 /* This changes the pages default color scheme. The panels tend to have their color modes hardwired. */
 :root:has(#syscolors-page-mode option[value="auto"]:checked) {
-  color-scheme: light dark;
+  color-scheme: light-dark;
 }
 :root:has(#syscolors-page-mode option[value="light"]:checked) {
   color-scheme: light;
