@@ -40,7 +40,9 @@ function updateContrast(el) {
 function setColor(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
+
     processJson(systemColorsJson);
+    window.location.reload();
 }
 
 let sortByCategory = false;

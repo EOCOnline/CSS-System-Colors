@@ -39,7 +39,7 @@
   border-color: ButtonBorder;
 }
 
-.SelectedItem {
+.SelectedItem1 {
   /* selected items */
   color: SelectedItemText;
   background-color: SelectedItem;
@@ -52,6 +52,7 @@
   background-color: Highlight;
 }
 
+#someID {
 a:link {
   /* non-active, non-visited links */
   color: LinkText;
@@ -72,7 +73,7 @@ a:active {
   /* active links */
   color: ActiveText;
 }
-
+)
 .GrayText {
   /* disabled text */
   color: GrayText;

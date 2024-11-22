@@ -4,7 +4,7 @@
  */
 
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const logLevel = 1;
+const logLevel = 3;
 const sourceJson = "css-system-colors.json";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-container");
 
-  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H2 .syscolors-demo-mode");
+  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
 
   document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
   document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
 
   updateContrast({ value: 97.5 });
+  if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 3 seconds while debugging
+
   processJson(systemColorsJson);
 
 });
@@ -111,7 +113,7 @@ function generateSystemColors(systemColorSet, elementID) {
   return systemColorSet;
 }
 
-//MUCH easier than readin from a file due to   CO   issues 
+//MUCH easier than reading from a file due to CORS issues 
 let systemColorsJson =
 {
   "info": {

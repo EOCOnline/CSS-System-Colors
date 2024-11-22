@@ -4,7 +4,7 @@
 *  Use CSS as much as possible to handle light vs dark mode and contrast
 *
 */
-
+/* https://codepen.io/sarajw/pen/eYwLaYp */
 /* https://codepen.io/sarajw/pen/eYwLaYp*/
 /*
 #syscolors-demo-container {
@@ -21,13 +21,6 @@
 }
 
 #syscolors-demo-container {
-  div > div {
-    display: inline-block;
-    width: 2rem;
-    height: 1rem;
-    border: 1px solid;
-  }
-
   div.oklch {
     background-color: var(--theme-oklch);
   }
@@ -50,13 +43,35 @@
     background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
   }
 }
+
+div > div {
+  display: inline-block;
+  width: 2rem;
+  height: 1rem;
+  border: 1px solid;
+}
   */
 
 /*https://www.digitalocean.com/community/tutorials/css-minimal-css-reset*/
 /* NO Need for reset, just ensure syscolors-container styles don't leak thru - or anything to root */
 #syscolors-demo {
-  margin: 5px;
-  padding: 5px;
+  color: CanvasText;
+  background-color: Canvas;
+
+  /* from https://www.color-meanings.com/light-color-palettes/ 
+  Pale Robin Egg, blue, Azure (web), Mimi pink, Beige, Straw
+  or #F8AC8C, #FBE4C4, #F9F4F0, #D2E4E8, #DEACD1 */
+  --light-primary: #96dfce;
+  --light-secondary: #ddecef;
+  --light-tertiary: #f8d5db;
+  --light-contrast: #eff1d9;
+  --light-bright: #f1eb86;
+  /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
+  --dark-primary: #4b0082;
+  --dark-secondary: #6a0f8a;
+  --dark-tertiary: #8a2be2;
+  --dark-contrast: #da70d6;
+  --dark-bright: #f5f5f5;
 
   /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
   :link {
@@ -65,49 +80,26 @@
   :visited {
     color: VisitedText;
   }
+  /* NOT included in CSS spec: :hover & :focus */
+  :hover {
+    color: light dark(var(--light-primary), var(--dark-primary));
+  }
+  :focus {
+    color: light dark(var(--light-secondary), var(--dark-secondary));
+  }
+
   :active {
     color: ActiveText;
   }
 }
 
-#syscolors-demo a:link {
-  color: LinkText;
-}
-#syscolors-demo a:visited {
-  color: VisitedText;
-}
-#syscolors-demo a:active {
-  color: ActiveText;
-}
-#syscolors-demo a:hover {
-  color: HighlightText;
-}
-
-#SaraJoyRocks {
-  form,
-  .single {
-    width: fit-content;
-    margin: 3rem auto;
-  }
-
-  form {
-    font-family: sans-serif;
-    padding: 1rem 2rem 2rem;
-    border: 1px solid silver;
-    border-radius: 1.5rem;
-    /*box-shadow: 0 0 2rem -1.25rem CanvasText;*/
-
-    box-shadow: Canvas 0px 50px 100px -20px, CanvasText 0px 30px 60px -30px,
-      CanvasText 0px -2px 6px 0px inset;
-  }
-}
-
 #myWebSite {
-  padding: 1rem 2rem 2rem;
-  width: fit-content;
-  margin: 3rem auto;
+  padding: 1rem;
+  /* width: fit-content;*/
+  width: 90%;
+  margin: 1rem auto;
 
-  border: 1px solid aqua;
+  border: 1px solid CanvasText;
   border-radius: 1.5rem;
   box-shadow: 0 0 2rem -1.25rem CanvasText;
 
@@ -122,8 +114,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    border: 1px solid light dark(var(--light-primary), var(--dark-primary));
+    background-color: light dark(var(--light-bright), var(--dark-bright));
   }
 
   li {
@@ -132,35 +124,30 @@
 
   li a {
     display: block;
-    color: #666;
     text-align: center;
     padding: 8px 16px;
     text-decoration: none;
+    font-weight: bold;
   }
 
   li a:hover:not(.active) {
-    background-color: #ddd;
+    background-color: light dark(var(--light-contrast), var(--dark-contrast));
+    color: light dark(var(--light-tertiary), var(--dark-tertiary));
   }
 
   li a.active {
-    color: white;
-    background-color: #04aa6d;
+    background-color: light dark(var(--light-secondary), var(--dark-secondary));
+    color: light dark(var(--light-bright), var(--dark-bright));
   }
 }
 
 #myWebSite section {
-  /*padding-right: 15px;
-  margin-right: 15px;
-  */
   display: flex;
   justify-content: space-between;
   align-content: stretch;
-  /*flex-wrap: wrap;
-  justify-content: flex-start;*/
 
-  width: 75%;
+  width: 90%;
   padding: 1rem;
-  margin-right: 1rem;
 
   background-color: Canvas;
   color: CanvasText;
@@ -195,16 +182,17 @@
 }
 
 #myWebSite aside {
+  display: inline-block;
   width: 30%;
-  height: 10rem;
+  height: 5rem;
   padding-left: 15px;
-  margin-left: 15px;
+  margin-right: 10px;
   float: right;
 
-  background-color: Selection;
-  color: SelectionText;
+  background-color: light dark(var(--light-primary), var(--dark-primary));
+  color: light dark(var(--light-bright), var(--dark-bright));
 
-  border: 1px solid CanvasText;
+  border: 1px dashed CanvasText;
   border-radius: 5px;
   box-shadow: 0 2px 3px 0 CanvasText;
 }
@@ -217,13 +205,15 @@
   border-left: 2px solid CanvasText;
   padding-left: 1em;
 }
-/*
+
 #myWebSite main {
+  width: 100%;
+  /*
   display: flex;
   align-items: center;
 
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: flex-start;*/
 }
 
 #mmyWebSite footer {
@@ -236,9 +226,8 @@
   bottom: 0;
   width: 100%;
 }
-*/
 
-.sssyscolors-break {
+.UNUSED-syscolors-break {
   flex-basis: 100%;
   height: 0;
 }
@@ -257,3 +246,19 @@
   border-radius: 1.5rem;
   box-shadow: 0 0 2rem -1.25rem CanvasText;
 }
+
+/*
+Canvas - application content or documents
+Accent - accented user interface controls
+Field - input fields
+Mark - specially marked with 'mark' tag
+ButtonFace - push buttons
+SelectedItem - selected items
+::selection - Text of selected text Background of selected text, for example from : :selection
+a:link - non-active, non-visited links
+a.visited - visited links
+a:hover - hovered links
+a:focus - focused links
+a:active - active links
+GrayText - disabled text
+*/

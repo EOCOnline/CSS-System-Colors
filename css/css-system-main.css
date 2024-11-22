@@ -288,6 +288,8 @@ blockquote {
 #syscolors-demo {
   display: flex;
   flex-wrap: wrap;
+  margin: 5px;
+  padding: 5px;
 }
 
 /* done by syscolors-light/dark classes above

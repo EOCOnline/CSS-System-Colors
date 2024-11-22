@@ -45,7 +45,7 @@
         title="This sets the general page color mode. All panels have hardwired color modes, so this basically just changes the page background.">Page
         color mode:</label>
       <select id="syscolors-page-mode" onchange="setColor(this)">
-        <option value="auto" selected="selected">OS Default</option>
+        <option value="auto" selected="selected">Light Dark (Browser Default)</option>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
@@ -76,7 +76,21 @@
 
             <details open>
               <summary>System Color Demonstration </summary>
-
+              <!-- Try to show a useful page using:
+                Canvas - application content or documents
+                Accent - accented user interface controls
+                Field - input fields
+                Mark - specially marked with 'mark' tag
+                ButtonFace - push buttons
+                SelectedItem - selected items
+                ::selection - Text of selected text Background of selected text, for example from : :selection
+                a:link - non-active, non-visited links
+                a.visited - visited links
+                a:hover - hovered links
+                a:focus - focused links
+                a:active - active links
+                GrayText - disabled text
+              -->
               <div id="myWebSite">
 
                 <header>
@@ -91,48 +105,37 @@
                 </header>
 
                 <main>
-
-
-                  <a id="blog">
-                    <h3>Our Blog</h3>
-                  </a>
-                  <div class="syscolors-break"></div>
-
+                  <!--div class="syscolors-break"></div-->
+                  <h3>Our Blog (h3)</h3>
+                  <a id="blog"></a>
+                  The following sections use Canvas as the background & CanvasText as the text color.
                   <section>
                     <div>
-
                       <article>
-                        <h4>CSS System Color News</h4>
-                        <p>
-                          Normal, <abbr title="Abbreviations">abbr</abbr>, <del>del</del>, <dfn>dfn</dfn>, <em>em</em>,
-                          <ins>ins</ins>, <mark>mark</mark>, <s>strike through</s>, <small>small</small>,
-                          <strong>strong</strong>,
-                          <sub>sub</sub>, <sup>sup</sup>, <u>u</u>
+                        <h4>CSS System Color News (h4)</h4>
+                        <p>Paragraph showing various HTML tags in action:
+                          Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
+                          <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
+                          <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
+                          <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
+                            text!</span>
                         </p>
-                        <p>this is a p with some <mark>marked text</mark> and this <mark class="Mark">with the
-                            .Mark
-                            class explicitly set!</mark>
-                        </p>
-                        <p>Testing <del>del(ete)</del> and <ins>ins(ert)</ins>.</p>
-                        <div>Try using your mouse or touchpad/gestures to select some text to see what 'select'ed text
-                          /background
-                          looks like.</div>
-                        <div class="SelectedItem">Selection - Text of selected text Background of selected text,
-                          for example from : :selection</div>
 
+                        <div>This is a div. Selecting some text will show the ::selected pseudo class in action: text
+                          color of 'HighlightText' & background color of 'Highlight'. <span class="SelectedItem1">This
+                            span has 'Selection' specified as the
+                            background color and 'SelectedItemText' as the text color.</div>
                       </article>
                     </div>
-
                     <div>
                       <h4>Comments</h4>
                       <article>Great post!</article>
                       <article>Very informative!</article>
                     </div>
-                    <aside>
+                    <!--aside>
                       <h4>Aside</h4>
                       <p>Interesting extra info</p>
-                    </aside>
-
+                    </aside-->
                   </section>
 
 
@@ -271,61 +274,41 @@
               <br />
               <hr>
               <br />
-              <div class="Canvas">Canvas - application content or documents
+              <details>
+                <summary>Details &amp; Summary</summary>
 
-                <div class="Accent">Accented - accented user interface controls</div>
-                <div class="Field">Field - input fields</div>
-                <div class="Mark">Marked - specially marked with 'mark' tag</div>
-                <div class="ButtonFace">ButtonFace - push buttons</div>
-                <div class="SelectedItem">SelectedItem - selected items</div>
-                <div class="Selection">Selection - Text of selected text Background of selected text,
-                  for example from : :selection</div>
+                <div class="Canvas">Canvas - application content or documents
 
-                <a href="#" class="a:link">a:link - non-active, non-visited links</a><br />
-                <a href="#" class="a.visited">a.visited - visited links</a><br />
-                <a href="#" class="a:hover">a:hover - hovered links</a><br />
-                <a href="#" class="a:focus">a:focus - focused links</a><br />
-                <a href="#" class="a:active">a:active - active links</a><br />
+                  <div class="Accent">Accented - accented user interface controls</div>
+                  <div class="Field">Field - input fields</div>
+                  <div class="Mark">Marked - specially marked with 'mark' tag</div>
+                  <div class="ButtonFace">ButtonFace - push buttons</div>
+                  <div class="SelectedItem">SelectedItem - selected items</div>
+                  <div class="Selection">Selection - Text of selected text Background of selected text,
+                    for example from : :selection</div>
 
-                <div class="a:link">a:link - non-active, non-visited links</div>
-                <div class="a.visited">a.visited - visited links</div>
-                <div class="a:hover">a:hover - hovered links</div>
-                <div class="a:focus">a:focus - focused links</div>
-                <div class="a:active">a:active - active links</div>
-                <div class="GrayText">GrayText - disabled text</div>
-              </div>
+                  <a href="#" class="a:link">a:link - non-active, non-visited links</a><br />
+                  <a href="#" class="a.visited">a.visited - visited links</a><br />
+                  <a href="#" class="a:hover">a:hover - hovered links</a><br />
+                  <a href="#" class="a:focus">a:focus - focused links</a><br />
+                  <a href="#" class="a:active">a:active - active links</a><br />
 
-              <p>
-                Normal, <abbr title="Abbreviations">abbr</abbr>, <del>del</del>, <dfn>dfn</dfn>, <em>em</em>,
-                <ins>ins</ins>, <mark>mark</mark>, <s>strike through</s>, <small>small</small>, <strong>strong</strong>,
-                <sub>sub</sub>, <sup>sup</sup>, <u>u</u>
-              </p>
+                  <div class="a:link">a:link - non-active, non-visited links</div>
+                  <div class="a.visited">a.visited - visited links</div>
+                  <div class="a:hover">a:hover - hovered links</div>
+                  <div class="a:focus">a:focus - focused links</div>
+                  <div class="a:active">a:active - active links</div>
+                  <div class="GrayText">GrayText - disabled text</div>
+                </div>
+              </details>
 
-
-              <!--
-            // Field - input fields
-            // Mark - specially marked with 'mark' tag
-            // ButtonFace - push buttons
-            // SelectedItem - selected items
-            // ::selection - Text of selected text Background of selected text, for example from : :selection
-            // a:link - non-active, non-visited links
-            // a.visited - visited links
-            // a:hover - hovered links
-            // a:focus - focused links
-            // a:active - active links
-            // GrayText - disabled text
--->
             </details>
 
 
 
 
-            <!--details>
+            <details>
               <summary>References for the Eager</summary>
-
-              <p>>NOTE: This page is more a vision than anything useful. I do plan to show a useful page that
-                demonstrates
-                how to use these in a real situation. Suggestions welcome!</p>
               <p> see https://codepen.io/sarajw/pen/xxzyOMZ & https://css-tricks.com/come-to-the-light-dark-side/ for a
                 starting point...
                 https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels<br />
@@ -342,89 +325,7 @@
                 https://web.dev/articles/color-scheme#demo <br />
                 https://color-scheme-light-dark.netlify.app/ <br />
               </p>
-
-            </details!-->
-
-            <!--
-            // Canvas - application content or documents<br />
-            // Accent - accented user interface controls<br />
-            // Field - input fields<br />
-            // Mark - specially marked with 'mark' tag<br />
-            // ButtonFace - push buttons<br />
-            // SelectedItem - selected items<br />
-            // ::selection - Text of selected text Background of selected text, for example from : :selection<br />
-            // a:link - non-active, non-visited links<br />
-            // a.visited - visited links<br />
-            // a:hover - hovered links<br />
-            // a:focus - focused links<br />
-            // a:active - active links<br />
-            // GrayText - disabled text<br />
--->
-
-
-            <!-- or https://x4qtf8.csb.app/: PicoCSS -->
-
-
-            <!-- Thanks to Sara Joy: https://codepen.io/sarajw/pen/eYwLaYp & https://sarajoy.dev/blog/color-scheme/ -->
-            <!--div id="SaraJoyRocks">
-              <h4>This section thanks to Sara Joy: https://codepen.io/sarajw/pen/xxzyOMZ &
-                https://sarajoy.dev/blog/color-scheme/ </h4>
-
-              <form>
-                <h3>What a nice form!</h3>
-                <label>text field
-                  <br><input type="text" placeholder="Hellooo">
-                </label>
-                <br />
-                <label> check box <input type="checkbox"> </label>
-                <br />
-                <label> radio <input type="radio"> </label>
-                <br />
-                <label>
-                  car brands: <select name="cars" id="cars">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </label>
-              </form>
-
-              <div class="single">
-                <header>
-                  <h1>My Website</h1>
-                  <nav>
-                    <ul>
-                      <li><a href="/">Home</a></li>
-                      <li><a href="#blog">Blog</a></li>
-                      <li><a href="/contact">Contact</a></li>
-                    </ul>
-                  </nav>
-                </header>
-                <main>
-                  <section>
-                    <h2>Blog title</h2>
-                    <article>
-                      <h3>Blog post title</h3>
-                      <p>Blog post content</p>
-                    </article>
-                    <aside>
-                      <h4>By the Way:</h4>
-                      <p>Interesting extra info</p>
-                    </aside>
-                  </section>
-                  <section>
-                    <h4>Comments</h4>
-                    <article>First!</article>
-                    <article>Great post!</article>
-                    <article>Very informative!</article>
-                  </section>
-                </main>
-                <footer>
-                  <p>Copyright Me, 2022</p>
-                </footer>
-              </div>
-            </div -->
+            </details>
 
             <hr>
 
