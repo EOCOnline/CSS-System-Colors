@@ -6,54 +6,94 @@
 */
 
 #syscolors-demo {
-  color: CanvasText;
-  background-color: Canvas;
+  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
+  a:link {
+    color: LinkText;
+  }
+  a:visited {
+    color: VisitedText;
+  }
 
-  /* from https://www.color-meanings.com/light-color-palettes/ 
-  Pale Robin Egg, blue, Azure (web), Mimi pink, Beige, Straw
-  or #F8AC8C, #FBE4C4, #F9F4F0, #D2E4E8, #DEACD1 */
-  --light-primary: rgb(248, 172, 140);
-  --light-primary-rgb: 248, 172, 140;
-  --light-secondary: rgb(251, 228, 196);
-  --light-secondary-rgb: 251, 228, 196;
-  --light-tertiary: rgb(249, 244, 240);
-  --light-tertiary-rgb: 249, 244, 240;
-  --light-contrast: rgb(210, 228, 232);
-  --light-contrast-rgb: 210, 228, 232;
-  --light-bright: rgb(222, 172, 209);
-  --light-bright-rgb: 222, 172, 209;
-  /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
-  --dark-primary: rgb(75, 0, 130);
-  --dark-primary-rgb: 75, 0, 130;
-  --dark-secondary: rgb(106, 15, 138);
-  --dark-secondary-rgb: 106, 15, 138;
-  --dark-tertiary: rgb(138, 43, 226);
-  --dark-tertiary-rgb: 138, 43, 226;
-  --dark-contrast: rgb(218, 112, 214);
-  --dark-contrast-rgb: 218, 112, 214;
-  --dark-bright: rgb(245, 245, 245);
-  --dark-bright-rgb: 245, 245, 245;
-
-  --primary: light-dark(var(--light-primary), var(--dark-primary));
-  --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
-  --tertiary: light-dark(var(--light-tertiary), var(--dark-tertiary));
-  --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
-  --bright: light-dark(var(--light-bright), var(--dark-bright));
-
-  .pri {
+  /* NOT included in above CSS spec: :hover & :focus 
+  a:hover {
     color: light-dark(var(--light-primary), var(--dark-primary));
   }
-  .sec {
+  a:focus {
     color: light-dark(var(--light-secondary), var(--dark-secondary));
   }
-  .ter {
-    color: light-dark(var(--light-tertiary), var(--dark-tertiary));
+*/
+
+  /* BUG: This next rule affects the entire page, not just the actual link text! */
+  a:active {
+    color: ActiveText;
   }
-  .con {
+}
+
+.myWebSite {
+  padding: 1rem;
+  /* width: fit-content;*/
+  max-width: 90%;
+  margin: 1rem auto;
+
+  border: 1px solid CanvasText;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 2rem -1.25rem CanvasText;
+
+  display: flex;
+  flex-wrap: wrap;
+  /*justify-content: flex-start;*/
+
+  --light-primary: rgb(248, 172, 140);
+  --light-secondary: rgb(251, 228, 196);
+  --light-contrast: rgb(46, 155, 180);
+  /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
+  --dark-primary: rgb(138, 68, 189);
+  --dark-secondary: rgb(195, 26, 161);
+  --dark-contrast: rgb(231, 143, 228);
+
+  /* Use of the light-dark function REQUIRES that "color-scheme: light dark;" is set, generally at the root or the html tag */
+  /* To use val's directly... */
+  --primary: light-dark(var(--light-primary), var(--dark-primary));
+  --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
+  --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
+
+  /* super minimal CSS reset */
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  article {
+    /* color: CanvasText; */
+    color: var(--primary);
+    background-color: Canvas;
+  }
+
+  div,
+  p,
+  ol,
+  ul {
+    color: CanvasText;
+    background-color: Canvas;
+  }
+
+  article {
+    color: var(--contrast);
+    background-color: Canvas;
+  }
+
+  /* Or to use classes... */
+  .primary {
+    color: light-dark(var(--light-primary), var(--dark-primary));
+  }
+  .secondary {
+    color: light-dark(var(--light-secondary), var(--dark-secondary));
+  }
+  .contrast {
     color: light-dark(var(--light-contrast), var(--dark-contrast));
-  }
-  .bri {
-    color: light-dark(var(--light-bright), var(--dark-bright));
   }
 
   .colorPalette {
@@ -76,50 +116,6 @@
       background-color: light-dark(var(--light-tertiary), var(--dark-tertiary));
     }
   }
-
-  .pri::before {
-    /* content: "rgb(248, 172, 140):";  /* Works */
-    content: var(--light-primary-rgb); /* FSails */
-    /* +
-      light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));*/
-  }
-
-  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
-  :link {
-    color: LinkText;
-  }
-  :visited {
-    color: VisitedText;
-  }
-
-  /* NOT included in above CSS spec: :hover & :focus 
-  :hover {
-    color: light-dark(var(--light-primary), var(--dark-primary));
-  }
-  :focus {
-    color: light-dark(var(--light-secondary), var(--dark-secondary));
-  }
-*/
-
-  /* BUG: This next rule affects the entire page, not just the actual link text! */
-  :active {
-    color: ActiveText;
-  }
-}
-
-.myWebSite {
-  padding: 1rem;
-  /* width: fit-content;*/
-  max-width: 90%;
-  margin: 1rem auto;
-
-  border: 1px solid CanvasText;
-  border-radius: 1.5rem;
-  box-shadow: 0 0 2rem -1.25rem CanvasText;
-
-  display: flex;
-  flex-wrap: wrap;
-  /*justify-content: flex-start;*/
 }
 
 .myWebSite nav {
@@ -129,20 +125,13 @@
     padding: 0;
     overflow: hidden;
 
-    background-color: light-dark(var(--light-bright), var(--dark-bright));
+    background-color: var(--secondary);
   }
 
   li {
     float: left;
     border: 1px solid CanvasText;
   }
-
-  /*
-  li:before {
-    content: "// ";
-      position: relative;
-    left: -1px;
-  }*/
 
   li a {
     display: block;
@@ -163,24 +152,6 @@
   }
 }
 
-.RGB-color::before {
-  /*content: light-dark(var(--light-bright-rgb), var(--dark-bright-rgb));
-  content: var(--light-bright-rgb);
-  content: "pre-";
-  https://www.w3schools.com/cssref/css_entities.php
-  */
-  content: "\2713";
-}
-
-.RGB-color::after {
-  content: attr(myval);
-  /*
-  a::before {
-  content: attr(href);
-}*/
-  color: green;
-}
-
 .myWebSite section {
   display: flex;
   justify-content: space-between;
@@ -197,12 +168,6 @@
 }
 
 .myWebSite .card {
-  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: canvasText 0px 10px 20px, canvasText 0px 6px 6px;
-*/
-  transition: 0.3s;
-  /*width: 20rem;
-  height: 10rem;*/
   width: 10rem;
   height: 6rem;
   margin-right: 0.5rem;
@@ -259,15 +224,15 @@
   justify-content: flex-start;*/
 }
 
-#mmyWebSite footer {
+.myWebSite footer {
   background-color: Canvas;
-  color: CanvasText;
+  color: var(--contrast);
   text-align: center;
-  padding: 10px;
+  /*padding: 10px;
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100%;*/
 }
 
 .syscolors-break {
@@ -275,7 +240,7 @@
   height: 0;
 }
 
-#myForm {
+.myForm {
   display: flex;
   flex-direction: column;
   align-items: start;

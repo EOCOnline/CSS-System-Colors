@@ -53,27 +53,27 @@
 }
 
 #someID {
-a:link {
-  /* non-active, non-visited links */
-  color: LinkText;
+  a:link {
+    /* non-active, non-visited links */
+    color: LinkText;
+  }
+  a.visited {
+    /* visited links */
+    color: VisitedText;
+  }
+  a:hover {
+    /* hovered links */
+    color: ActiveText; /* BUG: no special color?*/
+  }
+  a:focus {
+    /* focused links */
+    color: ActiveText; /* BUG: no special color?*/
+  }
+  a:active {
+    /* active links */
+    color: ActiveText;
+  }
 }
-a.visited {
-  /* visited links */
-  color: VisitedText;
-}
-a:hover {
-  /* hovered links */
-  color: ActiveText; /* BUG: no special color?*/
-}
-a:focus {
-  /* focused links */
-  color: ActiveText; /* BUG: no special color?*/
-}
-a:active {
-  /* active links */
-  color: ActiveText;
-}
-
 .GrayText {
   /* disabled text */
   color: GrayText;
