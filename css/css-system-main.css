@@ -292,19 +292,20 @@ blockquote {
   padding: 5px;
 }
 
-/* done by syscolors-light/dark classes above
+/* done by syscolors-light/dark classes above*
 #syscolors-demo-light {
-  color-scheme: light;
+  /*color-scheme: light;
   margin-right: 1%;
   width: 47%;
+  width: 1rem auto;
 }
-
+  
 #syscolors-demo-dark {
   color-scheme: dark;
   margin: 0px;
   width: 47%;
 }
-  */
+*/
 
 /**********************************************
  * Footer Panel

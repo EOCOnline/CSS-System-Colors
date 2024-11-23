@@ -5,8 +5,9 @@
 *
 */
 
+/*
 #syscolors-demo {
-  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
+  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample *
   a:link {
     color: LinkText;
   }
@@ -18,16 +19,13 @@
   a:hover {
     color: light-dark(var(--light-primary), var(--dark-primary));
   }
-  a:focus {
-    color: light-dark(var(--light-secondary), var(--dark-secondary));
-  }
-*/
+*
 
-  /* BUG: This next rule affects the entire page, not just the actual link text! */
   a:active {
     color: ActiveText;
-  }
+  }*
 }
+*/
 
 .myWebSite {
   padding: 1rem;
@@ -36,7 +34,7 @@
   margin: 1rem auto;
 
   border: 1px solid CanvasText;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   box-shadow: 0 0 2rem -1.25rem CanvasText;
 
   display: flex;
@@ -89,7 +87,8 @@
     background-color: rgba(var(--primary-rgb), 0.8);
     padding: 0;
   }
-  pre {
+
+  .UNUSED-pre {
     background-color: rgba(var(--primary-rgb), 0.8);
     margin: 0;
   }
@@ -130,6 +129,8 @@
       background-color: light-dark(var(--light-tertiary), var(--dark-tertiary));
     }
   }
+
+  font-family: "Delius", cursive;
 }
 
 .myWebSite nav {
@@ -138,8 +139,8 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-
     background-color: var(--secondary);
+    width: fit-content;
   }
 
   li {
@@ -214,7 +215,7 @@
   background-color: var(--primary);
 
   border: 1px dashed CanvasText;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   box-shadow: 0 2px 3px 0 CanvasText;
 }
 
@@ -233,10 +234,10 @@
   font-size: 135%;
 
   border-left: 4px dotted var(--contrast);
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
 }
 
-.UNUSED-myWebSite main {
+.myWebSite main {
   width: 100%;
   /*
   display: flex;
@@ -264,15 +265,22 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 1ex;
+  gap: 0.5ex;
 
-  /*padding: 1rem 2rem;
-  width: fit-content;*/
-  margin: 3rem auto;
+  width: fit-content;
+  text-align: center;
+  padding: 1rem 2rem;
+  /*
+  width: 1rem auto;  
+  */
 
-  border: 1px solid silver;
-  border-radius: 1.5rem;
+  border: 1px solid CanvasText;
+  border-radius: 0.5rem;
   box-shadow: 0 0 2rem -1.25rem CanvasText;
+
+  input:focus {
+    color: SelectedItem;
+  }
 }
 
 /*
