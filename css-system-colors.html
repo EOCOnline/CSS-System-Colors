@@ -151,7 +151,9 @@
                   <div>The CSS System Colors provide a very limited palette. However it
                     is <a href="https://web.dev/articles/prefers-color-scheme" target="_blank">easy to extend them</a>
                     with your <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">own scheme</a> that
-                    adds additional accent colors. This micro-site only uses a few accent colors. <br />
+                    adds additional accent colors. This micro-site only uses a few arbitrary accent colors:
+
+                    <br />
                     Our arbitrary palette for this micro-site:
                     <div class="colorPalette">
                       <div class="primary">
@@ -170,6 +172,53 @@
                         </svg>Contrast
                       </div>
                     </div>
+
+                    <br />
+                    <details>
+                      <summary><b>tl;dr</b> - Minimal code to copy for your own site...</summary>
+                      <br />
+                      This just sets up one 'highlight' color. You can add more colors as needed.
+                      <pre><code>
+  root: {
+    color-scheme: light dark;
+  
+    --light-highlight: rgb(10,0,230);
+    --dark-highlight: rgb(108, 102, 237);
+    --highlight: light-dark(var(--light-highlight), var(--dark-highlight));
+  }
+                          </code></pre>
+                      You may also add a class to set the color:
+                      <pre><code>
+  root: {
+    .highlight {
+      color: var(--highlight);  
+      background-color: light-dark(var(--dark-highlight), var(--light-highlight));  
+    }
+  }
+                          </code></pre>
+                      If you use transparency/opacity, you can also add:
+                      <pre><code>
+  root: {
+    --light-highlight-rgb: 10,0,230;
+    --dark-highlight-rgb: 10,0,230;
+    --highlight-rgb: light-dark(var(--light-highlight-rgb), var(--dark-highlight-rgb));
+
+    .highlight-transparent {
+      color: rgba(var(--highlight-rgb), 0.5);  
+      background-color: rgba(var(--highlight-rgb), 0.5);  
+    }
+  }
+                        </code></pre>
+                      <br />
+                      Optionally you can also use:
+                      <pre><code>
+  @media (prefers-color-scheme: dark) {
+    /* custom dark mode styles here */
+  }
+                        </code></pre>
+                    </details>
+
+
                   </div>
                 </section>
                 <h3>About Us</h3>
@@ -198,7 +247,7 @@
 
 
               <footer>
-                <p>©Copyright Me, 2024</p>
+                ©2024 Me, Myself & I
               </footer>
             </div>
 

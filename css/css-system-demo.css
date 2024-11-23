@@ -43,17 +43,21 @@
   flex-wrap: wrap;
   /*justify-content: flex-start;*/
 
+  /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
   --light-primary: rgb(248, 172, 140);
+  --light-primary-rgb: 248, 172, 140;
   --light-secondary: rgb(251, 228, 196);
   --light-contrast: rgb(46, 155, 180);
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
   --dark-primary: rgb(138, 68, 189);
+  --dark-primary-rgb: 138, 68, 189;
   --dark-secondary: rgb(195, 26, 161);
   --dark-contrast: rgb(231, 143, 228);
 
   /* Use of the light-dark function REQUIRES that "color-scheme: light dark;" is set, generally at the root or the html tag */
   /* To use val's directly... */
   --primary: light-dark(var(--light-primary), var(--dark-primary));
+  --primary-rgb: light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));
   --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
   --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
 
@@ -78,6 +82,16 @@
   ul {
     color: CanvasText;
     background-color: Canvas;
+  }
+
+  code {
+    color: var(--contrast);
+    background-color: rgba(var(--primary-rgb), 0.8);
+    padding: 0;
+  }
+  pre {
+    background-color: rgba(var(--primary-rgb), 0.8);
+    margin: 0;
   }
 
   article {
@@ -197,8 +211,7 @@
   margin-right: 10px;
   float: right;
 
-  background-color: light-dark(var(--light-primary), var(--dark-primary));
-  color: light-dark(var(--light-bright), var(--dark-bright));
+  background-color: var(--primary);
 
   border: 1px dashed CanvasText;
   border-radius: 5px;
@@ -207,14 +220,23 @@
 
 .myWebSite blockquote {
   float: right;
-  height: 5rem;
-  margin: 0.5rem 0.5rem;
-  font-size: 85%;
-  border-left: 2px solid CanvasText;
+
+  background-color: var(--secondary);
+  color: #aaa;
+
+  padding: 0.5rem;
   padding-left: 1em;
+  margin: 0.5rem;
+  width: fit-content;
+
+  font-style: italic;
+  font-size: 135%;
+
+  border-left: 4px dotted var(--contrast);
+  border-radius: 0.5em;
 }
 
-.mmmmyWebSite main {
+.UNUSED-myWebSite main {
   width: 100%;
   /*
   display: flex;
@@ -227,12 +249,10 @@
 .myWebSite footer {
   background-color: Canvas;
   color: var(--contrast);
+  width: 100%;
+  padding-top: 0.5rem;
   text-align: center;
-  /*padding: 10px;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;*/
+  font-weight: bold;
 }
 
 .syscolors-break {
@@ -246,8 +266,8 @@
   align-items: start;
   gap: 1ex;
 
-  padding: 1rem 2rem 2rem;
-  width: fit-content;
+  /*padding: 1rem 2rem;
+  width: fit-content;*/
   margin: 3rem auto;
 
   border: 1px solid silver;
