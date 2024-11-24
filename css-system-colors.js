@@ -6,6 +6,9 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
 const logLevel = 1;
 const sourceJson = "css-system-colors.json";
+let hueSlider;
+let hueDemo;
+
 
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
@@ -13,12 +16,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   contrastValue = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");
-  syscolorsContainer = document.getElementById("syscolors-container");
+  syscolorsContainer = document.getElementById("syscolors-outer-container");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
 
   document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
   document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
+
+  hueSlider = document.querySelector('#hueSlider');
+  hueDemo = document.querySelector("#syscolors-hue-demo")
+  hueSlider.addEventListener("input", () => {
+    hueDemo.style.setProperty("--hue", hueSlider.value)
+    console.log("hueSlider.value set to " + hueSlider.value);
+  }
+  );
 
   updateContrast({ value: 97.5 });
   //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 3 seconds while debugging
@@ -87,7 +98,7 @@ function processJson(json) {
 
 // Process a list of system-colors, creating HTML cards for display
 function generateSystemColors(systemColorSet, elementID) {
-  console.table(systemColorSet);
+  if (logLevel > 1) console.table(systemColorSet);
   let i = 0;
   if (!systemColorSet) {
     console.error("No systemColorSet object!");

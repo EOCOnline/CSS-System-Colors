@@ -16,17 +16,17 @@
   <link rel="stylesheet" href="./css-system-colors.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Delius&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
   <script src="./css-system-colors.js"></script>
   <script src="./js/css-system-helpers.js"></script>
-  <script src="./js/css-system-cards.js"></script>
+  <script defer src="./js/css-system-cards.js"></script>
 
 </head>
 
 <body>
-  <div id="syscolors-container">
+  <div id="syscolors-outer-container">
 
-    <div id="syscolors-header">
+    <header>
       <a href="https://eoc.online" target="_blank">
         <img src="./images/favicon.png" alt="eoc.online logo"
           title="brought to you by eoc.online - Open Source Tooling for Emergency Operation Centers" height="60" />
@@ -39,18 +39,33 @@
         <a href="https://github.com/eoconline/css-system-colors" target="_blank" title="Download the source!"><img
             src="./images/github-mark.svg" height="40"></a>
       </span>
-    </div>
+    </header>
 
-    <div id="syscolors-options" class="syscolors-inner-container">
+    <div id="syscolors-options-container" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
       <label for="syscolors-page-mode"
         title="This sets the general page color mode. All panels have hardwired color modes, so this basically just changes the page background.">Page
-        color mode:</label>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color mode</a>:</label>
       <select id="syscolors-page-mode" onchange="setColor(this)">
-        <option value="auto" selected="selected">Light Dark (Browser Default)</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
+        <option value="normal" title="The element can be rendered using the page's color
+  scheme settings. If the page does not have a color scheme 
+  set, the element is rendered using the page's default color settings." selected="selected">Normal (Browser Default)
+        </option>
+        <option value="light dark"
+          title="The element can be rendered using the operating system's light (preferred) or dark color scheme.">Light
+          Dark</option>
+        <option value="dark light"
+          title="The element can be rendered using the operating system's dark (preferred) or light color scheme.">Light
+          Dark</option>
+        <option value="light" title="The element can be rendered using the operating system light color scheme">Light
+        </option>
+        <option value="dark" title="The element can be rendered using the operating system dark color scheme.">Dark
+        </option>
+        <option value="only light" title="Forbids the user agent from overriding the color scheme for the element.">Only
+          Light</option>
+        <option value="only dark" title="Forbids the user agent from overriding the color scheme for the element.">Only
+          Dark</option>
       </select>
       &nbsp; &nbsp; &nbsp;
 
@@ -65,11 +80,11 @@
 
       </label>
       <div title="As reported by navigator.userAgent" id="syscolors-user-agent-div">
-        System parameters: <span id="syscolors-user-agent"></span>
+        <b>System parameters:</b> <span id="syscolors-user-agent"></span>
       </div>
     </div>
 
-    <div id="syscolors-intro" class="syscolors-inner-container">
+    <div id="syscolors-intro-container" class="syscolors-inner-container">
       <details>
         <summary>Introduction</summary>
         <h1 id="css-system-colors-visual-demonstration">CSS System Colors Visual Demonstration</h1>
@@ -218,12 +233,13 @@
             <ul> CSS System Colors:
               <li><a href="https://codepen.io/sarajw/pen/xxzyOMZ"
                   target="_blank">https://codepen.io/sarajw/pen/xxzyOMZ</a></li>
-              <li><a href="https://codepen.io/sarajw/pen/eYwLaYp"
-                  target="_blank">https://codepen.io/sarajw/pen/eYwLaYp</a></li>
+
               <li><a href="https://4mrnhq.csb.app/" target="_blank">https://4mrnhq.csb.app/</a></li>
               <li><a href="https://x4qtf8.csb.app/" target="_blank">https://x4qtf8.csb.app/</a></li>
               <li><a href="https://projects.dutchcelt.com/system.css/example.html"
                   target="_blank">https://projects.dutchcelt.com/system.css/example.html</a></li>
+              <li><a href="https://drafts.csswg.org/css-color/#css-system-colorss/example.html"
+                  target="_blank">https://drafts.csswg.org/css-color/#css-system-colorss/example.html</a></li>
               <li><a href="https://simplecss.org/demo/" target="_blank">https://simplecss.org/demo/</a></li>
             </ul>
 
@@ -277,6 +293,10 @@
             interfaces that appear to be from the system. However, as several system
             colors are now defined to be &quot;generic&quot;, this risk is believed to be
             mitigated.&quot; <a href="https://www.w3.org/TR/css-color-4/#security">2</a></li>
+          <li>&quot;Authors may also use these keywords at any time, but should be careful to use
+            the colors in matching background-foreground pairs to ensure appropriate contrast,
+            as any particular contrast relationship across non-matching pairs (e.g. Canvas
+            and ButtonText) is not guaranteed.<a href="https://drafts.csswg.org/css-color/#css-system-colors">3</a></li>
         </ul>
         <h2 id="license">License</h2>
         <p>©2024 eoc.online under the permissive MIT License. Please note our contributions
@@ -302,10 +322,10 @@
               <span class="syscolors-color-span"><strong>System Color</strong></span>
               <span class="syscolors-desc-span"> &mdash; Description </span>
             </div>
-            <div class="syscolors-row-light">
+            <div class="syscolors-row-light ">
               <strong>This column displays colors in light mode</strong>
             </div>
-            <div class="syscolors-row-dark">
+            <div class="syscolors-row-dark Canvas">
               <strong>This column displays colors in dark mode</strong>
             </div>
           </div>
@@ -314,7 +334,7 @@
       </details>
     </div>
 
-    <div id="syscolors-current-grid" class="syscolors-inner-container">
+    <div id="syscolors-grid-container" class="syscolors-inner-container">
       <details>
         <summary id="syscolors-current-summary">System Colors Grid</summary>
 
@@ -453,35 +473,35 @@
                     <details>
                       <summary><b>tl;dr</b> &mdash; Minimal code to copy for your own site...</summary>
                       <br />
-                      This just sets up one 'highlight' color. You can add more colors as needed.
+                      This just sets up one 'primary' highlight. You can add more colors as needed.
                       <pre><code>
   root: {
     color-scheme: light dark;
   
-    --light-highlight: rgb(10,0,230);
-    --dark-highlight: rgb(108, 102, 237);
-    --highlight: light-dark(var(--light-highlight), var(--dark-highlight));
+    --light-primary: rgb(10,0,230);
+    --dark-primary: rgb(108, 102, 237);
+    --primary: light-dark(var(--light-primary), var(--dark-primary));
   }
                           </code></pre>
                       You may also add a class to set the color:
                       <pre><code>
   root: {
-    .highlight {
-      color: var(--highlight);  
-      background-color: light-dark(var(--dark-highlight), var(--light-highlight));  
+    .primary {
+      color: var(--primary);  
+      background-color: light-dark(var(--dark-primary), var(--light-primary));  
     }
   }
                           </code></pre>
                       If you use transparency/opacity, you can also add:
                       <pre><code>
   root: {
-    --light-highlight-rgb: 10,0,230;
-    --dark-highlight-rgb: 10,0,230;
-    --highlight-rgb: light-dark(var(--light-highlight-rgb), var(--dark-highlight-rgb));
+    --light-primary-rgb: 10,0,230;
+    --dark-primary-rgb: 10,0,230;
+    --primary-rgb: light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));
 
-    .highlight-transparent {
-      color: rgba(var(--highlight-rgb), 0.5);  
-      background-color: rgba(var(--highlight-rgb), 0.5);  
+    .primary-transparent {
+      color: rgba(var(--primary-rgb), 0.5);  
+      background-color: rgba(var(--primary-rgb), 0.5);  
     }
   }
                         </code></pre>
@@ -574,7 +594,81 @@
               </p>
             </form>
           </div>
-          <!--
+          <div id="syscolors-demo-remainder">
+            <h3>REMAINDER</h3>
+
+
+            <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the
+              author
+              having to specify any adjustments! Easy Peasy.</p>
+
+            TODO: Organize this page by categories.
+
+            <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
+              Fake Button</button>
+            - This uses the ButtonText, ButtonFace & ButtonBorder colors. Hover to see ___ color, then Click
+            for the ActiveText color! <br />
+
+            <div class="syscolors-demo-canvas" class="CanvasText Canvas">
+              paragraph of text. It is here to demonstrate how the system colors
+              can be used in a real-world scenario. The text color is set to
+              <code>system-canvasText</code> and the background color is set to
+              <code>system-canvas</code>.
+              <br />
+
+              <p>Weird it is that clicking the paragraph changes its color to ActiveText. bug in the code
+                that
+                I can't seem to find. It is not supposed to do that. But it does. So there.</p>
+              </p>
+            </div>
+            <div>regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear with out
+              author intervention if you change the color mode.</div>
+
+            <div>
+              Here is a link to a site: <a href="https://eoc.online" target="_blank">eoc.online</a> - the link color
+              is
+              set to <code>system-link</code> and the visited link color is set to <code>system-visited</code>.
+            </div>
+            <div>
+              Here is a 2nd link to the same <a href="https://eoc.online" target="_blank">eoc.online</a>, and
+              another
+              that
+              you can select some other time: <a href="https://github.com/eoc.online"
+                target="_blank">github.com/eoconline</a>
+              -
+              the link color is set to <code>system-link</code> and the
+              visited link color is set to <code>system-visited</code>.
+            </div>
+
+            <blockquote>
+              blockquote. The text color is set to <code>system-quotetext</code> and the background color is
+              set
+              to <code>system-quote</code>:
+
+            </blockquote>
+
+            <div>piece of <mark>marked</mark> text.</div>
+            <div class="markText">This entire paragraph uses MarkText color, but <mark class="mark">only this bit
+                uses
+                Mark for the background</mark> color.</div>
+
+            <pre>
+              <code>
+                code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
+              </code>
+            </pre>
+
+            <input type="text" value="text input field" class="Input-Text Input">input here!</input>
+            <div class="input" role="textbox" contenteditable>
+              text input field. The text color is set to InputText and the background color is set to
+              Input."
+            </div>
+            <div class="Highlight HighlightText">
+              Select some text to see Highlight (background) and HighlightText at work:
+              <p>paragraph.</p>
+              <div>This is some text in a div element.</div>
+            </div>
+            <!--
               <input type="button">
               <input type="checkbox">
               <input type="color">
@@ -598,406 +692,33 @@
               <input type="url">
               <input type="week">
             -->
+          </div>
         </div>
-
       </details>
     </div>
 
-    <!-- Thanks to https://projects.dutchcelt.com/system.css/example.html -->
-    <!-- or consider: https://simplecss.org/demo  -->
-    <!--h4>This section is thanks to https://projects.dutchcelt.com/system.css/example.html</h4>
-            <main>
-              <h1>Heading level 1</h1>
-              <h2>Heading level 2</h2>
-              <h3>Heading level 3</h3>
-              <h4>Heading level 4</h4>
-              <h5>Heading level 5</h5>
-              <h6>Heading level 6</h6>
+    <div id="syscolors-hue-container" class="syscolors-inner-container">
+      <!-- color-mix https://codepen.io/sarajw/pen/eYwLaYp -->
+      <details open>
+        <summary>Hue Demo</summary>
+        <div id="syscolors-hue-demo">
+          <div>
+            <label for="hueSlider">&nbsp; Hue: <span id="hueValue">222</span></label>
+            <input id="hueSlider" type="range" min="0" max="360" value="222">
 
-              <h2>Paragraph</h2>
-              <p>
-                Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. In id risus quis purus mollis
-                lobortis vel ac tellus. Nam pharetra lorem quis dui commodo dapibus.
-              </p>
-              <aside>Just a random block of text inside an aside element!</aside>
-              <p>
-                <svg viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg" style="border: 2px solid green;">
-                  <rect width="50" height="50" fill="Canvas">rect</rect>
-                  <text x="50%" y="10%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui"
-                    font-size="0.3em" fill="GrayText">
-                    Aspect Ratio 4:3
-                  </text>
-                </svg>If you want the image to float place it inside a <code>&lt;p&gt;</code>, <code>&lt;li&gt;</code>,
-                <code>&lt;dd&gt;</code>, or a <code>&lt;td&gt;</code>.
-              </p>
-              <p> Nunc accumsan molestie nisl non malesuada. In egestas tellus lectus, nec venenatis tellus pulvinar
-                vel. Fusce consectetur sodales ante, sed vehicula mauris pulvinar non. </p>
-              <p>
-                Normal, <abbr title="Abbreviations">abbr</abbr>, <del>del</del>, <dfn>dfn</dfn>, <em>em</em>,
-                <ins>ins</ins>, <mark>mark</mark>, <s>strike through</s>, <small>small</small>, <strong>strong</strong>,
-                <sub>sub</sub>, <sup>sup</sup>, <u>u</u>
-              </p>
-
-              <h2>Links</h2>
-              <p>
-                These are links:
-                <a href="?2017-06-2703%3A30%3A17" onclick="return false;">never visited link (just don't click or it
-                  will becomes visited)</a>, <a href="https://sarajoy.dev">visited link</a>. Mouse hover to see effects.
-              </p>
-
-              <h2>Lists</h2>
-              <h3>Unordered list</h3>
-              <ul>
-                <li>List item</li>
-                <li>
-                  List item
-                  <ul>
-                    <li>List item</li>
-                    <li>List item</li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil vel nemo deleniti, ipsam
-                      inventore voluptate, tempora quae obcaecati aut voluptatum non?
-                      <ul>
-                        <li>List item</li>
-                        <li>List item</li>
-                      </ul>
-                    </li>
-                    <li>List item</li>
-                  </ul>
-                </li>
-                <li>List item</li>
-              </ul>
-
-              <h3>Ordered list</h3>
-              <ol>
-                <li>List item with a much longer description or more content.</li>
-                <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil vel nemo deleniti, ipsam inventore
-                  voluptate, tempora quae obcaecati aut voluptatum non? Dignissimos!!
-                </li>
-                <li>
-                  List item
-                  <ol>
-                    <li>Nested List Item</li>
-                    <li>Nested List Item</li>
-                  </ol>
-                </li>
-                <li>List item</li>
-              </ol>
-
-              <h3>Mixed</h3>
-              <ul>
-                <li>List item with a much longer description or more content.</li>
-                <li>List item</li>
-                <li>
-                  List item
-                  <ol>
-                    <li>Nested list item</li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil commodi odit quae ipsa quaerat
-                      enim.
-                    </li>
-                    <li>Nested list item</li>
-                  </ol>
-                </li>
-                <li>List item</li>
-              </ul>
-              <h3>Definition list</h3>
-              <dl>
-                <dt>Definition list</dt>
-                <dd>
-                  Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </dd>
-                <dt>Lorem ipsum dolor sit amet</dt>
-                <dd>
-                  Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  consequat.
-                </dd>
-              </dl>
-              <h3>Details &amp; Summary</h3>
-              <details>
-                <summary>Question 1</summary>
-                <p>
-                  <strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac
-                  turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec
-                  eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat
-                  sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt.
-                  <a href="#" onclick="return false;">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.
-                </p>
-                <details>
-                  <summary>Related documents</summary>
-                  <p>
-                    Yes, this works. But in general be careful with nesting the
-                    <code>&lt;details&gt;</code> element.
-                  </p>
-                  <ul>
-                    <li>
-                      <a href="#" onclick="return false;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-                    </li>
-                    <li><a href="#" onclick="return false;">Aliquam tincidunt mauris eu risus.</a></li>
-                    <li>
-                      <a href="#" onclick="return false;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-                    </li>
-                    <li><a href="#" onclick="return false;">Aliquam tincidunt mauris eu risus.</a></li>
-                  </ul>
-                </details>
-              </details>
-              <details>
-                <summary>Question 2</summary>
-                <p>
-                  Duis consequat metus et eros rutrum, interdum facilisis urna interdum. Etiam facilisis diam in
-                  libero varius ultricies id id est. Sed lacinia pellentesque sem vel sagittis.
-                </p>
-              </details>
-
-              <h2>Blockquote</h2>
-              <blockquote>
-                Those people who think they know everything are a great annoyance to those of us who do. -
-                <cite>Isaac Asimov</cite>
-              </blockquote>
-
-              <h2>Code</h2>
-              <p>
-                This is inline code <code>&lt;div&gt;div element&lt;/div&gt;</code>. This is sample output
-                <samp>sample</samp> And below is block code.
-              </p>
-              <pre>
-&#x3C;!DOCTYPE html&#x3E;
-&#x3C;html&#x3E;
-&#x3C;head&#x3E;
-&#x3C;title&#x3E;Hello World&#x3C;/title&#x3E;
-&#x3C;/head&#x3E;
-&#x3C;body&#x3E;
-&#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#x3C;/p&#x3E;
-&#x3C;/body&#x3E;
-&#x3C;/html&#x3E;</pre>
-              <p>
-                The input keyboard <kbd>Ctrl</kbd>+<kbd>S</kbd>. This is variable: <var>y</var> =
-                <var>m</var><var>x</var> + <var>b</var>
-              </p>
-
-              <h2>Table</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Table heading</th>
-                    <th>Table heading</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Table footer</th>
-                    <th>Table footer</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Table data</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                  </tr>
-                  <tr>
-                    <td>Table data</td>
-                    <td>Table data</td>
-                  </tr>
-                  <tr>
-                    <td>Table data</td>
-                    <td>Table data</td>
-                  </tr>
-                  <tr>
-                    <td>Table data</td>
-                    <td>Table data</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <h2>Buttons &amp; Inputs</h2>
-              <p>
-                <button disabled="disabled">Disabled</button>
-                <button type="button">Cancel</button>
-                <button type="submit">Submit</button>
-              </p>
-              <p style="display: flex; flex-direction: column; align-items: start; gap: 1ex">
-                <input type="text" placeholder="placeholder" />
-                <input type="radio" />
-                <input type="checkbox" />
-                <input type="file" />
-                <input type="range" />
-                <input type="number" />
-                <input type="date" />
-                <progress max="100" value="30"></progress>
-                <select id="select" required="required">
-                  <option>select</option>
-                  <optgroup label="Group A">
-                    <option>option 1a</option>
-                    <option>option 2a</option>
-                  </optgroup>
-                  <optgroup label="Group B">
-                    <option>option 1b</option>
-                    <option>option 2b</option>
-                  </optgroup>
-                </select>
-                <textarea id="textarea"></textarea>
-              </p>
-
-              <h2>Figure</h2>
-              <figure>
-                <svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="400" height="225" fill=Canvas></rect>
-                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui"
-                    font-size="0.2em;" fill=CanvasText>
-                    Aspect Ratio 16:9
-                  </text>
-                </svg>
-                <figcaption>This is a figcaption</figcaption>
-              </figure>
-            </main-->
-
-    <!--details>
-              <summary>Details &amp; Summary</summary>
-
-              <div class="Canvas">Canvas - application content or documents
-
-                <div class="Accent">Accented - accented user interface controls</div>
-                <div class="Field">Field - input fields</div>
-                <div class="Mark">Marked - specially marked with 'mark' tag</div>
-                <div class="ButtonFace">ButtonFace - push buttons</div>
-                <div class="SelectedItem">SelectedItem - selected items</div>
-                <div class="Selection">Selection - Text of selected text Background of selected text,
-                  for example from : :selection</div>
-
-                <a href="#" class="a:link">a:link - non-active, non-visited links</a><br />
-                <a href="#" class="a.visited">a.visited - visited links</a><br />
-                <a href="#" class="a:hover">a:hover - hovered links</a><br />
-                <a href="#" class="a:focus">a:focus - focused links</a><br />
-                <a href="#" class="a:active">a:active - active links</a><br />
-
-                <div class="a:link">a:link - non-active, non-visited links</div>
-                <div class="a.visited">a.visited - visited links</div>
-                <div class="a:hover">a:hover - hovered links</div>
-                <div class="a:focus">a:focus - focused links</div>
-                <div class="a:active">a:active - active links</div>
-                <div class="GrayText">GrayText - disabled text</div>
-              </div>
-              
-            // Field - input fields
-            // Mark - specially marked with 'mark' tag
-            // ButtonFace - push buttons
-            // SelectedItem - selected items
-            // ::selection - Text of selected text Background of selected text, for example from : :selection
-            // a:link - non-active, non-visited links
-            // a.visited - visited links
-            // a:hover - hovered links
-            // a:focus - focused links
-            // a:active - active links
-            // GrayText - disabled text
--->
-
-
-    <!-- color-scheme(Pertinent?!) & color-mix https://codepen.io/sarajw/pen/eYwLaYp -->
-    <!--div style="padding: 1rem;
-  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
-  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
-          ">????????????
-
-
-                <div>
-
-                  <label for="hueSlider">&nbsp; Hue:</label>
-                  <input id="hueSlider" type="range" min="0" max="360" value="222">
-
-                  <div>Theme color,
-                    <br>
-                    <div class="oklch"></div> in OKLCH color space
-                    <br>
-                    <div class="hsl"></div> in HSL color space
-                  </div>
-                  <p class="oklch">Here's some themed text in a themed box :) (OKLCH)</p>
-                  <p class="hsl">Here's some themed text in a themed box :) (HSL)</p>
-
-                </div>
-
-              </div-->
-
-    <!--div>
-
-                <p>page demonstrating the use of CSS System Colors in a real-world scenario. The text color is set to
-                  <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
-                </p>
-                <br />
-                <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the
-                  author
-                  having to specify any adjustments! Easy Peasy.</p>
-
-                TODO: Organize this page by categories.
-
-                <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
-                  Fake Button</button>
-                - This uses the ButtonText, ButtonFace & ButtonBorder colors. Hover to see ___ color, then Click
-                for the ActiveText color! <br />
-
-                <div class="syscolors-demo-canvas" class="CanvasText Canvas">
-                  paragraph of text. It is here to demonstrate how the system colors
-                  can be used in a real-world scenario. The text color is set to
-                  <code>system-canvasText</code> and the background color is set to
-                  <code>system-canvas</code>.
-                  <br />
-
-                  <p>Weird it is that clicking the paragraph changes its color to ActiveText. bug in the code
-                    that
-                    I can't seem to find. It is not supposed to do that. But it does. So there.</p>
-                  </p>
-                </div>
-                <div>regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear with out
-                  author intervention if you change the color mode.</div>
-
-                <div>
-                  Here is a link to a site: <a href="https://eoc.online" target="_blank">eoc.online</a> - the link color
-                  is
-                  set to <code>system-link</code> and the visited link color is set to <code>system-visited</code>.
-                </div>
-                <div>
-                  Here is a 2nd link to the same <a href="https://eoc.online" target="_blank">eoc.online</a>, and
-                  another
-                  that
-                  you can select some other time: <a href="https://github.com/eoc.online"
-                    target="_blank">github.com/eoconline</a> -
-                  the link color is set to <code>system-link</code> and the
-                  visited link color is set to <code>system-visited</code>.
-                </div>
-
-                <blockquote>
-                  blockquote. The text color is set to <code>system-quotetext</code> and the background color is
-                  set
-                  to <code>system-quote</code>:
-
-                </blockquote>
-
-                <div>piece of <mark>marked</mark> text.</div>
-                <div class="markText">This entire paragraph uses MarkText color, but <mark class="mark">only this bit
-                    uses
-                    Mark for the background</mark> color.</div>
-
-                <pre>
-              <code>
-                code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
-              </code>
-            </pre>
-
-                <input type="text" value="text input field" class="Input-Text Input">input here!</input>
-                <div class="input" role="textbox" contenteditable>
-                  text input field. The text color is set to InputText and the background color is set to
-                  Input."
-                </div>
-
-                <div class="Highlight HighlightText">
-                  Select some text to see Highlight (background) and HighlightText at work:
-                  <p>paragraph.</p>
-                  <div>This is some text in a div element.</div>
-                </div>
-              </div-->
-
-
+          </div>
+          <div>Theme color,
+            <br>
+            <div class="oklch">class="oklch"</div> in OKLCH color space
+            <br>
+            <div class="hsl">class="hsl"</div> in HSL color space
+          </div>
+          <br />
+          <p class="oklch">Here's some themed text in a themed box :) (OKLCH)</p>
+          <p class="hsl">Here's some themed text in a themed box :) (HSL)</p>
+        </div>
+      </details>
+    </div>
 
     <div id="syscolors-deprecated-table-container" class="syscolors-inner-container">
       <details>
@@ -1010,10 +731,10 @@
               <span class="syscolors-color-span"><strong>Deprecated System Color</strong></span>
               <span class="syscolors-desc-span"> &mdash; Description </span>
             </div>
-            <div class="syscolors-row-light">
+            <div class="syscolors-row-light Canvas">
               <strong>This column displays deprecated-colors in light mode</strong>
             </div>
-            <div class="syscolors-row-dark">
+            <div class="syscolors-row-dark Canvas">
               <strong>This column displays deprecated-colors in dark mode</strong>
             </div>
           </div>
@@ -1021,7 +742,7 @@
       </details>
     </div>
 
-    <div id="syscolors-deprecated" class="syscolors-inner-container">
+    <div id="syscolors-deprecated-table-container" class="syscolors-inner-container">
       <details>
         <summary id="syscolors-deprecated-summary">
           Deprecated System Color Grid
@@ -1049,10 +770,6 @@
         </button>
       </details>
     </div>
-
-
-
-
 
     <div id="syscolors-footer" class="syscolors-inner-container">
       <a href="https://eoc.online" target="_blank" title="Open source tooling for Emergency Operation Centers">©2024
