@@ -1,3 +1,4 @@
+</span>">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,32 +45,32 @@
     <div id="syscolors-options-container" class="syscolors-inner-container">
       Options: &nbsp; &nbsp;
 
-      <label for="syscolors-page-mode"
-        title="This sets the general page color mode. All panels have hardwired color modes, so this basically just changes the page background.">Page
+      <label for="syscolors-page-mode" title="This sets the general page color mode. All panels
+        have hardwired color modes, so this basically just changes the page background.">Page
         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color mode</a>:</label>
       <select id="syscolors-page-mode" onchange="setColor(this)">
-        <option value="normal" title="The element can be rendered using the page's color
-  scheme settings. If the page does not have a color scheme 
-  set, the element is rendered using the page's default color settings." selected="selected">Normal (Browser Default)
-        </option>
-        <option value="light dark"
-          title="The element can be rendered using the operating system's light (preferred) or dark color scheme.">Light
-          Dark</option>
-        <option value="dark light"
-          title="The element can be rendered using the operating system's dark (preferred) or light color scheme.">Light
-          Dark</option>
-        <option value="light" title="The element can be rendered using the operating system light color scheme">Light
-        </option>
-        <option value="dark" title="The element can be rendered using the operating system dark color scheme.">Dark
-        </option>
-        <option value="only light" title="Forbids the user agent from overriding the color scheme for the element.">Only
-          Light</option>
-        <option value="only dark" title="Forbids the user agent from overriding the color scheme for the element.">Only
-          Dark</option>
+        <option class="floater" value="normal" data-title="Page can be rendered using the page's color
+          scheme settings. If the page does not have a color scheme
+          set, the element is rendered using the page's default color settings." selected="selected">Normal
+          (Browser Default)</option>
+        <option class="floater" value="light dark" data-title="Page can be rendered using the operating
+          system's light (preferred) or dark color scheme.">Light Dark (Render page using
+          O/S's light (preferred) or dark color scheme.)<span>CSS tooltip showing up when your mouse over the
+            link</span></option>
+        <option class="floater" value="dark light" data-title="Page can be rendered using the operating
+          system's dark (preferred) or light color scheme.">Dark Light</option>
+        <option class="floater" value="light" data-title="Page can be rendered using the operating system light
+          color scheme.">Light</option>
+        <option class="floater" value="dark" data-title="Page can be rendered using the operating system dark
+          color scheme.">Dark</option>
+        <option class="floater" value="only light" data-title="Forbids the user agent from overriding the color scheme
+          for the element.">Only Light</option>
+        <option class="floater" value="only dark" data-title="Forbids the user agent from overriding the color scheme
+          for the element.">Only Dark</option>
       </select>
       &nbsp; &nbsp; &nbsp;
 
-      <label for="syscolors-sorted" title="Sort grid & table colors by category (vs. name)">Sort by category:</label>
+      <label for="syscolors-sorted" title="Sort grid & table colors by category (vs. name)">Sort by Category:</label>
       <input type="checkbox" onclick="setSortOrder(this)" id="syscolors-sorted" />
       &nbsp; &nbsp; &nbsp;
 
@@ -361,7 +362,7 @@
       <details>
         <summary>System Color Example</summary>
         <div id="syscolors-demo">
-          <div id="syscolors-demo-light">
+          <div id="syscolors-demo-light" class="syscolors-inner-container">
             <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
 
             <!-- Try to show a useful page using ALL the system colors, i.e.:
@@ -594,7 +595,7 @@
               </p>
             </form>
           </div>
-          <div id="syscolors-demo-remainder">
+          <!--div id="syscolors-demo-remainder">
             <h3>REMAINDER</h3>
 
 
@@ -668,7 +669,8 @@
               <p>paragraph.</p>
               <div>This is some text in a div element.</div>
             </div>
-            <!--
+          </div-->
+          <!--
               <input type="button">
               <input type="checkbox">
               <input type="color">
@@ -692,30 +694,48 @@
               <input type="url">
               <input type="week">
             -->
-          </div>
         </div>
       </details>
     </div>
 
     <div id="syscolors-hue-container" class="syscolors-inner-container">
-      <!-- color-mix https://codepen.io/sarajw/pen/eYwLaYp -->
       <details open>
-        <summary>Hue Demo</summary>
+        <summary>Color Scheme & Color-Mix</summary>
         <div id="syscolors-hue-demo">
+          Whether in a light or dark mode, theme colors can be nicely mixed in OKLCH & HSL
+          color spaces. This demo is courtesy of Sara Joy's
+          <a href="https://codepen.io/sarajw/pen/eYwLaYp" target="_blank"> CodePen</a> and her article explaining
+          color schemes at
+          <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank"> https://sarajoy.dev/blog/color-scheme/</a>
+          <!--div class="syscolors-break"-->
+          <br />
+          <br />
           <div>
-            <label for="hueSlider">&nbsp; Hue: <span id="hueValue">222</span></label>
+            <label for="hueSlider">Set the <b>Hue: <span class="hueValue">222</span></b></label>
             <input id="hueSlider" type="range" min="0" max="360" value="222">
-
-          </div>
-          <div>Theme color,
-            <br>
-            <div class="oklch">class="oklch"</div> in OKLCH color space
-            <br>
-            <div class="hsl">class="hsl"</div> in HSL color space
           </div>
           <br />
-          <p class="oklch">Here's some themed text in a themed box :) (OKLCH)</p>
-          <p class="hsl">Here's some themed text in a themed box :) (HSL)</p>
+          <div id="syscolors-hue-panels">
+
+            <div id="syscolors-hue-light" class="syscolors-inner-container">
+              <h3>Color-mix Panel: <span class="syscolors-hue-mode"></span> Color Mode</h3>
+              <div>
+                Theme color:
+                <br>
+                <div class="oklch"></div> in <a href="https://oklch.com" target="_blank">OKLCH color space</a>
+                <br>
+                <div class="hsl"></div> in <a href="https://hslpicker.com" target="_blank">HSL color space</a>
+              </div>
+              <br />
+              <p class="oklch">Themed text inside a themed paragraph<br />
+                oklch(50% 0.25 <span class="hueValue">222</span>)
+              </p>
+              <p class="hsl">Themed text inside a themed paragraph<br />
+                hsl(<span class="hueValue">222</span> 75% 50%)
+              </p>
+            </div>
+
+          </div>
         </div>
       </details>
     </div>
