@@ -261,9 +261,8 @@ https://www.w3docs.com/tools/code-editor/10122
  * Intro Panel
  */
 #syscolors-intro {
-  --noop: var(--noop);
   img {
-    max-width: 800px;
+    max-width: 80%;
     border: 1px solid black;
     border-radius: 0.5em;
   }
