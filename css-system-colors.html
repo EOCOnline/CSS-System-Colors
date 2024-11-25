@@ -51,21 +51,29 @@
       <select id="syscolors-page-mode" onchange="setColor(this)">
         <option class="floater" value="normal" data-title="Page can be rendered using the page's color
           scheme settings. If the page does not have a color scheme
+          set, the element is rendered using the page's default color settings." title="Page can be rendered using the page's color
+          scheme settings. If the page does not have a color scheme
           set, the element is rendered using the page's default color settings." selected="selected">Normal
           (Browser Default)</option>
-        <option class="floater" value="light dark" data-title="Page can be rendered using the operating
-          system's light (preferred) or dark color scheme.">Light Dark (Render page using
-          O/S's light (preferred) or dark color scheme.)<span>CSS tooltip showing up when your mouse over the
-            link</span></option>
-        <option class="floater" value="dark light" data-title="Page can be rendered using the operating
+        <option class="floater" value="light dark" title="Page can be rendered using the operating
+          system's light (preferred) or dark color scheme." data-title="Page can be rendered using the operating
+          system's light (preferred) or dark color scheme.">Light Dark</option>
+        <!-- <span>CSS tooltip showing up when your mouse over the
+            link</span>(Render page using O/S's light (preferred) or dark color scheme.) -->
+        <option class="floater" value="dark light" title="Page can be rendered using the operating
+        system's dark (preferred) or light color scheme." data-title="Page can be rendered using the operating
           system's dark (preferred) or light color scheme.">Dark Light</option>
-        <option class="floater" value="light" data-title="Page can be rendered using the operating system light
+        <option class="floater" value="light" title="Page can be rendered using the operating system light
+        color scheme." data-title="Page can be rendered using the operating system light
           color scheme.">Light</option>
-        <option class="floater" value="dark" data-title="Page can be rendered using the operating system dark
+        <option class="floater" value="dark" title="Page can be rendered using the operating system dark
+        color scheme." data-title="Page can be rendered using the operating system dark
           color scheme.">Dark</option>
-        <option class="floater" value="only light" data-title="Forbids the user agent from overriding the color scheme
+        <option class="floater" value="only light" title="Forbids the user agent from overriding the color scheme
+        for the element." data-title="Forbids the user agent from overriding the color scheme
           for the element.">Only Light</option>
-        <option class="floater" value="only dark" data-title="Forbids the user agent from overriding the color scheme
+        <option class="floater" value="only dark" title="Forbids the user agent from overriding the color scheme
+        for the element." data-title="Forbids the user agent from overriding the color scheme
           for the element.">Only Dark</option>
       </select>
       &nbsp; &nbsp; &nbsp;
