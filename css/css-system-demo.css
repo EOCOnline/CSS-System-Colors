@@ -5,41 +5,23 @@
 *
 */
 
-/*
-#syscolors-demo {
-  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample *
-  a:link {
-    color: LinkText;
-  }
-  a:visited {
-    color: VisitedText;
-  }
-
-  /* NOT included in above CSS spec: :hover & :focus 
-  a:hover {
-    color: light-dark(var(--light-primary), var(--dark-primary));
-  }
-*
-
-  a:active {
-    color: ActiveText;
-  }*
+#sssyscolors-demo-light,
+#syscolors-demo-dark {
+  width: fit-content;
 }
-*/
 
 .myWebSite {
   padding: 1rem;
-  /* width: fit-content;*/
+  width: fit-content;
   max-width: 90%;
   margin: 1rem auto;
 
   border: 1px solid CanvasText;
   border-radius: 0.5rem;
-  box-shadow: 0 0 2rem -1.25rem CanvasText;
+  box-shadow: 0 0 2rem -1.25rem Canvas;
 
   display: flex;
   flex-wrap: wrap;
-  /*justify-content: flex-start;*/
 
   /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
   --light-primary: rgb(248, 172, 140);
@@ -52,7 +34,8 @@
   --dark-secondary: rgb(195, 26, 161);
   --dark-contrast: rgb(231, 143, 228);
 
-  /* Use of the light-dark function REQUIRES that "color-scheme: light dark;" is set, generally at the root or the html tag */
+  /* Use of the light-dark function REQUIRES that "color-scheme: light dark;" is set, 
+     generally at the root or the html tag */
   /* To use val's directly... */
   --primary: light-dark(var(--light-primary), var(--dark-primary));
   --primary-rgb: light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));
@@ -88,11 +71,6 @@
     padding: 0;
   }
 
-  .UNUSED-pre {
-    background-color: rgba(var(--primary-rgb), 0.8);
-    margin: 0;
-  }
-
   article {
     color: var(--contrast);
     background-color: Canvas;
@@ -116,7 +94,6 @@
 
     div {
       width: fit-content;
-      /* height: 6rem;*/
       padding: 0.25rem;
       margin: 0.5rem;
       border-radius: 0.5rem;
@@ -171,8 +148,8 @@
   display: flex;
   justify-content: space-between;
   align-content: stretch;
-
   width: 90%;
+  /*max-width: 90%;*/
   padding: 1rem;
 
   background-color: Canvas;
@@ -238,13 +215,8 @@
 }
 
 .myWebSite main {
+  /*width: fit-content;*/
   width: 100%;
-  /*
-  display: flex;
-  align-items: center;
-
-  flex-wrap: wrap;
-  justify-content: flex-start;*/
 }
 
 .myWebSite footer {
@@ -256,11 +228,6 @@
   font-weight: bold;
 }
 
-.syscolors-break {
-  flex-basis: 100%;
-  height: 0;
-}
-
 .myForm {
   display: flex;
   flex-direction: column;
@@ -268,81 +235,15 @@
   gap: 0.5ex;
 
   width: fit-content;
-  text-align: center;
+
   padding: 1rem 2rem;
-  /*
-  width: 1rem auto;  
-  */
+  margin: 1rem auto;
 
   border: 1px solid CanvasText;
   border-radius: 0.5rem;
-  box-shadow: 0 0 2rem -1.25rem CanvasText;
+  box-shadow: 0 0 2rem -1.25rem Canvas;
 
   input:focus {
     color: SelectedItem;
   }
 }
-
-/*
-Canvas - application content or documents
-Accent - accented user interface controls
-Field - input fields
-Mark - specially marked with 'mark' tag
-ButtonFace - push buttons
-SelectedItem - selected items
-::selection - Text of selected text Background of selected text, for example from : :selection
-a:link - non-active, non-visited links
-a.visited - visited links
-a:hover - hovered links
-a:focus - focused links
-a:active - active links
-GrayText - disabled text
-*/
-
-/* https://codepen.io/sarajw/pen/eYwLaYp */
-/* https://codepen.io/sarajw/pen/eYwLaYp*/
-/*
-#syscolors-demo-container {
-  color: CanvasText;
-  background-color: Canvas;
-  padding: 1rem;
-
-  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
-  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
-}
-
-#syscolors-demo-container > div {
-  margin-block: 1rem 0;
-}
-
-#syscolors-demo-container {
-  div.oklch {
-    background-color: var(--theme-oklch);
-  }
-
-  div.hsl {
-    background-color: var(--theme-hsl);
-  }
-
-  p {
-    padding: 1rem;
-  }
-
-  p.oklch {
-    color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
-    background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
-  }
-
-  p.hsl {
-    color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
-    background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
-  }
-}
-
-div > div {
-  display: inline-block;
-  width: 2rem;
-  height: 1rem;
-  border: 1px solid;
-}
-  */

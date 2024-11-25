@@ -292,7 +292,9 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-grid-dark,
 #syscolors-deprecated-grid,
 #syscolors-deprecated-light,
-#syscolors-deprecated-dark {
+#syscolors-deprecated-dark /*,
+#syscolors-demo-light,
+#syscolors-demo-dark*/ {
   display: flex;
   flex-wrap: wrap;
   /*justify-content: flex-start;*/
@@ -313,38 +315,20 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-demo {
   display: flex;
   flex-wrap: wrap;
+
+  /*
+  margin: 1rem;
+  width: fit-content;*/
   margin: 5px;
   padding: 5px;
 }
 
-/* done by syscolors-light/dark classes above*
-#syscolors-demo-light {
-  /*color-scheme: light;
-  margin-right: 1%;
-  width: 47%;
-  width: 1rem auto;
-}
-  
-#syscolors-demo-dark {
-  color-scheme: dark;
-  margin: 0px;
-  width: 47%;
-}
-*/
 /**********************************************
  * Hue Panels
  * NOTE: Also see syscolors-demo.css & system-colors.css!
  */
 
-/* #sssyscolors-hue-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-*/
-
 #syscolors-hue-demo {
-  /*display: flex;
-  flex-wrap: wrap;*/
   margin: 0px;
   padding: 1rem 0 0 1rem;
 }
@@ -352,9 +336,12 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-hue-panels {
   display: flex;
   flex-wrap: wrap;
+
+  /* remove the following... "*/
   margin: 0rem;
   padding: 0rem;
 }
+
 #syscolors-hue-light,
 #syscolors-hue-dark {
   margin-right: 1rem;
@@ -393,7 +380,6 @@ https://www.w3docs.com/tools/code-editor/10122
   p {
     margin: 0.5rem 0;
     padding: 0.75rem;
-
     height: 3.5rem;
     border-radius: 0.5em;
   }
@@ -402,13 +388,10 @@ https://www.w3docs.com/tools/code-editor/10122
     color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
     background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
   }
+
   p.hsl {
     color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
     background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
-  }
-
-  #UNUSEDhueValue::before {
-    content: calc(var(--hue));
   }
 }
 
