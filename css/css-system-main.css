@@ -157,7 +157,7 @@ blockquote {
 /***********************************
  * Page Header
  */
-header {
+#syscolors-outer-container header {
   margin: 5px;
   padding: 5px;
   text-decoration: none;
@@ -299,28 +299,20 @@ https://www.w3docs.com/tools/code-editor/10122
   flex-wrap: wrap;
   /*justify-content: flex-start;*/
 }
+
 #syscolors-grid {
   padding: 10px;
 }
+
 /**********************************************
  * Demonstration Panels
  * NOTE: Also see syscolors-demo.css & system-colors.css!
  */
 
-#syscolors-demo-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 #syscolors-demo {
   display: flex;
   flex-wrap: wrap;
-
-  /*
-  margin: 1rem;
-  width: fit-content;*/
-  margin: 5px;
-  padding: 5px;
+  padding: 1rem;
 }
 
 /**********************************************
