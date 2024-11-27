@@ -1,11 +1,13 @@
 /**********************************************
  * Color Table Panel
- * NOTE: Also see syscolors-current-grid.css & system-colors.css!
+ * NOTE: syscolors-current-grid.css defines the grid layout for the color table,
+ * and system-colors.css contains the color definitions used in this table.
  **/
 
 .syscolors-row-card {
   display: inline-flex;
-  justify-content: space-between;
+  align-self: center;
+  justify-self: stretch;
   place-self: center stretch;
 
   width: 525px;
@@ -80,11 +82,10 @@
   padding: 3px;
 
   width: 200px;
-  height: val(--rowHeight);
+  height: var(--rowHeight);
 }
 
 .syscolors-row-text .syscolors-category-span {
-  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: absolute;
@@ -102,7 +103,7 @@
   border: 2px solid black;
   padding: 5px;
   border-radius: 0.5em;
-  height: val(--rowHeight);
+  height: var(--rowHeight);
   width: 150px;
 }
 
@@ -110,7 +111,7 @@
   color-scheme: dark;
   border: 2px solid black;
   padding: 5px;
-  border-radius: 0.5em;
+  height: var(--rowHeight);
   height: val(--rowHeight);
   width: 150px;
 }

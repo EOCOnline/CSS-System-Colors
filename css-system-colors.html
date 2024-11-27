@@ -1,11 +1,9 @@
-</span>">
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>CSS System Colors</title>
 
@@ -19,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
   <script src="./css-system-colors.js"></script>
-  <script src="./js/css-system-helpers.js"></script>
+  <script defer src="./js/css-system-helpers.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
 
 </head>
@@ -28,17 +26,17 @@
   <div id="syscolors-outer-container">
 
     <header>
-      <a href="https://eoc.online" target="_blank">
+      <a href="https://eoc.online" target="_blank" rel="noopener noreferrer">
         <img src="./images/favicon.png" alt="eoc.online logo"
           title="brought to you by eoc.online - Open Source Tooling for Emergency Operation Centers" height="60" />
       </a>
-      <a href="https://github.com/eoconline/css-system-colors" target="_blank" style="text-decoration:none;">
+      <a href="https://github.com/eoconline/css-system-colors" target="_blank" class="no-decoration">
         <h1>CSS System Colors</h1>&nbsp;&nbsp;
         <h3>Visually demonstrate CSS System Colors</h3>
       </a>
       <span id="syscolors-github">
-        <a href="https://github.com/eoconline/css-system-colors" target="_blank" title="Download the source!"><img
-            src="./images/github-mark.svg" height="40"></a>
+        <a href="https://github.com/eoconline/css-system-colors" target="_blank" rel="noopener noreferrer"
+          title="Download the source!"><img src="./images/github-mark.svg" height="40"></a>
       </span>
     </header>
 
@@ -58,8 +56,6 @@
         <option class="floater" value="light dark" title="Page can be rendered using the operating
           system's light (preferred) or dark color scheme." data-title="Page can be rendered using the operating
           system's light (preferred) or dark color scheme.">Light Dark</option>
-        <!-- <span>CSS tooltip showing up when your mouse over the
-            link</span>(Render page using O/S's light (preferred) or dark color scheme.) -->
         <option class="floater" value="dark light" title="Page can be rendered using the operating
         system's dark (preferred) or light color scheme." data-title="Page can be rendered using the operating
           system's dark (preferred) or light color scheme.">Dark Light</option>
@@ -102,7 +98,7 @@
           preferences.</p>
         <p>This page provides a nice visual reference to the system-colors - but the
           displayed colors are <strong>specific to this browser/operating System</strong>!</p>
-        <p><img src="images/Screenshot-Options&amp;SystemColorTable.png" alt="alt text"></p>
+        <p><img src="images/Screenshot-Options&amp;SystemColorTable.png" alt="System Color Table"></p>
         <blockquote>
           <p>Avoid specifying different colors for (light or dark
             mode)[<a
@@ -149,9 +145,9 @@
               &#39;dark&#39;.</p>
             <p>The actual color used for the backgrounds is then displayed in RGA and hex
               notation. (On a few colors the colors have some level of opacity so are
-              reported in the RGBA format.)
-              <img src="images/Screenshot-SystemColorTable.png" alt="System Color Table">
-            </p>
+              reported in the RGBA format.)</p>
+            <img src="images/Screenshot-SystemColorTable.png" alt="System Color Table" />
+
           </li>
           <li>
             <p><strong>System Color Grid:</strong> This is fairly similar to the table but groups the
@@ -240,32 +236,37 @@
           <details>
             <summary>References for the Eager</summary>
             <ul> CSS System Colors:
-              <li><a href="https://codepen.io/sarajw/pen/xxzyOMZ"
-                  target="_blank">https://codepen.io/sarajw/pen/xxzyOMZ</a></li>
+              <li><a href="https://codepen.io/sarajw/pen/xxzyOMZ" target="_blank"
+                  rel="noopener noreferrer">https://codepen.io/sarajw/pen/xxzyOMZ</a></li>
 
-              <li><a href="https://4mrnhq.csb.app/" target="_blank">https://4mrnhq.csb.app/</a></li>
-              <li><a href="https://x4qtf8.csb.app/" target="_blank">https://x4qtf8.csb.app/</a></li>
-              <li><a href="https://projects.dutchcelt.com/system.css/example.html"
-                  target="_blank">https://projects.dutchcelt.com/system.css/example.html</a></li>
-              <li><a href="https://drafts.csswg.org/css-color/#css-system-colorss/example.html"
-                  target="_blank">https://drafts.csswg.org/css-color/#css-system-colorss/example.html</a></li>
-              <li><a href="https://simplecss.org/demo/" target="_blank">https://simplecss.org/demo/</a></li>
+              <li><a href="https://4mrnhq.csb.app/" target="_blank"
+                  rel="noopener noreferrer">https://4mrnhq.csb.app/</a></li>
+              <li><a href="https://x4qtf8.csb.app/" target="_blank"
+                  rel="noopener noreferrer">https://x4qtf8.csb.app/</a></li>
+              <li><a href="https://projects.dutchcelt.com/system.css/example.html" target="_blank"
+                  rel="noopener noreferrer">https://projects.dutchcelt.com/system.css/example.html</a></li>
+              <li><a href="https://drafts.csswg.org/css-color/#css-system-colorss/example.html" target="_blank"
+                  rel="noopener noreferrer">https://drafts.csswg.org/css-color/#css-system-colorss/example.html</a></li>
+              <li><a href="https://simplecss.org/demo/" target="_blank"
+                  rel="noopener noreferrer">https://simplecss.org/demo/</a></li>
             </ul>
 
             <ul> CSS Color Scheme
-              <li><a href="https://sarajoy.dev/blog/color-scheme/"
-                  target="_blank">https://sarajoy.dev/blog/color-scheme/</a></li>
-              <li><a href="https://color-scheme-light-dark.netlify.app/"
-                  target="_blank">https://color-scheme-light-dark.netlify.app/</a></li>
-              <li><a href="https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels"
-                  target="_blank">https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels</a></li>
-              <li><a href="https://web.dev/articles/prefers-color-scheme"
-                  target="_blank">https://web.dev/articles/prefers-color-scheme</a></li>
-              <li><a href="https://web.dev/articles/color-scheme#demo"
-                  target="_blank">https://web.dev/articles/color-scheme#demo</a></li>
-              <li> <a href="https://github.com/kevquirk/simple.css/blob/main/index.html"
-                  target="_blank">https://github.com/kevquirk/simple.css/blob/main/index.html</a></li>
-              <li><a href="https://picocss.com/docs/colors" target="_blank">https://picocss.com/docs/colors</a></li>
+              <li><a href="https://sarajoy.dev/blog/color-scheme/" target="_blank"
+                  rel="noopener noreferrer">https://sarajoy.dev/blog/color-scheme/</a></li>
+              <li><a href="https://color-scheme-light-dark.netlify.app/" target="_blank"
+                  rel="noopener noreferrer">https://color-scheme-light-dark.netlify.app/</a></li>
+              <li><a href="https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels" target="_blank"
+                  rel="noopener noreferrer">https://css-tricks.com/come-to-the-light-dark-side/#aa-contrast-levels</a>
+              </li>
+              <li><a href="https://web.dev/articles/prefers-color-scheme" target="_blank"
+                  rel="noopener noreferrer">https://web.dev/articles/prefers-color-scheme</a></li>
+              <li><a href="https://web.dev/articles/color-scheme#demo" target="_blank"
+                  rel="noopener noreferrer">https://web.dev/articles/color-scheme#demo</a></li>
+              <li> <a href="https://github.com/kevquirk/simple.css/blob/main/index.html" target="_blank"
+                  rel="noopener noreferrer">https://github.com/kevquirk/simple.css/blob/main/index.html</a></li>
+              <li><a href="https://picocss.com/docs/colors" target="_blank"
+                  rel="noopener noreferrer">https://picocss.com/docs/colors</a></li>
             </ul>
 
             </p>
@@ -652,7 +653,7 @@
               </code>
             </pre>
 
-            <input type="text" value="text input field" class="Input-Text Input">input here!</input>
+            <input type="text" value="text input field" class="Input-Text Input" />input here!
             <div class="input" role="textbox" contenteditable>
               text input field. The text color is set to InputText and the background color is set to
               Input."
@@ -697,8 +698,9 @@
         <div id="syscolors-hue-demo">
           <p>Whether in a light or dark mode, theme colors can be nicely mixed in OKLCH & HSL
             color spaces. This demo is adapted from Sara Joy's
-            <a href="https://codepen.io/sarajw/pen/eYwLaYp" target="_blank"> CodePen</a>. Her article
-            at <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">
+            <a href="https://codepen.io/sarajw/pen/eYwLaYp" target="_blank" rel="noopener noreferrer"> CodePen</a>.
+            Her article at
+            <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank" rel="noopener noreferrer">
               https://sarajoy.dev/blog/color-scheme/</a>
             explains more about color schemes.
           </p>
@@ -786,9 +788,11 @@
     </div>
 
     <div id="syscolors-footer" class="syscolors-inner-container">
-      <a href="https://eoc.online" target="_blank" title="Open source tooling for Emergency Operation Centers">©2024
+      <a href="https://eoc.online" target="_blank" rel="noopener noreferrer"
+        title="Open source tooling for Emergency Operation Centers">©2024
         eoc.online</a>
-      <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank">Details &
+      <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank"
+          rel="noopener noreferrer">Details &
           source code</a>
         <!--img
           src="https://img.shields.io/github/stars/eoconline/system-colors?style=social"

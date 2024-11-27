@@ -9,8 +9,8 @@ displayed colors are **specific to this browser/operating System**!
 
 ![alt text](images/Screenshot-Options&SystemColorTable.png)
 
-> Avoid specifying different colors for (light or dark
-> mode)[https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark]:
+> Avoid specifying different colors for
+> [light or dark mode](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark):
 > let the browser & OS handle it for you!
 
 This page demonstrates the CSS System Colors in action.
@@ -94,7 +94,7 @@ matches the user's preferences.
 > operating system and browser settings!
 
 There are also a few other new "system" things out now:
-[System Fonts, font weights, icons](https://css-trricks.com/system-things) which
+[System Fonts, font weights, icons](https://css-tricks.com/system-things) which
 provides a neat new way to re-envision who does what. A complete
 [system.css](https://projects.dutchcelt.com/system.css/) can provide a quick
 start!
@@ -103,7 +103,7 @@ start!
 
 - CSS System Colors are not new but were originally part of
   [CSS2](https://www.w3.org/TR/CSS2/ui.html#system-colors).
-- With ![W3C's](W3C.png) CSS
+- With ![W3C's](images/W3C.png) CSS
   [Color Module Level 3](https://www.w3.org/TR/css-color-3/#css-system) they
   were all listed as depreciated. (Apparently they enabled mimicking system
   colors too well, and could be used for fake, evil
@@ -128,20 +128,20 @@ they were supposed to be prefixed with the system- keyword, such as
 system-highlight or system-buttonface, but this only leads to errors for me.)
 
 The colors are designed to adapt to different light/dark modes and contrast
-settings, making them ideal for creating (accessible)[https://whimsica11y.net/]
+settings, making them ideal for creating [accessible](https://whimsica11y.net/)
 and user-friendly (interfaces)[https://projects.dutchcelt.com/system.css/]. They
-can be used in combination with other color values to create a harmonious (color
+can be used in combination with other color values to create a harmonious [color
 palette)[https://codepen.io/sarajw/pen/eYwLaYp].
 
 For more information on CSS System Colors, check out:
 
 - CSS Tricks article: <https://css-tricks.com/come-to-the-light-dark-side/>
-- (Sara Joy)[https://sarajoy.dev/blog/color-scheme/]
-- (System.css)[https://projects.dutchcelt.com/system.css/]
-- (Thomas Steiner)[https://web.dev/articles/color-scheme]
+- [Sara Joy](https://sarajoy.dev/blog/color-scheme/)
+- [System.css](https://projects.dutchcelt.com/system.css/)
+- [Thomas Steiner](https://web.dev/articles/color-scheme)
 - (Jim Nielsen's blog
-  post)[https://blog.jim-nielsen.com/2021/css-system-colors/]
-- (MDN Web Docs)[https://developer.mozilla.org/en-US/docs/Web/CSS/system-color]
+  post](https://blog.jim-nielsen.com/2021/css-system-colors/)
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/system-color)
 
 ### Caveats
 

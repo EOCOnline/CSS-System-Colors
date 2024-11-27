@@ -16,7 +16,7 @@
   padding: 1rem;
   width: fit-content;
   max-width: 90%;
-  margin: 0, 1rem auto;
+  margin: 0 1rem auto;
 
   border: 1px solid CanvasText;
   border-radius: 0.5rem;
@@ -121,7 +121,7 @@
       text-shadow: 1px 1px CanvasText;
     }
 
-    :hover {
+    div:hover {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       background-color: light-dark(var(--light-tertiary), var(--dark-tertiary));
     }

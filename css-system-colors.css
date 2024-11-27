@@ -1,11 +1,12 @@
 /***************************************************************************************************************
  * This has two sets of classes: system-<name> and <name>. 
-  * There is one system-<name> class for every system-color.
-  * The <name> classes use one name to reference a 'combo' of related settings. They are less verbose.
-  * The system-<name> classes are more verbose, but they allow you to specify the color and background-color 
-  * separately.
+ * There is one system-<name> class for every system-color.
+ * The <name> classes use one name to reference a 'combo' of related settings.
+ * They are less verbose.
+ * The system-<name> classes are more verbose, but they allow you to specify the color 
+ * and background-color separately.
  **/
-
+/* Class combinations for different UI elements */
 /* name(s), the class combos */
 
 .Canvas {
@@ -57,13 +58,13 @@
     /* non-active, non-visited links */
     color: LinkText;
   }
-  a.visited {
+  a:visited {
     /* visited links */
     color: VisitedText;
   }
   a:hover {
     /* hovered links */
-    color: ActiveText; /* BUG: no special color?*/
+    color: FocusText; /* Focused links color */
   }
   a:focus {
     /* focused links */

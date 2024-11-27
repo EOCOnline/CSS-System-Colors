@@ -6,8 +6,12 @@
   --light-primary: rgb(248, 172, 140);
   --light-secondary: rgb(251, 228, 196);
   --light-contrast: rgb(210, 228, 232);
+  --light-tertiary: rgb(200, 200, 200); /* Example color */
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
   --dark-primary: rgb(75, 0, 130);
+  --dark-contrast: rgb(218, 112, 214);
+  --light-bright: rgb(255, 255, 255);
+  --dark-bright: rgb(0, 0, 0);
   --dark-secondary: rgb(106, 15, 138);
   --dark-contrast: rgb(218, 112, 214);
 

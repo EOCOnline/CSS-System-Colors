@@ -6,6 +6,7 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
 const logLevel = 1;
 const sourceJson = "css-system-colors.json";
+const sortByCategory = false;
 let hueValue = 222;
 
 
@@ -13,9 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 2) console.log("DOM fully loaded and parsed");
 
-  contrastValue = document.getElementById('syscolors-contrast-value');
-  syscolorsContrast = document.getElementById("syscolors-contrast");
-  syscolorsContainer = document.getElementById("syscolors-outer-container");
+  let contrastValue = document.getElementById('syscolors-contrast-value');
+  let syscolorsContrast = document.getElementById("syscolors-contrast");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
   cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
@@ -40,93 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
-/**************************************
- * Create the System Colors panels
+/**
+ * systemColorsJson object contains the system colors data.
+ * It has two main properties: 'info' and 'colors'.
+ * 'info' contains metadata about the colors.
+ * 'currentColors' contains an array of current system colors.
+ * 'deprecatedColors' contains an array of deprecated system colors.
+ * Reading this from a file is problematic due to CORS issues.
  */
-let currentColorsJson = { "info": {}, "currentColors": [] };
-let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
-
-// Create the various panels for display, with some pre-processing of the JSON
-function processJson(json) {
-  if (logLevel > 1) console.log("Processing JSON");
-  console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
-  try {
-    if (json.info) {
-      json.info.timeStamp = new Date().toLocaleString();
-      json.info.userAgent = navigator.userAgent;
-    } else {
-      console.error("No info object in JSON file!");
-    }
-    document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
-
-    // Sort colors by category (or leave as in the file: alphabetically)
-    if (sortByCategory) {
-      json.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
-      json.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
-    } else {
-      json.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
-      json.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
-    }
-
-    // Generate the System Colors 'Tables' These also trigger updating the Json with an RGBA key.
-    generateSystemColors(json.currentColors, "syscolors-table");
-    generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
-
-    // Generate the System Colors 'Grids'
-    console.log("currentColors: " + json.currentColors.length);
-    document.getElementById("syscolors-current-summary").innerText = "System Color (" + json.currentColors.length + ") Grid";
-    //json.currentColors = 
-    generateSystemColors(json.currentColors, "syscolors-grid-light");
-    json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-dark");
-    // save the JSON data for download
-    currentColorsJson.info = structuredClone(json.info);
-    currentColorsJson.currentColors = structuredClone(json.currentColors);
-
-    // & again for the Deprecated Color Grid...
-    console.log("deprecatedColors: " + json.deprecatedColors.length);
-    document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + json.deprecatedColors.length + ") Grid";
-    // json.deprecatedColors = 
-    generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
-    json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-dark");
-    // save the JSON data for download
-    deprecatedColorsJson.info = structuredClone(json.info);
-    deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
-  } catch (error) {
-    console.error("Error building the color panels: " + error.message);
-  }
-}
-
-
-// Process a list of system-colors, creating HTML cards for display
-function generateSystemColors(systemColorSet, elementID) {
-  if (logLevel > 1) console.table(systemColorSet);
-  let i = 0;
-  if (!systemColorSet) {
-    console.error("No systemColorSet object!");
-    return;
-  }
-
-  for (const index of Object.keys(systemColorSet)) {
-    // NOTE: As I read the spec, prefixing with system- should work, but doesn't
-    // let color = "system-" + systemColorSet[index].color 
-    let color = systemColorSet[index].color;
-
-    if (elementID === "syscolors-table") {
-      createColorRow(systemColorSet, index, "syscolors-table");
-    } else if (elementID === "syscolors-deprecated-table") {
-      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
-    } else {
-      createColorCard(systemColorSet, index, elementID); //, RGBA);
-    }
-
-    i++;
-  }
-  if (logLevel > 1) console.log("Processed " + i + " colors.");
-  return systemColorSet;
-}
-
-//MUCH easier than reading from a file due to CORS issues 
 let systemColorsJson =
 {
   "info": {
@@ -347,3 +268,95 @@ let systemColorsJson =
     }
   ]
 };
+
+/**************************************
+ * Create the System Colors panels
+ */
+let currentColorsJson = { "info": {}, "currentColors": [] };
+let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
+
+// Create the various panels for display, with some pre-processing of the JSON
+function processJson(json) {
+  console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
+  try {
+    updateJsonInfo(json);
+    document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
+    sortColors(json);
+    generateColorTables(json);
+    generateColorGrids(json);
+  } catch (error) {
+    console.error("Error building the color panels: " + error.message);
+  }
+}
+
+function updateJsonInfo(json) {
+  if (json.info) {
+    json.info.timeStamp = new Date().toLocaleString();
+    json.info.userAgent = navigator.userAgent;
+  } else {
+    console.error("No info object in JSON file!");
+  }
+}
+
+function sortColors(json) {
+  if (sortByCategory) {
+    json.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+    json.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+  } else {
+    json.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+    json.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+  }
+}
+
+// These also trigger updating the Json with an RGBA key.
+function generateColorTables(json) {
+  generateSystemColors(json.currentColors, "syscolors-table");
+  generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
+}
+
+function generateColorGrids(json) {
+  console.log("currentColors: " + json.currentColors.length);
+  document.getElementById("syscolors-current-summary").innerText = "System Color (" + json.currentColors.length + ") Grid";
+  generateSystemColors(json.currentColors, "syscolors-grid-light");
+  json.currentColors = generateSystemColors(json.currentColors, "syscolors-grid-dark");
+
+  // save the JSON data for download
+  currentColorsJson.info = structuredClone(json.info);
+  currentColorsJson.currentColors = structuredClone(json.currentColors);
+
+  console.log("deprecatedColors: " + json.deprecatedColors.length);
+  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + json.deprecatedColors.length + ") Grid";
+  generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
+  json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-dark");
+  deprecatedColorsJson.info = structuredClone(json.info);
+  deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
+}
+
+
+// Process a list of system-colors, creating HTML cards for display
+function generateSystemColors(systemColorSet, elementID) {
+  if (logLevel > 1) console.table(systemColorSet);
+  let i = 0;
+  if (!systemColorSet) {
+    console.error("No systemColorSet object!");
+    return;
+  }
+
+  for (const index of Object.keys(systemColorSet)) {
+    // NOTE: As I read the spec, prefixing with system- should work, but doesn't
+    // let color = "system-" + systemColorSet[index].color 
+    let color = systemColorSet[index].color;
+
+    if (elementID === "syscolors-table") {
+      createColorRow(systemColorSet, index, "syscolors-table");
+    } else if (elementID === "syscolors-deprecated-table") {
+      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
+    } else {
+      createColorCard(systemColorSet, index, elementID); //, RGBA);
+    }
+
+    i++;
+  }
+  if (logLevel > 1) console.log("Processed " + i + " colors.");
+  return systemColorSet;
+}

@@ -46,6 +46,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Adjusts the font weight for dark mode to improve readability */
 @media (prefers-color-scheme: dark) {
   body {
     font-weight: 350;
@@ -59,6 +60,10 @@ details > summary {
   font-weight: bold;
   font-style: italic;
   cursor: pointer;
+}
+
+.no-decoration {
+  text-decoration: none;
 }
 
 /* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
@@ -86,18 +91,18 @@ blockquote {
 /**********************************************
  * Styles used by multiple panels
  */
-
 #syscolors-table,
 #syscolors-deprecated-table,
 #syscolors-grid,
 #syscolors-deprecated-grid {
-  *,
-  *:before,
-  *:after {
+  & > *,
+  & > *:before,
+  & > *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+}
 }
 
 .syscolors-inner-container {
