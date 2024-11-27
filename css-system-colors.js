@@ -6,16 +6,14 @@
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
 const logLevel = 1;
 const sourceJson = "css-system-colors.json";
-const sortByCategory = false;
 let hueValue = 222;
-
 
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 2) console.log("DOM fully loaded and parsed");
 
-  let contrastValue = document.getElementById('syscolors-contrast-value');
-  let syscolorsContrast = document.getElementById("syscolors-contrast");
+  contrastValue = document.getElementById('syscolors-contrast-value');
+  syscolorsContrast = document.getElementById("syscolors-contrast");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
   cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");

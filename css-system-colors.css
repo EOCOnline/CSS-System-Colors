@@ -62,10 +62,14 @@
     /* visited links */
     color: VisitedText;
   }
+
+  /* Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
   a:hover {
-    /* hovered links */
-    color: FocusText; /* Focused links color */
+    /* hovered links *
+    color: FocusText; /* Focused links color *
   }
+  */
+
   a:focus {
     /* focused links */
     color: ActiveText; /* BUG: no special color?*/

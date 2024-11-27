@@ -85,11 +85,11 @@ function createColorCard(systemColorSet, index, elementId) {
     }
     + mode + " mode color: " + rgbaSpan.outerHTML + clickText;
     tooltipSpan.addEventListener('click', handleTooltipClick.bind(null, nameSpan, descSpan, categorySpan, mode, rgbaSpan, tooltipSpan));
-});
+};
 
 // Create an RGBA key in the json file for download
-tooltipSpan.addEventListener('click', handleTooltipClick.bind(null, nameSpan, descSpan, categorySpan, mode, rgbaSpan, tooltipSpan));
-    }
+//tooltipSpan.addEventListener('click', handleTooltipClick.bind(null, nameSpan, descSpan, categorySpan, mode, rgbaSpan, tooltipSpan));
+
 
 // Define the handleTooltipClick function separately
 function handleTooltipClick(nameSpan, descSpan, categorySpan, modeOrLight, rgbaOrDark, tooltipSpan) {
@@ -98,10 +98,8 @@ function handleTooltipClick(nameSpan, descSpan, categorySpan, modeOrLight, rgbaO
         + (typeof modeOrLight === 'string' ? "\n" + modeOrLight + " color " + rgbaOrDark.innerText : "\nlight mode: " + modeOrLight + "\ndark mode: " + rgbaOrDark);
     copyTextToClipboard(textToCopy, tooltipSpan.id);
 }
-    } else if (elementId == "syscolors-grid-dark" || elementId == "syscolors-deprecated-dark") {
-    systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
-}
-}
+
+// } else if (elementId == "syscolors-grid-dark" || elementId == "syscolors-deprecated-dark") systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
 
 
 // These cards look more like rows - & are used by TABLES

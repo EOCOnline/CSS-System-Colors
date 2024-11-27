@@ -80,7 +80,7 @@
   padding: 5px;
 
   width: 200px;
-  height: val(--rowHeight);
+  height: var(--rowHeight);
 }
 
 .syscolors-card .syscolors-category-span {
