@@ -39,10 +39,6 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
     return dark;
 }
 
-let contrastValue;
-let syscolorsContrast;
-let syscolorsContainer;
-
 function updateContrast(el) {
     const contrast = el.value;
     syscolorsContainer.style.filter = 'contrast(' + contrast + '%)';
@@ -71,24 +67,32 @@ function resetWebPage() {
     currentColorsJson = { "info": {}, "currentColors": [] };
     deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
-    // Preserve the initial cards
+    // For tables, preserve ONLY the initial cards
     let savedCard = document.getElementsByClassName("syscolors-initial-card")[0].cloneNode(true);
     document.getElementById("syscolors-table").innerHTML = savedCard.outerHTML;
 
     savedCard = document.getElementsByClassName("syscolors-initial-card")[1].cloneNode(true);
     document.getElementById("syscolors-deprecated-table").innerHTML = savedCard.outerHTML;
 
+    // For grids, preserve ONLY the titles
+    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
+    document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
+
+    /*
     document.getElementById("syscolors-grid-light").innerHTML = "";
     if (document.getElementById("syscolors-grid-dark")) {
         document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
     }
 
+    // removed too much!!!!
     document.getElementById("syscolors-deprecated-light").innerHTML = "";
     if (document.getElementById("syscolors-deprecated-dark")) {
         document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
     }
+*/
 
-    document.getElementById("syscolors-demo-light").innerHTML = "";
+    // For demos, preserve all the light elements
+    //document.getElementById("syscolors-demo-light").innerHTML = "";
     if (document.getElementById("syscolors-demo-dark")) {
         document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
     }

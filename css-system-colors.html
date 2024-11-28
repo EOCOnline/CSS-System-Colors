@@ -322,7 +322,7 @@
     </div>
 
     <div id="syscolors-table-container" class="syscolors-inner-container">
-      <details open>
+      <details>
         <summary id="syscolors-table-summary">System Color Table</summary>
         <div id="syscolors-table">
 
@@ -345,7 +345,7 @@
     </div>
 
     <div id="syscolors-grid-container" class="syscolors-inner-container">
-      <details>
+      <details open>
         <summary id="syscolors-current-summary">System Colors Grid</summary>
 
         <div id="syscolors-grid">
@@ -477,6 +477,29 @@
                   <div>
                     <article>
                       <h4>CSS System Color News <code>h4</code></h4>
+
+                      <div class="syscolors-demo-canvas" class="CanvasText Canvas">
+                        paragraph of text. It is here to demonstrate how the system colors
+                        can be used in a real-world scenario. The text color is set to
+                        <code>system-canvasText</code> and the background color is set to
+                        <code>system-canvas</code>.
+                      </div>
+                      <div>regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear without
+                        author intervention if you change the color mode.</div>
+
+                      <div>piece of <mark>marked</mark> text.</div>
+                      <div class="markText">This entire paragraph uses MarkText color, but <mark class="mark">only this
+                          bit
+                          uses
+                          Mark for the background</mark> color.</div>
+
+                      <pre>
+                          <code>
+                            code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
+                          </code>
+                        </pre>
+
+
                       <p>This paragraph shows various HTML tags in action:
                         Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
                         <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
@@ -495,6 +518,12 @@
                         <strong>Links</strong> <code>:hover</code> is not in <a
                           href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
                         browser-specific.
+
+                        <p>- the link color is set to <code>system-link</code>
+                          and the visited link color is set to
+                          <code>system-visited</code>.
+                        </p>
+
                         <ul>
                           <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
                               never visited link</a></li>
@@ -539,6 +568,11 @@
                     </div>
                   </div>
                   <blockquote><b>&ldquo;</b>We aim to please!</blockquote>
+                  <blockquote>
+                    blockquote. The text color is set to <code>system-quotetext</code> and the background color is
+                    set
+                    to <code>system-quote</code>:
+                  </blockquote>
                 </section>
               </main>
 
@@ -549,10 +583,14 @@
 
             <form class="myForm">
               <h3>A Fine Form</h3>
-              Text input, Number & Date illustrate <code>:focus</code> which we've
-              manually set to "SelectedItem". Notice the <code>Field</code> reflects
-              the color mode automatically.
-              <label>Text input: <input type="text" placeholder="Hellooo"></label>
+              <p>Text input, Number & Date illustrate <code>:focus</code>
+                which we've manually set to "SelectedItem". Notice
+                the <code>Field</code> reflects the color mode automatically.
+                Easy Peasy.</p>
+
+              <label>Text input: <input type="text" placeholder="Hellooo"> text input field. The text color is set to
+                InputText and the background color is set to
+                Input."</label>
 
               <label>Check box: <input type="checkbox"> </label>
 
@@ -593,84 +631,11 @@
                   ButtonBorder)</button>
                 <button class="Button" type="submit">Submit</button>
               </p>
-            </form>
-          </div>
-          <!--div id="syscolors-demo-remainder">
-            <h3>REMAINDER</h3>
-
-
-            <p>Note that if you change the Light/Dark mode above, the colors automatically adjust - without the
-              author
-              having to specify any adjustments! Easy Peasy.</p>
-
-            TODO: Organize this page by categories.
-
-            <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
-              Fake Button</button>
-            - This uses the ButtonText, ButtonFace & ButtonBorder colors. Hover to see ___ color, then Click
-            for the ActiveText color! <br />
-
-            <div class="syscolors-demo-canvas" class="CanvasText Canvas">
-              paragraph of text. It is here to demonstrate how the system colors
-              can be used in a real-world scenario. The text color is set to
-              <code>system-canvasText</code> and the background color is set to
-              <code>system-canvas</code>.
-              <br />
-
-              <p>Weird it is that clicking the paragraph changes its color to ActiveText. bug in the code
-                that
-                I can't seem to find. It is not supposed to do that. But it does. So there.</p>
-              </p>
-            </div>
-            <div>regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear with out
-              author intervention if you change the color mode.</div>
-
-            <div>
-              Here is a link to a site: <a href="https://eoc.online" target="_blank">eoc.online</a> - the link color
-              is
-              set to <code>system-link</code> and the visited link color is set to <code>system-visited</code>.
-            </div>
-            <div>
-              Here is a 2nd link to the same <a href="https://eoc.online" target="_blank">eoc.online</a>, and
-              another
-              that
-              you can select some other time: <a href="https://github.com/eoc.online"
-                target="_blank">github.com/eoconline</a>
-              -
-              the link color is set to <code>system-link</code> and the
-              visited link color is set to <code>system-visited</code>.
-            </div>
-
-            <blockquote>
-              blockquote. The text color is set to <code>system-quotetext</code> and the background color is
-              set
-              to <code>system-quote</code>:
-
-            </blockquote>
-
-            <div>piece of <mark>marked</mark> text.</div>
-            <div class="markText">This entire paragraph uses MarkText color, but <mark class="mark">only this bit
-                uses
-                Mark for the background</mark> color.</div>
-
-            <pre>
-              <code>
-                code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
-              </code>
-            </pre>
-
-            <input type="text" value="text input field" class="Input-Text Input" />input here!
-            <div class="input" role="textbox" contenteditable>
-              text input field. The text color is set to InputText and the background color is set to
-              Input."
-            </div>
-            <div class="Highlight HighlightText">
-              Select some text to see Highlight (background) and HighlightText at work:
-              <p>paragraph.</p>
-              <div>This is some text in a div element.</div>
-            </div>
-          </div-->
-          <!--
+              <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
+                Fake Button</button>
+              <p>- This uses the ButtonText, ButtonFace & ButtonBorder colors. No hover color, but Click for the
+                ActiveText color!</p>
+              <!--
               <input type="button">
               <input type="checkbox">
               <input type="color">
@@ -694,6 +659,9 @@
               <input type="url">
               <input type="week">
             -->
+            </form>
+          </div>
+
         </div>
       </details>
     </div>

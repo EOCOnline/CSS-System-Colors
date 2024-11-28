@@ -3,10 +3,13 @@
  * Main Action Flow™: these routines!
  */
 
-// logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
+// logLevel sets debug output: 0 = none, 1 = some, 3 = all
 const logLevel = 2;
 const sourceJson = "css-system-colors.json";
 let hueValue = 222;
+let contrastValue;
+let syscolorsContrast;
+let syscolorsContainer;
 
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
@@ -33,18 +36,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   updateContrast({ value: 97.5 });
-  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 5 seconds while debugging
+  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // reload page every 5 seconds while editing/debugging
 
   processJson(systemColorsJson);
-
 });
 
 /**
- * systemColorsJson object contains the system colors data.
- * It has two main properties: 'info' and 'colors'.
- * 'info' contains metadata about the colors.
- * 'currentColors' contains an array of current system colors.
- * 'deprecatedColors' contains an array of deprecated system colors.
+ * systemColorsJson contains the system colors data from the standard.
+ * 'systemColorsJson.info' contains metadata about the colors.
+ * 'systemColorsJson.currentColors' contains the current system color array.
+ * '.systemColorsJson.deprecatedColors' contains the deprecated system color array.
  * Reading this from a file is problematic due to CORS issues.
  */
 let systemColorsJson =
@@ -269,12 +270,14 @@ let systemColorsJson =
 };
 
 /**************************************
- * Create the System Colors panels
+ * Create the System Colors panels (both tables & grids)
  */
+
+// These save JSON data for possible downloading
 let currentColorsJson = { "info": {}, "currentColors": [] };
 let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
-// Create the various panels for display, with some pre-processing of the JSON
+// Create the display panels, with some JSON pre-processing
 function processJson(json) {
   console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
   try {
@@ -327,6 +330,7 @@ function generateColorGrids(json) {
   document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + json.deprecatedColors.length + ") Grid";
   generateSystemColors(json.deprecatedColors, "syscolors-deprecated-light");
   json.deprecatedColors = generateSystemColors(json.deprecatedColors, "syscolors-deprecated-dark");
+
   deprecatedColorsJson.info = structuredClone(json.info);
   deprecatedColorsJson.deprecatedColors = structuredClone(json.deprecatedColors);
 }
@@ -334,7 +338,7 @@ function generateColorGrids(json) {
 
 // Process a list of system-colors, creating HTML cards for display
 function generateSystemColors(systemColorSet, elementID) {
-  if (logLevel > 1) console.table(systemColorSet);
+  if (logLevel > 2) console.table(systemColorSet);
 
   if (!systemColorSet) {
     console.error("No systemColorSet object!");
