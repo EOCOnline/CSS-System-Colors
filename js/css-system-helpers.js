@@ -46,7 +46,7 @@ function updateContrast(el) {
     contrastValue.innerText = contrast;
 }
 
-function setColor(el) {
+function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
@@ -62,6 +62,18 @@ function setSortOrder(val) {
     //fetchSystemColors();
     processJson(systemColorsJson);
 }
+
+
+function updatePrimaryColor(picker, selector) {
+    document.querySelector(selector).style.background = picker.toBackground()
+}
+
+// triggers 'onInput' and 'onChange' on all color pickers when they are ready
+jscolor.trigger('input change');
+
+
+
+
 
 function resetWebPage() {
     currentColorsJson = { "info": {}, "currentColors": [] };

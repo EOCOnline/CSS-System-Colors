@@ -19,6 +19,7 @@
   <script src="./css-system-colors.js"></script>
   <script defer src="./js/css-system-helpers.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
+  <script defer src="./js/jscolor.js"></script> <!-- colorpicker from https://jscolor.com/ -->
 
 </head>
 
@@ -46,7 +47,7 @@
       <label for="syscolors-page-mode" title="This sets the general page color mode. All panels
         have hardwired color modes, so this basically just changes the page background.">Page
         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">color mode</a>:</label>
-      <select id="syscolors-page-mode" onchange="setColor(this)">
+      <select id="syscolors-page-mode" onchange="setPageColorMode(this)">
         <option class="floater" value="normal" data-title="Page can be rendered using the page's color
           scheme settings. If the page does not have a color scheme
           set, the element is rendered using the page's default color settings." title="Page can be rendered using the page's color
@@ -416,6 +417,15 @@
                           <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--contrast)" />
                         </svg>Contrast
                       </div>
+                    </div>
+                    <div>OR, choose your own primary:<br />
+                      <button data-jscolor="{
+                        onChange: 'updatePrimaryColor(this, \'#pr1\')',
+                        onInput: 'updatePrimaryColor(this, \'#pr2\')',
+                        alpha:0.7, value:'CCFFAA'}"></button>
+                      <br /><br /><br /><br /><br /><br /><br /><br />
+                      <em id="pr1" style="display:inline-block; padding:1em;">change event</em>
+                      <em id="pr2" style="display:inline-block; padding:1em;">input event</em>
                     </div>
 
                     <br />
