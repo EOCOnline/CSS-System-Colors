@@ -1,4 +1,6 @@
-/* Starter for building your own custom template to supplement the standard Css System Colors */
+/* Starter for building your own custom template to supplement the standard Css System Colors
+ * NOT used by css-system-colors.html!
+ */
 
 .myContainer {
   color-scheme: light dark;

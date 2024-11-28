@@ -4,7 +4,7 @@
  */
 
 // logLevel is used to control the level of logging output: 0 = none, 1 = some, 2 = all
-const logLevel = 1;
+const logLevel = 2;
 const sourceJson = "css-system-colors.json";
 let hueValue = 222;
 
@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   contrastValue = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");
+  syscolorsContainer = document.getElementById("syscolors-outer-container");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
   cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   updateContrast({ value: 97.5 });
-  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 3 seconds while debugging
+  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // force page refresh every 5 seconds while debugging
 
   processJson(systemColorsJson);
 
@@ -334,26 +335,22 @@ function generateColorGrids(json) {
 // Process a list of system-colors, creating HTML cards for display
 function generateSystemColors(systemColorSet, elementID) {
   if (logLevel > 1) console.table(systemColorSet);
-  let i = 0;
+
   if (!systemColorSet) {
     console.error("No systemColorSet object!");
     return;
   }
 
+  let i = 0;
   for (const index of Object.keys(systemColorSet)) {
-    // NOTE: As I read the spec, prefixing with system- should work, but doesn't
-    // let color = "system-" + systemColorSet[index].color 
-    let color = systemColorSet[index].color;
-
+    i++;
     if (elementID === "syscolors-table") {
       createColorRow(systemColorSet, index, "syscolors-table");
     } else if (elementID === "syscolors-deprecated-table") {
       createColorRow(systemColorSet, index, "syscolors-deprecated-table");
     } else {
-      createColorCard(systemColorSet, index, elementID); //, RGBA);
+      createColorCard(systemColorSet, index, elementID);
     }
-
-    i++;
   }
   if (logLevel > 1) console.log("Processed " + i + " colors.");
   return systemColorSet;

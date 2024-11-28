@@ -112,7 +112,6 @@
   border: 2px solid black;
   padding: 5px;
   height: var(--rowHeight);
-  height: val(--rowHeight);
   width: 150px;
 }
 

@@ -1,4 +1,4 @@
-// This contains routines for the main program THAT ARE INCIDENTAL TO THE MAIN flow!
+// This contains routines for the main program INCIDENTAL TO THE MAIN flow!
 
 function cloneLightPanel(elementId, cloneId, spanSelector) {
     let light = document.getElementById(elementId);
@@ -23,6 +23,19 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
 
     light.querySelector(spanSelector).innerText = "Light";
     dark.querySelector(spanSelector).innerText = "Dark";
+
+    // convert all id's that start with idLight to idDark
+    let lightIds = dark.querySelectorAll("[id^='idLight']");
+    for (let i = 0; i < lightIds.length; i++) {
+        lightIds[i].id = dark.id.replace("idLight", "idDark");
+    }
+
+    // convert all href's that start with idLight to idDark
+    lightIds = dark.querySelectorAll("[href^='idLight']");
+    for (let i = 0; i < lightIds.length; i++) {
+        lightIds[i].href = dark.href.replace("idLight", "idDark");
+    }
+
     return dark;
 }
 
@@ -59,23 +72,22 @@ function resetWebPage() {
     deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
     // Preserve the initial cards
-    let saveMe = document.getElementsByClassName("syscolors-initial-card")[0].cloneNode(true);
-    document.getElementById("syscolors-table").innerHTML = saveMe.outerHTML;
-    document.getElementById("syscolors-grid-light").innerHTML = "";
+    let savedCard = document.getElementsByClassName("syscolors-initial-card")[0].cloneNode(true);
+    document.getElementById("syscolors-table").innerHTML = savedCard.outerHTML;
 
+    savedCard = document.getElementsByClassName("syscolors-initial-card")[1].cloneNode(true);
+    document.getElementById("syscolors-deprecated-table").innerHTML = savedCard.outerHTML;
+
+    document.getElementById("syscolors-grid-light").innerHTML = "";
     if (document.getElementById("syscolors-grid-dark")) {
         document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
     }
-    if (document.getElementById("syscolors-deprecated-dark")) {
-        document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"));
-    }
-    if (document.getElementById("syscolors-deprecated-dark")) {
-        document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"));
-    }
+
     document.getElementById("syscolors-deprecated-light").innerHTML = "";
     if (document.getElementById("syscolors-deprecated-dark")) {
         document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
     }
+
     document.getElementById("syscolors-demo-light").innerHTML = "";
     if (document.getElementById("syscolors-demo-dark")) {
         document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
@@ -91,8 +103,6 @@ function resetWebPage() {
  */
 
 // TODO: get contrasting colors (not just black/white) with all-css strategy: https://css-tricks.com/methods-contrasting-text-backgrounds/ & https://codepen.io/thebabydino/pen/JNWqLL
-
-
 // TODO: Try https://www.w3.org/TR/css-color-5/#contrast-color
 // from: http://stackoverflow.com/a/1855903/186965  ONLY returns black or white!
 function getContrastingColor(r, g, b) {
@@ -105,23 +115,6 @@ function getContrastingColor(r, g, b) {
     var a = 1 - (0.299 * r + 0.587 * g + 0.114 * b) / 255;
     if (logLevel > 2) console.log("Perceptive luminance:" + a);
     return ((a < 0.5) ? 'black' : 'white');
-}
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d');
-
-// Write a named color to a canvas and read back the RGBA value
-function nameToRgba(name) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = name;
-    context.fillRect(0, 0, 1, 1);
-    const imageData = context.getImageData(0, 0, 1, 1).data;
-    if (imageData.length === 4) {
-        return imageData;
-    } else {
-        console.error('Invalid image data');
-        return [0, 0, 0, 0]; // Return a default value
-    }
-    return context.getImageData(0, 0, 1, 1).data;
 }
 
 
@@ -193,22 +186,10 @@ function createFileName(baseName) {
     let date = new Date().toISOString().slice(0, 10);
     let colorModeElement = document.querySelector("#syscolors-page-mode");
     let colorMode = colorModeElement ? colorModeElement.value : "default";
-    let userAgentSummary = hashString(navigator.userAgent);
+    let userAgentSummary = navigator.userAgent.replace(/[^a-zA-Z0-9]/g, '');  // TODO: shorten this!
     let fileName = baseName + "_" + date + "_" + colorMode + "_" + userAgentSummary + ".json";
     console.log("Download fileName: " + fileName);
     return fileName;
-}
-
-function hashString(str) {
-    let hash = 0, i, chr;
-    if (str.length === 0) return hash;
-    for (i = 0; i < str.length; i++) {
-        chr = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + chr;
-        hash |= 0; // Convert to 32bit integer
-    }
-    console.log("Hashed string: " + hash.toString(36));
-    return hash.toString(36);
 }
 
 function downloadCurrentColors() {

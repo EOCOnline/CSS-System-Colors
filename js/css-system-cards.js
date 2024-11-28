@@ -5,7 +5,8 @@ const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
 function createColorCard(systemColorSet, index, elementId) {
 
-    let mode = (elementId.includes("dark")) ? 'dark' : 'light'; // syscolors-grid-dark
+    let isDarkMode = elementId.includes("dark");
+    let mode = isDarkMode ? 'dark' : 'light';
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
     nameSpan.innerHTML = systemColorSet[index].color;
@@ -29,80 +30,71 @@ function createColorCard(systemColorSet, index, elementId) {
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
-    /*if (elementId == "syscolors-deprecated-table") {
+
+    let cardDiv = document.createElement('div');
+    if (elementId == "syscolors-deprecated-table") {
         cardDiv.className = "syscolors-row-card syscolors-tall-row";
     } else {
         cardDiv.className = "syscolors-row-card";
-    }*/
-    // Apply background color to inner div, so as to not affect cardDiv's big left border color!
-    cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
-    cardInnerDiv.appendChild(nameSpan);
-    cardInnerDiv.appendChild(descSpan);
-    cardInnerDiv.appendChild(rgbaSpan);
-
-    let cardDiv = document.createElement('div');
-    if ((elementId == "syscolors-deprecated-light") || (elementId == "syscolors-deprecated-dark")) {
-        cardDiv.className = "syscolors-card syscolors-tall-row";
-    } else {
-        cardDiv.className = "syscolors-card";
     }
-    cardDiv.appendChild(categorySpan);
-    cardDiv.appendChild(tooltipSpan);
-    cardDiv.appendChild(cardInnerDiv);
-    if (
-        document.getElementById(elementId) === null) {
-        console.error("Element " + elementId + " not found!");
-    }
-    else {
-        document.getElementById(elementId).appendChild(cardDiv);
-    }
-
-    // Card is built & complete. Now update colors based on what the browser actually used. 
-    let computedStyle = getComputedStyle(cardInnerDiv);
-    let color = computedStyle.backgroundColor;
-    let rgbValues = color.match(/\d+/g).map(Number);
-    let [r, g, b] = rgbValues;
-    cardInnerDiv.style.color = getContrastingColor(r, g, b);
-
-    if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
-        console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") was forcibly set to " + getContrastingColor(r, g, b));
-        cardInnerDiv.style.backgroundColor = color;// BUG: Without this, background was same as text color!!!
-        //cardDiv.style.color = "white";
-        //console.warn("HighLightText style reset to " + cardDiv.style.color);
-    }
-    let hexValues = rgbValues.map(value => value.toString(16).padStart(2, '0')).join('');
-    rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
-    rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
-
-
-    tooltipSpan.innerHTML = nameSpan.outerHTML + "<br/>" + descSpan.outerHTML + "<br/>"
-    //+ categorySpan.outerHTML + "<br/>" 
-    function handleTooltipClick(nameSpan, descSpan, categorySpan, modeOrLight, rgbaOrDark, tooltipSpan) {
-        let textToCopy = nameSpan.innerText + descSpan.innerText
-            + "\ncategory: " + categorySpan.innerText
-            + (typeof modeOrLight === 'string' ? "\n" + modeOrLight + " color " + rgbaOrDark.innerText : "\nlight mode: " + modeOrLight + "\ndark mode: " + rgbaOrDark);
-        copyTextToClipboard(textToCopy, tooltipSpan.id);
-    }
-    + mode + " mode color: " + rgbaSpan.outerHTML + clickText;
-    tooltipSpan.addEventListener('click', handleTooltipClick.bind(null, nameSpan, descSpan, categorySpan, mode, rgbaSpan, tooltipSpan));
-};
-
-// Create an RGBA key in the json file for download
-//tooltipSpan.addEventListener('click', handleTooltipClick.bind(null, nameSpan, descSpan, categorySpan, mode, rgbaSpan, tooltipSpan));
-
-
-// Define the handleTooltipClick function separately
-function handleTooltipClick(nameSpan, descSpan, categorySpan, modeOrLight, rgbaOrDark, tooltipSpan) {
-    let textToCopy = nameSpan.innerText + descSpan.innerText
-        + "\ncategory: " + categorySpan.innerText
-        + (typeof modeOrLight === 'string' ? "\n" + modeOrLight + " color " + rgbaOrDark.innerText : "\nlight mode: " + modeOrLight + "\ndark mode: " + rgbaOrDark);
-    copyTextToClipboard(textToCopy, tooltipSpan.id);
 }
 
-// } else if (elementId == "syscolors-grid-dark" || elementId == "syscolors-deprecated-dark") systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
+// Apply background color to inner div, so as to not affect cardDiv's big left border color!
+cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
+cardInnerDiv.appendChild(nameSpan);
+cardInnerDiv.appendChild(descSpan);
+cardInnerDiv.appendChild(rgbaSpan);
+
+cardDiv.appendChild(categorySpan);
+cardDiv.appendChild(tooltipSpan);
+cardDiv.appendChild(cardInnerDiv);
+if (
+    document.getElementById(elementId) === null) {
+    console.error("Element " + elementId + " not found!");
+}
+else {
+    document.getElementById(elementId).appendChild(cardDiv);
+}
+
+// Card is built & complete. Now update colors based on what the browser actually used. 
+let computedStyle = getComputedStyle(cardInnerDiv);
+let color = computedStyle.backgroundColor;
+let rgbValues = color.match(/\d+/g).map(Number);
+let [r, g, b] = rgbValues;
+cardInnerDiv.style.color = getContrastingColor(r, g, b);
+
+if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
+    console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
+    cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
+    //cardDiv.style.color = "white";
+    //console.warn("HighLightText style reset to " + cardDiv.style.color);
+}
+
+rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
+rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
+
+tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>${mode} mode color: ${rgbaSpan.outerHTML}${clickText}`;
+// categorySpan.outerHTML + "<br/>" 
+
+let textToCopy = nameSpan.innerText + descSpan.innerText
+    + "\ncategory: " + categorySpan.innerText
+    + "\n" + mode + " color " + rgbaSpan.innerText;
+tooltipSpan.addEventListener('click', function () {
+    copyTextToClipboard(textToCopy, tooltipSpan.id);
+});
+
+// Create an RGBA key for the downloadable json file
+if (mode = "light") { // syscolors-grid-light || syscolors-deprecated-light
+    if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
+    } else { // syscolors-grid-dark || syscolors-deprecated-dark
+        systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
+    }
+}
 
 
-// These cards look more like rows - & are used by TABLES
+
+
+// These cards are wider, like 'rows' - & are used by TABLES
 function createColorRow(systemColorSet, index, elementId) {
 
     let nameSpan = document.createElement('span');
@@ -179,10 +171,10 @@ function createColorRow(systemColorSet, index, elementId) {
     const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
     const dark = `${colorDark} ${darkHex}`;
     darkText.outerHTML += `<span class='syscolors-color-span'><br/>${dark}</span>`;
-    darkText.outerHTML += `<span class='syscolors-color-span'><br/>${dark}</span>`;
 
     tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>light mode: ${light}<br/>dark mode: ${dark}${clickText}`;
     tooltipSpan.addEventListener('click', function () {
         copyTextToClipboard(`${nameSpan.innerText}${descSpan.innerText}\ncategory: ${categorySpan.innerText}\nlight mode: ${light}\ndark mode: ${dark}`, tooltipSpan.id);
     });
 }
+

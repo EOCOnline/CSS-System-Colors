@@ -376,68 +376,23 @@
 
             <div class="myWebSite">
               <header>
+                <a id="idLightHome"></a>
                 <h1 class="contrast">A Swell Website <code>h1</code></h1>
                 <nav>
                   <ul>
-                    <li><a href="/" class="active">Home</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#aboutUs">About Us</a></li>
+                    <li><a href="#idLightHome" class="active">Home</a></li>
+                    <li><a href="#idLightColorPaletee">Color Palette</a></li>
+                    <li><a href="#idLightBlog">Blog</a></li>
+                    <li><a href="#idLightAboutUs">About Us</a></li>
                   </ul>
                 </nav>
               </header>
 
               <main>
-                <h3>Our Blog <code>h3</code></h3>
-                <a id="blog"></a>
-                <p>This demo page attempts to demonstrate a fictitious micro-website using
-                  light & dark color modes & CSS System Colors. The following sections
-                  use <code>Canvas</code> for the background & <code>CanvasText</code> as
-                  the text color.</p>
-                <section>
-                  <div>
-                    <article>
-                      <h4>CSS System Color News <code>h4</code></h4>
-                      <p>This paragraph shows various HTML tags in action:
-                        Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
-                        <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
-                        <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
-                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
-                          text.</span>
-                      </p>
-                      <div>This div describes text selection. If you select some text, the ::selected pseudo
-                        class sets a text color of <code>HighlightText</code> & background color of
-                        <code>Highlight</code>. <span class="SelectedItem1">This span has <code>Selection</code>
-                          hardcoded as
-                          the background color and <code>SelectedItemText</code> as the text color.</span>
-                      </div>
-                      <br />
-                      <div>
-                        <strong>Links</strong> <code>:hover</code> is not in the standards, so browser-specific.
-                        <ul>
-                          <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
-                              never visited link</a></li>
-                          <li>Here's a <a href="https://google.com?q=css+system+colors" class=":visited">visited
-                              link</a>
-                          </li>
-
-                        </ul>
-                      </div>
-
-                    </article>
-                  </div>
-                  <div>
-                    <h4>Comments</h4>
-                    <article>"Check this out!"</article><br />
-                    <article>"Very helpful"</article>
-                  </div>
-                  <!--aside>
-                      <h4>Aside</h4>
-                      <p>Interesting extra info</p>
-                    </aside-->
-                </section>
 
                 <h3>Our Color Palette</h3>
                 <section>
+                  <a id="idLightColorPalette"></a>
                   <div>The CSS System Colors provide a very limited palette. However it
                     is <a href="https://web.dev/articles/prefers-color-scheme" target="_blank">easy to extend them</a>
                     with your <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">own scheme</a> that
@@ -512,10 +467,61 @@
                   </div>
                 </section>
 
+                <h3>Our Blog <code>h3</code></h3>
+                <a id="idLightBlog"></a>
+                <p>This demo page attempts to demonstrate a fictitious micro-website using
+                  light & dark color modes & CSS System Colors. The following sections
+                  use <code>Canvas</code> for the background & <code>CanvasText</code> as
+                  the text color.</p>
+                <section>
+                  <div>
+                    <article>
+                      <h4>CSS System Color News <code>h4</code></h4>
+                      <p>This paragraph shows various HTML tags in action:
+                        Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
+                        <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
+                        <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
+                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
+                          text.</span>
+                      </p>
+                      <div>This div describes text selection. If you select some text, the ::selected pseudo
+                        class sets a text color of <code>HighlightText</code> & background color of
+                        <code>Highlight</code>. <span class="SelectedItem1">This span has <code>Selection</code>
+                          hardcoded as
+                          the background color and <code>SelectedItemText</code> as the text color.</span>
+                      </div>
+                      <br />
+                      <div>
+                        <strong>Links</strong> <code>:hover</code> is not in <a
+                          href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
+                        browser-specific.
+                        <ul>
+                          <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
+                              never visited link</a></li>
+                          <li>Here's a <a href="https://google.com" class=":visited" onclick="return false;">visited
+                              link</a>
+                          </li>
+
+                        </ul>
+                      </div>
+
+                    </article>
+                  </div>
+                  <div>
+                    <h4>Comments</h4>
+                    <article>"Check this out!"</article><br />
+                    <article>"Very helpful"</article>
+                  </div>
+                  <!--aside>
+                      <h4>Aside</h4>
+                      <p>Interesting extra info</p>
+                    </aside-->
+                </section>
+
                 <h3>About Us</h3>
                 <div class="syscolors-break"></div>
                 <section class="aboutUs">
-                  <a id="aboutUs"></a>
+                  <a id="idLightAboutUs"></a>
 
                   <div class="card">
                     <img src="./images/avatar2.png" alt="Avatar" style="width:30%">

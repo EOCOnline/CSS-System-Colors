@@ -15,7 +15,7 @@
   /*--test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
   --contrast: 100;*/
   --borderColor: #bbbbbb;
-  --rowHeight: 70px; /* BUG: Broken somehow had been using val, not var. Move to specific style sheets.*/
+  --rowHeight: 70px;
 }
 
 /* This changes the pages default color scheme. The panels tend to have their color modes hardwired. */

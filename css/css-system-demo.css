@@ -222,8 +222,7 @@
     background-color: var(--secondary);
     color: #aaa;
 
-    padding: 0.5rem;
-    padding-left: 1em;
+    padding: 0.75rem 1.25rem 0.5rem 1rem;
     margin: 0.5rem;
     width: fit-content;
 
