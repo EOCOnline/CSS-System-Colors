@@ -346,7 +346,7 @@
     </div>
 
     <div id="syscolors-grid-container" class="syscolors-inner-container">
-      <details open>
+      <details>
         <summary id="syscolors-current-summary">System Colors Grid</summary>
 
         <div id="syscolors-grid">
@@ -375,7 +375,7 @@
           <div id="syscolors-demo-light" class="syscolors-inner-container">
             <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
 
-            <div class="myWebSite">
+            <div class="myWebSite" id="idLightWebsite">
               <header>
                 <a id="idLightHome"></a>
                 <h1 class="contrast">A Swell Website <code>h1</code></h1>
@@ -403,9 +403,11 @@
                     Our arbitrary palette for this micro-site:
                     <div class="colorPalette">
                       <div class="primary">
-                        <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--primary)" />
-                        </svg> Primary
+                        <button id="idLightPicker" data-jscolor="{}">
+                          <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--primary)" />
+                          </svg> Primary
+                        </button>
                       </div>
                       <div class="secondary">
                         <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
@@ -418,16 +420,6 @@
                         </svg>Contrast
                       </div>
                     </div>
-                    <div>OR, choose your own primary:<br />
-                      <button data-jscolor="{
-                        onChange: 'updatePrimaryColor(this, \'#pr1\')',
-                        onInput: 'updatePrimaryColor(this, \'#pr2\')',
-                        alpha:0.7, value:'CCFFAA'}"></button>
-                      <br /><br /><br /><br /><br /><br /><br /><br />
-                      <em id="pr1" style="display:inline-block; padding:1em;">change event</em>
-                      <em id="pr2" style="display:inline-block; padding:1em;">input event</em>
-                    </div>
-
                     <br />
                     <details>
                       <summary><b>tl;dr</b> &mdash; Minimal code to copy for your own site...</summary>

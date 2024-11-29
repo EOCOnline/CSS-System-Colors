@@ -25,13 +25,13 @@
   font-family: "Delius", cursive;
 
   /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
-  --light-primary: rgb(248, 172, 140);
-  --light-primary-rgb: 248, 172, 140;
+  --light-primary: rgba(248, 172, 140, 0.9);
+  --light-primary-rgb: 248, 172, 140, 0.9;
   --light-secondary: rgb(251, 228, 196);
   --light-contrast: rgb(46, 155, 180);
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
-  --dark-primary: rgb(138, 68, 189);
-  --dark-primary-rgb: 138, 68, 189;
+  --dark-primary: rgba(138, 68, 189, 0.9);
+  --dark-primary-rgba: 138, 68, 189, 0.9;
   --dark-secondary: rgb(195, 26, 161);
   --dark-contrast: rgb(231, 143, 228);
 

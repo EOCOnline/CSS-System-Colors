@@ -37,61 +37,59 @@ function createColorCard(systemColorSet, index, elementId) {
     } else {
         cardDiv.className = "syscolors-row-card";
     }
-}
 
-// Apply background color to inner div, so as to not affect cardDiv's big left border color!
-cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
-cardInnerDiv.appendChild(nameSpan);
-cardInnerDiv.appendChild(descSpan);
-cardInnerDiv.appendChild(rgbaSpan);
+    // Apply background color to inner div, so as to not affect cardDiv's big left border color!
+    cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
+    cardInnerDiv.appendChild(nameSpan);
+    cardInnerDiv.appendChild(descSpan);
+    cardInnerDiv.appendChild(rgbaSpan);
 
-cardDiv.appendChild(categorySpan);
-cardDiv.appendChild(tooltipSpan);
-cardDiv.appendChild(cardInnerDiv);
-if (
-    document.getElementById(elementId) === null) {
-    console.error("Element " + elementId + " not found!");
-}
-else {
-    document.getElementById(elementId).appendChild(cardDiv);
-}
+    cardDiv.appendChild(categorySpan);
+    cardDiv.appendChild(tooltipSpan);
+    cardDiv.appendChild(cardInnerDiv);
+    if (
+        document.getElementById(elementId) === null) {
+        console.error("Element " + elementId + " not found!");
+    }
+    else {
+        document.getElementById(elementId).appendChild(cardDiv);
+    }
 
-// Card is built & complete. Now update colors based on what the browser actually used. 
-let computedStyle = getComputedStyle(cardInnerDiv);
-let color = computedStyle.backgroundColor;
-let rgbValues = color.match(/\d+/g).map(Number);
-let [r, g, b] = rgbValues;
-cardInnerDiv.style.color = getContrastingColor(r, g, b);
+    // Card is built & complete. Now update colors based on what the browser actually used. 
+    let computedStyle = getComputedStyle(cardInnerDiv);
+    let color = computedStyle.backgroundColor;
+    let rgbValues = color.match(/\d+/g).map(Number);
+    let [r, g, b] = rgbValues;
+    cardInnerDiv.style.color = getContrastingColor(r, g, b);
 
-if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
-    console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
-    cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
-    //cardDiv.style.color = "white";
-    //console.warn("HighLightText style reset to " + cardDiv.style.color);
-}
+    if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
+        console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
+        cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
+        //cardDiv.style.color = "white";
+        //console.warn("HighLightText style reset to " + cardDiv.style.color);
+    }
+    let hexValues = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+    rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
+    //rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
 
-rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
-rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
+    tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>${mode} mode color: ${rgbaSpan.outerHTML}${clickText}`;
+    // categorySpan.outerHTML + "<br/>" 
 
-tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>${mode} mode color: ${rgbaSpan.outerHTML}${clickText}`;
-// categorySpan.outerHTML + "<br/>" 
+    let textToCopy = nameSpan.innerText + descSpan.innerText
+        + "\ncategory: " + categorySpan.innerText
+        + "\n" + mode + " color " + rgbaSpan.innerText;
+    tooltipSpan.addEventListener('click', function () {
+        copyTextToClipboard(textToCopy, tooltipSpan.id);
+    });
 
-let textToCopy = nameSpan.innerText + descSpan.innerText
-    + "\ncategory: " + categorySpan.innerText
-    + "\n" + mode + " color " + rgbaSpan.innerText;
-tooltipSpan.addEventListener('click', function () {
-    copyTextToClipboard(textToCopy, tooltipSpan.id);
-});
-
-// Create an RGBA key for the downloadable json file
-if (mode = "light") { // syscolors-grid-light || syscolors-deprecated-light
-    if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
-    } else { // syscolors-grid-dark || syscolors-deprecated-dark
-        systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
+    // Create an RGBA key for the downloadable json file
+    if (mode = "light") { // syscolors-grid-light || syscolors-deprecated-light
+        if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
+        } else { // syscolors-grid-dark || syscolors-deprecated-dark
+            systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
+        }
     }
 }
-
-
 
 
 // These cards are wider, like 'rows' - & are used by TABLES

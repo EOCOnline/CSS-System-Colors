@@ -1,4 +1,4 @@
-// This contains routines for the main program INCIDENTAL TO THE MAIN flow!
+// This file has utility routines INCIDENTAL TO THE MAIN FLOW
 
 function cloneLightPanel(elementId, cloneId, spanSelector) {
     let light = document.getElementById(elementId);
@@ -9,41 +9,41 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
     let dark = light.cloneNode(true);
     dark.id = cloneId;
     dark.className = "syscolors-inner-container syscolors-dark";
+    dark.querySelector(spanSelector).innerText = "Dark";
 
     light.classList.add("syscolors-inner-container");
     light.classList.add("syscolors-light");
+    light.querySelector(spanSelector).innerText = "Light";
 
     let parent = light.parentNode;
     if (!parent) {
-        console.error("No parent element found for element with ID: " + elementId);
+        console.error("No parent element for element with ID: " + elementId);
         return;
     }
     if (logLevel > 1) console.log("Found Parent with ID: " + parent.id);
     parent.appendChild(dark);
 
-    light.querySelector(spanSelector).innerText = "Light";
-    dark.querySelector(spanSelector).innerText = "Dark";
+    if (elementId.includes("demo")) {
+        // convert all ID's that start with idLight to idDark
+        let lightIds = dark.querySelectorAll("[id^='idLight']");
+        for (let i = 0; i < lightIds.length; i++) {
+            lightIds[i].id = lightIds[i].id.replace("idLight", "idDark");
+            if (logLevel > 1) console.log(`Converted ID ${i}: to ${lightIds[i].id.toString()}`);
+        }
 
-    // convert all id's that start with idLight to idDark
-    let lightIds = dark.querySelectorAll("[id^='idLight']");
-    for (let i = 0; i < lightIds.length; i++) {
-        lightIds[i].id = dark.id.replace("idLight", "idDark");
+        // convert all HREF's that start with idLight to idDark
+        lightIds = dark.querySelectorAll("[href^='idLight']");
+        for (let i = 0; i < lightIds.length; i++) {
+            lightIds[i].href = dark.href.replace("idLight", "idDark");
+        }
     }
-
-    // convert all href's that start with idLight to idDark
-    lightIds = dark.querySelectorAll("[href^='idLight']");
-    for (let i = 0; i < lightIds.length; i++) {
-        lightIds[i].href = dark.href.replace("idLight", "idDark");
-    }
-
     return dark;
 }
 
 function updateContrast(el) {
-    const contrast = el.value;
-    syscolorsContainer.style.filter = 'contrast(' + contrast + '%)';
-    syscolorsContrast.value = contrast;
-    contrastValue.innerText = contrast;
+    syscolorsContainer.style.filter = 'contrast(' + el.value + '%)';
+    syscolorsContrast.value = el.value;
+    contrastValueId.innerText = el.value;
 }
 
 function setPageColorMode(el) {
@@ -63,16 +63,50 @@ function setSortOrder(val) {
     processJson(systemColorsJson);
 }
 
+// https://jscolor.com/docs/
+let lightPicker;
+let darkPicker;
+function setJsColorPicker() {
+    jscolor.trigger('input'); // triggers 'onInput' on all color pickers when they are ready
 
-function updatePrimaryColor(picker, selector) {
-    document.querySelector(selector).style.background = picker.toBackground()
+    lightPicker = document.getElementById('idLightPicker').jscolor;
+    if (!lightPicker) throw new Error("Light picker not found!");
+    lightPicker.onInput = updateLightPrimaryColor;
+    lightPicker.fromRGBA(document.querySelector(".myWebSite").style.getPropertyValue('--light-primary-rgba'));
+    // pickerLight.option({ 'width': 101, 'position': 'right',            'backgroundColor': '#333'     });
+
+    debugger;
+    // BUG: Following doesn't find id!
+    let darkPicker1 = document.getElementById('idDarkPicker');
+    let darkPicker = darkPicker1.jscolor;
+    if (!darkPicker) { throw new Error("idDarkPicker.jscolor not found!"); }
+    darkPicker.onInput = updateDarkPrimaryColor;
+    darkPicker.fromRGBA(document.querySelector("#idDarkWebsite").style.getPropertyValue('--dark-primary-rgba'));
+
+    console.log("JSColorPicker installed!");
 }
 
-// triggers 'onInput' and 'onChange' on all color pickers when they are ready
-jscolor.trigger('input change');
+function updateLightPrimaryColor() {
+    console.log("Light Primary Color: " + lightPicker.toRGBAString());
+    document.querySelector(".myWebSite").style.setProperty('--light-primary',
+        `rgba(${round(lightPicker.channels.r)}, 
+        ${round(lightPicker.channels.g)}, 
+        ${round(lightPicker.channels.b)}, 
+        ${round(lightPicker.channels.a)})`);
+}
 
+function updateDarkPrimaryColor() {
+    console.log("Dark Primary Color: " + darkPicker.toRGBAString());
+    document.querySelector(".myWebSite")[1].style.setProperty('--dark-primary',
+        `rgba(${round(darkPicker.channels.r)},
+        ${round(darkPicker.channels.g)},
+        ${round(darkPicker.channels.b)},
+        ${round(darkPicker.channels.a)})`);
+}
 
-
+function round(val) {
+    return Math.round(val * 100) / 100;
+}
 
 
 function resetWebPage() {
@@ -95,7 +129,7 @@ function resetWebPage() {
     if (document.getElementById("syscolors-grid-dark")) {
         document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
     }
-
+ 
     // removed too much!!!!
     document.getElementById("syscolors-deprecated-light").innerHTML = "";
     if (document.getElementById("syscolors-deprecated-dark")) {

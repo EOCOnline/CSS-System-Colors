@@ -7,7 +7,7 @@
 const logLevel = 2;
 const sourceJson = "css-system-colors.json";
 let hueValue = 222;
-let contrastValue;
+let contrastValueId;
 let syscolorsContrast;
 let syscolorsContainer;
 
@@ -15,16 +15,16 @@ document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 2) console.log("DOM fully loaded and parsed");
 
-  contrastValue = document.getElementById('syscolors-contrast-value');
+  contrastValueId = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-outer-container");
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
-  cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
-
   document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
   document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
+  setJsColorPicker();
 
+  cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
   const hueSlider = document.querySelector('#hueSlider');
   const hueDemo = document.querySelector("#syscolors-hue-demo")
   hueSlider.addEventListener("input", () => {
