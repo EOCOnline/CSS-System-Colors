@@ -375,7 +375,7 @@
           <div id="syscolors-demo-light" class="syscolors-inner-container">
             <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
 
-            <div class="myWebSite" id="idLightWebsite">
+            <div class="myWebSite" id="idLightWebSite">
               <header>
                 <a id="idLightHome"></a>
                 <h1 class="contrast">A Swell Website <code>h1</code></h1>
@@ -403,21 +403,13 @@
                     Our arbitrary palette for this micro-site:
                     <div class="colorPalette">
                       <div class="primary">
-                        <button id="idLightPicker" data-jscolor="{}">
-                          <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--primary)" />
-                          </svg> Primary
-                        </button>
+                        <button id="idLightPrimary" class="picker" data-jscolor="{}">Primary</button>
                       </div>
                       <div class="secondary">
-                        <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--secondary)" />
-                        </svg>Secondary
+                        <button id="idLightSecondary" class="picker" data-jscolor="{}">Secondary</button>
                       </div>
                       <div class="contrast">
-                        <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="15" cy="15" r="9" stroke="CanvasText" stroke-width="3" fill="var(--contrast)" />
-                        </svg>Contrast
+                        <button id="idLightContrast" class="picker" data-jscolor="{}">Contrast</button>
                       </div>
                     </div>
                     <br />

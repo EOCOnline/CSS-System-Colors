@@ -9,7 +9,7 @@
 #syscolors-demo-dark {
   max-width: 45%;
   margin-right: 1rem;
-  padding: 0 1rem;
+  padding: 0rem;
 }
 
 .myWebSite {
@@ -26,21 +26,47 @@
 
   /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
   --light-primary: rgba(248, 172, 140, 0.9);
-  --light-primary-rgb: 248, 172, 140, 0.9;
-  --light-secondary: rgb(251, 228, 196);
-  --light-contrast: rgb(46, 155, 180);
+  --light-primary-rgba: 248, 172, 140, 0.9;
+  --light-secondary: rgba(251, 228, 196, 1);
+  --light-secondary-rgba: 251, 228, 196, 1;
+  --light-contrast: rgba(46, 155, 180, 1);
+  --light-contrast-rgba: 255, 255, 255, 1;
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
   --dark-primary: rgba(138, 68, 189, 0.9);
   --dark-primary-rgba: 138, 68, 189, 0.9;
-  --dark-secondary: rgb(195, 26, 161);
-  --dark-contrast: rgb(231, 143, 228);
+  --dark-secondary: rgba(195, 26, 161, 1);
+  --dark-secondary-rgba: 195, 26, 161, 1;
+  --dark-contrast: rgba(231, 143, 228, 1);
+  --dark-contrast-rgba: 231, 143, 228, 1;
 
   /* The light-dark function REQUIRES "color-scheme: light dark;" be set */
   /* To use val's directly... */
   --primary: light-dark(var(--light-primary), var(--dark-primary));
-  --primary-rgb: light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));
+  --primary-rgba: light-dark(
+    var(--light-primary-rgba),
+    var(--dark-primary-rgba)
+  );
   --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
+  --secondary-rgba: light-dark(
+    var(--light-secondary-rgba),
+    var(--dark-secondary-rgba)
+  );
   --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
+  --contrast-rgba: light-dark(
+    var(--light-contrast-rgba),
+    var(--dark-contrast-rgba)
+  );
+
+  /* Or to use classes... */
+  .primary {
+    color: light-dark(var(--light-primary), var(--dark-primary));
+  }
+  .secondary {
+    color: light-dark(var(--light-secondary), var(--dark-secondary));
+  }
+  .contrast {
+    color: light-dark(var(--light-contrast), var(--dark-contrast));
+  }
 
   /* super minimal CSS reset */
   html,
@@ -63,6 +89,7 @@
   ul {
     color: CanvasText;
     background-color: Canvas;
+    max-width: 100%;
   }
 
   header {
@@ -74,6 +101,22 @@
 
   main {
     width: fit-content;
+    max-width: 100%;
+  }
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    /*align-content: stretch;
+    width: 90%;*/
+    max-width: 100%;
+    padding: 1rem;
+
+    background-color: Canvas;
+    color: CanvasText;
+
+    border: 1px solid CanvasText;
+    border-radius: 0.5rem;
   }
 
   footer {
@@ -89,22 +132,12 @@
     color: var(--contrast);
     background-color: rgba(var(--primary-rgb), 0.8);
     padding: 0;
+    max-width: 100%;
   }
 
   article {
     color: var(--contrast);
     background-color: Canvas;
-  }
-
-  /* Or to use classes... */
-  .primary {
-    color: light-dark(var(--light-primary), var(--dark-primary));
-  }
-  .secondary {
-    color: light-dark(var(--light-secondary), var(--dark-secondary));
-  }
-  .contrast {
-    color: light-dark(var(--light-contrast), var(--dark-contrast));
   }
 
   .colorPalette {
@@ -113,8 +146,8 @@
     justify-content: center;
 
     div {
-      width: fit-content;
       padding: 0.25rem;
+      width: fit-content;
       margin: 0.5rem;
       border-radius: 0.5rem;
       box-shadow: 0 2px 4px 0 CanvasText;
@@ -162,21 +195,6 @@
       );
       color: light-dark(var(--light-bright), var(--dark-bright));
     }
-  }
-
-  section {
-    display: flex;
-    justify-content: space-between;
-    align-content: stretch;
-    width: 90%;
-    /*max-width: 90%;*/
-    padding: 1rem;
-
-    background-color: Canvas;
-    color: CanvasText;
-
-    border: 1px solid CanvasText;
-    border-radius: 0.5rem;
   }
 
   .card {

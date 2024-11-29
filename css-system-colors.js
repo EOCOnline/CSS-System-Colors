@@ -11,6 +11,11 @@ let contrastValueId;
 let syscolorsContrast;
 let syscolorsContainer;
 
+/*jscolor.presets.light = Object.assign({}, jscolor.presets.light, { 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
+
+jscolor.presets.dark = Object.assign({}, jscolor.presets.dark, { 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
+*/
+
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 2) console.log("DOM fully loaded and parsed");

@@ -20,7 +20,7 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
         console.error("No parent element for element with ID: " + elementId);
         return;
     }
-    if (logLevel > 1) console.log("Found Parent with ID: " + parent.id);
+    if (logLevel > 1) { console.log("Found Parent with ID: " + parent.id); }
     parent.appendChild(dark);
 
     if (elementId.includes("demo")) {
@@ -28,13 +28,14 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
         let lightIds = dark.querySelectorAll("[id^='idLight']");
         for (let i = 0; i < lightIds.length; i++) {
             lightIds[i].id = lightIds[i].id.replace("idLight", "idDark");
-            if (logLevel > 1) console.log(`Converted ID ${i}: to ${lightIds[i].id.toString()}`);
+            if (logLevel > 1) { console.log(`Converted ID ${i}: to ${lightIds[i].id.toString()}`); }
         }
 
         // convert all HREF's that start with idLight to idDark
-        lightIds = dark.querySelectorAll("[href^='idLight']");
-        for (let i = 0; i < lightIds.length; i++) {
-            lightIds[i].href = dark.href.replace("idLight", "idDark");
+        let lightHrefs = dark.querySelectorAll("[href^='idLight']");
+        for (let i = 0; i < lightHrefs.length; i++) {
+            lightHrefs[i].href = lightHrefs[i].href.replace("idLight", "idDark");
+            if (logLevel > 1) { console.log(`Converted HREF ${i}: to ${lightHrefs[i].href.toString()}`); }
         }
     }
     return dark;
@@ -64,45 +65,112 @@ function setSortOrder(val) {
 }
 
 // https://jscolor.com/docs/
-let lightPicker;
-let darkPicker;
+let lightPrimaryPicker;
+let lightSecondaryPicker;
+let lightContrastPicker;
+let darkPrimaryPicker;
+let darkSecondaryPicker;
+let darkContrastPicker;
+let lightWebSite;
+let darkWebSite;
 function setJsColorPicker() {
+    jscolor.presets.default = Object.assign({}, jscolor.presets.default, { 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 30, 'padding': 5, 'shadow': false, 'backgroundColor': '#333' });
+
+
+    lightWebSite = document.getElementById("idLightWebSite");
+    if (!lightWebSite) throw new Error("Light website not found!");
+
+    lightPrimaryPicker = lightWebSite.getElementById('idLightPrimary').jscolor;
+    lightPrimaryPicker.onInput = updateLightPrimaryColor;
+    lightPrimaryPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-primary-rgba'));
+    //lightPrimaryPicker.option({ 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
+
+    lightSecondaryPicker = lightWebSite.getElementById('idLightSecondary').jscolor;
+    lightSecondaryPicker.onInput = updateLightSecondaryColor;
+    lightSecondaryPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-secondary-rgba'));
+
+    lightContrastPicker = lightWebSite.getElementById('idLightContrast').jscolor;
+    lightContrastPicker.onInput = updateLightContrastColor;
+    lightContrastPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-contrast-rgba'));
+
+    if (!lightPrimaryPicker || !lightSecondaryPicker || !lightContrastPicker) throw new Error("Light pickers not found!");
+
+
+    darkWebSite = document.getElementById("idDarkWebSite");
+    if (!darkWebSite) throw new Error("Dark website not found!");
+
+    darkPrimaryPicker = darkWebSite.getElementById('idDarkPrimary').jscolor;
+    if (!darkPrimaryPicker) { throw new Error("idDarkPrimaryPicker.jscolor not found!"); }
+    darkPrimaryPicker.onInput = updateDarkPrimaryColor;
+    darkPrimaryPicker.fromRGBA(darkWebSite.style.getPropertyValue('--dark-primary-rgba'));
+
+    darkSecondaryPicker = darkWebSite.getElementById('idDarkSecondary').jscolor;
+    darkSecondaryPicker.onInput = updateDarkSecondaryColor;
+    darkSecondaryPicker.fromRGBA(lightWebSite.style.getPropertyValue('--dark-secondary-rgba'));
+
+    darkContrastPicker = darkWebSite.getElementById('idDarkContrast').jscolor;
+    darkContrastPicker.onInput = updateDarkContrastColor;
+    darkContrastPicker.fromRGBA(lightWebSite.style.getPropertyValue('--dark-contrast-rgba'));
+
     jscolor.trigger('input'); // triggers 'onInput' on all color pickers when they are ready
-
-    lightPicker = document.getElementById('idLightPicker').jscolor;
-    if (!lightPicker) throw new Error("Light picker not found!");
-    lightPicker.onInput = updateLightPrimaryColor;
-    lightPicker.fromRGBA(document.querySelector(".myWebSite").style.getPropertyValue('--light-primary-rgba'));
-    // pickerLight.option({ 'width': 101, 'position': 'right',            'backgroundColor': '#333'     });
-
-    debugger;
-    // BUG: Following doesn't find id!
-    let darkPicker1 = document.getElementById('idDarkPicker');
-    let darkPicker = darkPicker1.jscolor;
-    if (!darkPicker) { throw new Error("idDarkPicker.jscolor not found!"); }
-    darkPicker.onInput = updateDarkPrimaryColor;
-    darkPicker.fromRGBA(document.querySelector("#idDarkWebsite").style.getPropertyValue('--dark-primary-rgba'));
-
     console.log("JSColorPicker installed!");
 }
 
 function updateLightPrimaryColor() {
-    console.log("Light Primary Color: " + lightPicker.toRGBAString());
-    document.querySelector(".myWebSite").style.setProperty('--light-primary',
-        `rgba(${round(lightPicker.channels.r)}, 
-        ${round(lightPicker.channels.g)}, 
-        ${round(lightPicker.channels.b)}, 
-        ${round(lightPicker.channels.a)})`);
+    console.log("Light Primary Color: " + lightPrimaryPicker.toRGBAString());
+    lightWebSite.style.setProperty('--light-primary',
+        `rgba(${round(lightPrimaryPicker.channels.r)}, 
+        ${round(lightPrimaryPicker.channels.g)}, 
+        ${round(lightPrimaryPicker.channels.b)}, 
+        ${round(lightPrimaryPicker.channels.a)})`);
 }
 
-function updateDarkPrimaryColor() {
-    console.log("Dark Primary Color: " + darkPicker.toRGBAString());
-    document.querySelector(".myWebSite")[1].style.setProperty('--dark-primary',
-        `rgba(${round(darkPicker.channels.r)},
-        ${round(darkPicker.channels.g)},
-        ${round(darkPicker.channels.b)},
-        ${round(darkPicker.channels.a)})`);
+function updateLightSecondaryColor() {
+    console.log("Light Secondary Color: " + lightSecondaryPicker.toRGBAString());
+    lightWebSite.style.setProperty('--light-secondary',
+        `rgba(${round(lightSecondaryPicker.channels.r)}, 
+        ${round(lightSecondaryPicker.channels.g)}, 
+        ${round(lightSecondaryPicker.channels.b)}, 
+        ${round(lightSecondaryPicker.channels.a)})`);
 }
+
+function updateLightContrastColor() {
+    console.log("Light Contrast Color: " + lightContrastPicker.toRGBAString());
+    lightWebSite.style.setProperty('--light-contrast',
+        `rgba(${round(lightContrastPicker.channels.r)},
+        ${round(lightContrastPicker.channels.g)},
+        ${round(lightContrastPicker.channels.b)},
+        ${round(lightContrastPicker.channels.a)})`);
+}
+
+
+function updateDarkPrimaryColor() {
+    console.log("Dark Primary Color: " + darkPrimaryPicker.toRGBAString());
+    darkWebSite.style.setProperty('--dark-primary',
+        `rgba(${round(darkPrimaryPicker.channels.r)},
+        ${round(darkPrimaryPicker.channels.g)},
+        ${round(darkPrimaryPicker.channels.b)},
+        ${round(darkPrimaryPicker.channels.a)})`);
+}
+
+function updateDarkSecondaryColor() {
+    console.log("Dark Secondary Color: " + darkSecondaryPicker.toRGBAString());
+    darkWebSite.style.setProperty('--dark-secondary',
+        `rgba(${round(darkSecondaryPicker.channels.r)},
+        ${round(darkSecondaryPicker.channels.g)},
+        ${round(darkSecondaryPicker.channels.b)},
+        ${round(darkSecondaryPicker.channels.a)})`);
+}
+
+function updateDarkContrastColor() {
+    console.log("Dark Contrast Color: " + darkContrastPicker.toRGBAString());
+    darkWebSite.style.setProperty('--dark-contrast',
+        `rgba(${round(darkContrastPicker.channels.r)},
+        ${round(darkContrastPicker.channels.g)},
+        ${round(darkContrastPicker.channels.b)},
+        ${round(darkContrastPicker.channels.a)})`);
+}
+
 
 function round(val) {
     return Math.round(val * 100) / 100;
