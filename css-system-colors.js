@@ -4,7 +4,7 @@
  */
 
 // logLevel sets debug output: 0 = none, 1 = some, 3 = all
-const logLevel = 2;
+const logLevel = 1;
 const sourceJson = "css-system-colors.json";
 let hueValue = 222;
 let contrastValueId;
