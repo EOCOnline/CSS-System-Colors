@@ -10,6 +10,9 @@
   max-width: 45%;
   margin-right: 1rem;
   padding: 0rem;
+  h3 {
+    margin-left: 1rem;
+  }
 }
 
 .myWebSite {
@@ -184,8 +187,8 @@
     }
 
     li a.active {
-      background-color: light-dark(var(--light-contrast), var(--dark-contrast));
-      color: light-dark(var(--light-primary), var(--dark-primary));
+      background-color: var(--primary);
+      color: var(--contrast);
       /*color: light-dark(var(--light-bright), var(--dark-bright));*/
     }
   }
