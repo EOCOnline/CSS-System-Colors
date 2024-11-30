@@ -18,6 +18,7 @@
   --rowHeight: 70px;
 }
 
+/* #region light-dark */
 /* This changes the pages default color scheme. The panels tend to have their color modes hardwired. */
 :root:has(#syscolors-page-mode option[value="normal"]:checked) {
   color-scheme: normal;
@@ -40,6 +41,7 @@
 :root:has(#syscolors-page-mode option[value="only dark"]:checked) {
   color-scheme: only dark;
 }
+/* #endregion */
 
 body {
   font-weight: 400; /* https://css-tricks.com/dark-mode-and-variable-fonts/ */
@@ -53,9 +55,8 @@ body {
   }
 }
 
-/**********************************************
- * General page styles
- */
+/* #region General page styles */
+/***********************************************/
 details > summary {
   font-weight: bold;
   font-style: italic;
@@ -76,10 +77,10 @@ blockquote {
   margin: 15px;
   border-radius: 0.5em;
 }
+/* #endregion */
 
-/***************************************************************
- * Page Containers/Panels
- */
+/* #region Page Containers/Panels */
+/****************************************************************/
 #syscolors-container {
   padding: 10px;
   border: 1px solid CanvasText;
@@ -87,10 +88,10 @@ blockquote {
   margin: 20px;
   font-family: sans-serif;
 }
+/* #endregion */
 
-/**********************************************
- * Styles used by multiple panels
- */
+/* #region Styles used by multiple panels */
+/***********************************************/
 #syscolors-table,
 #syscolors-deprecated-table,
 #syscolors-grid,
@@ -157,10 +158,11 @@ blockquote {
   position: absolute;
   z-index: 9;
 }
+/* #endregion */
 
-/***********************************
- * Page Header
- */
+/* #region(collapsed) Page Header */
+/***********************************/
+
 #syscolors-outer-container header {
   margin: 5px;
   padding: 5px;
@@ -181,41 +183,12 @@ blockquote {
     margin-right: 10px;
   }
 }
+/* #endregion */
 
-/***********************************
- * #Region: Options Panel
- */
+/* #region(collapsed) Options Panel */
+/************************************/
 #syscolors-options-container {
   font-weight: bold;
-}
-
-#UNUSED-syscolors-options-container {
-  .floater {
-    border-bottom: 1px dashed;
-    text-decoration: none;
-    color: saddlebrown;
-  }
-  .floater:hover {
-    cursor: help;
-    position: relative;
-    color: cadetblue;
-  }
-  .fffloater span {
-    display: none;
-  }
-  .floater:hover span {
-    border: #666 2px dotted;
-    padding: 5px 20px 5px 5px;
-    display: block;
-    z-index: 100;
-    background: #e3e3e3;
-    left: 0px;
-    margin: 15px;
-    width: 300px;
-    position: absolute;
-    top: 15px;
-    text-decoration: none;
-  }
 }
 
 /*
@@ -259,11 +232,10 @@ https://www.w3docs.com/tools/code-editor/10122
   border: #aaa 1px solid;*/
   padding: 2px;
 }
-/* # EndRegion Options Panel */
+/* #endregion */
 
-/***********************************
- * Intro Panel
- */
+/* #region(collapsed) Intro Panel */
+/************************************/
 #syscolors-intro {
   img {
     max-width: 80%;
@@ -271,12 +243,12 @@ https://www.w3docs.com/tools/code-editor/10122
     border-radius: 0.5em;
   }
 }
+/* #endregion */
 
+/* #region(collapsed) Table Panels */
 /***********************************
- * Table Panels
  * NOTE: see syscolors-table.css
  */
-
 #syscolors-table,
 #syscolors-deprecated-table {
   display: flex;
@@ -285,9 +257,10 @@ https://www.w3docs.com/tools/code-editor/10122
   justify-content: flex-start;*/
   padding: 5px;
 }
+/* #endregion */
 
+/* #region(collapsed) Color Grid Panels */
 /**********************************************
- * Color Grid Panels
  * NOTE: Also see syscolors-grid.css & system-colors.css
  */
 #syscolors-grid,
@@ -306,20 +279,21 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-grid {
   padding: 10px;
 }
+/* #endregion */
 
+/* #region Demonstration Panels */
 /**********************************************
- * Demonstration Panels
  * NOTE: Also see syscolors-demo.css & system-colors.css!
  */
-
 #syscolors-demo {
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
 }
+/* #endregion */
 
+/* #region(collapsed) Hue Panels */
 /**********************************************
- * Hue Panels
  * NOTE: Also see syscolors-demo.css & system-colors.css!
  */
 
@@ -389,10 +363,11 @@ https://www.w3docs.com/tools/code-editor/10122
     background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
   }
 }
+/* #endregion */
 
-/**********************************************
- * Footer Panel
- */
+/* #region Footer Panel */
+/***********************************************/
 #syscolors-footer {
   font-weight: bold;
 }
+/* #endregion */

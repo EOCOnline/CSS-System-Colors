@@ -24,6 +24,7 @@
 
   font-family: "Delius", cursive;
 
+  /* #region(collapsed) website additional highlight colors */
   /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
   --light-primary: rgba(248, 172, 140, 0.9);
   --light-primary-rgba: 248, 172, 140, 0.9;
@@ -55,8 +56,9 @@
   .contrast {
     color: light-dark(var(--light-contrast), var(--dark-contrast));
   }
+  /* #endregion */
 
-  /* super minimal CSS reset */
+  /* #region(collapsed) Super minimal CSS reset */
   h1 {
     font-size: 1.5em;
     margin: 0.67em 0;
@@ -83,7 +85,9 @@
     background-color: Canvas;
     max-width: 100%;
   }
+  /* #endregion */
 
+  /* #region(collapsed) page regions */
   header {
     display: flex;
     flex-direction: column;
@@ -130,6 +134,7 @@
     color: var(--contrast);
     background-color: Canvas;
   }
+  /* #endregion */
 
   .colorPalette {
     display: flex;
@@ -148,6 +153,7 @@
     }
   }
 
+  /* #region(collapsed) Nav Bar */
   nav {
     ul {
       list-style-type: none;
@@ -183,6 +189,7 @@
       /*color: light-dark(var(--light-bright), var(--dark-bright));*/
     }
   }
+  /* #endregion */
 
   .card {
     width: 10rem;
@@ -224,9 +231,12 @@
   blockquote {
     float: right;
 
+    /* BUG: Gets 
+    Expected color but found ‘QuoteText’.  Error in parsing value for ‘color’.  Declaration dropped.
+    
     background-color: Quote;
     color: QuoteText;
-
+*/
     padding: 0.75rem 1.25rem 0.5rem 1rem;
     margin: 0.5rem;
     width: fit-content;

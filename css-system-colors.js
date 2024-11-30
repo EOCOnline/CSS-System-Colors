@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
+ * #Region: System Colors JSON Data
  * systemColorsJson contains the system colors data from the standard.
  * 'systemColorsJson.info' contains metadata about the colors.
  * 'systemColorsJson.currentColors' contains the current system color array.

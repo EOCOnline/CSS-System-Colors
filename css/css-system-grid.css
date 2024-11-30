@@ -25,6 +25,7 @@
 .syscolors-card:has(.syscolors-category-span[category="category"]) {
   --borderColor: #88888844;
 }
+/* #region(collapsed) card */
 
 .syscolors-card:has(.syscolors-category-span[category="selection"]) {
   --borderColor: #00ff0044;
@@ -65,7 +66,7 @@
 .syscolors-card:has(.syscolors-category-span[category="3D"]) {
   --borderColor: #cdf27644;
 }
-
+/* #endregion */
 .syscolors-tall-row {
   --rowHeight: 130px;
 }

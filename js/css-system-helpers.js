@@ -111,7 +111,7 @@ function setJsColorPicker() {
     //darkPrimaryPicker = setUpPicker('Dark', 'Primary');
     //darkContrastPicker = setUpPicker('Dark', 'Contrast');
 
-    console.log("JSColorPicker installed!");
+    if (logLevel > 1) console.log("JSColorPicker installed");
 }
 
 function setUpPicker(theme, color) {
