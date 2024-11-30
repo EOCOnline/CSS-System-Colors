@@ -66,57 +66,51 @@ function setSortOrder(val) {
 
 // https://jscolor.com/docs/
 // ToDo: refactor to use a single function for all color pickers
+// BUG: Opacity slider not showing up on picker
+// BUG: Dark pickers not showing up
+// BUG: jscolor options not working
+
 let lightPrimaryPicker;
 let lightSecondaryPicker;
 let lightContrastPicker;
 let darkPrimaryPicker;
 let darkSecondaryPicker;
 let darkContrastPicker;
-let myWebSite;
 let lightWebSite;
 let darkWebSite;
-let lightStyle;
-let darkStyle;
+let siteStyle;
+const opts = {
+    'format': 'rgba',
+    'borderRadius': 15,
+    'borderWidth': 30,
+    'padding': 5,
+    'shadow': false,
+    'backgroundColor': '#333'
+};
 function setJsColorPicker() {
-    jscolor.presets.default = {
-        ...jscolor.presets.default,
-        'format': 'rgba',
-        'borderRadius': 15,
-        'borderWidth': 30,
-        'padding': 5,
-        'shadow': false,
-        'backgroundColor': '#333'
-    };
-
-    myWebSite = document.getElementsByClassName("myWebSite")[0];
-    if (!myWebSite) throw new Error("Website element not found!");
+    if (typeof jscolor !== 'undefined') {
+        jscolor.presets.default = Object.assign({}, jscolor.presets.default, opts);
+    } else {
+        console.error("jscolor is not defined. Make sure the jscolor library is included.");
+    }
 
     lightWebSite = document.getElementById("idLightWebSite");
     if (!lightWebSite) throw new Error("Light website not found!");
-    lightStyle = getComputedStyle(lightWebSite);
-
+    siteStyle = getComputedStyle(lightWebSite);
     lightPrimaryPicker = setUpPicker('Light', 'Primary');
     lightSecondaryPicker = setUpPicker('Light', 'Secondary');
     lightContrastPicker = setUpPicker('Light', 'Contrast');
 
     darkWebSite = document.getElementById("idDarkWebSite");
     if (!darkWebSite) throw new Error("Dark website not found!");
+    siteStyle = getComputedStyle(darkWebSite);
 
-    darkPrimaryPicker = document.getElementById('idDarkPrimary').jscolor;
-    /*  
-        if (!darkPrimaryPicker) { throw new Error("idDarkPrimaryPicker.jscolor not found!"); }
-       
-        darkPrimaryPicker.onInput = updateDarkPrimaryColor;
-        darkPrimaryPicker.fromRGBA(darkStyle.getPropertyValue('--dark-primary-rgba'));
-    
-        darkSecondaryPicker = document.getElementById('idDarkSecondary').jscolor;
-        darkSecondaryPicker.onInput = updateDarkSecondaryColor;
-        darkSecondaryPicker.fromRGBA(darkStyle.getPropertyValue('--dark-secondary-rgba'));
-    
-        darkContrastPicker = document.getElementById('idDarkContrast').jscolor;
-        darkContrastPicker.onInput = updateDarkContrastColor;
-        darkContrastPicker.fromRGBA(darkStyle.getPropertyValue('--dark-contrast-rgba'));
-    */
+    // BUG: next line gets "Error: idDarkPrimary.jscolor not found!" -- Not loaded?!
+    console.error("Setting up Dark pickers fails: why isn't the dark website loaded?");
+    //darkPrimaryPicker = setUpPicker('Dark', 'Primary');
+    //darkSecondaryPicker = setUpPicker('Dark', 'Secondary');
+    //darkContrastPicker = setUpPicker('Dark', 'Contrast');
+
     jscolor.trigger('input');  // triggers 'onInput' on all color pickers when they are ready
     console.log("JSColorPicker installed!");
 }
@@ -125,13 +119,23 @@ function setUpPicker(theme, color) {
     let picker = document.getElementById(`id${theme}${color}`).jscolor;
     if (!picker) { throw new Error(`id${theme}${color}.jscolor not found!`); }
     picker.onInput = window[`update${theme}${color}Color`];
-    if (!picker.fromRGBA(...lightStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
-        console.error(`Could not set ${theme} ${color} color picker to: ${lightStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
+    if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
+        console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
+    picker.option({ opts });
     return picker;
 }
 
+function updateColor(mode = 'Light', accent = 'Primary', picker) {
+    if (logLevel > 2) console.log(`${mode} ${accent} Color set to: ${picker.toRGBAString()}`);
+    lightWebSite.style.setProperty(`--${mode.toLowerCase()}-${accent.toLowerCase()}`,
+        `rgba(${round(picker.channels.r)},
+        ${round(picker.channels.g)},
+        ${round(picker.channels.b)},
+        ${round(picker.channels.a)})`);
+}
+
 function updateLightPrimaryColor() {
-    console.log("Light Primary Color: " + lightPrimaryPicker.toRGBAString());
+    if (logLevel > 2) console.log("Light Primary Color set to: " + lightPrimaryPicker.toRGBAString());
     lightWebSite.style.setProperty('--light-primary',
         `rgba(${round(lightPrimaryPicker.channels.r)}, 
         ${round(lightPrimaryPicker.channels.g)}, 
@@ -140,7 +144,7 @@ function updateLightPrimaryColor() {
 }
 
 function updateLightSecondaryColor() {
-    console.log("Light Secondary Color: " + lightSecondaryPicker.toRGBAString());
+    if (logLevel > 2) console.log("Light Secondary Color set to: " + lightSecondaryPicker.toRGBAString());
     lightWebSite.style.setProperty('--light-secondary',
         `rgba(${round(lightSecondaryPicker.channels.r)}, 
         ${round(lightSecondaryPicker.channels.g)}, 
@@ -149,7 +153,7 @@ function updateLightSecondaryColor() {
 }
 
 function updateLightContrastColor() {
-    console.log("Light Contrast Color: " + lightContrastPicker.toRGBAString());
+    if (logLevel > 2) console.log("Light Contrast Color set to: " + lightContrastPicker.toRGBAString());
     lightWebSite.style.setProperty('--light-contrast',
         `rgba(${round(lightContrastPicker.channels.r)},
         ${round(lightContrastPicker.channels.g)},
@@ -159,7 +163,7 @@ function updateLightContrastColor() {
 
 
 function updateDarkPrimaryColor() {
-    console.log("Dark Primary Color: " + darkPrimaryPicker.toRGBAString());
+    if (logLevel > 2) console.log("Dark Primary Color set to: " + darkPrimaryPicker.toRGBAString());
     darkWebSite.style.setProperty('--dark-primary',
         `rgba(${round(darkPrimaryPicker.channels.r)},
         ${round(darkPrimaryPicker.channels.g)},
@@ -168,7 +172,7 @@ function updateDarkPrimaryColor() {
 }
 
 function updateDarkSecondaryColor() {
-    console.log("Dark Secondary Color: " + darkSecondaryPicker.toRGBAString());
+    if (logLevel > 2) console.log("Dark Secondary Color set to: " + darkSecondaryPicker.toRGBAString());
     darkWebSite.style.setProperty('--dark-secondary',
         `rgba(${round(darkSecondaryPicker.channels.r)},
         ${round(darkSecondaryPicker.channels.g)},
@@ -177,7 +181,7 @@ function updateDarkSecondaryColor() {
 }
 
 function updateDarkContrastColor() {
-    console.log("Dark Contrast Color: " + darkContrastPicker.toRGBAString());
+    if (logLevel > 2) console.log("Dark Contrast Color set to: " + darkContrastPicker.toRGBAString());
     darkWebSite.style.setProperty('--dark-contrast',
         `rgba(${round(darkContrastPicker.channels.r)},
         ${round(darkContrastPicker.channels.g)},
