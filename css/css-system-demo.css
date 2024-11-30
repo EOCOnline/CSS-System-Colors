@@ -5,96 +5,266 @@
 *
 */
 
-/*https://www.digitalocean.com/community/tutorials/css-minimal-css-reset*/
-/* NO Need for reset, just ensure syscolors-container styles don't leak thru - or anything to root */
-#syscolors-demo {
-  margin: 5px;
-  padding: 5px;
+#syscolors-demo-light,
+#syscolors-demo-dark {
+  max-width: 45%;
+  margin-right: 1rem;
+  padding: 0rem;
+}
 
-  /* traditional desktop user agent colors for hyperlinks, per https://drafts.csswg.org/css-color/#sample */
-  :link {
-    color: LinkText;
+.myWebSite {
+  padding: 1rem;
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 1rem auto;
+
+  border: 1px solid CanvasText;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 2rem -1.25rem Canvas;
+
+  font-family: "Delius", cursive;
+
+  /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
+  --light-primary: rgba(248, 172, 140, 0.9);
+  --light-primary-rgba: 248, 172, 140, 0.9;
+  --light-secondary: rgba(251, 228, 196, 1);
+  --light-secondary-rgba: 251, 228, 196, 1;
+  --light-contrast: rgba(46, 155, 180, 1);
+  --light-contrast-rgba: 46, 155, 180, 1;
+  /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
+  --dark-primary: rgba(138, 68, 189, 0.9);
+  --dark-primary-rgba: 138, 68, 189, 0.9;
+  --dark-secondary: rgba(195, 26, 161, 1);
+  --dark-secondary-rgba: 195, 26, 161, 1;
+  --dark-contrast: rgba(231, 143, 228, 1);
+  --dark-contrast-rgba: 231, 143, 228, 1;
+
+  /* The light-dark function REQUIRES "color-scheme: light dark;" be set */
+  /* To use val's directly... */
+  --primary: light-dark(var(--light-primary), var(--dark-primary));
+  --primary-rgba: light-dark(
+    var(--light-primary-rgba),
+    var(--dark-primary-rgba)
+  );
+  --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
+  --secondary-rgba: light-dark(
+    var(--light-secondary-rgba),
+    var(--dark-secondary-rgba)
+  );
+  --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
+  --contrast-rgba: light-dark(
+    var(--light-contrast-rgba),
+    var(--dark-contrast-rgba)
+  );
+
+  /* Or to use classes... */
+  .primary {
+    color: light-dark(var(--light-primary), var(--dark-primary));
   }
-  :visited {
-    color: VisitedText;
+  .secondary {
+    color: light-dark(var(--light-secondary), var(--dark-secondary));
   }
-  :active {
-    color: ActiveText;
+  .contrast {
+    color: light-dark(var(--light-contrast), var(--dark-contrast));
+  }
+
+  /* super minimal CSS reset */
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  article {
+    /* color: CanvasText; */
+    color: var(--primary);
+    background-color: Canvas;
+  }
+
+  div,
+  p,
+  ol,
+  ul {
+    color: CanvasText;
+    background-color: Canvas;
+    max-width: 100%;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5ex;
+  }
+
+  main {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    /*align-content: stretch;
+    width: 90%;*/
+    max-width: 100%;
+    padding: 1rem;
+
+    background-color: Canvas;
+    color: CanvasText;
+
+    border: 1px solid CanvasText;
+    border-radius: 0.5rem;
+  }
+
+  footer {
+    background-color: Canvas;
+    color: var(--contrast);
+    width: 100%;
+    padding-top: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  code {
+    color: var(--contrast);
+    background-color: rgba(var(--primary-rgb), 0.8);
+    padding: 0;
+    max-width: 100%;
+  }
+
+  article {
+    color: var(--contrast);
+    background-color: Canvas;
+  }
+
+  .colorPalette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .picker {
+      border-radius: 1rem;
+      padding: 0.5rem;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+
+    .picker:hover {
+      border: black 2px solid;
+    }
+  }
+
+  nav {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: var(--secondary);
+      width: fit-content;
+    }
+
+    li {
+      float: left;
+      border: 1px solid CanvasText;
+    }
+
+    li a {
+      display: block;
+      text-align: center;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    li a:hover:not(.active) {
+      background-color: light-dark(var(--light-contrast), var(--dark-contrast));
+      color: light-dark(var(--light-secondary), var(--dark-secondary));
+    }
+
+    li a.active {
+      background-color: light-dark(
+        var(--light-secondary),
+        var(--dark-secondary)
+      );
+      color: light-dark(var(--light-bright), var(--dark-bright));
+    }
+  }
+
+  .card {
+    width: 10rem;
+    height: 6rem;
+    margin-right: 0.5rem;
+    border: 1px solid green;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px 0 CanvasText;
+
+    img {
+      border-radius: 0.5rem 0 0 0;
+    }
+
+    .container {
+      padding-left: 6px;
+      h4,
+      p {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+
+  UNUSED_aside {
+    display: block;
+    width: 30%;
+    height: 5rem;
+    padding-left: 15px;
+    margin-right: 10px;
+    float: right;
+
+    background-color: var(--primary);
+
+    border: 1px dashed CanvasText;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 3px 0 CanvasText;
+  }
+
+  blockquote {
+    float: right;
+
+    background-color: var(--secondary);
+    color: #aaa;
+
+    padding: 0.75rem 1.25rem 0.5rem 1rem;
+    margin: 0.5rem;
+    width: fit-content;
+
+    font-style: italic;
+    font-size: 135%;
+
+    border-left: 4px dotted var(--contrast);
+    border-radius: 0.5rem;
   }
 }
 
-#syscolors-demo a:link {
-  color: LinkText;
-}
-#syscolors-demo a:visited {
-  color: VisitedText;
-}
-#syscolors-demo a:active {
-  color: ActiveText;
-}
-#syscolors-demo a:hover {
-  color: HighlightText;
-}
+.myForm {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5ex;
 
-.syscolors-demo-button {
-  color: ButtonText;
-  background-color: ButtonFace;
-  border: 5px solid ButtonBorder;
-}
+  width: fit-content;
 
-.syscolors-demo-canvas,
-.syscolors-demo-canvas2 {
-  background-color: Canvas;
-  border: 5px solid CanvasText;
-}
+  padding: 1rem 2rem;
+  margin: 1rem auto;
 
-#syscolors-demo mark {
-  background-color: Mark;
-  color: MarkText;
-}
+  border: 1px solid CanvasText;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 2rem -1.25rem Canvas;
 
-#syscolors-demo input {
-  color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped.*/
-  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder; /*Error in parsing value for ‘border’.  Declaration dropped. */
-}
-
-#syscolors-demo input[type="text"] {
-  color: InputText; /* Expected color but found ‘InputText’.  Error in parsing value for ‘color’.  Declaration dropped. */
-  background-color: Input; /*Expected color but found ‘Input’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder;
-}
-
-#syscolors-demo input[type="submit"] {
-  color: system-ButtonText; /* Expected color but found ‘system-ButtonText’.  Error in parsing value for ‘color’.  Declaration dropped. */
-  background-color: ButtonFace; /* Expected color but found ‘system-ButtonFace’.  Error in parsing value for ‘background-color’.  Declaration dropped. */
-  border: 5px solid ButtonBorder;
-}
-#syscolors-demo input[type="submit"]:hover {
-  color: HighlightText;
-  background-color: Highlight;
-}
-#syscolors-demo input[type="submit"]:active {
-  color: ActiveText;
-  background-color: ActiveText;
-}
-#syscolors-demo input[type="submit"]:focus {
-  color: HighlightText;
-  background-color: Highlight;
-}
-#syscolors-demo input[type="submit"]:disabled {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:hover {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:active {
-  color: GrayText;
-  background-color: ButtonFace;
-}
-#syscolors-demo input[type="submit"]:disabled:focus {
-  color: GrayText;
-  background-color: ButtonFace;
+  input:focus {
+    color: SelectedItem;
+  }
 }

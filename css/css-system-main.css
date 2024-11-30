@@ -9,18 +9,24 @@
 ** Handle light vs dark mode
 **/
 :root {
-  /* allow unstyled HTML to follow user preference via prefers-color-scheme 
-  To enable support for the light-dark() color function, the color-scheme must have a value of light dark */
-  color-scheme: light dark;
-  --test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
-  --contrast: 100;
+  /* Allow unstyled HTML to follow user preference via prefers-color-scheme 
+  To enable support for the light-dark() color function, the color-scheme must have a value of light-dark */
+  color-scheme: light-dark;
+  /*--test-color: light-dark(rgb(1, 108, 90) rgb(95, 120, 116));
+  --contrast: 100;*/
   --borderColor: #bbbbbb;
   --rowHeight: 70px;
 }
 
 /* This changes the pages default color scheme. The panels tend to have their color modes hardwired. */
-:root:has(#syscolors-page-mode option[value="auto"]:checked) {
+:root:has(#syscolors-page-mode option[value="normal"]:checked) {
+  color-scheme: normal;
+}
+:root:has(#syscolors-page-mode option[value="light dark"]:checked) {
   color-scheme: light dark;
+}
+:root:has(#syscolors-page-mode option[value="dark light"]:checked) {
+  color-scheme: dark light;
 }
 :root:has(#syscolors-page-mode option[value="light"]:checked) {
   color-scheme: light;
@@ -28,35 +34,23 @@
 :root:has(#syscolors-page-mode option[value="dark"]:checked) {
   color-scheme: dark;
 }
-
-/*****************************
-** Handle contrast
- * NOTE: Apparently just using JS to set --contrast does everything?
- * Don't we also need to apply the 'filter' as below does?!
-**/
-
-/* https://css-tricks.com/dark-mode-and-variable-fonts/ */
-body {
-  font-weight: 400;
+:root:has(#syscolors-page-mode option[value="only light"]:checked) {
+  color-scheme: only light;
+}
+:root:has(#syscolors-page-mode option[value="only dark"]:checked) {
+  color-scheme: only dark;
 }
 
+body {
+  font-weight: 400; /* https://css-tricks.com/dark-mode-and-variable-fonts/ */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Adjusts the font weight for dark mode to improve readability */
 @media (prefers-color-scheme: dark) {
   body {
     font-weight: 350;
   }
-}
-
-/*
-Not used, but may be worth testing! 
-https://developer.chrome.com/blog/css-relative-color-syntax/#contrast_a_color */
-.well-contrasting-darker-color {
-  background: darkred;
-  color: oklch(from darkred calc(l + 0.6) c h);
-}
-
-.well-contrasting-lighter-color {
-  background: lightpink;
-  color: oklch(from lightpink calc(l - 0.6) c h);
 }
 
 /**********************************************
@@ -68,10 +62,8 @@ details > summary {
   cursor: pointer;
 }
 
-details > p {
-  font-size: 120%;
-  /*margin: 15px;
-  /*  box-shadow: 1px 1px 2px #bbbbbb;*/
+.no-decoration {
+  text-decoration: none;
 }
 
 /* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
@@ -99,14 +91,13 @@ blockquote {
 /**********************************************
  * Styles used by multiple panels
  */
-
 #syscolors-table,
 #syscolors-deprecated-table,
 #syscolors-grid,
 #syscolors-deprecated-grid {
-  *,
-  *:before,
-  *:after {
+  & > *,
+  & > *:before,
+  & > *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -124,7 +115,7 @@ blockquote {
   color-scheme: light;
   width: 48%;
   margin: 0px;
-  margin-right: 6px;
+  margin-right: 1%;
 }
 
 .syscolors-dark {
@@ -133,8 +124,7 @@ blockquote {
   margin: 0px;
 }
 
-/* Inserting this collapsed row between two flex items will make 
- * the flex item that comes after it break to a new row */
+/* A collapsed row between two flex items forces a row/column break */
 .syscolors-break {
   flex-basis: 100%;
   height: 0;
@@ -169,9 +159,9 @@ blockquote {
 }
 
 /***********************************
- * Head Panel
+ * Page Header
  */
-#syscolors-header {
+#syscolors-outer-container header {
   margin: 5px;
   padding: 5px;
   text-decoration: none;
@@ -179,39 +169,77 @@ blockquote {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: nowrap;
-}
 
-#syscolors-header h1,
-#syscolors-header h3 {
-  display: inline-block;
-  margin-left: 50px;
-}
+  h1,
+  h3 {
+    display: inline-block;
+    margin-left: 2rem;
+  }
 
-#syscolors-github {
-  margin-left: auto;
-  margin-right: 15px;
+  #syscolors-github {
+    margin-left: auto;
+    margin-right: 10px;
+  }
 }
 
 /***********************************
- * Options Panel
+ * #Region: Options Panel
  */
-#syscolors-options {
+#syscolors-options-container {
   font-weight: bold;
 }
 
-#syscolors-options input:hover {
-  box-shadow: rgba(69, 103, 187, 0.35) 0 -25px 18px -14px inset,
-    rgba(69, 103, 187, 0.35) 0 1px 2px, rgba(69, 103, 187, 0.35) 0 2px 4px,
-    rgba(69, 103, 187, 0.35) 0 4px 8px, rgba(69, 103, 187, 0.35) 0 8px 16px,
-    rgba(69, 103, 187, 0.35) 0 16px 32px;
-  transform: scale(1.05) rotate(-1deg);
-  background-color: #374151;
+#UNUSED-syscolors-options-container {
+  .floater {
+    border-bottom: 1px dashed;
+    text-decoration: none;
+    color: saddlebrown;
+  }
+  .floater:hover {
+    cursor: help;
+    position: relative;
+    color: cadetblue;
+  }
+  .fffloater span {
+    display: none;
+  }
+  .floater:hover span {
+    border: #666 2px dotted;
+    padding: 5px 20px 5px 5px;
+    display: block;
+    z-index: 100;
+    background: #e3e3e3;
+    left: 0px;
+    margin: 15px;
+    width: 300px;
+    position: absolute;
+    top: 15px;
+    text-decoration: none;
+  }
 }
 
-#syscolors-options input:focus {
-  box-shadow: none;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+/*
+https://bobbyhadz.com/blog/change-style-of-title-attribute-using-css
+https://www.w3docs.com/snippets/css/how-to-change-the-style-of-the-title-attribute-inside-an-anchor-tag.html
+https://www.w3docs.com/tools/code-editor/10122
+*/
+#syscolors-options-container option {
+  font-size: 1.25em;
+  position: relative;
+  display: inline-block;
+}
+
+#BROKEN-syscolors-options-container option:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  top: -1.5em;
+  left: 0;
+  z-index: 100;
+  border: 10px solid green;
+  background-color: aquamarine;
+  width: 250px;
+
+  color: red; /* title text */
 }
 
 #syscolors-user-agent-div {
@@ -225,22 +253,23 @@ blockquote {
   margin-bottom: -5px;
 }
 
-#syscolors-contrast-label {
-  font-size: medium;
-}
-
 #syscolors-contrast-value {
   display: inline-block;
   /*background-color: #e5e5e5;
   border: #aaa 1px solid;*/
   padding: 2px;
 }
+/* # EndRegion Options Panel */
 
 /***********************************
  * Intro Panel
  */
 #syscolors-intro {
-  --noop: var(--noop);
+  img {
+    max-width: 80%;
+    border: 1px solid black;
+    border-radius: 0.5em;
+  }
 }
 
 /***********************************
@@ -266,11 +295,14 @@ blockquote {
 #syscolors-grid-dark,
 #syscolors-deprecated-grid,
 #syscolors-deprecated-light,
-#syscolors-deprecated-dark {
+#syscolors-deprecated-dark /*,
+#syscolors-demo-light,
+#syscolors-demo-dark*/ {
   display: flex;
   flex-wrap: wrap;
   /*justify-content: flex-start;*/
 }
+
 #syscolors-grid {
   padding: 10px;
 }
@@ -279,24 +311,84 @@ blockquote {
  * Demonstration Panels
  * NOTE: Also see syscolors-demo.css & system-colors.css!
  */
-#syscolors-demo-container {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 #syscolors-demo {
   display: flex;
   flex-wrap: wrap;
-}
-/*
-#syscolors-demo-light {
-  margin-right: 6px;
+  padding: 1rem;
 }
 
-#syscolors-demo-dark {
+/**********************************************
+ * Hue Panels
+ * NOTE: Also see syscolors-demo.css & system-colors.css!
+ */
+
+#syscolors-hue-demo {
   margin: 0px;
+  padding: 1rem 0 0 1rem;
 }
-*/
+
+#syscolors-hue-panels {
+  display: flex;
+  flex-wrap: wrap;
+
+  /* remove the following... "*/
+  margin: 0rem;
+  padding: 0rem;
+}
+
+#syscolors-hue-light,
+#syscolors-hue-dark {
+  margin-right: 1rem;
+  padding: 1rem;
+  width: fit-content;
+
+  border: 1px solid black;
+  border-radius: 0.5em;
+
+  box-shadow: 0 0 2rem -1.25rem CanvasText;
+
+  --theme-oklch: oklch(50% 0.25 var(--hue, 222));
+  --theme-hsl: hsl(var(--hue, 222) 75% 50%);
+
+  div {
+    margin-block: 1rem 0;
+  }
+
+  div div {
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+    border: 1px solid;
+  }
+
+  div.oklch {
+    background-color: var(--theme-oklch);
+    border-radius: 0.25em;
+  }
+
+  div.hsl {
+    background-color: var(--theme-hsl);
+    border-radius: 0.25em;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    height: 3.5rem;
+    border-radius: 0.5em;
+  }
+
+  p.oklch {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-oklch));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-oklch));
+  }
+
+  p.hsl {
+    color: color-mix(in oklab, CanvasText 75%, var(--theme-hsl));
+    background-color: color-mix(in oklab, Canvas 75%, var(--theme-hsl));
+  }
+}
 
 /**********************************************
  * Footer Panel
