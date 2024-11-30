@@ -32,10 +32,10 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
         }
 
         // convert all HREF's that start with idLight to idDark
-        let lightHrefs = dark.querySelectorAll("[href^='idLight']");
-        for (let i = 0; i < lightHrefs.length; i++) {
-            lightHrefs[i].href = lightHrefs[i].href.replace("idLight", "idDark");
-            if (logLevel > 1) { console.log(`Converted HREF ${i}: to ${lightHrefs[i].href.toString()}`); }
+        let lightHRefs = dark.querySelectorAll("[href^='idLight']");
+        for (let i = 0; i < lightHRefs.length; i++) {
+            lightHRefs[i].href = lightHRefs[i].href.replace("idLight", "idDark");
+            if (logLevel > 1) { console.log(`Converted HREF ${i}: to ${lightHRefs[i].href.toString()}`); }
         }
     }
     return dark;
@@ -72,47 +72,63 @@ let lightContrastPicker;
 let darkPrimaryPicker;
 let darkSecondaryPicker;
 let darkContrastPicker;
+let myWebSite;
 let lightWebSite;
 let darkWebSite;
 function setJsColorPicker() {
-    jscolor.presets.default = { ...jscolor.presets.default, 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 30, 'padding': 5, 'shadow': false, 'backgroundColor': '#333' };
+    jscolor.presets.default = {
+        ...jscolor.presets.default,
+        'format': 'rgba',
+        'borderRadius': 15,
+        'borderWidth': 30,
+        'padding': 5,
+        'shadow': false,
+        'backgroundColor': '#333'
+    };
 
+    myWebSite = document.getElementsByClassName("myWebSite")[0];
+    if (!myWebSite) throw new Error("Website element not found!");
 
     lightWebSite = document.getElementById("idLightWebSite");
     if (!lightWebSite) throw new Error("Light website not found!");
-
+    //debugger;
     lightPrimaryPicker = document.getElementById('idLightPrimary').jscolor;
     lightPrimaryPicker.onInput = updateLightPrimaryColor;
     lightPrimaryPicker.option({ 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
-    lightPrimaryPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-primary-rgba'));
+    let lightPrimaryColor = myWebSite.style.getPropertyValue('--light-primary-rgba');
+    console.log("Light Primary Color: " + lightPrimaryColor);
+    lightPrimaryPicker.fromRGBA(lightPrimaryColor);
 
     lightSecondaryPicker = document.getElementById('idLightSecondary').jscolor;
     lightSecondaryPicker.onInput = updateLightSecondaryColor;
-    lightSecondaryPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-secondary-rgba'));
+    lightSecondaryPicker.fromRGBA(myWebSite.style.getPropertyValue('--light-secondary-rgba'));
+    console.log("Light Secondary Color: " + myWebSite.style.getPropertyValue('--light-secondary-rgba'));
 
     lightContrastPicker = document.getElementById('idLightContrast').jscolor;
     lightContrastPicker.onInput = updateLightContrastColor;
-    lightContrastPicker.fromRGBA(lightWebSite.style.getPropertyValue('--light-contrast-rgba'));
+    lightContrastPicker.fromRGBA(myWebSite.style.getPropertyValue('--light-contrast-rgba'));
+    console.log("Light Contrast Color: " + myWebSite.style.getPropertyValue('--light-contrast-rgba'));
 
 
     darkWebSite = document.getElementById("idDarkWebSite");
     if (!darkWebSite) throw new Error("Dark website not found!");
 
-    /*
     darkPrimaryPicker = document.getElementById('idDarkPrimary').jscolor;
-    if (!darkPrimaryPicker) { throw new Error("idDarkPrimaryPicker.jscolor not found!"); }
-    darkPrimaryPicker.onInput = updateDarkPrimaryColor;
-    darkPrimaryPicker.fromRGBA(darkWebSite.style.getPropertyValue('--dark-primary-rgba'));
-
-    darkSecondaryPicker = document.getElementById('idDarkSecondary').jscolor;
-    darkSecondaryPicker.onInput = updateDarkSecondaryColor;
-    darkSecondaryPicker.fromRGBA(darkWebSite.style.getPropertyValue('--dark-secondary-rgba'));
-
-    darkContrastPicker = document.getElementById('idDarkContrast').jscolor;
-    darkContrastPicker.onInput = updateDarkContrastColor;
-    darkContrastPicker.fromRGBA(darkWebSite.style.getPropertyValue('--dark-contrast-rgba'));
-*/
-    jscolor.trigger('input'); // triggers 'onInput' on all color pickers when they are ready
+    /*  
+        if (!darkPrimaryPicker) { throw new Error("idDarkPrimaryPicker.jscolor not found!"); }
+       
+        darkPrimaryPicker.onInput = updateDarkPrimaryColor;
+        darkPrimaryPicker.fromRGBA(myWebSite.style.getPropertyValue('--dark-primary-rgba'));
+    
+        darkSecondaryPicker = document.getElementById('idDarkSecondary').jscolor;
+        darkSecondaryPicker.onInput = updateDarkSecondaryColor;
+        darkSecondaryPicker.fromRGBA(myWebSite.style.getPropertyValue('--dark-secondary-rgba'));
+    
+        darkContrastPicker = document.getElementById('idDarkContrast').jscolor;
+        darkContrastPicker.onInput = updateDarkContrastColor;
+        darkContrastPicker.fromRGBA(myWebSite.style.getPropertyValue('--dark-contrast-rgba'));
+    */
+    jscolor.trigger('input');  // triggers 'onInput' on all color pickers when they are ready
     console.log("JSColorPicker installed!");
 }
 
