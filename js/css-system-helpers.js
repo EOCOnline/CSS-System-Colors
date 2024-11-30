@@ -26,17 +26,18 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
     if (elementId.includes("demo")) {
         // convert all ID's that start with idLight to idDark
         let lightIds = dark.querySelectorAll("[id^='idLight']");
-        for (let i = 0; i < lightIds.length; i++) {
-            lightIds[i].id = lightIds[i].id.replace("idLight", "idDark");
-            if (logLevel > 1) { console.log(`Converted ID ${i}: to ${lightIds[i].id.toString()}`); }
-        }
+
+        lightIds.forEach((lightId, i) => {
+            lightId.id = lightId.id.replace("idLight", "idDark");
+            if (logLevel > 1) { console.log(`Converted ID ${i}: to ${lightId.id.toString()}`); }
+        });
 
         // convert all HREF's that start with idLight to idDark
         let lightHRefs = dark.querySelectorAll("[href^='idLight']");
-        for (let i = 0; i < lightHRefs.length; i++) {
-            lightHRefs[i].href = lightHRefs[i].href.replace("idLight", "idDark");
-            if (logLevel > 1) { console.log(`Converted HREF ${i}: to ${lightHRefs[i].href.toString()}`); }
-        }
+        lightHRefs.forEach((lightHRef, i) => {
+            lightHRef.href = lightHRef.href.replace("idLight", "idDark");
+            if (logLevel > 1) { console.log(`Converted ID ${i}: to ${lightHRef.href.toString()}`); }
+        });
     }
     return dark;
 }
