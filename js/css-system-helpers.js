@@ -68,8 +68,7 @@ function setSortOrder(val) {
 // https://jscolor.com/docs/
 // ToDo: refactor to use a single function for all color pickers
 // BUG: Opacity slider not showing up on picker
-// BUG: Dark pickers not showing up
-// BUG: jscolor options not working
+// BUG: Dark picker IDs not found, but are in the browser DOM
 
 let lightPrimaryPicker;
 let lightSecondaryPicker;
@@ -87,7 +86,7 @@ const opts = {
     'padding': 5,
     'shadow': false,
     'backgroundColor': '#333'
-};
+}; // BUG: can't use this object, must use the actual text
 function setJsColorPicker() {
     if (typeof jscolor !== 'undefined') {
         jscolor.presets.default = Object.assign({}, jscolor.presets.default, opts);
@@ -95,10 +94,15 @@ function setJsColorPicker() {
         console.error("jscolor is not defined. Make sure the jscolor library is included.");
     }
 
+    //jscolor.install();
+    jscolor.trigger('input');  // triggers 'onInput' on all color pickers when they are ready
+
+
     lightWebSite = document.getElementById("idLightWebSite");
     if (!lightWebSite) throw new Error("Light website not found!");
     siteStyle = getComputedStyle(lightWebSite);
     lightPrimaryPicker = setUpPicker('Light', 'Primary');
+
     lightSecondaryPicker = setUpPicker('Light', 'Secondary');
     lightContrastPicker = setUpPicker('Light', 'Contrast');
 
@@ -112,7 +116,6 @@ function setJsColorPicker() {
     //darkSecondaryPicker = setUpPicker('Dark', 'Secondary');
     //darkContrastPicker = setUpPicker('Dark', 'Contrast');
 
-    jscolor.trigger('input');  // triggers 'onInput' on all color pickers when they are ready
     console.log("JSColorPicker installed!");
 }
 
@@ -122,7 +125,8 @@ function setUpPicker(theme, color) {
     picker.onInput = window[`update${theme}${color}Color`];
     if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
         console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
-    picker.option({ opts });
+    picker.option({ 'format': 'rgba', 'borderWidth': 1, 'padding': 10, 'alphaChannel': true, });
+    // picker.option(opts);  // BUG: doesn't work...
     return picker;
 }
 

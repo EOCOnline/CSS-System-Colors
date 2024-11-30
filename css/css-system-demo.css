@@ -145,18 +145,15 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    div {
-      padding: 0.25rem;
-      width: fit-content;
-      margin: 0.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 4px 0 CanvasText;
-      text-shadow: 1px 1px CanvasText;
+    .picker {
+      border-radius: 1rem;
+      padding: 0.5rem;
+      font-weight: bold;
+      margin-right: 1rem;
     }
 
-    div:hover {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      background-color: light-dark(var(--light-tertiary), var(--dark-tertiary));
+    .picker:hover {
+      border: black 2px solid;
     }
   }
 
@@ -185,7 +182,7 @@
 
     li a:hover:not(.active) {
       background-color: light-dark(var(--light-contrast), var(--dark-contrast));
-      color: light-dark(var(--light-tertiary), var(--dark-tertiary));
+      color: light-dark(var(--light-secondary), var(--dark-secondary));
     }
 
     li a.active {
