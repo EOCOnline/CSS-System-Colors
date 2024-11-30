@@ -53,6 +53,7 @@
   background-color: Highlight;
 }
 
+/* NOTE: Remove the 'some' below! */
 #someID {
   a:link {
     /* non-active, non-visited links */
@@ -63,7 +64,7 @@
     color: VisitedText;
   }
 
-  /* Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
+  /* NOTE: Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
   a:hover {
     /* hovered links *
     color: FocusText; /* Focused links color *

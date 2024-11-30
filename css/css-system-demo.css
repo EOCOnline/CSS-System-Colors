@@ -173,12 +173,14 @@
 
     li a:hover:not(.active) {
       background-color: light-dark(var(--light-contrast), var(--dark-contrast));
-      color: light-dark(var(--light-contrast), var(--dark-contrast));
+      /*color: light-dark(var(--light-contrast), var(--dark-contrast));*/
+      color: light-dark(var(--light-primary), var(--dark-primary));
     }
 
     li a.active {
       background-color: light-dark(var(--light-contrast), var(--dark-contrast));
-      color: light-dark(var(--light-bright), var(--dark-bright));
+      color: light-dark(var(--light-primary), var(--dark-primary));
+      /*color: light-dark(var(--light-bright), var(--dark-bright));*/
     }
   }
 
