@@ -40,7 +40,7 @@
   border-color: ButtonBorder;
 }
 
-.SelectedItem1 {
+.SelectedItem {
   /* selected items */
   color: SelectedItemText;
   background-color: SelectedItem;

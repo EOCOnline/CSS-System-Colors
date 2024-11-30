@@ -378,7 +378,7 @@
             <div class="myWebSite" id="idLightWebSite">
               <header>
                 <a id="idLightHome"></a>
-                <h1 class="contrast">A Swell Website <code>h1</code></h1>
+                <h1>A Swell Website <code>h1</code></h1>
                 <nav>
                   <ul>
                     <li><a href="#idLightHome" class="active">Home</a></li>
@@ -397,14 +397,15 @@
                   <div>The CSS System Colors provide a very limited palette. However it
                     is <a href="https://web.dev/articles/prefers-color-scheme" target="_blank">easy to extend them</a>
                     with your <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">own scheme</a> that
-                    adds additional accent colors. Our arbitrary palette for this micro-site &mdash; click to change
-                    these initial colors:
+                    adds additional accent colors. This micro-site uses only two:
+                    <ol>
+                      <li>Primary: used for headings (except h1)</li>
+                      <li>Contrast: used for h1, nav bar, footer, code (blocks), left margin of block quotes </li>
+                    </ol>
+                    (Maybe using color-mix in the future.) Click to change either color:
                     <div class="colorPalette">
                       <div class="primary1">
                         <button id="idLightPrimary" class="picker" data-jscolor="{}">Primary</button>
-                      </div>
-                      <div class="secondary">
-                        <button id="idLightSecondary" class="picker" data-jscolor="{}">Secondary</button>
                       </div>
                       <div class="contrast">
                         <button id="idLightContrast" class="picker" data-jscolor="{}">Contrast</button>
@@ -412,7 +413,8 @@
                     </div>
                     <br />
                     <details>
-                      <summary><b>tl;dr</b> &mdash; Minimal code to copy for your own site...</summary>
+                      <summary><b>tl;dr</b> &mdash; click to see sample code for setting up another site's color
+                        scheme...</summary>
                       <br />
                       This just sets up one 'primary' highlight. You can add more colors as needed.
                       <pre><code>
@@ -437,7 +439,7 @@
                       <pre><code>
   root: {
     --light-primary-rgb: 10,0,230;
-    --dark-primary-rgb: 10,0,230;
+    --dark-primary-rgb: 108,102,237;
     --primary-rgb: light-dark(var(--light-primary-rgb), var(--dark-primary-rgb));
 
     .primary-transparent {
@@ -455,72 +457,48 @@
                         </code></pre>
                     </details>
 
-
                   </div>
                 </section>
 
                 <h3>Our Blog <code>h3</code></h3>
                 <a id="idLightBlog"></a>
-                <p>This demo page attempts to demonstrate a fictitious micro-website using
-                  light & dark color modes & CSS System Colors. The following sections
-                  use <code>Canvas</code> for the background & <code>CanvasText</code> as
-                  the text color.</p>
                 <section>
                   <div>
                     <article>
                       <h4>CSS System Color News <code>h4</code></h4>
 
-                      <div class="syscolors-demo-canvas" class="CanvasText Canvas">
-                        paragraph of text. It is here to demonstrate how the system colors
-                        can be used in a real-world scenario. The text color is set to
-                        <code>system-canvasText</code> and the background color is set to
-                        <code>system-canvas</code>.
-                      </div>
-                      <div>regular paragraph without system colors! Note: This may [BUT DOESN'T!!!] disappear without
-                        author intervention if you change the color mode.</div>
+                      <p>This demo paragraph illustrates a micro-website using light & dark color
+                        modes & CSS System Colors. Micro-site content generally uses <code>CanvasText</code> for
+                        the text color and <code>Canvas</code> for the background.</p>
 
-                      <div>piece of <mark>marked</mark> text.</div>
-                      <div class="markText">This entire paragraph uses MarkText color, but <mark class="mark">only this
-                          bit
-                          uses
-                          Mark for the background</mark> color.</div>
-
-                      <pre>
-                          <code>
-                            code block. The text color is set to <code>system-canvasText</code> and the background color is set to <code>system-canvas</code>.
-                          </code>
-                        </pre>
-
+                      <div>This is a <code>div</code> element with the same color settings.</div>
 
                       <p>This paragraph shows various HTML tags in action:
                         Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
                         <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
                         <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
-                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This is some GrayText
-                          text.</span>
+                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This uses the
+                          <code>GrayText</code>
+                          system color.</span>
                       </p>
-                      <div>This div describes text selection. If you select some text, the ::selected pseudo
+                      <div>This div describes text selection. If you select some text, the <code>::selected</code>
+                        pseudo
                         class sets a text color of <code>HighlightText</code> & background color of
-                        <code>Highlight</code>. <span class="SelectedItem1">This span has <code>Selection</code>
-                          hardcoded as
-                          the background color and <code>SelectedItemText</code> as the text color.</span>
+                        <code>Highlight</code>. <span class="SelectedItem">This span has <code>Selection</code>
+                          hardcoded as the background color and <code>SelectedItemText</code>
+                          as the text color.</span>
                       </div>
                       <br />
                       <div>
-                        <strong>Links</strong> <code>:hover</code> is not in <a
-                          href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
-                        browser-specific.
-
-                        <p>- the link color is set to <code>system-link</code>
-                          and the visited link color is set to
-                          <code>system-visited</code>.
-                        </p>
-
+                        <strong>Links</strong>
                         <ul>
+                          <li><code>:hover</code> is not in <a
+                              href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
+                            browser-specific.</li>
                           <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
-                              never visited link</a></li>
+                              never visited link</a> using the <code>Link</code> system color.</li>
                           <li>Here's a <a href="https://google.com" class=":visited" onclick="return false;">visited
-                              link</a>
+                              link using the <code>Visited</code> system color</a>
                           </li>
 
                         </ul>
@@ -559,11 +537,9 @@
                       <p>Engineer</p>
                     </div>
                   </div>
-                  <blockquote><b>&ldquo;</b>We aim to please!</blockquote>
                   <blockquote>
-                    blockquote. The text color is set to <code>system-quotetext</code> and the background color is
-                    set
-                    to <code>system-quote</code>:
+                    This blockquote has the text color set to <code>QuoteText</code> and a
+                    background color of <code>Quote</code>
                   </blockquote>
                 </section>
               </main>

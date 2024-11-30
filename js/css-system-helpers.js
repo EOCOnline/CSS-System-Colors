@@ -71,10 +71,8 @@ function setSortOrder(val) {
 // BUG: Dark picker IDs not found, but are in the browser DOM
 
 let lightPrimaryPicker;
-let lightSecondaryPicker;
 let lightContrastPicker;
 let darkPrimaryPicker;
-let darkSecondaryPicker;
 let darkContrastPicker;
 let lightWebSite;
 let darkWebSite;
@@ -102,8 +100,6 @@ function setJsColorPicker() {
     if (!lightWebSite) throw new Error("Light website not found!");
     siteStyle = getComputedStyle(lightWebSite);
     lightPrimaryPicker = setUpPicker('Light', 'Primary');
-
-    lightSecondaryPicker = setUpPicker('Light', 'Secondary');
     lightContrastPicker = setUpPicker('Light', 'Contrast');
 
     darkWebSite = document.getElementById("idDarkWebSite");
@@ -113,7 +109,6 @@ function setJsColorPicker() {
     // BUG: next line gets "Error: idDarkPrimary.jscolor not found!" -- Not loaded?!
     console.error("Setting up Dark pickers fails: why isn't the dark website loaded?");
     //darkPrimaryPicker = setUpPicker('Dark', 'Primary');
-    //darkSecondaryPicker = setUpPicker('Dark', 'Secondary');
     //darkContrastPicker = setUpPicker('Dark', 'Contrast');
 
     console.log("JSColorPicker installed!");
@@ -148,15 +143,6 @@ function updateLightPrimaryColor() {
         ${round(lightPrimaryPicker.channels.a)})`);
 }
 
-function updateLightSecondaryColor() {
-    if (logLevel > 2) console.log("Light Secondary Color set to: " + lightSecondaryPicker.toRGBAString());
-    lightWebSite.style.setProperty('--light-secondary',
-        `rgba(${round(lightSecondaryPicker.channels.r)}, 
-        ${round(lightSecondaryPicker.channels.g)}, 
-        ${round(lightSecondaryPicker.channels.b)}, 
-        ${round(lightSecondaryPicker.channels.a)})`);
-}
-
 function updateLightContrastColor() {
     if (logLevel > 2) console.log("Light Contrast Color set to: " + lightContrastPicker.toRGBAString());
     lightWebSite.style.setProperty('--light-contrast',
@@ -174,15 +160,6 @@ function updateDarkPrimaryColor() {
         ${round(darkPrimaryPicker.channels.g)},
         ${round(darkPrimaryPicker.channels.b)},
         ${round(darkPrimaryPicker.channels.a)})`);
-}
-
-function updateDarkSecondaryColor() {
-    if (logLevel > 2) console.log("Dark Secondary Color set to: " + darkSecondaryPicker.toRGBAString());
-    darkWebSite.style.setProperty('--dark-secondary',
-        `rgba(${round(darkSecondaryPicker.channels.r)},
-        ${round(darkSecondaryPicker.channels.g)},
-        ${round(darkSecondaryPicker.channels.b)},
-        ${round(darkSecondaryPicker.channels.a)})`);
 }
 
 function updateDarkContrastColor() {

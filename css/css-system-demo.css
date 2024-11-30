@@ -27,15 +27,11 @@
   /* Formally these rules should be applied to 'root:', NOT '.myContainer'. Your mileage may vary. */
   --light-primary: rgba(248, 172, 140, 0.9);
   --light-primary-rgba: 248, 172, 140, 0.9;
-  --light-secondary: rgba(251, 228, 196, 1);
-  --light-secondary-rgba: 251, 228, 196, 1;
   --light-contrast: rgba(46, 155, 180, 1);
   --light-contrast-rgba: 46, 155, 180, 1;
   /*https://piktochart.com/tips/dark-color-palette: deep indigo, rich violet, soft lavender, crisp white */
   --dark-primary: rgba(138, 68, 189, 0.9);
   --dark-primary-rgba: 138, 68, 189, 0.9;
-  --dark-secondary: rgba(195, 26, 161, 1);
-  --dark-secondary-rgba: 195, 26, 161, 1;
   --dark-contrast: rgba(231, 143, 228, 1);
   --dark-contrast-rgba: 231, 143, 228, 1;
 
@@ -45,12 +41,7 @@
   --primary-rgba: light-dark(
     var(--light-primary-rgba),
     var(--dark-primary-rgba)
-  );
-  --secondary: light-dark(var(--light-secondary), var(--dark-secondary));
-  --secondary-rgba: light-dark(
-    var(--light-secondary-rgba),
-    var(--dark-secondary-rgba)
-  );
+  ); /* BUG:  var(--light-primary-rgba); works, this doesn't */
   --contrast: light-dark(var(--light-contrast), var(--dark-contrast));
   --contrast-rgba: light-dark(
     var(--light-contrast-rgba),
@@ -61,23 +52,24 @@
   .primary {
     color: light-dark(var(--light-primary), var(--dark-primary));
   }
-  .secondary {
-    color: light-dark(var(--light-secondary), var(--dark-secondary));
-  }
   .contrast {
     color: light-dark(var(--light-contrast), var(--dark-contrast));
   }
 
   /* super minimal CSS reset */
+  h1 {
+    font-size: 1.5em;
+    margin: 0.67em 0;
+    color: var(--contrast);
+  }
+
   html,
   body,
-  h1,
   h2,
   h3,
   h4,
   h5,
-  h6,
-  article {
+  h6 {
     /* color: CanvasText; */
     color: var(--primary);
     background-color: Canvas;
@@ -130,12 +122,11 @@
 
   code {
     color: var(--contrast);
-    background-color: rgba(var(--primary-rgb), 0.8);
     padding: 0;
     max-width: 100%;
   }
 
-  article {
+  UNUSED-article {
     color: var(--contrast);
     background-color: Canvas;
   }
@@ -149,7 +140,7 @@
       border-radius: 1rem;
       padding: 0.5rem;
       font-weight: bold;
-      margin-right: 1rem;
+      margin: 0.5rem 0.5rem 0;
     }
 
     .picker:hover {
@@ -163,7 +154,7 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: var(--secondary);
+      background-color: var(--contrast);
       width: fit-content;
     }
 
@@ -182,14 +173,11 @@
 
     li a:hover:not(.active) {
       background-color: light-dark(var(--light-contrast), var(--dark-contrast));
-      color: light-dark(var(--light-secondary), var(--dark-secondary));
+      color: light-dark(var(--light-contrast), var(--dark-contrast));
     }
 
     li a.active {
-      background-color: light-dark(
-        var(--light-secondary),
-        var(--dark-secondary)
-      );
+      background-color: light-dark(var(--light-contrast), var(--dark-contrast));
       color: light-dark(var(--light-bright), var(--dark-bright));
     }
   }
@@ -234,8 +222,8 @@
   blockquote {
     float: right;
 
-    background-color: var(--secondary);
-    color: #aaa;
+    background-color: Quote;
+    color: QuoteText;
 
     padding: 0.75rem 1.25rem 0.5rem 1rem;
     margin: 0.5rem;
