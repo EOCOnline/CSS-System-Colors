@@ -33,9 +33,9 @@ function createColorCard(systemColorSet, index, elementId) {
 
     let cardDiv = document.createElement('div');
     if (elementId == "syscolors-deprecated-table") {
-        cardDiv.className = "syscolors-row-card syscolors-tall-row";
+        cardDiv.className = "syscolors-card syscolors-tall-row";
     } else {
-        cardDiv.className = "syscolors-row-card";
+        cardDiv.className = "syscolors-card";
     }
 
     // Apply background color to inner div, so as to not affect cardDiv's big left border color!
