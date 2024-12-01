@@ -3,10 +3,12 @@
 **/
 
 .syscolors-card {
-  display: inline-flex;
+  display: flex; /*was inline-flex   align-content: stretch;*/
   justify-content: space-between;
   place-self: center stretch;
+
   flex: 0 1;
+  /*flex-grow: 2;*/
 
   font-weight: bolder;
 
@@ -67,6 +69,7 @@
   --borderColor: #cdf27644;
 }
 /* #endregion */
+
 .syscolors-tall-row {
   --rowHeight: 130px;
 }

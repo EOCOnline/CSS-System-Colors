@@ -32,11 +32,7 @@ function createColorCard(systemColorSet, index, elementId) {
     cardInnerDiv.className = "syscolors-card-inner";
 
     let cardDiv = document.createElement('div');
-    if (elementId == "syscolors-deprecated-table") {
-        cardDiv.className = "syscolors-card syscolors-tall-row";
-    } else {
-        cardDiv.className = "syscolors-card";
-    }
+    cardDiv.className = elementId.includes("deprecated") ? "syscolors-card syscolors-tall-row" : "syscolors-card";
 
     // Apply background color to inner div, so as to not affect cardDiv's big left border color!
     cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
@@ -83,11 +79,13 @@ function createColorCard(systemColorSet, index, elementId) {
     });
 
     // Create an RGBA key for the downloadable json file
-    if (mode = "light") { // syscolors-grid-light || syscolors-deprecated-light
-        if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
-        } else { // syscolors-grid-dark || syscolors-deprecated-dark
-            systemColorSet[index].darkModeRGBA = color + "= #" + r + g + b;
-        }
+    let rHex = r.toString(16).padStart(2, '0');
+    let gHex = g.toString(16).padStart(2, '0');
+    let bHex = b.toString(16).padStart(2, '0');
+    if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
+        systemColorSet[index].lightModeRGBA = color + "= #" + rHex + gHex + bHex;
+    } else { // syscolors-grid-dark || syscolors-deprecated-dark
+        systemColorSet[index].darkModeRGBA = color + "= #" + rHex + gHex + bHex;
     }
 }
 

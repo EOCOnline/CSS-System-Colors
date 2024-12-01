@@ -131,11 +131,6 @@ blockquote {
   height: 0;
 }
 
-#syscolors-grid .syscolors-inner-container H2,
-#syscolors-deprecated-grid .syscolors-inner-container H2 {
-  margin: 0px 0px 0px 10px;
-}
-
 /* https://stackoverflow.com/questions/23688025/making-a-simple-tooltip-with-only-html-and-css */
 .syscolors-card:hover .syscolors-tooltip,
 .syscolors-row-card:hover .syscolors-tooltip {
@@ -273,11 +268,17 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-demo-dark*/ {
   display: flex;
   flex-wrap: wrap;
-  /*justify-content: flex-start;*/
+  align-content: stretch;
+  justify-content: space-between;
 }
 
 #syscolors-grid {
   padding: 10px;
+}
+
+#syscolors-grid .syscolors-inner-container H2,
+#syscolors-deprecated-grid .syscolors-inner-container H2 {
+  margin: 0px 0px 0px 10px;
 }
 /* #endregion */
 
