@@ -11,18 +11,15 @@ let contrastValueId;
 let syscolorsContrast;
 let syscolorsContainer;
 
-/*jscolor.presets.light = Object.assign({}, jscolor.presets.light, { 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
-
-jscolor.presets.dark = Object.assign({}, jscolor.presets.dark, { 'format': 'rgba', 'borderRadius': 15, 'borderWidth': 10, 'padding': 1, 'shadow': false, 'backgroundColor': '#333' });
-*/
-
 document.addEventListener("DOMContentLoaded", function () {
   if (logLevel > 1) console.clear();
   if (logLevel > 2) console.log("DOM fully loaded and parsed");
+  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // reload page every 5 seconds while editing/debugging
 
   contrastValueId = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-outer-container");
+  updateContrast({ value: 97.5 });
 
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
   document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
@@ -40,14 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (logLevel > 2) console.log("hueSlider.value set to " + hueSlider.value);
   });
 
-  updateContrast({ value: 97.5 });
-  //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // reload page every 5 seconds while editing/debugging
-
   processJson(systemColorsJson);
 });
 
 /**
- * #Region: System Colors JSON Data
+ * #region: System Colors JSON Data
  * systemColorsJson contains the system colors data from the standard.
  * 'systemColorsJson.info' contains metadata about the colors.
  * 'systemColorsJson.currentColors' contains the current system color array.

@@ -232,5 +232,43 @@ a:active {
     }
 
 ]
+    ;
 
+
+BuildGroupedCards(classTable.grouped);
+BuildIndividualCards(classTable.individual);
+
+function BuildGroupedCards(grouped) {
+    let container = document.getElementById('grouped');
+    grouped.forEach(group => {
+        let card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <h2>${group.name}</h2>
+            <p>${group.description}</p>
+            <div class="color" style="background-color: ${group['background-color']}; color: ${group.color};">
+                <span>${group['background-color']}</span>
+                <span>${group.color}</span>
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
+
+function BuildIndividualCards(individual) {
+    let container = document.getElementById('individual');
+    individual.forEach(color => {
+        let card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <h2>${color.name}</h2>
+            <p>${color.description}</p>
+            <div class="color" style="background-color: ${color['background-color']}; color: ${color.color};">
+                <span>${color['background-color']}</span>
+                <span>${color.color}</span>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+

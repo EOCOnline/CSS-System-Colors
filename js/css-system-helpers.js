@@ -61,119 +61,7 @@ function setSortOrder(val) {
     sortByCategory = val.checked;
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
-    //fetchSystemColors();
     processJson(systemColorsJson);
-}
-
-// https://jscolor.com/docs/
-// ToDo: refactor to use a single function for all color pickers
-// BUG: Opacity slider not showing up on picker
-// BUG: Dark picker IDs not found, but are in the browser DOM
-
-let lightPrimaryPicker;
-let lightContrastPicker;
-let darkPrimaryPicker;
-let darkContrastPicker;
-let lightWebSite;
-let darkWebSite;
-let siteStyle;
-const opts = {
-    'format': 'rgba',
-    'borderRadius': 15,
-    'borderWidth': 30,
-    'padding': 5,
-    'shadow': false,
-    'backgroundColor': '#333'
-}; // BUG: can't use this object, must use the actual text
-function setJsColorPicker() {
-    if (typeof jscolor !== 'undefined') {
-        jscolor.presets.default = Object.assign({}, jscolor.presets.default, opts);
-    } else {
-        console.error("jscolor is not defined. Make sure the jscolor library is included.");
-    }
-
-    //jscolor.install();
-    jscolor.trigger('input');  // triggers 'onInput' on all color pickers when they are ready
-
-
-    lightWebSite = document.getElementById("idLightWebSite");
-    if (!lightWebSite) throw new Error("Light website not found!");
-    siteStyle = getComputedStyle(lightWebSite);
-    lightPrimaryPicker = setUpPicker('Light', 'Primary');
-    lightContrastPicker = setUpPicker('Light', 'Contrast');
-
-    darkWebSite = document.getElementById("idDarkWebSite");
-    if (!darkWebSite) throw new Error("Dark website not found!");
-    siteStyle = getComputedStyle(darkWebSite);
-
-    // BUG: next line gets "Error: idDarkPrimary.jscolor not found!" -- Not loaded?!
-    console.error("Setting up Dark pickers fails: why isn't the dark website loaded?");
-    //darkPrimaryPicker = setUpPicker('Dark', 'Primary');
-    //darkContrastPicker = setUpPicker('Dark', 'Contrast');
-
-    if (logLevel > 1) console.log("JSColorPicker installed");
-}
-
-function setUpPicker(theme, color) {
-    let picker = document.getElementById(`id${theme}${color}`).jscolor;
-    if (!picker) { throw new Error(`id${theme}${color}.jscolor not found!`); }
-    picker.onInput = window[`update${theme}${color}Color`];
-    if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
-        console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
-    picker.option({ 'format': 'rgba', 'borderWidth': 1, 'padding': 10, 'alphaChannel': true, });
-    // picker.option(opts);  // BUG: doesn't work...
-    return picker;
-}
-
-function updateColor(mode = 'Light', accent = 'Primary', picker) {
-    if (logLevel > 2) console.log(`${mode} ${accent} Color set to: ${picker.toRGBAString()}`);
-    lightWebSite.style.setProperty(`--${mode.toLowerCase()}-${accent.toLowerCase()}`,
-        `rgba(${round(picker.channels.r)},
-        ${round(picker.channels.g)},
-        ${round(picker.channels.b)},
-        ${round(picker.channels.a)})`);
-}
-
-function updateLightPrimaryColor() {
-    if (logLevel > 2) console.log("Light Primary Color set to: " + lightPrimaryPicker.toRGBAString());
-    lightWebSite.style.setProperty('--light-primary',
-        `rgba(${round(lightPrimaryPicker.channels.r)}, 
-        ${round(lightPrimaryPicker.channels.g)}, 
-        ${round(lightPrimaryPicker.channels.b)}, 
-        ${round(lightPrimaryPicker.channels.a)})`);
-}
-
-function updateLightContrastColor() {
-    if (logLevel > 2) console.log("Light Contrast Color set to: " + lightContrastPicker.toRGBAString());
-    lightWebSite.style.setProperty('--light-contrast',
-        `rgba(${round(lightContrastPicker.channels.r)},
-        ${round(lightContrastPicker.channels.g)},
-        ${round(lightContrastPicker.channels.b)},
-        ${round(lightContrastPicker.channels.a)})`);
-}
-
-
-function updateDarkPrimaryColor() {
-    if (logLevel > 2) console.log("Dark Primary Color set to: " + darkPrimaryPicker.toRGBAString());
-    darkWebSite.style.setProperty('--dark-primary',
-        `rgba(${round(darkPrimaryPicker.channels.r)},
-        ${round(darkPrimaryPicker.channels.g)},
-        ${round(darkPrimaryPicker.channels.b)},
-        ${round(darkPrimaryPicker.channels.a)})`);
-}
-
-function updateDarkContrastColor() {
-    if (logLevel > 2) console.log("Dark Contrast Color set to: " + darkContrastPicker.toRGBAString());
-    darkWebSite.style.setProperty('--dark-contrast',
-        `rgba(${round(darkContrastPicker.channels.r)},
-        ${round(darkContrastPicker.channels.g)},
-        ${round(darkContrastPicker.channels.b)},
-        ${round(darkContrastPicker.channels.a)})`);
-}
-
-
-function round(val) {
-    return Math.round(val * 100) / 100;
 }
 
 
@@ -213,12 +101,88 @@ function resetWebPage() {
 }
 
 
+/* #region(collapsed) Color Pickers */
+// https://jscolor.com/docs/
+// BUG: Dark picker IDs not found, but are in the browser DOM
+let lightPrimaryPicker;
+let lightContrastPicker;
+let darkPrimaryPicker;
+let darkContrastPicker;
+function setJsColorPicker() {
+    let siteStyle = getComputedStyle(document.getElementById("idLightWebSite"));
+    lightPrimaryPicker = setUpPicker('Light', 'Primary', siteStyle);
+    lightContrastPicker = setUpPicker('Light', 'Contrast', siteStyle);
+
+    let darkWebSiteElement = document.getElementById("idDarkWebSite");
+    if (!darkWebSiteElement) {
+        console.error("Dark website element not found!");
+        return;
+    }
+    siteStyle = getComputedStyle(darkWebSiteElement);
+    darkPrimaryPicker = setUpPicker('Dark', 'Primary', siteStyle);
+    darkContrastPicker = setUpPicker('Dark', 'Contrast', siteStyle);
+}
+
+const opts = {
+    'borderRadius': 15,
+    'borderWidth': 2,
+    'padding': 4,
+    'shadow': true,
+    'format': 'rgba',
+    'alphaChannel': true,
+};
+function setUpPicker(theme, color, siteStyle) {
+    let picker = document.getElementById(`id${theme}${color}`).jscolor;
+    // BUG: This gets thrown for the dark pickers, but they are in the browser DOM
+    if (!picker) { throw new Error(`id${theme}${color}.jscolor not found!`); }
+    picker.onInput = window[`update${theme}${color}Color`];
+    if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
+        console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
+    picker.option(opts);
+    return picker;
+}
+
+// picker calls these onUpdate() functions when user picks new colors
+function updateLightPrimaryColor() {
+    updateColor('Light', 'Primary', lightPrimaryPicker);
+}
+
+function updateLightContrastColor() {
+    updateColor('Light', 'Contrast', lightContrastPicker);
+}
+
+function updateDarkPrimaryColor() {
+    updateColor('Dark', 'Primary', darkPrimaryPicker);
+}
+
+function updateDarkContrastColor() {
+    updateColor('Dark', 'Contrast', darkContrastPicker);
+}
+
+function updateColor(theme, color, picker) {
+    let siteStyle;
+    if (theme === 'Light') {
+        siteStyle = document.getElementById("idLightWebSite").style;
+    } else {
+        siteStyle = document.getElementById("idDarkWebSite").style; //getComputedStyle
+    }
+    siteStyle.setProperty(`--${theme.toLowerCase()}-${color.toLowerCase()}`,
+        `rgba(${round(picker.channels.r)}, 
+        ${round(picker.channels.g)}, 
+        ${round(picker.channels.b)}, 
+        ${round(picker.channels.a)})`);
+
+    if (logLevel > 2) console.log(`${theme} ${color} Color set to: ${picker.toRGBAString()}`);
+}
+
+function round(num) {
+    return Math.round(num * 100) / 100;
+}
+/* #endregion */
 
 
-/******************************************* 
- * 
- * Color functions
- */
+// #region(collapsed) Color functions
+/*******************************************/
 
 // TODO: get contrasting colors (not just black/white) with all-css strategy: https://css-tricks.com/methods-contrasting-text-backgrounds/ & https://codepen.io/thebabydino/pen/JNWqLL
 // TODO: Try https://www.w3.org/TR/css-color-5/#contrast-color
@@ -234,13 +198,11 @@ function getContrastingColor(r, g, b) {
     if (logLevel > 2) console.log("Perceptive luminance:" + a);
     return ((a < 0.5) ? 'black' : 'white');
 }
+// #endregion
 
 
-/*****************************
- * 
- *  Copy text to clipboard
- */
-
+// #region(collapsed) Copy text to clipboard
+/*******************************************/
 function copyTextToClipboard(text, id) {
     if (!navigator.clipboard) {
         console.warn('Browser does not support clipboard, using old techniques!');
@@ -291,15 +253,11 @@ function fallbackCopyTextToClipboard(text) {
     }
     document.body.removeChild(textArea);
 }
+// #endregion
 
 
-
-
-/******************************************
- * 
- * Download JSON file
- */
-
+// #region(collapsed) Download JSON
+/******************************************/
 function createFileName(baseName) {
     let date = new Date().toISOString().slice(0, 10);
     let colorModeElement = document.querySelector("#syscolors-page-mode");
@@ -339,3 +297,4 @@ function downloadJSON(data, filename) {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 };
+// #endregion
