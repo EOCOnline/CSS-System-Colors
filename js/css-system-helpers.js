@@ -38,6 +38,8 @@ function cloneLightPanel(elementId, cloneId, spanSelector) {
             lightHRef.href = lightHRef.href.replace("idLight", "idDark");
             if (logLevel > 1) { console.log(`Converted ID ${i}: to ${lightHRef.href.toString()}`); }
         });
+        new JSColor('#idDarkPrimary', ({}));
+        new JSColor('#idDarkContrast', ({}));
     }
     return dark;
 }
@@ -103,7 +105,6 @@ function resetWebPage() {
 
 /* #region(collapsed) Color Pickers */
 // https://jscolor.com/docs/
-// BUG: Dark picker IDs not found, but are in the browser DOM
 let lightPrimaryPicker;
 let lightContrastPicker;
 let darkPrimaryPicker;
@@ -114,10 +115,6 @@ function setJsColorPicker() {
     lightContrastPicker = setUpPicker('Light', 'Contrast', siteStyle);
 
     let darkWebSiteElement = document.getElementById("idDarkWebSite");
-    if (!darkWebSiteElement) {
-        console.error("Dark website element not found!");
-        return;
-    }
     siteStyle = getComputedStyle(darkWebSiteElement);
     darkPrimaryPicker = setUpPicker('Dark', 'Primary', siteStyle);
     darkContrastPicker = setUpPicker('Dark', 'Contrast', siteStyle);
@@ -132,9 +129,10 @@ const opts = {
     'alphaChannel': true,
 };
 function setUpPicker(theme, color, siteStyle) {
-    let picker = document.getElementById(`id${theme}${color}`).jscolor;
-    // BUG: This gets thrown for the dark pickers, but they are in the browser DOM
-    if (!picker) { throw new Error(`id${theme}${color}.jscolor not found!`); }
+    let element = document.getElementById(`id${theme}${color}`);
+    if (!element) { throw new Error(`id${theme}${color} not found`); }
+    let picker = element.jscolor;
+    if (!picker) { throw new Error(`id${theme}${color}.jscolor not found`); }
     picker.onInput = window[`update${theme}${color}Color`];
     if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
         console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
@@ -164,7 +162,7 @@ function updateColor(theme, color, picker) {
     if (theme === 'Light') {
         siteStyle = document.getElementById("idLightWebSite").style;
     } else {
-        siteStyle = document.getElementById("idDarkWebSite").style; //getComputedStyle
+        siteStyle = document.getElementById("idDarkWebSite").style;
     }
     siteStyle.setProperty(`--${theme.toLowerCase()}-${color.toLowerCase()}`,
         `rgba(${round(picker.channels.r)}, 
