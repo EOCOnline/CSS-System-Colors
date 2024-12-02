@@ -54,6 +54,7 @@ function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
+    doDemo();
     doTableGrids();
     window.location.reload();
 }
@@ -64,6 +65,7 @@ function setSortOrder(val) {
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
 
+    doDemo();
     doTableGrids();
     // window.location.reload();
 }
@@ -100,37 +102,6 @@ function resetWebPage() {
         document.getElementById("syscolors-demo").removeChild(demoDarkElement);
     }
 }
-
-
-
-
-/*    
-    document.querySelector("#syscolors-grid-light").innerHTML = document.querySelector("#syscolors-grid-light h2").outerHTML;
-    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
-    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
-    // TODO: SAVE THE LINE BREAKS!
-    //document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[1].outerHTML;
-    document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
-    document.getElementById("syscolors-deprecated-light").innerHTML = document.getElementById("syscolors-deprecated-light").children[0].outerHTML;
-    document.getElementById("syscolors-deprecated-dark").innerHTML = document.getElementById("syscolors-deprecated-dark").children[0].outerHTML;
-    */
-
-/* document.getElementById("syscolors-grid-light").innerHTML = "";
-if (document.getElementById("syscolors-grid-dark")) {
-document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
-}
- 
-document.getElementById("syscolors-deprecated-light").innerHTML = "";
-if (document.getElementById("syscolors-deprecated-dark")) {
-document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"));
-}
-*/
-
-
-
-
-
-
 /* #region(collapsed) Color Pickers */
 // https://jscolor.com/docs/
 let lightPrimaryPicker;

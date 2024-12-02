@@ -22,11 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContainer = document.getElementById("syscolors-outer-container");
   updateContrast({ value: 97.5 });
 
-  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
-  document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
-  document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
-  setJsColorPicker();
-
   cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
   const hueSlider = document.querySelector('#hueSlider');
   const hueDemo = document.querySelector("#syscolors-hue-demo")
@@ -274,6 +269,14 @@ let systemColorsJson =
 /**************************************
  * Create the System Colors panels (both tables & grids)
  */
+
+function doDemo() {
+  cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
+  document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
+  document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
+  setJsColorPicker();
+}
+
 
 // This preserves JSON data - with RGBA values - for downloading
 let downloadableJson; // = { "info": {}, "currentColors": [], "deprecatedColors": [] };
