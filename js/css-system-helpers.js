@@ -54,7 +54,7 @@ function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
-    doTablesGrids(systemColorsJson);
+    doTableGrids();
     window.location.reload();
 }
 
@@ -64,44 +64,71 @@ function setSortOrder(val) {
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
 
-    doTablesGrids(systemColorsJson);
+    doTableGrids();
     // window.location.reload();
 }
 
-// Return web page/DOM to original state 
+/**
+ * Resets the web page/DOM to its original state.
+ * This function preserves the initial card for tables and the titles & line breaks for grids.
+ * It also removes the dark demo element if it exists.
+ * This is useful for resetting the page after changes have been made to the DOM.
+ */
 function resetWebPage() {
-    downloadableJson = { "info": {}, "currentColors": [] };
-    deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
-
-    // For tables, preserve ONLY the initial cards
-    let savedCard = document.getElementsByClassName("syscolors-initial-card")[0].cloneNode(true);
+    // For tables, preserve ONLY the initial card
+    let savedCard = document.querySelector("#syscolors-table .syscolors-initial-card").cloneNode(true);
     document.getElementById("syscolors-table").innerHTML = savedCard.outerHTML;
 
-    savedCard = document.getElementsByClassName("syscolors-initial-card")[1].cloneNode(true);
+    savedCard = document.querySelector("#syscolors-deprecated-table .syscolors-initial-card").cloneNode(true);
     document.getElementById("syscolors-deprecated-table").innerHTML = savedCard.outerHTML;
 
-    // For grids, preserve ONLY the titles
+    for (const index of document.getElementsByClassName("syscolors-preserve")) {
+        // only preserve titles of grid panels
+        let h2 = index.parentNode;
+        let parentDiv = h2.parentNode;
+        parentDiv.innerHTML = h2.outerHTML;
+
+        //console.warn("parentDiv=" + parentDiv.outerHTML);
+        // ...and a line break
+        let div = document.createElement('div');
+        div.className = 'syscolors-break';
+        parentDiv.appendChild(div);
+    }
+
+    const demoDarkElement = document.getElementById("syscolors-demo-dark");
+    if (demoDarkElement) {
+        document.getElementById("syscolors-demo").removeChild(demoDarkElement);
+    }
+}
+
+
+
+
+/*    
+    document.querySelector("#syscolors-grid-light").innerHTML = document.querySelector("#syscolors-grid-light h2").outerHTML;
+    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
     document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
     // TODO: SAVE THE LINE BREAKS!
     //document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[1].outerHTML;
     document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
     document.getElementById("syscolors-deprecated-light").innerHTML = document.getElementById("syscolors-deprecated-light").children[0].outerHTML;
     document.getElementById("syscolors-deprecated-dark").innerHTML = document.getElementById("syscolors-deprecated-dark").children[0].outerHTML;
+    */
 
-    /* document.getElementById("syscolors-grid-light").innerHTML = "";
+/* document.getElementById("syscolors-grid-light").innerHTML = "";
 if (document.getElementById("syscolors-grid-dark")) {
-  document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
+document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
 }
-
+ 
 document.getElementById("syscolors-deprecated-light").innerHTML = "";
 if (document.getElementById("syscolors-deprecated-dark")) {
-  document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
+document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"));
 }
 */
-    if (document.getElementById("syscolors-demo-dark")) {
-        document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
-    }
-}
+
+
+
+
 
 
 /* #region(collapsed) Color Pickers */

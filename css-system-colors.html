@@ -3,20 +3,22 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+  <!--Refresh page every 5 seconds: meta http-equiv="refresh" content="5"-->
   <title>CSS System Colors</title>
 
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+
   <link rel="stylesheet" href="./css/css-system-main.css" />
   <link rel="stylesheet" href="./css/css-system-demo.css" />
   <link rel="stylesheet" href="./css/css-system-grid.css" />
   <link rel="stylesheet" href="./css/css-system-table.css" />
   <!--link rel="stylesheet" href="./css/css-system-classes.css" /-->
   <link rel="stylesheet" href="./css-system-colors.css" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
   <script src="./css-system-colors.js"></script>
   <script defer src="./js/css-system-helpers.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
@@ -384,12 +386,14 @@
 
         <div id="syscolors-grid">
           <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
-            <h2>Current System Colors: <span class="syscolors-grid-mode"></span> Light Color Mode</h2>
+            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
+            </h2>
             <div class="syscolors-break"></div>
           </div>
           <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
-            <h2>Current System Colors: <span class="syscolors-grid-mode"></span> Dark Color Mode</h2>
-            <div class="syscolors-break"></div>
+            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Dark Color Mode
+            </h2>
+            <div class="syscolors-break  syscolors-preserve"></div>
           </div>
         </div>
 
@@ -756,11 +760,13 @@
         </p>
         <div id="syscolors-deprecated-grid">
           <div id="syscolors-deprecated-light" class="syscolors-inner-container syscolors-light">
-            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Light Color Mode</h2>
+            <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Light Color Mode
+            </h2>
             <div class="syscolors-break"></div>
           </div>
           <div id="syscolors-deprecated-dark" class="syscolors-inner-container syscolors-dark">
-            <h2>Deprecated System Colors: <span class="syscolors-grid-mode"></span> Dark Color Mode</h2>
+            <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Dark Color Mode
+            </h2>
             <div class="syscolors-break"></div>
           </div>
         </div>
