@@ -274,84 +274,50 @@ let systemColorsJson =
  * Create the System Colors panels (both tables & grids)
  */
 
-// This also gets called after changing the sort order or color mode
+// This preserves JSON data - with RGBA values - for downloading
+let downloadableJson = { "info": {}, "currentColors": [], "deprecatedColors": [] };
+
+// Also called after resetWebPage: i.e., changing sort order/color mode
 function doTableGrids() {
-  let json = systemColorsJson.structuredClone();
-  json.info.timeStamp = new Date().toLocaleString();
-  json.info.userAgent = navigator.userAgent;
+  downloadableJson = structuredClone(systemColorsJson);
+  downloadableJson.info.timeStamp = new Date().toLocaleString();
+  downloadableJson.info.userAgent = navigator.userAgent;
   document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
 
-  json = sortColors(json);
+  sortColors();
 
-  // generateColorTables
-  generateSystemColors(json.currentColors, "syscolors-table");
-  generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
+  // Generate Color Tables
+  for (const index of Object.keys(downloadableJson.currentColors)) {
+    createColorRow(downloadableJson.currentColors, index, "syscolors-table");
+  }
+  for (const index of Object.keys(downloadableJson.deprecatedColors)) {
+    createColorRow(downloadableJson.deprecatedColors, index, "syscolors-deprecated-table");
+  }
 
-  generateColorGrids(json);
+  generateColorGrids();
 }
 
-
-function sortColors(json) {
+function sortColors() {
   if (sortByCategory) {
-    json.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
-    json.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+    downloadableJson.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+    downloadableJson.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
   } else {
-    json.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
-    json.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+    downloadableJson.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+    downloadableJson.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
   }
-  return json;
 }
 
-// This updates systemColorSet with an RGBA key, in addition to creating HTML cards
-function generateSystemColors(systemColorSet, elementID) {
-  if (logLevel > 2) console.table(systemColorSet);
-
-  for (const index of Object.keys(systemColorSet)) {
-    if (elementID === "syscolors-table") {
-      createColorRow(systemColorSet, index, "syscolors-table");
-    } else if (elementID === "syscolors-deprecated-table") {
-      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
-    } else {
-      debugger; // should never hit...
-      createColorCard(systemColorSet, index, elementID);
-    }
-  }
-  return systemColorSet;
-}
-
-// These save JSON data for possible downloading
-let currentColorsJson = { "info": {}, "currentColors": [] };
-let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
-
+// This updates the downloadableJson with an RGBA key, in addition to creating HTML cards
 function generateColorGrids() {
-  //console.log("currentColors: " + systemColorsJson.currentColors.length);
-  document.getElementById("syscolors-current-summary").innerText = "System Color (" + systemColorsJson.currentColors.length + ") Grid";
-  //generateSystemColors(systemColorsJson.currentColors, "syscolors-grid-light");
-  //systemColorsJson.currentColors = generateSystemColors(systemColorsJson.currentColors, "syscolors-grid-dark");
-
-  for (const index of Object.keys(systemColorsJson.currentColors)) {
-    createColorCard(systemColorsJson.currentColors, index, "syscolors-grid-light");
-  }
-  for (const index of Object.keys(systemColorsJson.currentColors)) {
-    createColorCard(systemColorsJson.currentColors, index, "syscolors-grid-dark");
+  document.getElementById("syscolors-grid-title").innerText = "System Color (" + downloadableJson.currentColors.length + ") Grid";
+  for (const index of Object.keys(downloadableJson.currentColors)) {
+    createColorCard(downloadableJson.currentColors, index, "syscolors-grid-light");
+    createColorCard(downloadableJson.currentColors, index, "syscolors-grid-dark");
   }
 
-  // save the JSON data for download
-  currentColorsJson.info = structuredClone(systemColorsJson.info);
-  currentColorsJson.currentColors = structuredClone(systemColorsJson.currentColors);
-
-  //console.log("deprecatedColors: " + systemColorsJson.deprecatedColors.length);
-  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + systemColorsJson.deprecatedColors.length + ") Grid";
-  // generateSystemColors(systemColorsJson.deprecatedColors, "syscolors-deprecated-light");
-  // systemColorsJson.deprecatedColors = generateSystemColors(systemColorsJson.deprecatedColors, "syscolors-deprecated-dark");
-
-  for (const index of Object.keys(systemColorsJson.currentColors)) {
-    createColorCard(systemColorsJson.deprecatedColors, index, "syscolors-deprecated-light");
+  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grid";
+  for (const index of Object.keys(downloadableJson.deprecatedColors)) {
+    createColorCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-light");
+    createColorCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-dark");
   }
-  for (const index of Object.keys(systemColorsJson.currentColors)) {
-    createColorCard(systemColorsJson.deprecatedColors, index, "syscolors-deprecated-dark");
-  }
-
-  deprecatedColorsJson.info = structuredClone(systemColorsJson.info);
-  deprecatedColorsJson.deprecatedColors = structuredClone(systemColorsJson.deprecatedColors);
 }

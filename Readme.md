@@ -68,9 +68,9 @@ The web page delivers a handful of panels:
   colors for anyone's interest.
 - **Deprecated System Color Grid:** as above, but displays the deprecated colors
   for anyone's interest.
-- **Demo Page:** - UNFINISHED, but the goal is to have a simple HTML page that
-  shows all the System Colors in use as intended - shown in light & dark mode of
-  course.
+- **Demo Page:** - The goal is to have a simple HTML page that shows all the
+  System Colors in use as intended - shown in light & dark mode of course. You
+  can also play with a couple accent colors.
 
 You can view the colors and change the light/dark mode and contrast settings to
 see how the colors adapt to different environments.

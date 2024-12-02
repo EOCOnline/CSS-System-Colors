@@ -70,7 +70,7 @@ function setSortOrder(val) {
 
 // Return web page/DOM to original state 
 function resetWebPage() {
-    currentColorsJson = { "info": {}, "currentColors": [] };
+    downloadableJson = { "info": {}, "currentColors": [] };
     deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
     // For tables, preserve ONLY the initial cards
@@ -82,9 +82,9 @@ function resetWebPage() {
 
     // For grids, preserve ONLY the titles
     document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
+    // SAVE THE LINE BREAKS!
+    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[1].outerHTML;
     document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
-
-    // For grids, preserve ONLY the titles
     document.getElementById("syscolors-deprecated-light").innerHTML = document.getElementById("syscolors-deprecated-light").children[0].outerHTML;
     document.getElementById("syscolors-deprecated-dark").innerHTML = document.getElementById("syscolors-deprecated-dark").children[0].outerHTML;
 
@@ -267,13 +267,8 @@ function createFileName(baseName) {
     return fileName;
 }
 
-function downloadCurrentColors() {
-    downloadJSON(currentColorsJson, createFileName("CSS_System_Colors"));
-
-}
-
-function downloadDeprecatedColors() {
-    downloadJSON(deprecatedColorsJson, createFileName("CSS_Deprecated_Colors"));
+function downloadColors() {
+    downloadJSON(downloadableJson, createFileName("CSS_System_Colors"));
 }
 
 function downloadJSON(data, filename) {

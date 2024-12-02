@@ -4,28 +4,10 @@
  * and system-colors.css contains the color definitions used in this table.
  **/
 
-.syscolors-row-card {
-  display: inline-flex;
-  align-self: center;
-  justify-self: stretch;
-  place-self: center stretch;
-
-  width: 525px;
-
-  padding: 5px;
-  margin: 0.5em;
-
-  border: 2px solid #585858;
-  border-radius: 0.5em;
-
-  /* https://getcssscan.com/css-box-shadow-examples */
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
 .syscolors-row-text:has(.syscolors-category-span[category="category"]) {
   --borderColor: #88888866;
 }
-
+/* #region(collapsed) border colors by category */
 .syscolors-row-text:has(.syscolors-category-span[category="selection"]) {
   --borderColor: #00ff0066;
 }
@@ -65,67 +47,87 @@
 .syscolors-row-text:has(.syscolors-category-span[category="3D"]) {
   --borderColor: #cdf27666;
 }
+/* #endregion */
 
 .syscolors-tall-row {
   --rowHeight: 130px;
 }
 
-.syscolors-row-text {
-  border: 2px solid var(--borderColor);
-  border-left: 30px solid var(--borderColor);
+.syscolors-row-card {
+  display: inline-flex;
+  align-self: center;
+  justify-self: stretch;
+  place-self: center stretch;
+
+  width: 525px;
+
+  padding: 5px;
+  margin: 0.5em;
+
+  border: 2px solid #585858;
   border-radius: 0.5em;
 
-  position: relative;
-  font-size: small;
-  display: inline-block;
+  /* https://getcssscan.com/css-box-shadow-examples */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-  padding: 3px;
+  .syscolors-category-span {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: absolute;
+    padding: 0.25em 0.5em;
+    margin-left: -30px;
+    bottom: -21px;
+    font-size: x-small;
+    font-weight: bold;
+    transform: rotate(270deg);
+    transform-origin: 0 0;
+  }
 
-  width: 200px;
-  height: var(--rowHeight);
-}
+  .syscolors-row-text {
+    border: 2px solid var(--borderColor);
+    border-left: 30px solid var(--borderColor);
+    border-radius: 0.5em;
 
-.syscolors-row-text .syscolors-category-span {
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  position: absolute;
-  padding: 0.25em 0.5em;
-  margin-left: -30px;
-  bottom: -21px;
-  font-size: x-small;
-  font-weight: bold;
-  transform: rotate(270deg);
-  transform-origin: 0 0;
-}
+    position: relative;
+    font-size: small;
+    display: inline-block;
 
-.syscolors-row-light {
-  color-scheme: light;
-  border: 2px solid black;
-  padding: 5px;
-  border-radius: 0.5em;
-  height: var(--rowHeight);
-  width: 150px;
-}
+    padding: 5px;
 
-.syscolors-row-dark {
-  color-scheme: dark;
-  border: 2px solid black;
-  padding: 5px;
-  height: var(--rowHeight);
-  width: 150px;
-}
+    width: 200px;
+    height: var(--rowHeight);
 
-.syscolors-row-card .syscolors-name-span {
-  font-weight: bold;
-  font-size: small;
-}
+    .syscolors-name-span {
+      font-weight: bold;
+      font-size: small;
+    }
 
-.syscolors-desc-span {
-  font-size: 90%;
-  font-weight: 500;
-}
+    .syscolors-desc-span {
+      font-size: 90%;
+      font-weight: 500;
+    }
 
-.syscolors-color-span {
-  font-size: 90%;
-  font-weight: 500;
+    .syscolors-color-span {
+      font-size: 90%;
+      font-weight: 500;
+    }
+  }
+
+  .syscolors-row-light {
+    color-scheme: light;
+  }
+
+  .syscolors-row-dark {
+    color-scheme: dark;
+  }
+
+  .syscolors-row-dark,
+  .syscolors-row-light {
+    border: 2px solid black;
+    padding: 5px;
+    margin-right: 1px;
+    border-radius: 0.5em;
+    height: var(--rowHeight);
+    width: 150px;
+  }
 }

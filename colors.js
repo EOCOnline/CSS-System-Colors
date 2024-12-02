@@ -317,7 +317,7 @@ let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
 
 function generateColorGrids() {
     //console.log("currentColors: " + systemColorsJson.currentColors.length);
-    document.getElementById("syscolors-current-summary").innerText = "System Color (" + systemColorsJson.currentColors.length + ") Grid";
+    document.getElementById("syscolors-grid-title").innerText = "System Color (" + systemColorsJson.currentColors.length + ") Grid";
     //generateSystemColors(systemColorsJson.currentColors, "syscolors-grid-light");
     //systemColorsJson.currentColors = generateSystemColors(systemColorsJson.currentColors, "syscolors-grid-dark");
 
