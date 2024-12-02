@@ -82,8 +82,8 @@ function resetWebPage() {
 
     // For grids, preserve ONLY the titles
     document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
-    // SAVE THE LINE BREAKS!
-    document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[1].outerHTML;
+    // TODO: SAVE THE LINE BREAKS!
+    //document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[1].outerHTML;
     document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
     document.getElementById("syscolors-deprecated-light").innerHTML = document.getElementById("syscolors-deprecated-light").children[0].outerHTML;
     document.getElementById("syscolors-deprecated-dark").innerHTML = document.getElementById("syscolors-deprecated-dark").children[0].outerHTML;

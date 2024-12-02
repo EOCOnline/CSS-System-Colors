@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 let systemColorsJson =
 {
   "info": {
-    "copyright": "Created by eoc.online CSS System Colors tool: https://github.com/eoconline/css-system-colors"
+    "credit": "Created by eoc.online CSS System Colors tool: https://github.com/eoconline/css-system-colors"
   },
   "currentColors": [
     {
@@ -275,7 +275,7 @@ let systemColorsJson =
  */
 
 // This preserves JSON data - with RGBA values - for downloading
-let downloadableJson = { "info": {}, "currentColors": [], "deprecatedColors": [] };
+let downloadableJson; // = { "info": {}, "currentColors": [], "deprecatedColors": [] };
 
 // Also called after resetWebPage: i.e., changing sort order/color mode
 function doTableGrids() {
@@ -315,7 +315,7 @@ function generateColorGrids() {
     createColorCard(downloadableJson.currentColors, index, "syscolors-grid-dark");
   }
 
-  document.getElementById("syscolors-deprecated-summary").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grid";
+  document.getElementById("syscolors-deprecated-title").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grid";
   for (const index of Object.keys(downloadableJson.deprecatedColors)) {
     createColorCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-light");
     createColorCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-dark");
