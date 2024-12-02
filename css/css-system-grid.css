@@ -94,8 +94,8 @@
   position: absolute;
   color: black;
 
-  margin-left: -26px; /* bigger # sends it leftward */
-  margin-top: 55px; /* bigger # sends it downward */
+  margin-left: -32px; /* bigger negative # sends it leftward */
+  margin-top: 70px; /* bigger # sends it downward */
 
   font-size: 0.75rem;
   font-weight: bold;

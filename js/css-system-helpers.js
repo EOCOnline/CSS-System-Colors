@@ -54,7 +54,7 @@ function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
-    processJson(systemColorsJson);
+    doTablesGrids(systemColorsJson);
     window.location.reload();
 }
 
@@ -63,10 +63,12 @@ function setSortOrder(val) {
     sortByCategory = val.checked;
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
-    processJson(systemColorsJson);
+
+    doTablesGrids(systemColorsJson);
+    // window.location.reload();
 }
 
-
+// Return web page/DOM to original state 
 function resetWebPage() {
     currentColorsJson = { "info": {}, "currentColors": [] };
     deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
@@ -82,21 +84,20 @@ function resetWebPage() {
     document.getElementById("syscolors-grid-light").innerHTML = document.getElementById("syscolors-grid-light").children[0].outerHTML;
     document.getElementById("syscolors-grid-dark").innerHTML = document.getElementById("syscolors-grid-dark").children[0].outerHTML;
 
-    /*
-    document.getElementById("syscolors-grid-light").innerHTML = "";
-    if (document.getElementById("syscolors-grid-dark")) {
-        document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
-    }
- 
-    // removed too much!!!!
-    document.getElementById("syscolors-deprecated-light").innerHTML = "";
-    if (document.getElementById("syscolors-deprecated-dark")) {
-        document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
-    }
-*/
+    // For grids, preserve ONLY the titles
+    document.getElementById("syscolors-deprecated-light").innerHTML = document.getElementById("syscolors-deprecated-light").children[0].outerHTML;
+    document.getElementById("syscolors-deprecated-dark").innerHTML = document.getElementById("syscolors-deprecated-dark").children[0].outerHTML;
 
-    // For demos, preserve all the light elements
-    //document.getElementById("syscolors-demo-light").innerHTML = "";
+    /* document.getElementById("syscolors-grid-light").innerHTML = "";
+if (document.getElementById("syscolors-grid-dark")) {
+  document.getElementById("syscolors-grid").removeChild(document.getElementById("syscolors-grid-dark"));
+}
+
+document.getElementById("syscolors-deprecated-light").innerHTML = "";
+if (document.getElementById("syscolors-deprecated-dark")) {
+  document.getElementById("syscolors-deprecated-grid").removeChild(document.getElementById("syscolors-deprecated-dark"))
+}
+*/
     if (document.getElementById("syscolors-demo-dark")) {
         document.getElementById("syscolors-demo").removeChild(document.getElementById("syscolors-demo-dark"))
     }

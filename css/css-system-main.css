@@ -2,7 +2,8 @@
 *
 *  CSS System Colors
 *  Use CSS as much as possible to handle light vs dark mode and contrast
-*  General CSS for page containers and miscellaneous styling
+*  General CSS for page containers and panel styling
+*  Internal panel styling done in other files
 */
 
 /*****************************
@@ -274,6 +275,11 @@ https://www.w3docs.com/tools/code-editor/10122
 
 #syscolors-grid {
   padding: 10px;
+
+  ~ h2 {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
 }
 
 #syscolors-grid .syscolors-inner-container H2,
@@ -295,7 +301,7 @@ https://www.w3docs.com/tools/code-editor/10122
 
 /* #region(collapsed) Hue Panels */
 /**********************************************
- * NOTE: Also see syscolors-demo.css & system-colors.css!
+ * NOTE: Also see syscolors-demo.css & system-colors.css
  */
 
 #syscolors-hue-demo {
@@ -315,7 +321,7 @@ https://www.w3docs.com/tools/code-editor/10122
 #syscolors-hue-light,
 #syscolors-hue-dark {
   margin-right: 1rem;
-  padding: 1rem;
+  padding: 0 1rem 1rem;
   width: fit-content;
 
   border: 1px solid black;

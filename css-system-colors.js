@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (logLevel > 2) console.log("hueSlider.value set to " + hueSlider.value);
   });
 
-  processJson();
+  doTableGrids();
 });
 
 /**
@@ -274,39 +274,54 @@ let systemColorsJson =
  * Create the System Colors panels (both tables & grids)
  */
 
+// This also gets called after changing the sort order or color mode
+function doTableGrids() {
+  let json = systemColorsJson.structuredClone();
+  json.info.timeStamp = new Date().toLocaleString();
+  json.info.userAgent = navigator.userAgent;
+  document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
+
+  json = sortColors(json);
+
+  // generateColorTables
+  generateSystemColors(json.currentColors, "syscolors-table");
+  generateSystemColors(json.deprecatedColors, "syscolors-deprecated-table");
+
+  generateColorGrids(json);
+}
+
+
+function sortColors(json) {
+  if (sortByCategory) {
+    json.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+    json.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
+  } else {
+    json.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+    json.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
+  }
+  return json;
+}
+
+// This updates systemColorSet with an RGBA key, in addition to creating HTML cards
+function generateSystemColors(systemColorSet, elementID) {
+  if (logLevel > 2) console.table(systemColorSet);
+
+  for (const index of Object.keys(systemColorSet)) {
+    if (elementID === "syscolors-table") {
+      createColorRow(systemColorSet, index, "syscolors-table");
+    } else if (elementID === "syscolors-deprecated-table") {
+      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
+    } else {
+      debugger; // should never hit...
+      createColorCard(systemColorSet, index, elementID);
+    }
+  }
+  return systemColorSet;
+}
+
 // These save JSON data for possible downloading
 let currentColorsJson = { "info": {}, "currentColors": [] };
 let deprecatedColorsJson = { "info": {}, "deprecatedColors": [] };
-
-// Create the display panels, with some JSON pre-processing
-function processJson() {
-  console.log("%c" + "Read system colors file", "color:aqua;font-weight:bold;");
-  try {
-    systemColorsJson.info.timeStamp = new Date().toLocaleString();
-    systemColorsJson.info.userAgent = navigator.userAgent;
-    document.getElementById("syscolors-user-agent").innerText = navigator.userAgent;
-    sortColors();
-    generateColorTables();
-    generateColorGrids();
-  } catch (error) {
-    console.error("Error building the color panels: " + error.message);
-  }
-}
-
-function sortColors() {
-  if (sortByCategory) {
-    systemColorsJson.currentColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
-    systemColorsJson.deprecatedColors.sort((a, b) => (a.category > b.category) ? 1 : -1);
-  } else {
-    systemColorsJson.currentColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
-    systemColorsJson.deprecatedColors.sort((a, b) => (a.color > b.color) ? 1 : -1);
-  }
-}
-
-function generateColorTables() {
-  generateSystemColors(systemColorsJson.currentColors, "syscolors-table");
-  generateSystemColors(systemColorsJson.deprecatedColors, "syscolors-deprecated-table");
-}
 
 function generateColorGrids() {
   //console.log("currentColors: " + systemColorsJson.currentColors.length);
@@ -339,20 +354,4 @@ function generateColorGrids() {
 
   deprecatedColorsJson.info = structuredClone(systemColorsJson.info);
   deprecatedColorsJson.deprecatedColors = structuredClone(systemColorsJson.deprecatedColors);
-}
-
-// This updates systemColorSet with an RGBA key, in addition to creating HTML cards
-function generateSystemColors(systemColorSet, elementID) {
-  if (logLevel > 2) console.table(systemColorSet);
-
-  for (const index of Object.keys(systemColorSet)) {
-    if (elementID === "syscolors-table") {
-      createColorRow(systemColorSet, index, "syscolors-table");
-    } else if (elementID === "syscolors-deprecated-table") {
-      createColorRow(systemColorSet, index, "syscolors-deprecated-table");
-    } else {
-      createColorCard(systemColorSet, index, elementID);
-    }
-  }
-  return systemColorSet;
 }
