@@ -1,7 +1,6 @@
-
-
 const classTable = {
     "grouped": [
+        // #region(collapsed)
         {
             "name": "Canvas",
             "description": "Application content or documents",
@@ -44,222 +43,160 @@ const classTable = {
             "description": "Selected text",
             "color": "HighlightText",
             "background-color": "Highlight"
+        },
+        {
+            "name": "Link",
+            "description": "Links",
+            "color": "LinkText", /* non-active, non-visited links */
+            "active-color": "ActiveText", /* active, non-visited links */
+            "visited-color": "VisitedText" /* visited links */
+        },
+        {
+            "name": "GrayText",
+            "description": "Disabled text",
+            "color": "GrayText"
         }
+        // #endregion
     ],
     "individual": [
+        // #region(collapsed)
         {
             "name": "Canvas",
-            "description": "Application content or documents",
-            "color": "CanvasText",
+            "description": "Background of application content or documents",
             "background-color": "Canvas"
         },
         {
+            "name": "CanvasText",
+            "description": "Text in application content or documents",
+            "color": "CanvasText"
+        },
+        {
             "name": "AccentColor",
-            "description": "Accented user interface controls",
-            "color": "AccentColorText",
+            "description": "Background of accented user interface controls",
             "background-color": "AccentColor"
         },
         {
+            "name": "AccentColorText",
+            "description": "Text of accented user interface controls",
+            "color": "AccentColorText"
+        },
+        {
             "name": "Field",
-            "description": "Input fields",
-            "color": "FieldText",
+            "description": "Background of input fields",
             "background-color": "Field"
         },
         {
-            "name": "Mark",
-            "description": "Text that has been specially marked (such as by the HTML mark element)",
-            "color": "MarkText",
-            "background-color": "Mark"
+            "name": "FieldText",
+            "description": "Text in input fields",
+            "color": "FieldText"
         },
         {
-            "name": "Button",
-            "description": "Push buttons",
-            "color": "ButtonText",
-            "background-color": "ButtonFace",
+            "name": "ButtonBorder",
+            "description": "The base border color for push buttons",
             "border-color": "ButtonBorder"
         },
         {
+            "name": "ButtonFace",
+            "description": "The face background color for push buttons",
+            "background-color": "ButtonFace"
+        },
+        {
+            "name": "ButtonText",
+            "description": "Text on push buttons",
+            "color": "ButtonText"
+        },
+        {
+            "name": "LinkText",
+            "description": "Text in non-active, non-visited links",
+            "color": "LinkText"
+        },
+        {
+            "name": "ActiveText",
+            "description": "Text in active links",
+            "color": "ActiveText"
+        },
+        {
+            "name": "VisitedText",
+            "description": "Text in visited links",
+            "color": "VisitedText"
+        },
+        {
+            "name": "GrayText",
+            "description": "Disabled text",
+            "color": "GrayText"
+        },
+        {
+            "name": "Mark",
+            "description": "Background of text that has been specially marked (such as by the HTML mark element)",
+            "background-color": "Mark",
+        },
+        {
+            "name": "MarkText",
+            "description": "Text of specially marked text",
+            "color": "MarkText"
+        },
+        {
             "name": "SelectedItem",
-            "description": "Selected items",
-            "color": "SelectedItemText",
+            "description": "Background of selected items",
             "background-color": "SelectedItem"
         },
         {
-            "name": "Selection",
-            "description": "Selected text",
-            "color": "HighlightText",
-            "background-color": "Highlight"
+            "name": "SelectedItemText",
+            "description": "Text of selected items",
+            "color": "SelectedItemText"
+        },
+        {
+            "name": "::Selection  NEEDS VERIFICATION!",
+            "description": "Background of selected text",
+            "background-color": "Highlight",
+            "color": "HighlightText"
+        },
+        {
+            "name": "Highlight",
+            "description": "Background of selected text",
+            "background-color": "Highlight",
+        },
+        {
+            "name": "HighlightText",
+            "description": "Text of selected text",
+            "color": "HighlightText"
         }
-    ]   
-#someID {
-        a: link {
-            /* non-active, non-visited links */
-            color: LinkText;
-    }
-a:visited {
-    /* visited links */
-    color: VisitedText;
-}
+        // #endregion
+    ]
+};
 
-/* NOTE: Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
-a:hover {
-  /* hovered links *
-  color: FocusText; /* Focused links color *
-}
-*/
-
-a:focus {
-    /* focused links */
-    color: ActiveText; /* BUG: no special color?*/
-}
-a:active {
-    /* active links */
-    color: ActiveText;
-}
-}
-  .GrayText {
-    /* disabled text */
-    color: GrayText;
-}
-]
-"IndividualColors": [  
-  
-  .system - Canvas {
-        /* Background of application content or documents */
-        background- color: Canvas;
-  }
-  
-  .system - CanvasText {
-        /* Text in application content or documents */
-        color: CanvasText;
-    }
-
-        /*********************************
-         * Input elements
-         */
-
-        .system - AccentColor {
-            /* Background of accented user interface controls */
-            background- color: AccentColor;
-  }
-  
-  .system - AccentColorText {
-        /* Text of accented user interface controls */
-        color: AccentColorText;
-    }
-
-        .system - Field {
-            /* Background of input fields */
-            background- color: Field;
-  }
-  
-  .system - FieldText {
-        /* Text in input fields */
-        color: FieldText;
-    }
-
-        /*********************************
-         * Button elements
-         */
-        .system - ButtonBorder {
-            /* The base border color for push buttons */
-            color: ButtonBorder;
-        }
-
-            .system - ButtonFace {
-                /* The face background color for push buttons */
-                background- color: ButtonFace;
-  }
-  
-  .system - ButtonText {
-        /* Text on push buttons */
-        color: ButtonText;
-    }
-
-        /*********************************
-         * Links
-         */
-
-        .system - LinkText {
-            /* Text in non-active, non-visited links. For light backgrounds, traditionally blue */
-            color: LinkText;
-        }
-
-            .system - ActiveText {
-                /* Text in active links. For light backgrounds, traditionally red */
-                color: ActiveText;
-            }
-
-                .system - VisitedText {
-                    /* Text in visited links. For light backgrounds, traditionally purple */
-                    color: VisitedText;
-                }
-
-                    /*********************************
-                     * Other miscellaneous
-                     */
-
-                    .system - GrayText {
-                        /* Disabled text (Often, but not necessarily, gray) */
-                        color: GrayText;
-                    }
-
-                        .system - Mark {
-                            /* Background of text that has been specially marked (such as by the HTML mark element) */
-                            background- color: Mark;
-  }
-  
-  .system - MarkText {
-        /* Text that has been specially marked (such as by the HTML mark element) */
-        color: MarkText;
-    }
-  
-  :: selection {
-        /* Text of selected text */
-        color: HighlightText;
-        /* Background of selected text, for example from : :selection */
-        background- color: Highlight;
-  }
-  
-  .system - SelectedItem {
-        /* Background of selected items, for example a selected checkbox */
-        background- color: SelectedItem;
-  }
-  
-  .system - SelectedItemText {
-        /* Text of selected items */
-        color: SelectedItemText;
-    }
-
-]
-    ;
-
-
-BuildGroupedCards(classTable.grouped);
-BuildIndividualCards(classTable.individual);
-
-function BuildGroupedCards(grouped) {
-    let container = document.getElementById('grouped');
+function BuildGroupedClassCards(grouped) {
+    let container = document.getElementById('syscolors-class-grouped');
     grouped.forEach(group => {
         let card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'syscolors-class-card';
+
+        let cell = `<span class="`;
+        cell += group['color'] ? ` color:${['group.color']}` : ``;
+        cell += group['background-color'] ? ` background-color:${group['background-color']}` : ``;
+        cell += group['border-color'] ? ` border-color:${group['border-color']}` : ``;
+        // "active-color": "ActiveText", /* active, non-visited links */
+        // "visited-color": "VisitedText" /* visited links */
+        cell += `">Some Text</span>`;
+
         card.innerHTML = `
-            <h2>${group.name}</h2>
-            <p>${group.description}</p>
-            <div class="color" style="background-color: ${group['background-color']}; color: ${group.color};">
-                <span>${group['background-color']}</span>
-                <span>${group.color}</span>
-            </div>
-        `;
+<div class="syscolors-row-text">
+  <span class="syscolors-category-span" className="Class">${group.name}</span>
+  <span class="syscolors-color-span"><strong>${group.name}</strong></span>
+  <span class="syscolors-desc-span"> &mdash; ${group.description} </span>
+</div>
+<div class="syscolors-row-light">${cell}</div>
+<div class="syscolors-row-dark Canvas">${cell}</div>`;
         container.appendChild(card);
     });
 }
 
-function BuildIndividualCards(individual) {
-    let container = document.getElementById('individual');
+
+function BuildIndividualClassCards(individual) {
+    let container = document.getElementById('syscolors-class-individual');
     individual.forEach(color => {
         let card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'syscolors-class-card';
         card.innerHTML = `
             <h2>${color.name}</h2>
             <p>${color.description}</p>

@@ -96,7 +96,9 @@ blockquote {
 #syscolors-table,
 #syscolors-deprecated-table,
 #syscolors-grid,
-#syscolors-deprecated-grid {
+#syscolors-deprecated-grid,
+#syscolors-class-grouped,
+#syscolors-class-individual {
   & > *,
   & > *:before,
   & > *:after {
@@ -207,7 +209,6 @@ https://www.w3docs.com/tools/code-editor/10122
   border: 10px solid green;
   background-color: aquamarine;
   width: 250px;
-
   color: red; /* title text */
 }
 

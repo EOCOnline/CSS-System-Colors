@@ -3,5 +3,75 @@
         "Hellooo",
         "jscolor",
         "syscolors"
-    ]
+    ],
+    "maptz.regionfolder": {
+        // https://marketplace.visualstudio.com/items?itemName=maptz.regionfolder
+        // https://github.com/maptz/maptz.vscode.extensions.customfolding
+        "[ahk]": { //Language selector -- see     maptz.vscode.extensions.customfolding/src/config/DefaultConfiguration.ts
+            "foldEnd": "; #endregion", //Text inserted at the end of the fold
+            "foldEndRegex": ";[\\s]*#endregion", //Regex used to find fold end text.
+            "foldStart": "; #region [NAME]", //Text inserted at the start of the fold.
+            //Use the `[NAME]` placeholder to indicate
+            //where the cursor should be placed after
+            //insertion
+            "foldStartRegex": ";[\\s]*#region[\\s]*(.*)", ////Regex used to find fold start text.
+            "disableFolding": false //Turn off #region folding for this language
+        },
+        "[markdown]": {
+            "defaultFoldStartRegex": "\\<!--[\\s]*#region\\(collapsed\\)[\\s]*(.*)",
+            "foldEnd": "<!-- #endregion -->",
+            "foldEndRegex": "\\<!--[\\s]*#endregion",
+            "foldStart": "<!-- #region [NAME] -->",
+            "foldStartRegex": "\\<!--[\\s]*#region[\\s]*(.*)"
+        },
+        "[javascript]": {
+            "foldEnd": "/* #endregion */",
+            "foldEndRegex": "/\\*[\\s]*#endregion",
+            "foldStart": "/* #region [NAME] */",
+            "foldStartRegex": "^[\\s]*/\\*[\\s]*#region[\\s]*(.*)[\\s]*\\*/[\\s]*$",
+            "defaultFoldStartRegex": "^[\\s]*/\\*[\\s]*#region[\\s]*default\\s(.*)[\\s]*\\*/[\\s]*$",
+            "foldDefinitions": [
+                {
+                    "foldEndRegex": "\\*+/[\\s]*$",
+                    "foldStartRegex": "^[\\s]*/\\*\\*+",
+                    "isFoldedByDefault": true
+                }
+            ]
+        },
+        "[typescript]": {
+            "foldEnd": "/* #endregion */",
+            "foldEndRegex": "/\\*[\\s]*#endregion",
+            "foldStart": "/* #region [NAME] */",
+            "foldStartRegex": "^[\\s]*/\\*[\\s]*#region[\\s]*(.*)[\\s]*\\*/[\\s]*$",
+            "defaultFoldStartRegex": "^[\\s]*/\\*[\\s]*#region[\\s]*default\\s(.*)[\\s]*\\*/[\\s]*$",
+            "foldDefinitions": [
+                {
+                    "foldEndRegex": "\\*+/[\\s]*$",
+                    "foldStartRegex": "^[\\s]*/\\*\\*+",
+                    "isFoldedByDefault": true
+                }
+            ]
+        },
+        "[csharp]": {
+            "foldEnd": "#endregion",
+            "foldEndRegex": "#[\\s]*endregion",
+            "foldStart": "#region [NAME]",
+            "foldStartRegex": "#[\\s]*region[\\s]*(.*)",
+            "defaultFoldStartRegex": "#[\\s]*region[\\s]*default[\\s]*(.*)"
+        },
+        "[cpp]": {
+            "foldEnd": "// #endregion",
+            "foldEndRegex": "//[\\s]*#endregion",
+            "foldStart": "// #region [NAME]",
+            "foldStartRegex": "//[\\s]*#region[\\s]*(.*)",
+            "defaultFoldStartRegex": "//[\\s]*#region[\\s]*default[\\s]*(.*)"
+        },
+        "[html]": {
+            "foldEnd": "<!-- #endregion -->",
+            "foldEndRegex": "\\<!--[\\s]*#endregion",
+            "foldStart": "<!-- #region [NAME] -->",
+            "foldStartRegex": "\\<!--[\\s]*#region[\\s]*(.*)",
+            "defaultFoldStartRegex": "\\<!--[\\s]*#region[\\s]*default[\\s]*(.*)"
+        },
+    }
 }

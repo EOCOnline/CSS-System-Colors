@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./css/css-system-demo.css" />
   <link rel="stylesheet" href="./css/css-system-grid.css" />
   <link rel="stylesheet" href="./css/css-system-table.css" />
-  <!--link rel="stylesheet" href="./css/css-system-classes.css" /-->
+  <link rel="stylesheet" href="./css/css-system-classes.css">
   <link rel="stylesheet" href="./css-system-colors.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
   <script src="./css-system-colors.js"></script>
   <script defer src="./js/css-system-helpers.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
-  <!--script defer src="./js/css-system-classes.js"></script-->
+  <script defer src="./js/css-system-classes.js"></script>
   <script defer src="./js/jscolor.js"></script> <!-- color picker from https://jscolor.com/ -->
 
 </head>
@@ -331,9 +331,10 @@
 
     <div id="syscolors-class-container" class="syscolors-inner-container">
       <!-- #region classes -->
-      <details>
+      <details open>
         <summary id="syscolors-class-title">System Color Class</summary>
-        <div id="syscolors-class">
+        <div id="syscolors-class-grouped">
+          <h2>System Color Grouped Classes</h2>
 
           <div class="syscolors-class-card syscolors-initial-card">
 
@@ -349,6 +350,23 @@
               <strong>This column displays colors in dark mode</strong>
             </div>
           </div>
+        </div>
+        <div id="syscolors-class-individual">
+          <h2>System Color Individual Classes</h2>
+          <div class="syscolors-class-card syscolors-initial-card">
+            <div class="syscolors-row-text">
+              <span class="syscolors-category-span" className="Class">Class Name</span>
+              <span class="syscolors-color-span"><strong>Color Class</strong></span>
+              <span class="syscolors-desc-span"> &mdash; Description </span>
+            </div>
+            <div class="syscolors-row-light">
+              <strong>This column displays colors in light mode</strong>
+            </div>
+            <div class="syscolors-row-dark Canvas">
+              <strong>This column displays colors in dark mode</strong>
+            </div>
+          </div>
+
         </div>
       </details>
       <!-- #endregion -->
