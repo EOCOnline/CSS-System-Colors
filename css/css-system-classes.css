@@ -28,7 +28,7 @@
     transform-origin: 0 0;
   }
 
-  .syscolors-row-text {
+  .syscolors-cell-text {
     border: 2px solid var(--borderColor);
     border-left: 30px solid var(--borderColor);
     border-radius: 0.5em;
@@ -58,17 +58,17 @@
     }
   }
 
-  .syscolors-row-light {
+  .syscolors-cell-light {
     color-scheme: light;
   }
 
-  .syscolors-row-dark {
+  .syscolors-cell-dark {
     color-scheme: dark;
   }
 
-  .syscolors-row-dark,
-  .syscolors-row-light {
-    border: 2px solid black;
+  .syscolors-cell-dark,
+  .syscolors-cell-light {
+    border: 5px solid;
     padding: 5px;
     margin-right: 1px;
     border-radius: 0.5em;

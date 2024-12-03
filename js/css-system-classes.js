@@ -172,21 +172,22 @@ function BuildGroupedClassCards(grouped) {
         card.className = 'syscolors-class-card';
 
         let cell = `<span class="`;
-        cell += group['color'] ? ` color:${['group.color']}` : ``;
-        cell += group['background-color'] ? ` background-color:${group['background-color']}` : ``;
-        cell += group['border-color'] ? ` border-color:${group['border-color']}` : ``;
+        cell += group['color'] ? ` color:${group['color']};` : ``;
+        cell += group['background-color'] ? ` background-color:${group['background-color']};` : ``;
+        cell += group['border-color'] ? ` border-color:red;` : ``;
+        //cell += group['border-color'] ? ` border-color:${group['border-color']};` : ``;
         // "active-color": "ActiveText", /* active, non-visited links */
         // "visited-color": "VisitedText" /* visited links */
         cell += `">Some Text</span>`;
 
         card.innerHTML = `
-<div class="syscolors-row-text">
+<div class="syscolors-cell-text">
   <span class="syscolors-category-span" className="Class">${group.name}</span>
   <span class="syscolors-color-span"><strong>${group.name}</strong></span>
   <span class="syscolors-desc-span"> &mdash; ${group.description} </span>
 </div>
-<div class="syscolors-row-light">${cell}</div>
-<div class="syscolors-row-dark Canvas">${cell}</div>`;
+<div class="syscolors-cell-light  ${group.name}">${cell}</div>
+<div class="syscolors-cell-dark  ${group.name}">${cell}</div>`;
         container.appendChild(card);
     });
 }

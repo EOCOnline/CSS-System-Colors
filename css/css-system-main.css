@@ -80,17 +80,6 @@ blockquote {
 }
 /* #endregion */
 
-/* #region Page Containers/Panels */
-/****************************************************************/
-#syscolors-container {
-  padding: 10px;
-  border: 1px solid CanvasText;
-  border-radius: 0.3em;
-  margin: 20px;
-  font-family: sans-serif;
-}
-/* #endregion */
-
 /* #region Styles used by multiple panels */
 /***********************************************/
 #syscolors-table,
@@ -187,58 +176,72 @@ blockquote {
 /************************************/
 #syscolors-options-container {
   font-weight: bold;
-}
 
-/*
+  /*
 https://bobbyhadz.com/blog/change-style-of-title-attribute-using-css
 https://www.w3docs.com/snippets/css/how-to-change-the-style-of-the-title-attribute-inside-an-anchor-tag.html
 https://www.w3docs.com/tools/code-editor/10122
 */
-#syscolors-options-container option {
-  font-size: 1.25em;
-  position: relative;
-  display: inline-block;
-}
+  option {
+    font-size: 1.25em;
+    position: relative;
+    display: inline-block;
+  }
 
-#BROKEN-syscolors-options-container option:hover::after {
-  content: attr(data-title);
-  position: absolute;
-  top: -1.5em;
-  left: 0;
-  z-index: 100;
-  border: 10px solid green;
-  background-color: aquamarine;
-  width: 250px;
-  color: red; /* title text */
-}
+  #BROKEN option:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    top: -1.5em;
+    left: 0;
+    z-index: 100;
+    border: 10px solid green;
+    background-color: aquamarine;
+    width: 250px;
+    color: red; /* title text */
+  }
 
-#syscolors-user-agent-div {
-  font-weight: normal;
-  font-size: 90%;
-  margin-top: 15px;
-}
+  #syscolors-user-agent-div {
+    font-weight: normal;
+    font-size: 90%;
+    margin-top: 15px;
+  }
 
-#syscolors-contrast {
-  width: 125px;
-  margin-bottom: -5px;
-}
+  #syscolors-contrast {
+    width: 125px;
+    margin-bottom: -5px;
+  }
 
-#syscolors-contrast-value {
-  display: inline-block;
-  /*background-color: #e5e5e5;
+  #syscolors-contrast-value {
+    display: inline-block;
+    /*background-color: #e5e5e5;
   border: #aaa 1px solid;*/
-  padding: 2px;
+    padding: 2px;
+  }
 }
 /* #endregion */
 
 /* #region(collapsed) Intro Panel */
 /************************************/
-#syscolors-intro {
+#syscolors-intro-container {
   img {
     max-width: 80%;
     border: 1px solid black;
     border-radius: 0.5em;
   }
+}
+
+#syscolors-intro-main {
+  padding-left: 1rem;
+}
+/* #endregion */
+
+/* #region(collapsed) Class Panels */
+/***********************************
+ * NOTE: see syscolors-class.css
+ */
+#syscolors-class-main {
+  padding: 0.5rem;
+  width: 90%;
 }
 /* #endregion */
 
