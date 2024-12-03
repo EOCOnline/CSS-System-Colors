@@ -1,6 +1,6 @@
+// This table should reflect (be derived from?!) css-system-colors.css
 const classTable = {
     "grouped": [
-        // #region(collapsed)
         {
             "name": "Canvas",
             "description": "Application content or documents",
@@ -56,175 +56,144 @@ const classTable = {
             "description": "Disabled text",
             "color": "GrayText"
         }
-        // #endregion
     ],
     "individual": [
-        // #region(collapsed)
         {
-            "name": "Canvas",
+            "name": "system-Canvas",
             "description": "Background of application content or documents",
             "background-color": "Canvas"
         },
         {
-            "name": "CanvasText",
+            "name": "system-CanvasText",
             "description": "Text in application content or documents",
             "color": "CanvasText"
         },
         {
-            "name": "AccentColor",
+            "name": "system-AccentColor",
             "description": "Background of accented user interface controls",
             "background-color": "AccentColor"
         },
         {
-            "name": "AccentColorText",
+            "name": "system-AccentColorText",
             "description": "Text of accented user interface controls",
             "color": "AccentColorText"
         },
         {
-            "name": "Field",
+            "name": "system-Field",
             "description": "Background of input fields",
             "background-color": "Field"
         },
         {
-            "name": "FieldText",
+            "name": "system-FieldText",
             "description": "Text in input fields",
             "color": "FieldText"
         },
         {
-            "name": "ButtonBorder",
+            "name": "system-ButtonBorder",
             "description": "The base border color for push buttons",
             "border-color": "ButtonBorder"
         },
         {
-            "name": "ButtonFace",
+            "name": "system-ButtonFace",
             "description": "The face background color for push buttons",
             "background-color": "ButtonFace"
         },
         {
-            "name": "ButtonText",
+            "name": "system-ButtonText",
             "description": "Text on push buttons",
             "color": "ButtonText"
         },
         {
-            "name": "LinkText",
+            "name": "system-LinkText",
             "description": "Text in non-active, non-visited links",
             "color": "LinkText"
         },
         {
-            "name": "ActiveText",
+            "name": "system-ActiveText",
             "description": "Text in active links",
             "color": "ActiveText"
         },
         {
-            "name": "VisitedText",
+            "name": "system-VisitedText",
             "description": "Text in visited links",
             "color": "VisitedText"
         },
         {
-            "name": "GrayText",
+            "name": "system-GrayText",
             "description": "Disabled text",
             "color": "GrayText"
         },
         {
-            "name": "Mark",
+            "name": "system-Mark",
             "description": "Background of text that has been specially marked (such as by the HTML mark element)",
             "background-color": "Mark",
         },
         {
-            "name": "MarkText",
+            "name": "system-MarkText",
             "description": "Text of specially marked text",
             "color": "MarkText"
         },
         {
-            "name": "SelectedItem",
+            "name": "system-SelectedItem",
             "description": "Background of selected items",
             "background-color": "SelectedItem"
         },
         {
-            "name": "SelectedItemText",
+            "name": "system-SelectedItemText",
             "description": "Text of selected items",
             "color": "SelectedItemText"
         },
         {
-            "name": "::Selection  NEEDS VERIFICATION!",
+            "name": "system-::Selection  NEEDS VERIFICATION!",
             "description": "Background of selected text",
             "background-color": "Highlight",
             "color": "HighlightText"
         },
         {
-            "name": "Highlight",
+            "name": "system-Highlight",
             "description": "Background of selected text",
             "background-color": "Highlight",
         },
         {
-            "name": "HighlightText",
+            "name": "system-HighlightText",
             "description": "Text of selected text",
             "color": "HighlightText"
         }
-        // #endregion
     ]
 };
 
-function BuildGroupedClassCards(grouped) {
-    let container = document.getElementById('syscolors-class-grouped');
-    grouped.forEach(group => {
+function BuildClassCards() {
+    let container = document.getElementById(`syscolors-class-grouped`);
+    GenerateClassCards(container, classTable.grouped);
+    container = document.getElementById(`syscolors-class-individual`);
+    GenerateClassCards(container, classTable.individual);
+}
+
+function GenerateClassCards(container, segment) {
+    segment.forEach(group => {
+
+        let prettyClassName = group.name;
+        if (group.name.startsWith("system-")) {
+            prettyClassName = "system-<br/>" + group.name.replace("system-", "");
+        }
+
+        let styles = group['color'] ? `color:<b>${group['color']}</b>` : ``;
+        styles += group['background-color'] ? `<br/>background-color:<b>${group['background-color']}</b>` : ``;
+        styles += group['border-color'] ? `<br/>border-color:<b>${group['border-color']}</b>` : ``;
+        styles += group['active-color'] ? `<br/>active-color:<b>${group['active-color']}</b>` : ``;
+        styles += group['visited-color'] ? `<br/>visited-color:<b>${group['visited-color']}</b>` : ``;
+
         let card = document.createElement('div');
-        card.className = 'syscolors-class-card';
-
-        let styles = group['color'] ? `color:<b>${group['color']}</b><br/>` : ``;
-        styles += group['background-color'] ? `background-color:<b>${group['background-color']}</b><br/>` : ``;
-        styles += group['border-color'] ? `border-color:<b>${group['border-color']}</b><br/>` : ``;
-        styles += group['active-color'] ? `active-color:<b>${group['active-color']}</b><br/>` : ``;
-        styles += group['visited-color'] ? `visited-color:<b>${group['visited-color']}</b>` : ``;
-
+        card.className = `syscolors-class-card ${group.name}`;
         card.innerHTML = `
 <div class="syscolors-cell-text">
-  <span class="syscolors-category-span" className="Class">${group.name}</span>
+<!-- className="Class" -->
+  <span class="syscolors-category-span">${prettyClassName}</span>
   <!--span class="syscolors-name-span"><strong>${group.name}</strong> &mdash; </span-->
   <span class="syscolors-desc-span">${group.description}</span>
- 
 </div>
 <div class="syscolors-cell-light  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>
 <div class="syscolors-cell-dark  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>`;
         container.appendChild(card);
     });
 }
-
-
-function BuildIndividualClassCards(individual) {
-    let container = document.getElementById('syscolors-class-individual');
-    individual.forEach(color => {
-        let card = document.createElement('div');
-        card.className = 'syscolors-class-card';
-
-        let cell = `<span class = " `;
-        cell += group['color'] ? `${group['color']} ` : ``;
-        cell += group['background-color'] ? `${group['background-color']} ` : ``;
-        cell += group['border-color'] ? `${group['border-color']} ` : ``;
-        // "active-color": "ActiveText", /* active, non-visited links */
-        // "visited-color": "VisitedText" /* visited links */
-        cell += `">Some Text</span>`;
-
-        card.innerHTML = `
-<div class="syscolors-cell-text">
-  <span class="syscolors-category-span" className="Class">${group.name}</span>
-  <span class="syscolors-color-span"><strong>${group.name}</strong></span>
-  <span class="syscolors-desc-span"> &mdash; ${group.description} </span>
-</div>
-<div class="syscolors-cell-light  ${group.name}">${cell}</div>
-<div class="syscolors-cell-dark  ${group.name}">${cell}</div>`;
-
-        /*
-            card.innerHTML = `
-                <h2>${color.name}</h2>
-                <p>${color.description}</p>
-                <div class="color" style="background-color: ${color['background-color']}; color: ${color.color};">
-                    <span>${color['background-color']}</span>
-                    <span>${color.color}</span>
-                </div>
-            `;
-            container.appendChild(card);
-        */
-    });
-}
-

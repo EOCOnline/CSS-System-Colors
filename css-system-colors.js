@@ -17,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // reload page every 5 seconds while editing/debugging
   // use instead: <meta http-equiv="refresh" content="5"> in the head section
 
-  BuildGroupedClassCards(classTable.grouped);
-  BuildIndividualClassCards(classTable.individual);
+  BuildClassCards();
 
   contrastValueId = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");

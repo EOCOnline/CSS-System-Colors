@@ -343,7 +343,10 @@
             'css-system-colors.css' & available for your use. The 'grouped' classes contain
             multiple styles designed to be used together: generally pairs of text and
             background colors. The 'individual' classes gives finer grained control if you desire to
-            specify the standard styles independently.</div>
+            specify the standard styles independently. Independent classes in `css-system-colors.css`
+            all are preceded by `system-` to avoid conflicting with those of the same name from
+            the grouped classes.
+          </div>
 
           <div id="syscolors-class-grouped">
             <h2>System Color Grouped Classes</h2>
@@ -355,24 +358,26 @@
                 <span class="syscolors-desc-span">Class Description</span>
               </div>
               <div class="syscolors-cell-light">These cells display the classes actual styles in light mode</div>
-              <div class="syscolors-cell-dark Canvas">These cells display the classes actual styles in dark mode</div>
+              <div class="syscolors-cell-dark Canvas">These cells display the classes' actual styles in dark mode</div>
             </div>
+          </div>
 
-            <div id="syscolors-class-individual">
-              <h2>System Color Individual Classes</h2>
+          <div id="syscolors-class-individual">
+            <h2>System Color Individual Classes</h2>
 
-              <div class="syscolors-class-card syscolors-initial-card">
-                <div class="syscolors-cell-text">
-                  <span class="syscolors-category-span" className="Class">Class Name</span>
-                  <!--span class="syscolors-name-span"><strong>Color Class</strong> &mdash;</span-->
-                  <span class="syscolors-desc-span">Class Description</span>
-                </div>
-                <div class="syscolors-cell-light">These cells display the classes actual styles in light mode</div>
-                <div class="syscolors-cell-dark Canvas">These cells display the classes actual styles in dark mode</div>
+            <div class="syscolors-class-card syscolors-initial-card">
+              <div class="syscolors-cell-text">
+                <span class="syscolors-category-span" className="Class">Class Name</span>
+                <!--span class="syscolors-name-span"><strong>Color Class</strong> &mdash;</span-->
+                <span class="syscolors-desc-span">Class Description</span>
+              </div>
+              <div class="syscolors-cell-light">These cells display the classes actual styles in light mode</div>
+              <div class="syscolors-cell-dark Canvas">These cells display the classes' actual styles in dark mode
               </div>
             </div>
-
           </div>
+
+        </div>
       </details>
       <!-- #endregion -->
     </div>
