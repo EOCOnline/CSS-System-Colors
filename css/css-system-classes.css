@@ -51,11 +51,10 @@
       font-size: 90%;
       font-weight: 500;
     }
+  }
 
-    .syscolors-color-span {
-      font-size: 90%;
-      font-weight: 500;
-    }
+  .syscolors-details-span {
+    padding: 0;
   }
 
   .syscolors-cell-light {
@@ -71,8 +70,9 @@
     border: 5px solid;
     padding: 5px;
     margin-right: 1px;
+    font-size: smaller;
     border-radius: 0.5em;
     height: var(--rowHeight);
-    width: 150px;
+    width: 275px;
   }
 }

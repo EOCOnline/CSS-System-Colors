@@ -171,11 +171,36 @@ function BuildGroupedClassCards(grouped) {
         let card = document.createElement('div');
         card.className = 'syscolors-class-card';
 
-        let cell = `<span class="`;
-        cell += group['color'] ? ` color:${group['color']};` : ``;
-        cell += group['background-color'] ? ` background-color:${group['background-color']};` : ``;
-        cell += group['border-color'] ? ` border-color:red;` : ``;
-        //cell += group['border-color'] ? ` border-color:${group['border-color']};` : ``;
+        let styles = group['color'] ? `color:<b>${group['color']}</b><br/>` : ``;
+        styles += group['background-color'] ? `background-color:<b>${group['background-color']}</b><br/>` : ``;
+        styles += group['border-color'] ? `border-color:<b>${group['border-color']}</b><br/>` : ``;
+        styles += group['active-color'] ? `active-color:<b>${group['active-color']}</b><br/>` : ``;
+        styles += group['visited-color'] ? `visited-color:<b>${group['visited-color']}</b>` : ``;
+
+        card.innerHTML = `
+<div class="syscolors-cell-text">
+  <span class="syscolors-category-span" className="Class">${group.name}</span>
+  <!--span class="syscolors-name-span"><strong>${group.name}</strong> &mdash; </span-->
+  <span class="syscolors-desc-span">${group.description}</span>
+ 
+</div>
+<div class="syscolors-cell-light  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>
+<div class="syscolors-cell-dark  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>`;
+        container.appendChild(card);
+    });
+}
+
+
+function BuildIndividualClassCards(individual) {
+    let container = document.getElementById('syscolors-class-individual');
+    individual.forEach(color => {
+        let card = document.createElement('div');
+        card.className = 'syscolors-class-card';
+
+        let cell = `<span class = " `;
+        cell += group['color'] ? `${group['color']} ` : ``;
+        cell += group['background-color'] ? `${group['background-color']} ` : ``;
+        cell += group['border-color'] ? `${group['border-color']} ` : ``;
         // "active-color": "ActiveText", /* active, non-visited links */
         // "visited-color": "VisitedText" /* visited links */
         cell += `">Some Text</span>`;
@@ -188,25 +213,18 @@ function BuildGroupedClassCards(grouped) {
 </div>
 <div class="syscolors-cell-light  ${group.name}">${cell}</div>
 <div class="syscolors-cell-dark  ${group.name}">${cell}</div>`;
-        container.appendChild(card);
-    });
-}
 
-
-function BuildIndividualClassCards(individual) {
-    let container = document.getElementById('syscolors-class-individual');
-    individual.forEach(color => {
-        let card = document.createElement('div');
-        card.className = 'syscolors-class-card';
-        card.innerHTML = `
-            <h2>${color.name}</h2>
-            <p>${color.description}</p>
-            <div class="color" style="background-color: ${color['background-color']}; color: ${color.color};">
-                <span>${color['background-color']}</span>
-                <span>${color.color}</span>
-            </div>
-        `;
-        container.appendChild(card);
+        /*
+            card.innerHTML = `
+                <h2>${color.name}</h2>
+                <p>${color.description}</p>
+                <div class="color" style="background-color: ${color['background-color']}; color: ${color.color};">
+                    <span>${color['background-color']}</span>
+                    <span>${color.color}</span>
+                </div>
+            `;
+            container.appendChild(card);
+        */
     });
 }
 
