@@ -361,17 +361,7 @@
             individual colors in each category. As an alternative, the 'css-system-colors.css' file provides handy
             classes allowing one to simply assign a class to an HTML element without complicating CSS files. Easy Peasy!
           </div>
-          <div>The following cards display & demonstrate the styles included in each category's class. There are two
-            sets of classes in the file:
-            <ul>
-              <li>'Grouped Classes' contain multiple styles designed to be used together: generally pairs of text and
-                background colors.</li>
-              <li>'Individual Classes' give finer grained control if you desire to specify the standard styles
-                independently.</li>
-            </ul>
-            (Independent classes in `css-system-colors.css` all are preceded by `system-` to avoid
-            conflicting with those of the same name from the grouped classes.)
-          </div>
+          <div>The following cards display & demonstrate the styles included in each category's class.</div>
 
           <div id="syscolors-class-grouped">
             <h2>System Color Grouped Classes</h2>
@@ -391,6 +381,13 @@
             <summary>
               System Color Individual Classes
             </summary>
+            <div>In practice, authors may desire finer-grained control and
+              to specify text and background colors independently. If so,
+              these 'Individual Classes' allow you to still assign classes, without explicit style statements.
+              (Independent classes in `css-system-colors.css` all are preceded by `system-` to avoid
+              conflicting with those of the same name from the grouped classes.)
+            </div>
+
             <div id="syscolors-class-individual">
               <div class="syscolors-class-card syscolors-initial-card">
                 <div class="syscolors-cell-text">
@@ -417,7 +414,11 @@
     <!-- #region(collapsed) table -->
     <details open>
       <summary id="syscolors-table-title">System Color Table</summary>
-      <div id="syscolors-table">
+      <div id="syscolors-table">These cards list each system color from the standard & its description. It then
+        provides two cells that show the actual color (as chosen by the browser) for 'light' and 'dark' color modes. It
+        also provides the actual color in RGB and Hex notation. (Note that some colors have some level of opacity so are
+        reported in the RGBA format.) Hovering over each card displays the same text as in the card, and allows copying
+        it to your clipboard if desired.
 
         <div class="syscolors-row-card syscolors-initial-card">
           <div class="syscolors-row-text">
@@ -443,7 +444,12 @@
     <details>
       <summary id="syscolors-grid-title">System Colors Grid</summary>
 
-      <div id="syscolors-grid">
+      <div id="syscolors-grid">Similar to the table display above,
+        these cards are just organized into separate panels for
+        light & dark modes. The colors and values in these 'grids'
+        should match those in the 'tables'. Note that there is a
+        "Download JSON" button to allow downloading the colors
+        this browser & OS actually rendered.<br /><br />
         <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
           <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
           </h2>
