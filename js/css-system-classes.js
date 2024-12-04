@@ -183,6 +183,13 @@ function GenerateClassCards(container, segment) {
         styles += group['active-color'] ? `<br/>active-color:<b>${group['active-color']}</b>` : ``;
         styles += group['visited-color'] ? `<br/>visited-color:<b>${group['visited-color']}</b>` : ``;
 
+        let contrastText = "";
+        if ((group.name == "system-Canvas") ||
+            (group.name == "system-Field") ||
+            (group.name == "system-ButtonFace")) {
+            // ensure that the color is visible on the background
+            contrastText = `system-CanvasText`;
+        }
         let card = document.createElement('div');
         card.className = `syscolors-class-card ${group.name}`;
         card.innerHTML = `
@@ -192,8 +199,11 @@ function GenerateClassCards(container, segment) {
   <!--span class="syscolors-name-span"><strong>${group.name}</strong> &mdash; </span-->
   <span class="syscolors-desc-span">${group.description}</span>
 </div>
-<div class="syscolors-cell-light  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>
-<div class="syscolors-cell-dark  ${group.name}"><span class="syscolors-details-span">${styles}</span></div>`;
+<div class="syscolors-cell-light  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>
+<div class="syscolors-cell-dark  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>`;
         container.appendChild(card);
     });
 }
+
+//header.textclip
+//	h2(contentEditable='true' role='textbox' aria-multiline='true') And stay alive

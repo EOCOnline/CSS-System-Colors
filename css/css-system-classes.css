@@ -28,20 +28,27 @@
     transform-origin: 0 0;
   }
 
-  .syscolors-cell-text {
-    border: 2px solid var(--borderColor);
-    border-left: 30px solid var(--borderColor);
+  .syscolors-cell-text,
+  .syscolors-cell-dark,
+  .syscolors-cell-light {
     border-radius: 0.5em;
-
-    position: relative;
-    font-size: small;
-    display: inline-block;
-
+    height: calc(var(--rowHeight) + 10px);
     padding: 5px;
     margin-right: 1px;
+    border: 2px solid;
+
+    filter: drop-shadow(2px 2px 3px gray);
+    text-shadow: 1px 1px Canvas;
+  }
+
+  .syscolors-cell-text {
+    border-color: var(--borderColor);
+    border-left: 30px solid var(--borderColor);
+    position: relative;
+    display: inline-block;
+    font-size: small;
 
     width: 200px;
-    height: var(--rowHeight);
 
     .syscolors-name-span {
       font-weight: bold;
@@ -54,8 +61,15 @@
     }
   }
 
-  .syscolors-details-span {
-    padding: 0;
+  .syscolors-cell-dark,
+  .syscolors-cell-light {
+    font-size: smaller;
+
+    width: 300px;
+
+    .syscolors-details-span {
+      padding: 0;
+    }
   }
 
   .syscolors-cell-light {
@@ -65,15 +79,7 @@
   .syscolors-cell-dark {
     color-scheme: dark;
   }
-
-  .syscolors-cell-dark,
-  .syscolors-cell-light {
-    border: 2px solid;
-    padding: 5px;
-    margin-right: 1px;
-    font-size: smaller;
-    border-radius: 0.5em;
-    height: calc(var(--rowHeight) + 10px);
-    width: 300px;
-  }
 }
+
+/*  https://codepen.io/thebabydino/pen/JNWqLL
+    https://css-tricks.com/methods-contrasting-text-backgrounds/ */
