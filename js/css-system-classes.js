@@ -165,8 +165,13 @@ const classTable = {
 function BuildClassCards() {
     let container = document.getElementById(`syscolors-class-grouped`);
     GenerateClassCards(container, classTable.grouped);
-    container = document.getElementById(`syscolors-class-individual`);
-    GenerateClassCards(container, classTable.individual);
+    //container = document.getElementById(`syscolors-class-individual`);
+    //GenerateClassCards(container, classTable.individual);
+
+    classTable.individual.forEach(group => {
+        document.getElementById(`syscolors-class-individual`).appendChild(
+            GenerateClassCard(group));
+    });
 }
 
 function GenerateClassCards(container, segment) {
@@ -205,5 +210,36 @@ function GenerateClassCards(container, segment) {
     });
 }
 
-//header.textclip
-//	h2(contentEditable='true' role='textbox' aria-multiline='true') And stay alive
+function GenerateClassCard(group) {
+    let prettyClassName = group.name;
+    if (group.name.startsWith("system-")) {
+        prettyClassName = "system-<br/>" + group.name.replace("system-", "");
+    }
+
+    let styles = group['color'] ? `color:<b>${group['color']}</b>` : ``;
+    styles += group['background-color'] ? `<br/>background-color:<b>${group['background-color']}</b>` : ``;
+    styles += group['border-color'] ? `<br/>border-color:<b>${group['border-color']}</b>` : ``;
+    styles += group['active-color'] ? `<br/>active-color:<b>${group['active-color']}</b>` : ``;
+    styles += group['visited-color'] ? `<br/>visited-color:<b>${group['visited-color']}</b>` : ``;
+
+    // make text visible on dark backgrounds
+    let contrastText = "";
+    if ((group.name == "system-Canvas") ||
+        (group.name == "system-Field") ||
+        (group.name == "system-ButtonFace")) {
+        contrastText = `system-CanvasText`;
+    }
+
+    let card = document.createElement('div');
+    card.className = `syscolors-class-card ${group.name}`;
+    card.innerHTML = `
+<div class="syscolors-cell-text">
+<!-- className="Class" -->
+  <span class="syscolors-category-span">${prettyClassName}</span>
+  <!--span class="syscolors-name-span"><strong>${group.name}</strong> &mdash; </span-->
+  <span class="syscolors-desc-span">${group.description}</span>
+</div>
+<div class="syscolors-cell-light  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>
+<div class="syscolors-cell-dark  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>`;
+    return card;
+}

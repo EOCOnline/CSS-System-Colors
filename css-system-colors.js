@@ -17,25 +17,15 @@ document.addEventListener("DOMContentLoaded", function () {
   //if (logLevel > 2) setTimeout(() => { document.location.reload(); }, 5 * 1000); // reload page every 5 seconds while editing/debugging
   // use instead: <meta http-equiv="refresh" content="5"> in the head section
 
-  BuildClassCards();
-
   contrastValueId = document.getElementById('syscolors-contrast-value');
   syscolorsContrast = document.getElementById("syscolors-contrast");
   syscolorsContainer = document.getElementById("syscolors-outer-container");
   updateContrast({ value: 97.5 });
 
-  cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
-  const hueSlider = document.querySelector('#hueSlider');
-  const hueDemo = document.querySelector("#syscolors-hue-demo")
-  hueSlider.addEventListener("input", () => {
-    hueDemo.style.setProperty("--hue", hueSlider.value);
-    document.querySelectorAll(".hueValue").forEach((element) => {
-      element.innerText = hueSlider.value;
-    });
-    if (logLevel > 2) console.log("hueSlider.value set to " + hueSlider.value);
-  });
-
-  doTableGrids();
+  BuildClassCards();
+  BuildDemoPanels();
+  BuildHuePanel();
+  BuildTablesAndGrids();
 });
 
 /**
@@ -272,7 +262,7 @@ let systemColorsJson =
  * Create the System Colors panels (both tables & grids)
  */
 
-function doDemo() {
+function BuildDemoPanels() {
   cloneLightPanel("syscolors-demo-light", "syscolors-demo-dark", "H3 .syscolors-demo-mode");
   document.getElementById("syscolors-demo-light").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?v=" + new Date().getTime();
   document.getElementById("syscolors-demo-dark").getElementsByClassName("uniqueUrl")[0].href = "https://eoc.online/?d=" + new Date().getTime();
@@ -280,11 +270,24 @@ function doDemo() {
 }
 
 
+function BuildHuePanel() {
+  cloneLightPanel("syscolors-hue-light", "syscolors-hue-dark", "H3 .syscolors-hue-mode");
+  const hueSlider = document.querySelector('#hueSlider');
+  const hueDemo = document.querySelector("#syscolors-hue-demo")
+  hueSlider.addEventListener("input", () => {
+    hueDemo.style.setProperty("--hue", hueSlider.value);
+    document.querySelectorAll(".hueValue").forEach((element) => {
+      element.innerText = hueSlider.value;
+    });
+    if (logLevel > 2) console.log("hueSlider.value set to " + hueSlider.value);
+  });
+}
+
 // This preserves JSON data - with RGBA values - for downloading
 let downloadableJson; // = { "info": {}, "currentColors": [], "deprecatedColors": [] };
 
 // Also called after resetWebPage: i.e., changing sort order/color mode
-function doTableGrids() {
+function BuildTablesAndGrids() {
   downloadableJson = structuredClone(systemColorsJson);
   downloadableJson.info.timeStamp = new Date().toLocaleString();
   downloadableJson.info.userAgent = navigator.userAgent;

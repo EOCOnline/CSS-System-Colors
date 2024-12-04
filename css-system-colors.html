@@ -337,15 +337,40 @@
       <!-- #region classes -->
       <details open>
 
-        <summary>System Color Classes</summary>
+        <summary>System Color Categories</summary>
         <div id="syscolors-class-main">
-          <div>These illustrate the two types of class definitions contained in
-            'css-system-colors.css' & available for your use. The 'grouped' classes contain
-            multiple styles designed to be used together: generally pairs of text and
-            background colors. The 'individual' classes gives finer grained control if you desire to
-            specify the standard styles independently. Independent classes in `css-system-colors.css`
-            all are preceded by `system-` to avoid conflicting with those of the same name from
-            the grouped classes.
+          <div>The CSS System Color standard tacitly defines color 'categories' - and for each a brief description:
+            <ul>
+              <li>Accent - accented user interface controls</li>
+              <li>Canvas - application content or documents</li>
+              <li>Field - input fields</li>
+              <li>Mark - specially marked with the <code>&lt;mark&gt;</code> tag</li>
+              <li>GrayText - disabled text</li>
+              <li>Button - push buttons</li>
+              <li>Link - hyperlinks</li>
+              <li>Highlight - text of selected text</li>
+              <li>Selection - selected items</li>
+            </ul>
+            Each 'category' generally defines a text color and a background color that will display together well. (A
+            few
+            categories have additional colors.) The benefit is that these colors are provided by the system (i.e.,
+            browser & OS) so authors don't need to specify exact colors or worry about how they work in light
+            or dark mode, or with each other. Its one less thing to do!
+          </div>
+          <div>Currently a developer/designer must specify explicit style statements calling for each of the standard's
+            individual colors in each category. As an alternative, the 'css-system-colors.css' file provides handy
+            classes allowing one to simply assign a class to an HTML element without complicating CSS files. Easy Peasy!
+          </div>
+          <div>The following cards display & demonstrate the styles included in each category's class. There are two
+            sets of classes in the file:
+            <ul>
+              <li>'Grouped Classes' contain multiple styles designed to be used together: generally pairs of text and
+                background colors.</li>
+              <li>'Individual Classes' give finer grained control if you desire to specify the standard styles
+                independently.</li>
+            </ul>
+            (Independent classes in `css-system-colors.css` all are preceded by `system-` to avoid
+            conflicting with those of the same name from the grouped classes.)
           </div>
 
           <div id="syscolors-class-grouped">
@@ -362,133 +387,139 @@
             </div>
           </div>
 
-          <div id="syscolors-class-individual">
-            <h2>System Color Individual Classes</h2>
-
-            <div class="syscolors-class-card syscolors-initial-card">
-              <div class="syscolors-cell-text">
-                <span class="syscolors-category-span" className="Class">Class Name</span>
-                <!--span class="syscolors-name-span"><strong>Color Class</strong> &mdash;</span-->
-                <span class="syscolors-desc-span">Class Description</span>
+          <details>
+            <summary>
+              System Color Individual Classes
+            </summary>
+            <div id="syscolors-class-individual">
+              <div class="syscolors-class-card syscolors-initial-card">
+                <div class="syscolors-cell-text">
+                  <span class="syscolors-category-span" className="Class">Class Name</span>
+                  <!--span class="syscolors-name-span"><strong>Color Class</strong> &mdash;</span-->
+                  <span class="syscolors-desc-span">Class Description</span>
+                </div>
+                <div class="syscolors-cell-light">These cells display the classes actual styles in light mode</div>
+                <div class="syscolors-cell-dark Canvas">These cells display the classes' actual styles in dark mode
+                </div>
               </div>
-              <div class="syscolors-cell-light">These cells display the classes actual styles in light mode</div>
-              <div class="syscolors-cell-dark Canvas">These cells display the classes' actual styles in dark mode
-              </div>
             </div>
-          </div>
-
-        </div>
-      </details>
-      <!-- #endregion -->
-    </div>
-
-    <div id="syscolors-table-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) table -->
-      <details>
-        <summary id="syscolors-table-title">System Color Table</summary>
-        <div id="syscolors-table">
-
-          <div class="syscolors-row-card syscolors-initial-card">
-            <div class="syscolors-row-text">
-              <span class="syscolors-category-span" category="category">Category</span>
-              <span class="syscolors-color-span"><strong>System Color</strong></span>
-              <span class="syscolors-desc-span"> &mdash; Description </span>
-            </div>
-            <div class="syscolors-row-light ">
-              <strong>This column displays colors in light mode</strong>
-            </div>
-            <div class="syscolors-row-dark Canvas">
-              <strong>This column displays colors in dark mode</strong>
-            </div>
-          </div>
         </div>
 
-      </details>
-      <!-- #endregion -->
     </div>
 
-    <div id="syscolors-grid-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) grid -->
-      <details open>
-        <summary id="syscolors-grid-title">System Colors Grid</summary>
+    </details>
+  </div>
+  </details>
+  <!-- #endregion -->
+  </div>
 
-        <div id="syscolors-grid">
-          <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
-            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
-            </h2>
-            <div class="syscolors-break"></div>
+  <div id="syscolors-table-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) table -->
+    <details open>
+      <summary id="syscolors-table-title">System Color Table</summary>
+      <div id="syscolors-table">
+
+        <div class="syscolors-row-card syscolors-initial-card">
+          <div class="syscolors-row-text">
+            <span class="syscolors-category-span" category="category">Category</span>
+            <span class="syscolors-color-span"><strong>System Color</strong></span>
+            <span class="syscolors-desc-span"> &mdash; Description </span>
           </div>
-          <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
-            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Dark Color Mode
-            </h2>
-            <div class="syscolors-break  syscolors-preserve"></div>
+          <div class="syscolors-row-light ">
+            <strong>This column displays colors in light mode</strong>
+          </div>
+          <div class="syscolors-row-dark Canvas">
+            <strong>This column displays colors in dark mode</strong>
           </div>
         </div>
+      </div>
 
-        <button class="btn" id="syscolors-download-current" style="cursor: pointer"
-          title="Download JSON file with RGBA values" onclick="downloadColors()">
-          Download JSON
-        </button>
-      </details>
-      <!-- #endregion -->
-    </div>
+    </details>
+    <!-- #endregion -->
+  </div>
 
-    <div id="syscolors-demo-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) demo -->
-      <details>
-        <summary>System Color Website & Form Example</summary>
-        <div id="syscolors-demo">
-          <div id="syscolors-demo-light" class="syscolors-inner-container">
-            <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
+  <div id="syscolors-grid-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) grid -->
+    <details>
+      <summary id="syscolors-grid-title">System Colors Grid</summary>
 
-            <div class="myWebSite" id="idLightWebSite">
-              <header>
-                <a id="idLightHome"></a>
-                <h1>A Swell Website <code>h1</code></h1>
-                <nav>
-                  <ul>
-                    <li><a href="#idLightHome" class="active">Home</a></li>
-                    <li><a href="#idLightColorPaletee">Color Palette</a></li>
-                    <li><a href="#idLightBlog">Blog</a></li>
-                    <li><a href="#idLightAboutUs">About Us</a></li>
-                  </ul>
-                </nav>
-              </header>
+      <div id="syscolors-grid">
+        <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
+          <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
+          </h2>
+          <div class="syscolors-break"></div>
+        </div>
+        <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
+          <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Dark Color Mode
+          </h2>
+          <div class="syscolors-break  syscolors-preserve"></div>
+        </div>
+      </div>
 
-              <main>
+      <button class="btn" id="syscolors-download-current" style="cursor: pointer"
+        title="Download JSON file with RGBA values" onclick="downloadColors()">
+        Download JSON
+      </button>
+    </details>
+    <!-- #endregion -->
+  </div>
 
-                <h3>Our Color Palette <code>h3</code></h3>
-                <section>
-                  <a id="idLightColorPalette"></a>
-                  <div>The CSS System Colors provide a very limited palette. Use it for your own site by
-                    copying the sample code below, and possibly by adopting our `css-system-colors.css`
-                    file which sets up two sets of useful classes for you.
-                    <br />
-                    <br />
-                    It is <a href="https://web.dev/articles/prefers-color-scheme" target="_blank">easy to
-                      extend them</a> with your
-                    <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">own scheme</a> that
-                    adds additional accent colors. This micro-site uses only two:
-                    <ol>
-                      <li>Primary: used for headings (except h1)</li>
-                      <li>Contrast: used for h1, nav bar, footer, code (blocks), left margin of block quotes </li>
-                    </ol>
-                    (We could use color-mix in the future.) Click to change either color:
-                    <div class="colorPalette">
-                      <div class="primary">
-                        <button id="idLightPrimary" class="picker" data-jscolor="{}">Primary</button>
-                      </div>
-                      <div class="contrast">
-                        <button id="idLightContrast" class="picker" data-jscolor="{}">Contrast</button>
-                      </div>
+  <div id="syscolors-demo-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) demo -->
+    <details open>
+      <summary>System Color Website & Form Example</summary>
+      <div id="syscolors-demo" open>
+        <div id="syscolors-demo-light" class="syscolors-inner-container">
+          <h3>Demo Page: <span class="syscolors-demo-mode"></span> Color Mode</h3>
+
+          <div class="myWebSite" id="idLightWebSite">
+            <header>
+              <a id="idLightHome"></a>
+              <h1>A Swell Website <code>h1</code></h1>
+              <nav>
+                <ul>
+                  <li><a href="#idLightHome" class="active">Home</a></li>
+                  <li><a href="#idLightColorPaletee">Color Palette</a></li>
+                  <li><a href="#idLightBlog">Blog</a></li>
+                  <li><a href="#idLightAboutUs">About Us</a></li>
+                </ul>
+              </nav>
+            </header>
+
+            <main>
+
+              <h3>Our Color Palette <code>h3</code></h3>
+              <section>
+                <a id="idLightColorPalette"></a>
+                <div>The CSS System Colors provide a very limited palette. Use it for your own site by
+                  copying the sample code below, and possibly by adopting our `css-system-colors.css`
+                  file which sets up two sets of useful classes for you.
+                  <br />
+                  <br />
+                  It is <a href="https://web.dev/articles/prefers-color-scheme" target="_blank">easy to
+                    extend them</a> with your
+                  <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank">own scheme</a> that
+                  adds additional accent colors. This micro-site uses only two:
+                  <ol>
+                    <li>Primary: used for headings (except h1)</li>
+                    <li>Contrast: used for h1, nav bar, footer, code (blocks), left margin of block quotes </li>
+                  </ol>
+                  (We could use color-mix in the future.) Click to change either color:
+                  <div class="colorPalette">
+                    <div class="primary">
+                      <button id="idLightPrimary" class="picker" data-jscolor="{}">Primary</button>
                     </div>
+                    <div class="contrast">
+                      <button id="idLightContrast" class="picker" data-jscolor="{}">Contrast</button>
+                    </div>
+                  </div>
+                  <br />
+                  <details>
+                    <summary><b>tl;dr</b> &mdash; click to see sample code for setting up another site's color
+                      scheme...</summary>
                     <br />
-                    <details>
-                      <summary><b>tl;dr</b> &mdash; click to see sample code for setting up another site's color
-                        scheme...</summary>
-                      <br />
-                      This just sets up one 'primary' highlight. You can add more colors as needed.
-                      <pre><code>
+                    This just sets up one 'primary' highlight. You can add more colors as needed.
+                    <pre><code>
   root: {
     color-scheme: light dark;
   
@@ -497,8 +528,8 @@
     --primary: light-dark(var(--light-primary), var(--dark-primary));
   }
                           </code></pre>
-                      You may also add a class to set the color:
-                      <pre><code>
+                    You may also add a class to set the color:
+                    <pre><code>
   root: {
     .primary {
       color: var(--primary);  
@@ -506,8 +537,8 @@
     }
   }
                           </code></pre>
-                      If you use transparency/opacity, you can also add:
-                      <pre><code>
+                    If you use transparency/opacity, you can also add:
+                    <pre><code>
   root: {
     --light-primary-rgb: 10,0,230;
     --dark-primary-rgb: 108,102,237;
@@ -519,162 +550,162 @@
     }
   }
                         </code></pre>
-                      <br />
-                      Optionally you can also use:
-                      <pre><code>
+                    <br />
+                    Optionally you can also use:
+                    <pre><code>
   @media (prefers-color-scheme: dark) {
     /* custom dark mode styles here */
   }
                         </code></pre>
-                    </details>
+                  </details>
 
-                  </div>
-                </section>
+                </div>
+              </section>
 
-                <h3>Our Blog <code>h3</code></h3>
-                <a id="idLightBlog"></a>
-                <section>
-                  <div>
-                    <article>
-                      <h4>CSS System Color News <code>h4</code></h4>
+              <h3>Our Blog <code>h3</code></h3>
+              <a id="idLightBlog"></a>
+              <section>
+                <div>
+                  <article>
+                    <h4>CSS System Color News <code>h4</code></h4>
 
-                      <p>This demo paragraph illustrates a micro-website using light & dark color
-                        modes & CSS System Colors. Micro-site content generally uses <code>CanvasText</code> for
-                        the text color and <code>Canvas</code> for the background.</p>
+                    <p>This demo paragraph illustrates a micro-website using light & dark color
+                      modes & CSS System Colors. Micro-site content generally uses <code>CanvasText</code> for
+                      the text color and <code>Canvas</code> for the background.</p>
 
-                      <div>This is a <code>div</code> element with the same color settings.</div>
+                    <div>This is a <code>div</code> element with the same color settings.</div>
 
-                      <p>This paragraph shows various HTML tags in action:
-                        Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
-                        <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
-                        <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
-                        <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This uses the
-                          <code>GrayText</code>
-                          system color.</span>
-                      </p>
-                      <div>This div describes text selection. If you select some text, the <code>::selected</code>
-                        pseudo
-                        class sets a text color of <code>HighlightText</code> & background color of
-                        <code>Highlight</code>. <span class="SelectedItem">This span has <code>Selection</code>
-                          hardcoded as the background color and <code>SelectedItemText</code>
-                          as the text color.</span>
-                      </div>
-                      <br />
-                      <div>
-                        <strong>Links</strong>
-                        <ul>
-                          <li><code>:hover</code> is not in <a
-                              href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
-                            browser-specific.</li>
-                          <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
-                              never visited link</a> using the <code>Link</code> system color.</li>
-                          <li>Here's a <a href="https://google.com" class=":visited" onclick="return false;">visited
-                              link using the <code>Visited</code> system color</a>
-                          </li>
+                    <p>This paragraph shows various HTML tags in action:
+                      Normal, <abbr title="Abbreviations">abbr</abbr>, <cite>cite-ation</cite>, <del>del-ete</del>,
+                      <dfn>dfn-definition</dfn>, <em>em-phasis</em>, <ins>ins-ert</ins>, <mark>mark</mark>,
+                      <s>s-trike through</s>, <small>small</small>, <strong>strong</strong>, <sub>sub-script</sub>,
+                      <sup>sup-erscript</sup>, <u>u-nderline</u>. <span class="GrayText">This uses the
+                        <code>GrayText</code>
+                        system color.</span>
+                    </p>
+                    <div>This div describes text selection. If you select some text, the <code>::selected</code>
+                      pseudo
+                      class sets a text color of <code>HighlightText</code> & background color of
+                      <code>Highlight</code>. <span class="SelectedItem">This span has <code>Selection</code>
+                        hardcoded as the background color and <code>SelectedItemText</code>
+                        as the text color.</span>
+                    </div>
+                    <br />
+                    <div>
+                      <strong>Links</strong>
+                      <ul>
+                        <li><code>:hover</code> is not in <a
+                            href="https://www.w3.org/TR/css-color-4/#css-system-colors">the standards</a>, so
+                          browser-specific.</li>
+                        <li>Here's a <a href="Mofified each document.load" class="uniqueUrl" onclick="return false;">
+                            never visited link</a> using the <code>Link</code> system color.</li>
+                        <li>Here's a <a href="https://google.com" class=":visited" onclick="return false;">visited
+                            link using the <code>Visited</code> system color</a>
+                        </li>
 
-                        </ul>
-                      </div>
+                      </ul>
+                    </div>
 
-                    </article>
-                  </div>
-                  <div>
-                    <h4>Comments</h4>
-                    <article>"Check this out!"</article><br />
-                    <article>"Very helpful"</article>
-                  </div>
-                  <!--aside>
+                  </article>
+                </div>
+                <div>
+                  <h4>Comments</h4>
+                  <article>"Check this out!"</article><br />
+                  <article>"Very helpful"</article>
+                </div>
+                <!--aside>
                       <h4>Aside</h4>
                       <p>Interesting extra info</p>
                     </aside-->
-                </section>
+              </section>
 
-                <h3>About Us</h3>
-                <div class="syscolors-break"></div>
-                <section class="aboutUs">
-                  <a id="idLightAboutUs"></a>
+              <h3>About Us</h3>
+              <div class="syscolors-break"></div>
+              <section class="aboutUs">
+                <a id="idLightAboutUs"></a>
 
-                  <div class="card">
-                    <img src="./images/avatar2.png" alt="Avatar" style="width:30%">
-                    <div class="container">
-                      <h4>Wanda Doe</h4>
-                      <p>Architect</p>
-                    </div>
+                <div class="card">
+                  <img src="./images/avatar2.png" alt="Avatar" style="width:30%">
+                  <div class="container">
+                    <h4>Wanda Doe</h4>
+                    <p>Architect</p>
                   </div>
+                </div>
 
-                  <div class="card">
-                    <img src="./images/avatar1.png" alt="Avatar" style="width:30%">
-                    <div class="container">
-                      <h4>Eddie Doe</h4>
-                      <p>Engineer</p>
-                    </div>
+                <div class="card">
+                  <img src="./images/avatar1.png" alt="Avatar" style="width:30%">
+                  <div class="container">
+                    <h4>Eddie Doe</h4>
+                    <p>Engineer</p>
                   </div>
-                  <blockquote>
-                    This blockquote has the text color set to <code>QuoteText</code> and a
-                    background color of <code>Quote</code>
-                  </blockquote>
-                </section>
-              </main>
+                </div>
+                <blockquote>
+                  This blockquote has the text color set to <code>QuoteText</code> and a
+                  background color of <code>Quote</code>
+                </blockquote>
+              </section>
+            </main>
 
-              <footer>
-                ©2024 Me, Myself & I
-              </footer>
+            <footer>
+              ©2024 Me, Myself & I
+            </footer>
+          </div>
+
+          <form class="myForm">
+            <h3>A Fine Form</h3>
+            <p>Text input, Number & Date illustrate <code>:focus</code>
+              which we've manually set to "SelectedItem". Notice
+              the <code>Field</code> reflects the color mode automatically.
+              Easy Peasy.</p>
+
+            <label>Text input: <input type="text" placeholder="Hellooo"> text input field. The text color is set to
+              InputText and the background color is set to
+              Input."</label>
+
+            <label>Check box: <input type="checkbox"> </label>
+
+            <div>Radio button:
+              <input type="radio" name="rName" value="1" id="idOn">
+              <label for="idOn">on</label>
+              <input type="radio" id="idOff" name="rName" value="2">
+              <label for="idOff">off</label>
             </div>
 
-            <form class="myForm">
-              <h3>A Fine Form</h3>
-              <p>Text input, Number & Date illustrate <code>:focus</code>
-                which we've manually set to "SelectedItem". Notice
-                the <code>Field</code> reflects the color mode automatically.
-                Easy Peasy.</p>
+            <label>Select: <select name="cars" id="bikes">
+                <option>Cervelo</option>
+                <optgroup label="Domestic">
+                  <option>Schwinn</option>
+                  <option>Specialized</option>
+                  <option>Trek</option>
+                  <option>Cannondale</option>
+                </optgroup>
+                <option>Giant</option>
+              </select>
+            </label>
 
-              <label>Text input: <input type="text" placeholder="Hellooo"> text input field. The text color is set to
-                InputText and the background color is set to
-                Input."</label>
+            <div>File: <input type="file" /></div>
+            <div>Range: <input type="range" /> </div>
+            <div>Number: <input type="number" value="1" /> </div>
+            <div>Date: <input type="date" /> </div>
+            <div>Progress: <progress max="100" value="30"></progress> </div>
+            <div>Text area: <textarea id="textarea"></textarea></div>
 
-              <label>Check box: <input type="checkbox"> </label>
-
-              <div>Radio button:
-                <input type="radio" name="rName" value="1" id="idOn">
-                <label for="idOn">on</label>
-                <input type="radio" id="idOff" name="rName" value="2">
-                <label for="idOff">off</label>
-              </div>
-
-              <label>Select: <select name="cars" id="bikes">
-                  <option>Cervelo</option>
-                  <optgroup label="Domestic">
-                    <option>Schwinn</option>
-                    <option>Specialized</option>
-                    <option>Trek</option>
-                    <option>Cannondale</option>
-                  </optgroup>
-                  <option>Giant</option>
-                </select>
-              </label>
-
-              <div>File: <input type="file" /></div>
-              <div>Range: <input type="range" /> </div>
-              <div>Number: <input type="number" value="1" /> </div>
-              <div>Date: <input type="date" /> </div>
-              <div>Progress: <progress max="100" value="30"></progress> </div>
-              <div>Text area: <textarea id="textarea"></textarea></div>
-
-              <p>Unstyled Buttons:<br />
-                <button disabled="disabled">Disabled</button>
-                <button type="button">Cancel</button>
-                <button type="submit">Submit</button>
-              </p>
-              <p>Buttons using the Button class:<br />
-                <button class="Button" disabled="disabled">Disabled</button>
-                <button class="Button" style="border:5px solid ButtonBorder;" type="button">Cancel (with fat
-                  ButtonBorder)</button>
-                <button class="Button" type="submit">Submit</button>
-              </p>
-              <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
-                Fake Button</button>
-              <p>- This uses the ButtonText, ButtonFace & ButtonBorder colors. No hover color, but Click for the
-                ActiveText color!</p>
-              <!--
+            <p>Unstyled Buttons:<br />
+              <button disabled="disabled">Disabled</button>
+              <button type="button">Cancel</button>
+              <button type="submit">Submit</button>
+            </p>
+            <p>Buttons using the Button class:<br />
+              <button class="Button" disabled="disabled">Disabled</button>
+              <button class="Button" style="border:5px solid ButtonBorder;" type="button">Cancel (with fat
+                ButtonBorder)</button>
+              <button class="Button" type="submit">Submit</button>
+            </p>
+            <button class="btn" class="syscolors-demo-button" style="cursor: pointer" title="non-functional button">
+              Fake Button</button>
+            <p>- This uses the ButtonText, ButtonFace & ButtonBorder colors. No hover color, but Click for the
+              ActiveText color!</p>
+            <!--
               <input type="button">
               <input type="checkbox">
               <input type="color">
@@ -698,129 +729,129 @@
               <input type="url">
               <input type="week">
             -->
-            </form>
-          </div>
-
+          </form>
         </div>
-      </details>
-      <!-- #endregion -->
-    </div>
 
-    <div id="syscolors-hue-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) hue -->
-      <details>
-        <summary>Color Scheme & Color-Mix</summary>
-        <div id="syscolors-hue-demo">
-          <p>Whether in a light or dark mode, theme colors can be nicely mixed in OKLCH & HSL
-            color spaces. This demo is adapted from Sara Joy's
-            <a href="https://codepen.io/sarajw/pen/eYwLaYp" target="_blank" rel="noopener noreferrer"> CodePen</a>.
-            Her article at
-            <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank" rel="noopener noreferrer">
-              https://sarajoy.dev/blog/color-scheme/</a>
-            explains more about color schemes.
-          </p>
-          <div>
-            <label for="hueSlider">Set the <b>Hue: <span class="hueValue">222</span></b></label>
-            <input id="hueSlider" type="range" min="0" max="360" value="222">
-          </div>
-          <br />
-          <div id="syscolors-hue-panels">
+      </div>
+    </details>
+    <!-- #endregion -->
+  </div>
 
-            <div id="syscolors-hue-light" class="syscolors-inner-container">
-              <h3>Color-mix Panel: <span class="syscolors-hue-mode"></span> Color Mode</h3>
-              <div>
-                Theme color:
-                <br>
-                <div class="oklch"></div> in <a href="https://oklch.com" target="_blank">OKLCH color space</a>
-                <br>
-                <div class="hsl"></div> in <a href="https://hslpicker.com" target="_blank">HSL color space</a>
-              </div>
-              <br />
-              <p class="oklch">Themed text inside a themed paragraph<br />
-                oklch(50% 0.25 <span class="hueValue">222</span>)
-              </p>
-              <p class="hsl">Themed text inside a themed paragraph<br />
-                hsl(<span class="hueValue">222</span> 75% 50%)
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </details>
-      <!-- #endregion -->
-    </div>
-
-    <div id="syscolors-deprecated-table-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) dep-table -->
-      <details>
-        <summary id="syscolors-deprecated-table-title">Deprecated System Color Table</summary>
-        <div id="syscolors-deprecated-table">
-
-          <div class="syscolors-row-card syscolors-initial-card syscolors-tall-row">
-            <div class="syscolors-row-text">
-              <span class="syscolors-category-span" category="category">Category</span>
-              <span class="syscolors-color-span"><strong>Deprecated System Color</strong></span>
-              <span class="syscolors-desc-span"> &mdash; Description </span>
-            </div>
-            <div class="syscolors-row-light Canvas">
-              <strong>This column displays deprecated-colors in light mode</strong>
-            </div>
-            <div class="syscolors-row-dark Canvas">
-              <strong>This column displays deprecated-colors in dark mode</strong>
-            </div>
-          </div>
-        </div>
-      </details>
-      <!-- #endregion -->
-    </div>
-
-    <div id="syscolors-deprecated-grid-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) demo -->
-      <details>
-        <summary id="syscolors-deprecated-title">
-          Deprecated System Color Grid
-        </summary>
-
-        <p>
-          You may - or may not - see a color as these are deprecated and
-          should not be used. The browser decides what to do with these
-          values. They are included here for reference purposes only.
+  <div id="syscolors-hue-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) hue -->
+    <details>
+      <summary>Color Scheme & Color-Mix</summary>
+      <div id="syscolors-hue-demo">
+        <p>Whether in a light or dark mode, theme colors can be nicely mixed in OKLCH & HSL
+          color spaces. This demo is adapted from Sara Joy's
+          <a href="https://codepen.io/sarajw/pen/eYwLaYp" target="_blank" rel="noopener noreferrer"> CodePen</a>.
+          Her article at
+          <a href="https://sarajoy.dev/blog/color-scheme/" target="_blank" rel="noopener noreferrer">
+            https://sarajoy.dev/blog/color-scheme/</a>
+          explains more about color schemes.
         </p>
-        <div id="syscolors-deprecated-grid">
-          <div id="syscolors-deprecated-light" class="syscolors-inner-container syscolors-light">
-            <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Light Color Mode
-            </h2>
-            <div class="syscolors-break"></div>
+        <div>
+          <label for="hueSlider">Set the <b>Hue: <span class="hueValue">222</span></b></label>
+          <input id="hueSlider" type="range" min="0" max="360" value="222">
+        </div>
+        <br />
+        <div id="syscolors-hue-panels">
+
+          <div id="syscolors-hue-light" class="syscolors-inner-container">
+            <h3>Color-mix Panel: <span class="syscolors-hue-mode"></span> Color Mode</h3>
+            <div>
+              Theme color:
+              <br>
+              <div class="oklch"></div> in <a href="https://oklch.com" target="_blank">OKLCH color space</a>
+              <br>
+              <div class="hsl"></div> in <a href="https://hslpicker.com" target="_blank">HSL color space</a>
+            </div>
+            <br />
+            <p class="oklch">Themed text inside a themed paragraph<br />
+              oklch(50% 0.25 <span class="hueValue">222</span>)
+            </p>
+            <p class="hsl">Themed text inside a themed paragraph<br />
+              hsl(<span class="hueValue">222</span> 75% 50%)
+            </p>
           </div>
-          <div id="syscolors-deprecated-dark" class="syscolors-inner-container syscolors-dark">
-            <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Dark Color Mode
-            </h2>
-            <div class="syscolors-break"></div>
+
+        </div>
+      </div>
+    </details>
+    <!-- #endregion -->
+  </div>
+
+  <div id="syscolors-deprecated-table-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) dep-table -->
+    <details>
+      <summary id="syscolors-deprecated-table-title">Deprecated System Color Table</summary>
+      <div id="syscolors-deprecated-table">
+
+        <div class="syscolors-row-card syscolors-initial-card syscolors-tall-row">
+          <div class="syscolors-row-text">
+            <span class="syscolors-category-span" category="category">Category</span>
+            <span class="syscolors-color-span"><strong>Deprecated System Color</strong></span>
+            <span class="syscolors-desc-span"> &mdash; Description </span>
+          </div>
+          <div class="syscolors-row-light Canvas">
+            <strong>This column displays deprecated-colors in light mode</strong>
+          </div>
+          <div class="syscolors-row-dark Canvas">
+            <strong>This column displays deprecated-colors in dark mode</strong>
           </div>
         </div>
+      </div>
+    </details>
+    <!-- #endregion -->
+  </div>
 
-        <button class="btn" id="syscolors-download-deprecated" style="cursor: pointer"
-          title="Download JSON file with RGBA values" onclick="downloadColors()">
-          Download JSON
-        </button>
-      </details>
-      <!-- #endregion -->
-    </div>
+  <div id="syscolors-deprecated-grid-container" class="syscolors-inner-container">
+    <!-- #region(collapsed) demo -->
+    <details>
+      <summary id="syscolors-deprecated-title">
+        Deprecated System Color Grid
+      </summary>
 
-    <div id="syscolors-footer" class="syscolors-inner-container">
-      <!-- #region(collapsed) footer -->
-      <a href="https://eoc.online" target="_blank" rel="noopener noreferrer"
-        title="Open source tooling for Emergency Operation Centers">©2024
-        eoc.online</a>
-      <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank"
-          rel="noopener noreferrer">Details &
-          source code</a>
-        <!--img
+      <p>
+        You may - or may not - see a color as these are deprecated and
+        should not be used. The browser decides what to do with these
+        values. They are included here for reference purposes only.
+      </p>
+      <div id="syscolors-deprecated-grid">
+        <div id="syscolors-deprecated-light" class="syscolors-inner-container syscolors-light">
+          <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Light Color Mode
+          </h2>
+          <div class="syscolors-break"></div>
+        </div>
+        <div id="syscolors-deprecated-dark" class="syscolors-inner-container syscolors-dark">
+          <h2>Deprecated System Colors: <span class="syscolors-grid-mode syscolors-preserve"></span> Dark Color Mode
+          </h2>
+          <div class="syscolors-break"></div>
+        </div>
+      </div>
+
+      <button class="btn" id="syscolors-download-deprecated" style="cursor: pointer"
+        title="Download JSON file with RGBA values" onclick="downloadColors()">
+        Download JSON
+      </button>
+    </details>
+    <!-- #endregion -->
+  </div>
+
+  <div id="syscolors-footer" class="syscolors-inner-container">
+    <!-- #region(collapsed) footer -->
+    <a href="https://eoc.online" target="_blank" rel="noopener noreferrer"
+      title="Open source tooling for Emergency Operation Centers">©2024
+      eoc.online</a>
+    <span style="float: right"><a href="https://github.com/eoconline/css-system-colors" target="_blank"
+        rel="noopener noreferrer">Details &
+        source code</a>
+      <!--img
           src="https://img.shields.io/github/stars/eoconline/system-colors?style=social"
           alt="GitHub stars"/-->
-      </span>
-      <!-- #endregion -->
-    </div>
+    </span>
+    <!-- #endregion -->
+  </div>
   </div>
 </body>
 

@@ -54,8 +54,8 @@ function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
-    doDemo();
-    doTableGrids();
+    BuildDemoPanels();
+    BuildTablesAndGrids();
     window.location.reload();
 }
 
@@ -65,8 +65,8 @@ function setSortOrder(val) {
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
 
-    doDemo();
-    doTableGrids();
+    BuildDemoPanels();
+    BuildTablesAndGrids();
     // window.location.reload();
 }
 
