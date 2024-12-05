@@ -56,7 +56,7 @@ This page demonstrates the CSS System Colors in action.
 
 ## Screenshots
 
-<img src="./images/Screenshot--GroupedClasses.png" alt="Screenshot of this web page" style="max-width:400px"/>
+<img src="./images/Screenshot--GroupedClasses.png" alt="Screenshot of this web page" style="max-width:300px"/>
 
 <img src="./images/Screenshot-SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
 
