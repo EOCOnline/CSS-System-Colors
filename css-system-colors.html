@@ -8,18 +8,19 @@
 
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
 
+  <link rel="stylesheet" href="./css-system-colors.css" />
   <link rel="stylesheet" href="./css/css-system-main.css" />
   <link rel="stylesheet" href="./css/css-system-demo.css" />
   <link rel="stylesheet" href="./css/css-system-grid.css" />
   <link rel="stylesheet" href="./css/css-system-table.css" />
   <link rel="stylesheet" href="./css/css-system-classes.css">
-  <link rel="stylesheet" href="./css-system-colors.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
   <script src="./css-system-colors.js"></script>
+  <script defer src="./css-system-json.js"></script>
   <script defer src="./js/css-system-utilities.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
   <script defer src="./js/jscolor.js"></script> <!-- color picker from https://jscolor.com/ -->
@@ -116,13 +117,32 @@
             let the browser &amp; OS handle it for you!
           </blockquote>
 
-
           <p>There are also a few other new &quot;system&quot; things out now:
             <a href="https://css-trricks.com/system-things">System Fonts, font weights, icons</a> which
             provides a neat new way to re-envision who does what. A complete
             <a href="https://projects.dutchcelt.com/system.css/">system.css</a> can provide a quick
             start!
           </p>
+          <h3>What the system specification doesn't/can't do:</h3>
+          <ul>
+            <li>Provide classes to readily access the suggested styles</li>
+            <li>Provide a JSON representation of the colors</li>
+            <li>Provide explicit terms or names for the implicit categories or groups it creates</li>
+            <li>Show how the color scheme can be used practically</li>
+          </ul>
+          <p>This web page addresses these points:</p>
+          <ul>
+            <li>We provide an independent file 'css-system-colors.css' that sets up handy classes
+              corresponding with the suggested styles</li>
+            <li>The file 'css-system-json.js' provides two different JSON representations
+              of the colors that can be adapted for your own use.</li>
+            <li>The 'System Colors Categories' section provides categories that make conceptualizing
+              the system colors easier and more natural. These match the classes in
+              the 'css-system-colors.css' file.</li>
+            <li>Provides a micro-website and minimal input form to explore how best to use
+              the system colors.</li>
+          </ul>
+
           <h3 id="history">History</h3>
           <ul>
             <li>CSS System Colors are not new but were originally part of
@@ -238,15 +258,6 @@
               and ButtonText) is not guaranteed.<a href="https://drafts.csswg.org/css-color/#css-system-colors">3</a>
             </li>
           </ul>
-          <h2 id="license">License</h2>
-          <p>©2024 eoc.online under the permissive MIT License. Please note our contributions
-            though!</p>
-          <p><a href="https://eoc.online">https://eoc.online</a>: Open source tooling for Emergency Operation Centers
-          </p>
-          <p>Source &amp; details at <a
-              href="https://github.com/eoconline/css-system-colors">https://github.com/eoconline/css-system-colors</a>
-          </p>
-
         </div>
       </details>
       <!-- #endregion -->
