@@ -222,16 +222,19 @@ https://www.w3docs.com/tools/code-editor/10122
 
 /* #region(collapsed) Intro Panel */
 /************************************/
-#syscolors-intro-container {
-  img {
-    max-width: 80%;
-    border: 1px solid black;
-    border-radius: 0.5em;
-  }
-}
-
 #syscolors-intro-main {
   padding-left: 1rem;
+}
+/* #endregion */
+
+/* #region(collapsed) Help Panel */
+/************************************/
+#syscolors-help-main {
+  padding-left: 1rem;
+
+  img {
+    max-width: 800px;
+  }
 }
 /* #endregion */
 
