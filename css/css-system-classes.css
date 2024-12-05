@@ -21,7 +21,7 @@
     position: absolute;
     padding: 0.25em 0.5em;
     margin-left: -36px; /* bigger negative # sends it leftward */
-    bottom: -30px; /* margin-top: bigger # sends it downward */
+    bottom: -20px; /* margin-top: bigger negative # sends it downward */
     font-size: x-small;
     font-weight: bold;
     transform: rotate(270deg);

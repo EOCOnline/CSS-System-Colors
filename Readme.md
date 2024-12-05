@@ -19,7 +19,7 @@ This page provides a nice visual reference to the system-colors - but note that
 the displayed colors are by design **specific to this browser/operating
 System**!
 
-<img href="images/Screenshot-Options&SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
+<img src="./images/Screenshot-Options&SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
 
 > Avoid specifying different colors for
 > [light or dark mode](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark):
@@ -37,7 +37,7 @@ This page demonstrates the CSS System Colors in action.
   creates
 - Show how the color scheme can be used practically
 
-**This web page addresses these points**
+## This web page addresses these pain points
 
 - We provide an independent file 'css-system-colors.css' that sets up handy
   classes corresponding with the suggested styles
@@ -53,6 +53,16 @@ This page demonstrates the CSS System Colors in action.
   classes in the 'css-system-colors.css' file.
 - Provides a micro-website and minimal input form to explore how best to use the
   system colors.
+
+## Screenshots
+
+<img src="./images/Screenshot--GroupedClasses.png" alt="Screenshot of this web page" style="max-width:800px"/>
+
+<img src="./images/Screenshot-SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
+
+<img src="./images/Screenshot-SystemColorGrid.png" alt="Screenshot of this web page" style="max-width:800px"/>
+
+<img src="./images/Screenshot-Website.png" alt="Screenshot of this web page" style="max-width:800px"/>
 
 ## License
 
