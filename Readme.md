@@ -1,7 +1,7 @@
 # CSS System Colors Visual Demonstration
 
 CSS provides a system-wide color scheme, that automatically handles light & dark
-modes, provides requires little work by web designers and is accessible &
+modes, requires little effort to implement by web designers and is accessible &
 user-friendly. System Colors are derived by the browser from the user&#39;s
 operating system&#39;s color scheme.
 
@@ -19,7 +19,7 @@ This page provides a nice visual reference to the system-colors - but note that
 the displayed colors are by design **specific to this browser/operating
 System**!
 
-![alt text](images/Screenshot-Options&SystemColorTable.png) width=800px
+<img href="images/Screenshot-Options&SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
 
 > Avoid specifying different colors for
 > [light or dark mode](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark):
