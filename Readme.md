@@ -9,14 +9,13 @@ Advantages of using system colors include:
 
 - With just a few statements a website can handle light & dark modes.
 - Application colors will match others providing a consistent user experience.
-- They are designed to adapt to different light/dark modes and contrast
-  settings.
+- They naturally adapt to different light/dark modes and contrast settings.
 - They are ideal for creating accessible and user-friendly interfaces.
 - They can be used in combination with other color values to create a harmonious
   color palette.
 
 This page provides a nice visual reference to the system-colors - but note that
-the displayed colors are by design **specific to this browser/operating
+the actual colors displayed are by design **specific to this browser/operating
 System**!
 
 <img src="./images/Screenshot-Options&SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
@@ -37,7 +36,7 @@ This page demonstrates the CSS System Colors in action.
   creates
 - Show how the color scheme can be used practically
 
-## This web page addresses these pain points
+## This web page/Github project addresses these pain points
 
 - We provide an independent file 'css-system-colors.css' that sets up handy
   classes corresponding with the suggested styles
@@ -46,8 +45,9 @@ This page demonstrates the CSS System Colors in action.
 - A JSON file can be downloaded which contains the actual colors (in RGBA & hex
   format) for each color mode, as provided by the user's browser & operating
   system (OS).
-- We provide 3 different views of the colors: by category, with different color
-  modes implemented, and as actually displayed by the browser.
+- We provide multiple views of the colors: by category, with different color
+  modes implemented, as actually displayed by the browser, and deprecated
+  colors.
 - The 'System Colors Categories' section provides categories that make
   conceptualizing the system colors easier and more natural. These match the
   classes in the 'css-system-colors.css' file.
@@ -56,7 +56,7 @@ This page demonstrates the CSS System Colors in action.
 
 ## Screenshots
 
-<img src="./images/Screenshot--GroupedClasses.png" alt="Screenshot of this web page" style="width:550px"/>
+<img src="./images/Screenshot--GroupedClasses.png" alt="Screenshot of this web page" style="width:500px"/>
 
 <img src="./images/Screenshot-SystemColorTable.png" alt="Screenshot of this web page" style="max-width:800px"/>
 
