@@ -1,4 +1,4 @@
-// This file has utility routines INCIDENTAL TO THE MAIN FLOW
+// This file has utility/helper routines INCIDENTAL TO THE MAIN FLOW
 
 function cloneLightPanel(elementId, cloneId, spanSelector) {
     let light = document.getElementById(elementId);
@@ -54,9 +54,9 @@ function setPageColorMode(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 
-    BuildDemoPanels();
-    BuildTablesAndGrids();
-    window.location.reload();
+    buildDemoPanels();
+    buildTableAndGridPanels();
+    //window.location.reload();
 }
 
 let sortByCategory = false;
@@ -65,8 +65,8 @@ function setSortOrder(val) {
     if (logLevel > 1) console.log("Sort by category: " + sortByCategory);
     resetWebPage();
 
-    BuildDemoPanels();
-    BuildTablesAndGrids();
+    buildDemoPanels();
+    buildTableAndGridPanels();
     // window.location.reload();
 }
 
@@ -84,19 +84,18 @@ function resetWebPage() {
     savedCard = document.querySelector("#syscolors-deprecated-table .syscolors-initial-card").cloneNode(true);
     document.getElementById("syscolors-deprecated-table").innerHTML = savedCard.outerHTML;
 
+    // For grids, only preserve panel titles and line breaks
     for (const index of document.getElementsByClassName("syscolors-preserve")) {
-        // only preserve titles of grid panels
         let h2 = index.parentNode;
         let parentDiv = h2.parentNode;
         parentDiv.innerHTML = h2.outerHTML;
 
-        //console.warn("parentDiv=" + parentDiv.outerHTML);
-        // ...and a line break
         let div = document.createElement('div');
         div.className = 'syscolors-break';
         parentDiv.appendChild(div);
     }
 
+    // Remove the dark demo element if it exists
     const demoDarkElement = document.getElementById("syscolors-demo-dark");
     if (demoDarkElement) {
         document.getElementById("syscolors-demo").removeChild(demoDarkElement);

@@ -20,9 +20,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
   <script src="./css-system-colors.js"></script>
-  <script defer src="./js/css-system-helpers.js"></script>
+  <script defer src="./js/css-system-utilities.js"></script>
   <script defer src="./js/css-system-cards.js"></script>
-  <script defer src="./js/css-system-classes.js"></script>
   <script defer src="./js/jscolor.js"></script> <!-- color picker from https://jscolor.com/ -->
 
 </head>
@@ -667,7 +666,7 @@
               InputText and the background color is set to
               Input."</label>
 
-            <label>Check box: <input type="checkbox"> </label>
+            <label>Check box: <input type="checkbox"> Click to see selected color</label>
 
             <div>Radio button:
               <input type="radio" name="rName" value="1" id="idOn">
@@ -745,7 +744,7 @@
   <div id="syscolors-hue-container" class="syscolors-inner-container">
     <!-- #region(collapsed) hue -->
     <details>
-      <summary>Color Scheme & Color-Mix</summary>
+      <summary>Hue & Color-Mix</summary>
       <div id="syscolors-hue-demo">
         <p>Whether in a light or dark mode, theme colors can be nicely mixed in OKLCH & HSL
           color spaces. This demo is adapted from Sara Joy's
