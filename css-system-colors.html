@@ -76,6 +76,9 @@
         <option class="floater" value="only dark" title="Forbids the user agent from overriding the color scheme
         for the element." data-title="Forbids the user agent from overriding the color scheme
           for the element.">Only Dark</option>
+        <option class="floater" value="Nonsense String"
+          title="An unexpected/non-standard string here is interpreted as 'Light'."
+          data-title="An unexpected/non-standard string here is interpreted as 'Light'.">Nonsense String</option>
       </select>
       &nbsp; &nbsp; &nbsp;
 
@@ -192,6 +195,10 @@
           <details>
             <summary>References for the Eager</summary>
             <ul> CSS System Colors:
+              <li><a
+                  href="https://www.bram.us/2023/10/09/the-future-of-css-easy-light-dark-mode-color-switching-with-light-dark/"
+                  target="_blank">https://www.bram.us/2023/10/09/the-future-of-css-easy-light-dark-mode-color-switching-with-light-dark/</a>
+              </li>
               <li><a href="https://codepen.io/sarajw/pen/xxzyOMZ" target="_blank"
                   rel="noopener noreferrer">https://codepen.io/sarajw/pen/xxzyOMZ</a></li>
 
@@ -382,7 +389,7 @@
       <!-- #region classes -->
       <details open>
 
-        <summary>System Color Categories</summary>
+        <summary>Utility Classes for System Colors</summary>
         <div id="syscolors-class-main">
           <div>The CSS System Color standard tacitly defines color 'categories' - and for each a brief description:
             <ul>
@@ -394,22 +401,31 @@
               <li>Button - push buttons</li>
               <li>Link - hyperlinks</li>
               <li>Highlight - text of selected text</li>
-              <li>Selection - selected items</li>
+              <li>Selected - selected items</li>
             </ul>
-            Each 'category' generally defines a text color and a background color that will display together well. (A
-            few
-            categories have additional colors.) The benefit is that these colors are provided by the system (i.e.,
-            browser & OS) so authors don't need to specify exact colors or worry about how they work in light
-            or dark mode, or with each other. Its one less thing to do!
-          </div>
-          <div>Currently a developer/designer must specify explicit style statements calling for each of the standard's
-            individual colors in each category. As an alternative, the 'css-system-colors.css' file provides handy
-            classes allowing one to simply assign a class to an HTML element without complicating CSS files. Easy Peasy!
-          </div>
-          <div>The following cards display & demonstrate the styles included in each category's class.</div>
+            We've created a simple file (<code>css-system-colors.css</code>) that provides explicit classes
+            for each of these tacit categories. Now authors can easily assign a class to an HTML element
+            and have it display in an appropriate system defined (and accessible & user-friendly) color.
+          </div><br />
+          <div>Our system color classes offer one less thing to do!</div><br>
 
-          <div id="syscolors-class-grouped">
-            <h2>System Color Grouped Classes</h2>
+          <div>The alternative to these classes is to have a developer/designer create multiple style
+            statements for each of the standard's individual colors in each category.</div> <br />
+          <div>
+            Each 'category' generally defines a text color and a background color that will display together well. (A
+            few categories define additional colors.) These "system colors" are automatically handled by the system
+            (i.e.,
+            browser & OS) to account for light & dark modes.
+          </div><br />
+          <div> As an alternative, the 'css-system-colors.css' file provides handy
+            classes allowing one to simply assign a class to an HTML element without complicating CSS files. Just assign
+            one of the following classes to an HTML element and it will naturally use the system defined colors. Easy
+            Peasy!
+          </div><br />
+          <div>Each class (one per category) is listed and demonstrated below.</div>
+
+          <div id="syscolors-class-category">
+            <h2>System Colors by Category</h2>
 
             <div class="syscolors-class-card syscolors-initial-card">
               <div class="syscolors-cell-text">
@@ -422,9 +438,9 @@
             </div>
           </div>
 
-          <details>
+          <details open>
             <summary>
-              System Color Individual Classes
+              Individual System Colors
             </summary>
             <div>In practice, authors may desire finer-grained control and
               to specify text and background colors independently. If so,

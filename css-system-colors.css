@@ -40,7 +40,7 @@
   border-color: ButtonBorder;
 }
 
-.SelectedItem {
+.Selected {
   /* selected items */
   color: SelectedItemText;
   background-color: SelectedItem;
@@ -53,34 +53,34 @@
   background-color: Highlight;
 }
 
-/* NOTE: Remove the 'some' below! */
-#someID {
-  a:link {
-    /* non-active, non-visited links */
-    color: LinkText;
-  }
-  a:visited {
-    /* visited links */
-    color: VisitedText;
-  }
+/* NOTE: Remove the 'some' below! 
+#someID {*/
+a:link {
+  /* non-active, non-visited links */
+  color: LinkText;
+}
+a:visited {
+  /* visited links */
+  color: VisitedText;
+}
 
-  /* NOTE: Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
+/* NOTE: Doesn't exist at https://www.w3.org/TR/css-color-4/#css-system-colors
   a:hover {
     /* hovered links *
     color: FocusText; /* Focused links color *
   }
-  */
+ 
 
-  a:focus {
-    /* focused links */
-    color: ActiveText; /* BUG: no special color?*/
-  }
-  a:active {
-    /* active links */
-    color: ActiveText;
-  }
+a:focus {
+  /* focused links *
+  color: ActiveText; /* BUG: no special color?*
+} */
+a:active {
+  /* active links */
+  color: ActiveText;
 }
-.GrayText {
+
+.Disabled {
   /* disabled text */
   color: GrayText;
 }

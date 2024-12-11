@@ -1,39 +1,103 @@
 const clickText = "&nbsp; &nbsp; <strong>(Click to copy)</strong>";
 const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 
-function generateClassCard(group) {
-    let prettyClassName = group.name;
-    if (group.name.startsWith("system-")) {
-        prettyClassName = "system-<br/>" + group.name.replace("system-", "");
+function generateClassCard(className, color) {
+
+    if (className !== "") {
+        // get all currentColors with category of className.name
+        let colors = systemColorsJson.currentColors.filter(color => color.category === className.name);
+
+        let styles = "<ul class='listy'>";
+        colors.forEach(color => {
+            styles += "<li>" + color['style'] + "</li>";
+        });
+        styles += "</ul>";
+
+        // make text visible on dark backgrounds
+        let contrastText = "";
+        /*
+        if ((category.name == "Canvas") ||
+            (category.name == "Field") ||
+            (category.name == "ButtonFace")) {
+            contrastText = `CanvasText`;
+        }*/
+
+        let card = document.createElement('div');
+        card.className = `syscolors-class-card ${className.name}`;
+        card.innerHTML = `
+    <div class="syscolors-cell-text">
+      <span class="syscolors-category-span">${className.name}</span>
+      <span class="syscolors-name-span">${className.description}</span>
+      <span class="syscolors-desc-span">${styles}</span>
+    </div>
+
+    <div class="syscolors-cell-light ${className.name} ${contrastText}"><span class="syscolors-details-span">Sample</span></div>
+
+    <div class="syscolors-cell-dark ${className.name} ${contrastText}"><span class="syscolors-details-span">Sample</span></div>`;
+        return card;
     }
 
-    let styles = group['color'] ? `color:<b>${group['color']}</b>` : ``;
-    styles += group['background-color'] ? `<br/>background-color:<b>${group['background-color']}</b>` : ``;
-    styles += group['border-color'] ? `<br/>border-color:<b>${group['border-color']}</b>` : ``;
-    styles += group['active-color'] ? `<br/>active-color:<b>${group['active-color']}</b>` : ``;
-    styles += group['visited-color'] ? `<br/>visited-color:<b>${group['visited-color']}</b>` : ``;
+
+    // Test each current color style independently
+    // make text visible on dark backgrounds
+    let contrastText = "";
+    if ((color.category == "Canvas") ||
+        (color.category == "Field") ||
+        (color.category == "ButtonFace")) {
+        contrastText = `Canvas`;
+    }
+
+    let card = document.createElement('div');
+    card.className = `syscolors-class-card ${color.systemColor}`;
+    card.innerHTML = `
+<div class="syscolors-cell-text">
+  <span class="syscolors-category-span">${color.category}</span>
+  <span class="syscolors-name-span"><strong>${color.systemColor}</strong> &mdash; </span>
+  <span class="syscolors-desc-span">${color.desc}</span>
+</div>
+<div class="syscolors-cell-light system-${color.systemColor} ${contrastText}">
+<span class="syscolors-details-span ">${color.style}</span></div>
+<div class="syscolors-cell-dark system-${color.systemColor} ${contrastText}"><span class="syscolors-details-span"> ${color.style}</span></div>`;
+    return card;
+}
+
+/*
+function ORIGgenerateClassCard(color) {
+    let prettyClassName = color.name;
+    if (color.name.startsWith("system-")) {
+        prettyClassName = "system-<br/>" + color.name.replace("system-", "");
+    }
+
+    let styles = color['color'] ? `color:<b>${color['color']}</b>` : ``;
+    styles += color['background-color'] ? `<br/>background-color:<b>${color['background-color']}</b>` : ``;
+    styles += color['border-color'] ? `<br/>border-color:<b>${color['border-color']}</b>` : ``;
+    styles += color['active-color'] ? `<br/>active-color:<b>${color['active-color']}</b>` : ``;
+    styles += color['visited-color'] ? `<br/>visited-color:<b>${color['visited-color']}</b>` : ``;
 
     // make text visible on dark backgrounds
     let contrastText = "";
-    if ((group.name == "system-Canvas") ||
-        (group.name == "system-Field") ||
-        (group.name == "system-ButtonFace")) {
+    if ((color.name == "system-Canvas") ||
+        (color.name == "system-Field") ||
+        (color.name == "system-ButtonFace")) {
         contrastText = `system-CanvasText`;
     }
 
     let card = document.createElement('div');
-    card.className = `syscolors-class-card ${group.name}`;
+    card.className = `syscolors-class-card ${color.name}`;
     card.innerHTML = `
 <div class="syscolors-cell-text">
 <!-- className="Class" -->
   <span class="syscolors-category-span">${prettyClassName}</span>
-  <!--span class="syscolors-name-span"><strong>${group.name}</strong> &mdash; </span-->
-  <span class="syscolors-desc-span">${group.description}</span>
+  <!--span class="syscolors-name-span"><strong>${color.name}</strong> &mdash; </span-->
+  <span class="syscolors-desc-span">${color.description}</span>
 </div>
-<div class="syscolors-cell-light  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>
-<div class="syscolors-cell-dark  ${group.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>`;
+<div class="syscolors-cell-light  ${color.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>
+<div class="syscolors-cell-dark  ${color.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>`;
     return card;
 }
+*/
+
+
 
 
 

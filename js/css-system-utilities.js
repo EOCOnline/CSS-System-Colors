@@ -89,7 +89,6 @@ function resetWebPage() {
         let h2 = index.parentNode;
         let parentDiv = h2.parentNode;
         parentDiv.innerHTML = h2.outerHTML;
-
         let div = document.createElement('div');
         div.className = 'syscolors-break';
         parentDiv.appendChild(div);
@@ -101,6 +100,7 @@ function resetWebPage() {
         document.getElementById("syscolors-demo").removeChild(demoDarkElement);
     }
 }
+
 /* #region(collapsed) Color Pickers */
 // https://jscolor.com/docs/
 let lightPrimaryPicker;
@@ -118,7 +118,7 @@ function setJsColorPicker() {
     darkContrastPicker = setUpPicker('Dark', 'Contrast', siteStyle);
 }
 
-const opts = {
+const options = {
     'borderRadius': 15,
     'borderWidth': 2,
     'padding': 4,
@@ -134,7 +134,7 @@ function setUpPicker(theme, color, siteStyle) {
     picker.onInput = window[`update${theme}${color}Color`];
     if (!picker.fromRGBA(...siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`).match(/\d+(\.\d+)?/g).map(Number)))
         console.error(`Could not set ${theme} ${color} color picker to: ${siteStyle.getPropertyValue(`--${theme.toLowerCase()}-${color.toLowerCase()}-rgba`)}`);
-    picker.option(opts);
+    picker.option(options);
     return picker;
 }
 
