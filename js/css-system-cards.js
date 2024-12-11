@@ -123,7 +123,7 @@ function createTableCard(color, elementId) {
     let rgbValuesDark = colorDark.match(/\d+/g).map(Number);
     [r, g, b] = rgbValuesDark;
     darkDiv.style.color = getContrastingColor(r, g, b);
-    if (color.color === "HighlightText") {
+    if (color.systemColor === "HighlightText") {
         console.warn(`HighLightText contrasting color(in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)} `);
         darkDiv.style.background = colorDark;
     }
@@ -140,30 +140,30 @@ function createTableCard(color, elementId) {
 
 
 // Build up an HTML card for each color & attach to the DOM - used by GRIDS
-function createGridCard(systemColorSet, index, elementId) {
+function createGridCard(color, elementId) {
 
     let isDarkMode = elementId.includes("dark");
     let mode = isDarkMode ? 'dark' : 'light';
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
-    nameSpan.innerHTML = systemColorSet[index].color;
+    nameSpan.innerHTML = color.systemColor;
 
     let descSpan = document.createElement('span');
     descSpan.className = "syscolors-desc-span";
-    descSpan.innerHTML = " &mdash; " + systemColorSet[index].desc;
+    descSpan.innerHTML = " &mdash; " + color.desc;
 
     let categorySpan = document.createElement('span');
     categorySpan.className = "syscolors-category-span";
     // add attribute to span
-    categorySpan.setAttribute("category", systemColorSet[index].category);
-    categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
+    categorySpan.setAttribute("category", color.category);
+    categorySpan.innerHTML = color.category.replace(/-/g, "<br/>");
 
     let rgbaSpan = document.createElement('span');
     rgbaSpan.className = "syscolors-rgba-span";
 
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = `syscolors - tooltip - ${elementId.includes("deprecated") ? "deprecated" : ""}${mode}${index} `;
+    tooltipSpan.id = `syscolors-tooltip-${elementId.includes("deprecated") ? "deprecated" : ""}${mode}${color.systemColor} `;
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
@@ -172,7 +172,7 @@ function createGridCard(systemColorSet, index, elementId) {
     cardDiv.className = elementId.includes("deprecated") ? "syscolors-card syscolors-tall-row" : "syscolors-card";
 
     // Apply background color to inner div, so as to not affect cardDiv's big left border color!
-    cardInnerDiv.style.backgroundColor = systemColorSet[index].color;
+    cardInnerDiv.style.backgroundColor = color.systemColor;
     cardInnerDiv.appendChild(nameSpan);
     cardInnerDiv.appendChild(descSpan);
     cardInnerDiv.appendChild(rgbaSpan);
@@ -190,12 +190,12 @@ function createGridCard(systemColorSet, index, elementId) {
 
     // Card is built & complete. Now update colors based on what the browser actually used. 
     let computedStyle = getComputedStyle(cardInnerDiv);
-    let color = computedStyle.backgroundColor;
-    let rgbValues = color.match(/\d+/g).map(Number);
+    let backColor = computedStyle.backgroundColor;
+    let rgbValues = backColor.match(/\d+/g).map(Number);
     let [r, g, b] = rgbValues;
     cardInnerDiv.style.color = getContrastingColor(r, g, b);
 
-    if (systemColorSet[index].color === "HighlightText" && mode === "dark") {
+    if (color.systemColor === "HighlightText" && mode === "dark") {
         console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
         cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
         //cardDiv.style.color = "white";
@@ -220,8 +220,8 @@ function createGridCard(systemColorSet, index, elementId) {
     let gHex = g.toString(16).padStart(2, '0');
     let bHex = b.toString(16).padStart(2, '0');
     if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
-        systemColorSet[index].lightModeRGBA = color + "= #" + rHex + gHex + bHex;
+        color.lightModeRGBA = color + "= #" + rHex + gHex + bHex;
     } else { // syscolors-grid-dark || syscolors-deprecated-dark
-        systemColorSet[index].darkModeRGBA = color + "= #" + rHex + gHex + bHex;
+        color.darkModeRGBA = color + "= #" + rHex + gHex + bHex;
     }
 }

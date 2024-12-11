@@ -90,14 +90,14 @@ function sortColors() {
 function generateGridPanels() {
   document.getElementById("syscolors-grid-title").innerText = "System Color (" + downloadableJson.currentColors.length + ") Grid";
   for (const index of Object.keys(downloadableJson.currentColors)) {
-    createGridCard(downloadableJson.currentColors, index, "syscolors-grid-light");
-    createGridCard(downloadableJson.currentColors, index, "syscolors-grid-dark");
+    createGridCard(downloadableJson.currentColors[index], "syscolors-grid-light");
+    createGridCard(downloadableJson.currentColors[index], "syscolors-grid-dark");
   }
 
   document.getElementById("syscolors-deprecated-title").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grid";
   for (const index of Object.keys(downloadableJson.deprecatedColors)) {
-    createGridCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-light");
-    createGridCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-dark");
+    createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-light");
+    createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-dark");
   }
 }
 
