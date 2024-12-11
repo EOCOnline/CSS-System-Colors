@@ -65,10 +65,10 @@ function buildTableAndGridPanels() {
 
   // Generate Color Tables
   for (const index of Object.keys(downloadableJson.currentColors)) {
-    createTableCard(downloadableJson.currentColors, index, "syscolors-table");
+    createTableCard(downloadableJson.currentColors[index], "syscolors-table");
   }
   for (const index of Object.keys(downloadableJson.deprecatedColors)) {
-    createTableCard(downloadableJson.deprecatedColors, index, "syscolors-deprecated-table");
+    createTableCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-table");
   }
 
   generateGridPanels();

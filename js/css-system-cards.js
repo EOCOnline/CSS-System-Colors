@@ -2,126 +2,77 @@ const clickText = "&nbsp; &nbsp; <strong>(Click to copy)</strong>";
 const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 
 function generateClassCard(className, color) {
+    let classCard;
+    let categorySpan;
+    let nameSpan;
+    let descSpan;
+    let detailsSpan;
+    let contrastingBackground = "";
 
     if (className !== "") {
+        classCard = className.name;
+        categorySpan = className.name;
+        nameSpan = className.description;
+        detailsSpan = 'Sample';
+
         // get all currentColors with category of className.name
         let colors = systemColorsJson.currentColors.filter(color => color.category === className.name);
 
-        let styles = "<ul class='listy'>";
+        descSpan = "<ul class='classList'>";
         colors.forEach(color => {
-            styles += "<li>" + color['style'] + "</li>";
+            descSpan += "<li>" + color['style'] + "</li>";
         });
-        styles += "</ul>";
+        descSpan += "</ul>";
+    } else {
+        classCard = color.systemColor;
+        categorySpan = color.category;
+        nameSpan = color.systemColor;
+        descSpan = color.desc;
+        detailsSpan = color.style;
 
-        // make text visible on dark backgrounds
-        let contrastText = "";
-        /*
-        if ((category.name == "Canvas") ||
-            (category.name == "Field") ||
-            (category.name == "ButtonFace")) {
-            contrastText = `CanvasText`;
-        }*/
-
-        let card = document.createElement('div');
-        card.className = `syscolors-class-card ${className.name}`;
-        card.innerHTML = `
-    <div class="syscolors-cell-text">
-      <span class="syscolors-category-span">${className.name}</span>
-      <span class="syscolors-name-span">${className.description}</span>
-      <span class="syscolors-desc-span">${styles}</span>
-    </div>
-
-    <div class="syscolors-cell-light ${className.name} ${contrastText}"><span class="syscolors-details-span">Sample</span></div>
-
-    <div class="syscolors-cell-dark ${className.name} ${contrastText}"><span class="syscolors-details-span">Sample</span></div>`;
-        return card;
-    }
-
-
-    // Test each current color style independently
-    // make text visible on dark backgrounds
-    let contrastText = "";
-    if ((color.category == "Canvas") ||
-        (color.category == "Field") ||
-        (color.category == "ButtonFace")) {
-        contrastText = `Canvas`;
+        if ((color.category == "Canvas") ||
+            (color.category == "Field") ||
+            (color.category == "ButtonFace")) {
+            contrastingBackground = `Canvas`;
+        }
     }
 
     let card = document.createElement('div');
-    card.className = `syscolors-class-card ${color.systemColor}`;
+    card.className = `syscolors-class-card ${classCard}`;
     card.innerHTML = `
 <div class="syscolors-cell-text">
-  <span class="syscolors-category-span">${color.category}</span>
-  <span class="syscolors-name-span"><strong>${color.systemColor}</strong> &mdash; </span>
-  <span class="syscolors-desc-span">${color.desc}</span>
+  <span class="syscolors-category-span">${categorySpan}</span>
+  <span class="syscolors-name-span">${nameSpan}</span>
+  <span class="syscolors-desc-span">${descSpan}</span>
 </div>
-<div class="syscolors-cell-light system-${color.systemColor} ${contrastText}">
-<span class="syscolors-details-span ">${color.style}</span></div>
-<div class="syscolors-cell-dark system-${color.systemColor} ${contrastText}"><span class="syscolors-details-span"> ${color.style}</span></div>`;
+
+<div class="syscolors-cell-light ${classCard} ${contrastingBackground}"><span class="syscolors-details-span">${detailsSpan}</span></div>
+<div class="syscolors-cell-dark ${classCard} ${contrastingBackground}"><span class="syscolors-details-span">${detailsSpan}</span></div>`;
     return card;
 }
-
-/*
-function ORIGgenerateClassCard(color) {
-    let prettyClassName = color.name;
-    if (color.name.startsWith("system-")) {
-        prettyClassName = "system-<br/>" + color.name.replace("system-", "");
-    }
-
-    let styles = color['color'] ? `color:<b>${color['color']}</b>` : ``;
-    styles += color['background-color'] ? `<br/>background-color:<b>${color['background-color']}</b>` : ``;
-    styles += color['border-color'] ? `<br/>border-color:<b>${color['border-color']}</b>` : ``;
-    styles += color['active-color'] ? `<br/>active-color:<b>${color['active-color']}</b>` : ``;
-    styles += color['visited-color'] ? `<br/>visited-color:<b>${color['visited-color']}</b>` : ``;
-
-    // make text visible on dark backgrounds
-    let contrastText = "";
-    if ((color.name == "system-Canvas") ||
-        (color.name == "system-Field") ||
-        (color.name == "system-ButtonFace")) {
-        contrastText = `system-CanvasText`;
-    }
-
-    let card = document.createElement('div');
-    card.className = `syscolors-class-card ${color.name}`;
-    card.innerHTML = `
-<div class="syscolors-cell-text">
-<!-- className="Class" -->
-  <span class="syscolors-category-span">${prettyClassName}</span>
-  <!--span class="syscolors-name-span"><strong>${color.name}</strong> &mdash; </span-->
-  <span class="syscolors-desc-span">${color.description}</span>
-</div>
-<div class="syscolors-cell-light  ${color.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>
-<div class="syscolors-cell-dark  ${color.name} ${contrastText}"><span class="syscolors-details-span">${styles}</span></div>`;
-    return card;
-}
-*/
-
-
-
 
 
 // These cards are wider, like 'rows' - & are used by TABLES
-function createTableCard(systemColorSet, index, elementId) {
+function createTableCard(color, elementId) {
 
     let nameSpan = document.createElement('span');
     nameSpan.className = "syscolors-name-span";
-    nameSpan.innerHTML = systemColorSet[index].color;
+    nameSpan.innerHTML = color.systemColor;
     const lightText = nameSpan.cloneNode(true);
     const darkText = nameSpan.cloneNode(true);
 
     const descSpan = document.createElement('span');
     descSpan.className = "syscolors-desc-span";
-    descSpan.innerHTML = ` &mdash; ${systemColorSet[index].desc}`;
+    descSpan.innerHTML = ` &mdash; ${color.desc} `;
 
     const categorySpan = document.createElement('span');
     categorySpan.className = "syscolors-category-span";
-    categorySpan.setAttribute("category", systemColorSet[index].category);
-    categorySpan.innerHTML = systemColorSet[index].category.replace(/-/g, "<br/>");
+    categorySpan.setAttribute("category", color.category);
+    categorySpan.innerHTML = color.category.replace(/-/g, "<br/>");
 
     const tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = `syscolors-row-tooltip-${elementId.includes("deprecated") ? "deprecated" : ""}${index}`;
+    tooltipSpan.id = `syscolors-row-tooltip-${elementId.includes("deprecated") ? "deprecated" : ""}${color.systemColor} `;
 
     const cardDiv = document.createElement('div');
     cardDiv.className = elementId === "syscolors-deprecated-table" ? "syscolors-row-card syscolors-tall-row" : "syscolors-row-card";
@@ -135,12 +86,12 @@ function createTableCard(systemColorSet, index, elementId) {
 
     const lightDiv = document.createElement('div');
     lightDiv.className = "syscolors-row-light";
-    lightDiv.style.backgroundColor = systemColorSet[index].color;
+    lightDiv.style.backgroundColor = color.systemColor;
     lightDiv.appendChild(lightText);
 
     const darkDiv = document.createElement('div');
     darkDiv.className = "syscolors-row-dark";
-    darkDiv.style.backgroundColor = systemColorSet[index].color;
+    darkDiv.style.backgroundColor = color.systemColor;
     darkDiv.appendChild(darkText);
 
     cardDiv.appendChild(textDiv);
@@ -153,35 +104,36 @@ function createTableCard(systemColorSet, index, elementId) {
     } else {
         parentElement.appendChild(cardDiv);
     }
-
     // This card is built & complete. 
+
     // Now update colors based on what the browser actually used.
-    nameSpan.innerHTML = systemColorSet[index].color;
+    nameSpan.innerHTML = color.systemColor;
     let computedStyleLight = getComputedStyle(lightDiv);
     const colorLight = computedStyleLight.backgroundColor;
+    // TODO: Will this ever return RGBA?
     let rgbValuesLight = colorLight.match(/\d+/g).map(Number);
     let [r, g, b] = rgbValuesLight;
-    lightDiv.style.color = getContrastingColor(r, g, b);
-    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-    const light = `${colorLight} ${lightHex}`;
-    lightText.outerHTML += `<span class='syscolors-color-span'><br/>${light}</span>`;
+    lightDiv.style.color = getContrastingColor(r, g, b); // NOTE:  ignores alpha channel
+    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const light = `${colorLight} ${lightHex} `;
+    lightText.outerHTML += `<span class='syscolors-color-span'><br />${light}</span> `;
 
     let computedStyleDark = getComputedStyle(darkDiv);
     const colorDark = computedStyleDark.backgroundColor;
     let rgbValuesDark = colorDark.match(/\d+/g).map(Number);
     [r, g, b] = rgbValuesDark;
     darkDiv.style.color = getContrastingColor(r, g, b);
-    if (systemColorSet[index].color === "HighlightText") {
-        console.warn(`HighLightText contrasting color (in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)}`);
+    if (color.color === "HighlightText") {
+        console.warn(`HighLightText contrasting color(in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)} `);
         darkDiv.style.background = colorDark;
     }
-    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-    const dark = `${colorDark} ${darkHex}`;
-    darkText.outerHTML += `<span class='syscolors-color-span'><br/>${dark}</span>`;
+    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const dark = `${colorDark} ${darkHex} `;
+    darkText.outerHTML += `<span class='syscolors-color-span'><br />${dark}</span> `;
 
-    tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>light mode: ${light}<br/>dark mode: ${dark}${clickText}`;
+    tooltipSpan.innerHTML = `${nameSpan.outerHTML} <br />${descSpan.outerHTML} <br />light mode: ${light} <br />dark mode: ${dark}${clickText} `;
     tooltipSpan.addEventListener('click', function () {
-        copyTextToClipboard(`${nameSpan.innerText}${descSpan.innerText}\ncategory: ${categorySpan.innerText}\nlight mode: ${light}\ndark mode: ${dark}`, tooltipSpan.id);
+        copyTextToClipboard(`${nameSpan.innerText}${descSpan.innerText} \ncategory: ${categorySpan.innerText} \nlight mode: ${light} \ndark mode: ${dark} `, tooltipSpan.id);
     });
 }
 
@@ -211,7 +163,7 @@ function createGridCard(systemColorSet, index, elementId) {
 
     let tooltipSpan = document.createElement('span');
     tooltipSpan.className = "syscolors-tooltip";
-    tooltipSpan.id = `syscolors-tooltip-${elementId.includes("deprecated") ? "deprecated" : ""}${mode}${index}`;
+    tooltipSpan.id = `syscolors - tooltip - ${elementId.includes("deprecated") ? "deprecated" : ""}${mode}${index} `;
 
     let cardInnerDiv = document.createElement('div');
     cardInnerDiv.className = "syscolors-card-inner";
@@ -253,7 +205,7 @@ function createGridCard(systemColorSet, index, elementId) {
     rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
     //rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
 
-    tooltipSpan.innerHTML = `${nameSpan.outerHTML}<br/>${descSpan.outerHTML}<br/>${mode} mode color: ${rgbaSpan.outerHTML}${clickText}`;
+    tooltipSpan.innerHTML = `${nameSpan.outerHTML} <br />${descSpan.outerHTML} <br />${mode} mode color: ${rgbaSpan.outerHTML}${clickText} `;
     // categorySpan.outerHTML + "<br/>" 
 
     let textToCopy = nameSpan.innerText + descSpan.innerText
