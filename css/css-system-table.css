@@ -4,31 +4,43 @@
  * and system-colors.css contains the color definitions used in this table.
  **/
 
-.syscolors-row-text:has(.syscolors-category-span[category="category"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Category"]) {
   --borderColor: #88888866;
 }
 /* #region(collapsed) border colors by category */
-.syscolors-row-text:has(.syscolors-category-span[category="selection"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Accent"]) {
   --borderColor: #00ff0066;
 }
 
-.syscolors-row-text:has(.syscolors-category-span[category="general"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Button"]) {
   --borderColor: #ca648a66;
 }
-.syscolors-row-text:has(.syscolors-category-span[category="interface"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Canvas"]) {
   --borderColor: #ff00ff66;
 }
 
-.syscolors-row-text:has(.syscolors-category-span[category="links"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Disabled"]) {
   --borderColor: #ffff0066;
 }
 
-.syscolors-row-text:has(.syscolors-category-span[category="input-button"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Field"]) {
   --borderColor: #00ffff66;
 }
 
-.syscolors-row-text:has(.syscolors-category-span[category="input"]) {
+.syscolors-row-text:has(.syscolors-category-span[category="Highlight"]) {
   --borderColor: #80c8c866;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="Link"]) {
+  --borderColor: #ff000066;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="Mark"]) {
+  --borderColor: #c46d1666;
+}
+
+.syscolors-row-text:has(.syscolors-category-span[category="Selected"]) {
+  --borderColor: #13a83866;
 }
 
 /* additional deprecated categories...*/

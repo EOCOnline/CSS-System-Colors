@@ -24,7 +24,7 @@ function generateClassCard(className, color) {
         });
         descSpan += "</ul>";
     } else {
-        classCard = color.systemColor;
+        classCard = "system-" + color.systemColor;
         categorySpan = color.category;
         nameSpan = color.systemColor;
         descSpan = color.desc;
@@ -125,7 +125,8 @@ function createTableCard(color, elementId) {
     darkDiv.style.color = getContrastingColor(r, g, b);
     if (color.systemColor === "HighlightText") {
         console.warn(`HighLightText contrasting color(in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)} `);
-        darkDiv.style.background = colorDark;
+        darkDiv.style.backgroundColor = colorDark;
+        //darkDiv.style.color = "red";
     }
     const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
     const dark = `${colorDark} ${darkHex} `;
@@ -197,12 +198,13 @@ function createGridCard(color, elementId) {
 
     if (color.systemColor === "HighlightText" && mode === "dark") {
         console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
-        cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
-        //cardDiv.style.color = "white";
-        //console.warn("HighLightText style reset to " + cardDiv.style.color);
+        cardInnerDiv.style.backgroundColor = "black"; // Ensures background color is set correctly, not to the text color.
+        //cardInnerDiv.style.backgroundColor = getContrastingColor(r, g, b); // Ensures background color is set correctly, not to the text color.
+        //cardInnerDiv.style.color = "brown";
+        // console.warn("HighLightText style reset to " + cardDiv.style.color);
     }
     let hexValues = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
-    rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
+    rgbaSpan.innerHTML = ` [${color.systemColor} #${hexValues}]`;
     //rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
 
     tooltipSpan.innerHTML = `${nameSpan.outerHTML} <br />${descSpan.outerHTML} <br />${mode} mode color: ${rgbaSpan.outerHTML}${clickText} `;
