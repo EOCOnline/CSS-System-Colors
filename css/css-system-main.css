@@ -71,12 +71,14 @@ details > summary {
 /* https://cssdeck.com/blog/six-ways-style-blockquotes/ */
 blockquote {
   font-style: italic;
-  font-size: 135%;
+  font-size: 125%;
   width: fit-content;
   background-color: #e0e0e0;
-  padding: 15px;
-  margin: 15px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 0.5em;
+  border-left: AccentColor 5px solid;
+  border-right: AccentColor 5px solid;
 }
 /* #endregion */
 
