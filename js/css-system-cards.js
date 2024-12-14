@@ -24,7 +24,7 @@ function generateClassCard(className, color) {
         });
         descSpan += "</ul>";
     } else {
-        classCard = color.systemColor;
+        classCard = "system-" + color.systemColor;
         categorySpan = color.category;
         nameSpan = color.systemColor;
         descSpan = color.desc;
@@ -107,27 +107,34 @@ function createTableCard(color, elementId) {
     // This card is built & complete. 
 
     // Now update colors based on what the browser actually used.
+    let r, g, b, a = 1;
     nameSpan.innerHTML = color.systemColor;
     let computedStyleLight = getComputedStyle(lightDiv);
     const colorLight = computedStyleLight.backgroundColor;
-    // TODO: Will this ever return RGBA?
-    let rgbValuesLight = colorLight.match(/\d+/g).map(Number);
-    let [r, g, b] = rgbValuesLight;
+    let rgbaValuesLight = colorLight.match(/[\d.]+/g).map(Number);
+    [r, g, b] = rgbaValuesLight;
+    if (rgbaValuesLight.length == 4) {
+        a = Math.round(rgbaValuesLight[3] * 255);
+    }
     lightDiv.style.color = getContrastingColor(r, g, b); // NOTE:  ignores alpha channel
-    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a ? a.toString(16).padStart(2, '0') : ''} `;
     const light = `${colorLight} ${lightHex} `;
     lightText.outerHTML += `<span class='syscolors-color-span'><br />${light}</span> `;
 
     let computedStyleDark = getComputedStyle(darkDiv);
     const colorDark = computedStyleDark.backgroundColor;
-    let rgbValuesDark = colorDark.match(/\d+/g).map(Number);
-    [r, g, b] = rgbValuesDark;
+    let rgbaValuesDark = colorDark.match(/[\d.]+/g).map(Number);
+    [r, g, b] = rgbaValuesDark;
+    if (rgbaValuesDark.length == 4) {
+        a = Math.round(rgbaValuesDark[3] * 255);
+    }
     darkDiv.style.color = getContrastingColor(r, g, b);
     if (color.systemColor === "HighlightText") {
         console.warn(`HighLightText contrasting color(in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)} `);
-        darkDiv.style.background = colorDark;
+        darkDiv.style.backgroundColor = colorDark;
+        //darkDiv.style.color = "red";
     }
-    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a ? a.toString(16).padStart(2, '0') : ''} `;
     const dark = `${colorDark} ${darkHex} `;
     darkText.outerHTML += `<span class='syscolors-color-span'><br />${dark}</span> `;
 
@@ -191,22 +198,24 @@ function createGridCard(color, elementId) {
     // Card is built & complete. Now update colors based on what the browser actually used. 
     let computedStyle = getComputedStyle(cardInnerDiv);
     let backColor = computedStyle.backgroundColor;
-    let rgbValues = backColor.match(/\d+/g).map(Number);
-    let [r, g, b] = rgbValues;
+    let rgbaValues = backColor.match(/[\d.]+/g).map(Number);
+    let [r, g, b] = rgbaValues;
+    let a = 255
+    if (rgbaValues.length == 4) {
+        a = Math.round(rgbaValues[3] * 255);
+    }
     cardInnerDiv.style.color = getContrastingColor(r, g, b);
 
     if (color.systemColor === "HighlightText" && mode === "dark") {
         console.warn("WORKAROUND: HighLightText contrasting color (for dark grid " + color + ") forcibly set to " + getContrastingColor(r, g, b));
-        cardInnerDiv.style.backgroundColor = color; // Ensures background color is set correctly, not to the text color.
-        //cardDiv.style.color = "white";
-        //console.warn("HighLightText style reset to " + cardDiv.style.color);
+        cardInnerDiv.style.backgroundColor = "black"; // Ensures background color is set correctly, not to the text color.
+        //cardInnerDiv.style.backgroundColor = getContrastingColor(r, g, b); // Ensures background color is set correctly, not to the text color.
+        //cardInnerDiv.style.color = "brown";
+        // console.warn("HighLightText style reset to " + cardDiv.style.color);
     }
-    let hexValues = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
-    rgbaSpan.innerHTML = ` [${color} #${hexValues}]`;
-    //rgbaSpan.innerHTML = " [" + color + " #" + r + g + b + "]";
-
+    let hexValues = "#" + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0') + (a != 255 ? a.toString(16).padStart(2, '0') : '');
+    rgbaSpan.innerHTML = ` [rgba(${rgbaValues}) = ${hexValues}]`;
     tooltipSpan.innerHTML = `${nameSpan.outerHTML} <br />${descSpan.outerHTML} <br />${mode} mode color: ${rgbaSpan.outerHTML}${clickText} `;
-    // categorySpan.outerHTML + "<br/>" 
 
     let textToCopy = nameSpan.innerText + descSpan.innerText
         + "\ncategory: " + categorySpan.innerText
@@ -215,13 +224,9 @@ function createGridCard(color, elementId) {
         copyTextToClipboard(textToCopy, tooltipSpan.id);
     });
 
-    // Create an RGBA key for the downloadable json file
-    let rHex = r.toString(16).padStart(2, '0');
-    let gHex = g.toString(16).padStart(2, '0');
-    let bHex = b.toString(16).padStart(2, '0');
     if (mode === "light") { // syscolors-grid-light || syscolors-deprecated-light
-        color.lightModeRGBA = color + "= #" + rHex + gHex + bHex;
+        color.lightModeRGBA = rgbaSpan.innerHTML;
     } else { // syscolors-grid-dark || syscolors-deprecated-dark
-        color.darkModeRGBA = color + "= #" + rHex + gHex + bHex;
+        color.darkModeRGBA = rgbaSpan.innerHTML;
     }
 }

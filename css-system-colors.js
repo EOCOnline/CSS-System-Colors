@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
   syscolorsContainer = document.getElementById("syscolors-outer-container");
   updateContrast({ value: 97.5 });
 
-  buildClassPanel();
   buildTableAndGridPanels();
+  buildClassPanel();
   buildDemoPanels();
   buildHuePanel();
 });
@@ -35,20 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
 /**************************************
  * Create the System Colors panels (both tables & grids)
  */
-
-function buildClassPanel() {
-  let elementCategory = document.getElementById(`syscolors-class-category`);
-  systemColorsJson.categories.forEach(category => {
-    elementCategory.appendChild(
-      generateClassCard(category, ""));
-  });
-
-  let elementIndividual = document.getElementById(`syscolors-class-individual`)
-  systemColorsJson.currentColors.forEach(color => {
-    elementIndividual.appendChild(
-      generateClassCard("", color));
-  });
-}
 
 
 // This preserves JSON data - with light & dark RGBA values - for downloading
@@ -99,6 +85,21 @@ function generateGridPanels() {
     createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-light");
     createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-dark");
   }
+}
+
+
+function buildClassPanel() {
+  let elementCategory = document.getElementById(`syscolors-class-category`);
+  systemColorsJson.categories.forEach(category => {
+    elementCategory.appendChild(
+      generateClassCard(category, ""));
+  });
+
+  let elementIndividual = document.getElementById(`syscolors-class-individual`)
+  systemColorsJson.currentColors.forEach(color => {
+    elementIndividual.appendChild(
+      generateClassCard("", color));
+  });
 }
 
 

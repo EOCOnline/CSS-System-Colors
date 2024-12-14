@@ -50,7 +50,7 @@ function updateContrast(el) {
     contrastValueId.innerText = el.value;
 }
 
-function setPageColorMode(el) {
+function setPageColorScheme(el) {
     // Mostly handled by CSS's color-scheme property
     resetWebPage();
 

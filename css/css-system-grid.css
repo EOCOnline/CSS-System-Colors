@@ -24,50 +24,62 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.syscolors-card:has(.syscolors-category-span[category="category"]) {
-  --borderColor: #88888844;
+.syscolors-card:has(.syscolors-category-span[category="Category"]) {
+  --borderColor: #88888866;
 }
-/* #region(collapsed) cards */
-
-.syscolors-card:has(.syscolors-category-span[category="selection"]) {
-  --borderColor: #00ff0044;
-}
-
-.syscolors-card:has(.syscolors-category-span[category="general"]) {
-  --borderColor: #ca648a44;
-}
-.syscolors-card:has(.syscolors-category-span[category="interface"]) {
-  --borderColor: #ff00ff44;
+/* #region(collapsed) border colors by category */
+.syscolors-card:has(.syscolors-category-span[category="Accent"]) {
+  --borderColor: #00ff0066;
 }
 
-.syscolors-card:has(.syscolors-category-span[category="links"]) {
-  --borderColor: #ffff0044;
+.syscolors-card:has(.syscolors-category-span[category="Button"]) {
+  --borderColor: #ca648a66;
+}
+.syscolors-card:has(.syscolors-category-span[category="Canvas"]) {
+  --borderColor: #ff00ff66;
 }
 
-.syscolors-card:has(.syscolors-category-span[category="input-button"]) {
-  --borderColor: #00ffff44;
+.syscolors-card:has(.syscolors-category-span[category="Disabled"]) {
+  --borderColor: #ffff0066;
 }
 
-.syscolors-card:has(.syscolors-category-span[category="input"]) {
-  --borderColor: #80c8c844;
+.syscolors-card:has(.syscolors-category-span[category="Field"]) {
+  --borderColor: #00ffff66;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="Highlight"]) {
+  --borderColor: #80c8c866;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="Link"]) {
+  --borderColor: #ff000066;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="Mark"]) {
+  --borderColor: #c46d1666;
+}
+
+.syscolors-card:has(.syscolors-category-span[category="Selected"]) {
+  --borderColor: #13a83866;
 }
 
 /* additional deprecated categories...*/
 .syscolors-card:has(.syscolors-category-span[category="window"]) {
-  --borderColor: #ec57ec44;
+  --borderColor: #ec57ec66;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="MDI"]) {
-  --borderColor: #73f29344;
+  --borderColor: #73f29366;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="tooltip"]) {
-  --borderColor: #458fd444;
+  --borderColor: #458fd466;
 }
 
 .syscolors-card:has(.syscolors-category-span[category="3D"]) {
-  --borderColor: #cdf27644;
+  --borderColor: #cdf27666;
 }
+
 /* #endregion */
 
 .syscolors-tall-row {
