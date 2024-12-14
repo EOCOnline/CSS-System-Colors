@@ -3,14 +3,28 @@ const clickedText = "&nbsp; &nbsp; <strong>(Copied!)</strong>";
 
 function generateClassCard(className, color) {
     let classCard;
+    let category;
     let categorySpan;
     let nameSpan;
     let descSpan;
     let detailsSpan;
     let contrastingBackground = "";
 
-    if (className !== "") {
-        classCard = className.name;
+    if (className == "") {
+        classCard = "system-" + color.systemColor;
+        category = color.category;
+        categorySpan = color.category;
+        nameSpan = color.systemColor;
+        descSpan = color.desc;
+        detailsSpan = color.style;
+
+        if ((color.category == "Canvas") ||
+            (color.category == "Field") ||
+            (color.category == "ButtonFace")) {
+            contrastingBackground = `Canvas`;
+        }
+    } else {
+        category = classCard = className.name;
         categorySpan = className.name;
         nameSpan = className.description;
         detailsSpan = 'Sample';
@@ -23,25 +37,13 @@ function generateClassCard(className, color) {
             descSpan += "<li>" + color['style'] + "</li>";
         });
         descSpan += "</ul>";
-    } else {
-        classCard = "system-" + color.systemColor;
-        categorySpan = color.category;
-        nameSpan = color.systemColor;
-        descSpan = color.desc;
-        detailsSpan = color.style;
-
-        if ((color.category == "Canvas") ||
-            (color.category == "Field") ||
-            (color.category == "ButtonFace")) {
-            contrastingBackground = `Canvas`;
-        }
     }
 
     let card = document.createElement('div');
     card.className = `syscolors-class-card ${classCard}`;
     card.innerHTML = `
 <div class="syscolors-cell-text">
-  <span class="syscolors-category-span">${categorySpan}</span>
+  <span class="syscolors-category-span" category="${category}">${categorySpan}</span>
   <span class="syscolors-name-span">${nameSpan}</span>
   <span class="syscolors-desc-span">${descSpan}</span>
 </div>
