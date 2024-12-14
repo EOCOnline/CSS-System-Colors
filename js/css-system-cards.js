@@ -107,28 +107,34 @@ function createTableCard(color, elementId) {
     // This card is built & complete. 
 
     // Now update colors based on what the browser actually used.
+    let r, g, b, a = 1;
     nameSpan.innerHTML = color.systemColor;
     let computedStyleLight = getComputedStyle(lightDiv);
     const colorLight = computedStyleLight.backgroundColor;
-    // TODO: Will this ever return RGBA?
-    let rgbValuesLight = colorLight.match(/\d+/g).map(Number);
-    let [r, g, b] = rgbValuesLight;
+    let rgbValuesLight = colorLight.match(/[\d.]+/g).map(Number);
+    [r, g, b] = rgbValuesLight;
+    if (rgbValuesLight.length == 4) {
+        a = Math.round(rgbValuesLight[3] * 255);
+    }
     lightDiv.style.color = getContrastingColor(r, g, b); // NOTE:  ignores alpha channel
-    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const lightHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a ? a.toString(16).padStart(2, '0') : ''} `;
     const light = `${colorLight} ${lightHex} `;
     lightText.outerHTML += `<span class='syscolors-color-span'><br />${light}</span> `;
 
     let computedStyleDark = getComputedStyle(darkDiv);
     const colorDark = computedStyleDark.backgroundColor;
-    let rgbValuesDark = colorDark.match(/\d+/g).map(Number);
+    let rgbValuesDark = colorDark.match(/[\d.]+/g).map(Number);
     [r, g, b] = rgbValuesDark;
+    if (rgbValuesDark.length == 4) {
+        a = Math.round(rgbValuesDark[3] * 255);
+    }
     darkDiv.style.color = getContrastingColor(r, g, b);
     if (color.systemColor === "HighlightText") {
         console.warn(`HighLightText contrasting color(in dark mode for rows of ${colorDark}) was set to ${getContrastingColor(r, g, b)} `);
         darkDiv.style.backgroundColor = colorDark;
         //darkDiv.style.color = "red";
     }
-    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')} `;
+    const darkHex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a ? a.toString(16).padStart(2, '0') : ''} `;
     const dark = `${colorDark} ${darkHex} `;
     darkText.outerHTML += `<span class='syscolors-color-span'><br />${dark}</span> `;
 
