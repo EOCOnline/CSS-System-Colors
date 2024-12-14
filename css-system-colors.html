@@ -277,11 +277,13 @@
         <p>CSS provides a system-wide color scheme, that automatically handles light & dark modes,
           requires little effort to implement by web designers and is accessible & user-friendly.</p>
 
-        <p>These cards list each system color from the standard & its description. The neighboring cells' background
+        <p>These cards list each system color from the standard & its description. The neighboring cells'
+          <strong>background</strong>
           show the actual (browser dependent) color provided by the browser for 'light' and 'dark' color modes. The
           actual color is also provided in RGB and Hex notation. (Note that the few non-opaque colors are reported in
           the RGBA format.) Hovering over each card displays the same text as in the card, and allows copying it to
-          your clipboard if desired.</p>
+          your clipboard if desired.
+        </p>
 
         <p>Use these colors anywhere you'd use another color, e.g., as a text, border or background style.</p>
         <div id="syscolors-table">
@@ -301,6 +303,31 @@
           </div>
 
         </div>
+      </details>
+      <!-- #endregion -->
+    </div>
+
+    <div id="syscolors-grid-container" class="syscolors-inner-container">
+      <!-- #region(collapsed) grid -->
+      <details>
+        <summary id="syscolors-grid-title">System Colors Grouped by Color Mode</summary>
+
+        <div id="syscolors-grid">
+          <p>This 'grid' view is nearly identical to the above 'table' view, but
+            these cards are organized into separate panels for
+            light & dark modes and the text may be rearranged a bit.</p>
+          <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
+            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
+            </h2>
+            <div class="syscolors-break"></div>
+          </div>
+          <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
+            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Dark Color Mode
+            </h2>
+            <div class="syscolors-break  syscolors-preserve"></div>
+          </div>
+        </div>
+
       </details>
       <!-- #endregion -->
     </div>
@@ -332,7 +359,8 @@
             statement for each of the standard's individual colors in each category.</p>
           <p>As an alternative, the 'css-system-colors.css' file provides handy
             classes. Simply assign a class to an HTML element. Easy Peasy!</p>
-          <p>Each class (one per category) is listed and demonstrated below.</p>
+          <p>Each class (one per category) is listed and demonstrated below. The previous panels just showed
+            colors in the cell background. Here, we show text and background color using both selectors.</p>
 
           <div id="syscolors-class-category">
             <h2>Classes for System Colors</h2>
@@ -348,7 +376,7 @@
             </div>
           </div>
 
-          <details open>
+          <details>
             <summary>
               Individual System Color Classes
             </summary>
@@ -377,30 +405,7 @@
       <!-- #endregion -->
     </div>
 
-    <div id="syscolors-grid-container" class="syscolors-inner-container">
-      <!-- #region(collapsed) grid -->
-      <details>
-        <summary id="syscolors-grid-title">System Colors Grid</summary>
 
-        <div id="syscolors-grid">Similar to the table display above,
-          these cards are just organized into separate panels for
-          light & dark modes. The background colors and values in these 'grids'
-          should match those in the 'tables'.<br /><br />
-          <div id="syscolors-grid-light" class="syscolors-inner-container syscolors-light">
-            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Light Color Mode
-            </h2>
-            <div class="syscolors-break"></div>
-          </div>
-          <div id="syscolors-grid-dark" class="syscolors-inner-container syscolors-dark">
-            <h2>Current System Colors: <span class="syscolors-grid-mode  syscolors-preserve"></span> Dark Color Mode
-            </h2>
-            <div class="syscolors-break  syscolors-preserve"></div>
-          </div>
-        </div>
-
-      </details>
-      <!-- #endregion -->
-    </div>
 
     <div id="syscolors-demo-container" class="syscolors-inner-container">
       <!-- #region(collapsed) demo -->
@@ -593,8 +598,7 @@
               <h3>A Fine Form</h3>
               <p>Text input, Number & Date illustrate <code>:focus</code>
                 which we've manually set to "SelectedItem". Notice
-                the <code>Field</code> reflects the color mode automatically.
-                Easy Peasy.</p>
+                the <code>Field</code> reflects the color mode automatically.</p>
 
               <label>Text input: <input type="text" placeholder="Hellooo"> text input field. The text color is set to
                 InputText and the background color is set to

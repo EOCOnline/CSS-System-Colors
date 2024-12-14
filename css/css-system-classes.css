@@ -86,3 +86,42 @@
     color-scheme: dark;
   }
 }
+
+.syscolors-class-card:has(.syscolors-category-span[category="Category"]) {
+  --borderColor: #88888833;
+}
+/* #region(collapsed) border colors by category */
+.syscolors-class-card:has(.syscolors-category-span[category="Accent"]) {
+  --borderColor: #00ff0033;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Button"]) {
+  --borderColor: #ca648a33;
+}
+.syscolors-class-card:has(.syscolors-category-span[category="Canvas"]) {
+  --borderColor: #ff00ff33;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Disabled"]) {
+  --borderColor: #ffff0033;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Field"]) {
+  --borderColor: #00ffff33;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Highlight"]) {
+  --borderColor: #80c8c833;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Link"]) {
+  --borderColor: #ff000033;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Mark"]) {
+  --borderColor: #c46d1633;
+}
+
+.syscolors-class-card:has(.syscolors-category-span[category="Selected"]) {
+  --borderColor: #13a83833;
+}

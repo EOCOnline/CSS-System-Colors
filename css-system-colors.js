@@ -74,13 +74,13 @@ function sortColors() {
 
 // This updates the downloadableJson with an RGBA key, in addition to creating HTML cards
 function generateGridPanels() {
-  document.getElementById("syscolors-grid-title").innerText = "System Color (" + downloadableJson.currentColors.length + ") Grid";
+  document.getElementById("syscolors-grid-title").innerText = "System Colors (" + downloadableJson.currentColors.length + ") Grouped by Color Mode";
   for (const index of Object.keys(downloadableJson.currentColors)) {
     createGridCard(downloadableJson.currentColors[index], "syscolors-grid-light");
     createGridCard(downloadableJson.currentColors[index], "syscolors-grid-dark");
   }
 
-  document.getElementById("syscolors-deprecated-title").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grid";
+  document.getElementById("syscolors-deprecated-title").innerText = "Deprecated System Color (" + downloadableJson.deprecatedColors.length + ") Grouped by Color Mode";
   for (const index of Object.keys(downloadableJson.deprecatedColors)) {
     createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-light");
     createGridCard(downloadableJson.deprecatedColors[index], "syscolors-deprecated-dark");
